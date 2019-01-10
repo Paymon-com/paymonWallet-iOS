@@ -1,0 +1,57 @@
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "ASE-EY-KdW"; */
+"ASE-EY-KdW.title" = "Item";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "H2k-Kc-Blt"; */
+"H2k-Kc-Blt.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "You have an account?"; ObjectID = "HkI-Yf-MZM"; */
+"HkI-Yf-MZM.text" = "You have an account?";
+
+/* Class = "UILabel"; text = "Please enter your information"; ObjectID = "Pfv-n8-vBx"; */
+"Pfv-n8-vBx.text" = "Please enter your information";
+
+/* Class = "UIButton"; normalTitle = "sign in"; ObjectID = "Pgb-b7-MU7"; */
+"Pgb-b7-MU7.normalTitle" = "sign in";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "TS3-Ls-8Wv"; */
+"TS3-Ls-8Wv.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Длина пароля не менее 8 символов."; ObjectID = "WqF-sU-YPW"; */
+"WqF-sU-YPW.text" = "Длина пароля не менее 8 символов.";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "b0q-uu-OhG"; */
+"b0q-uu-OhG.title" = "Title";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "bwR-Jh-Yfn"; */
+"bwR-Jh-Yfn.title" = "Title";
+
+/* Class = "UIButton"; normalTitle = "sign up"; ObjectID = "fah-Mv-7aF"; */
+"fah-Mv-7aF.normalTitle" = "sign up";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "i0J-dI-QYp"; */
+"i0J-dI-QYp.title" = "Item";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "iJe-ig-u7u"; */
+"iJe-ig-u7u.placeholder" = "Password";
+
+/* Class = "UITextField"; placeholder = "Repeat password"; ObjectID = "mmU-dE-yCU"; */
+"mmU-dE-yCU.placeholder" = "Repeat password";
+
+/* Class = "UILabel"; text = "Длина логина не менее 3 символов"; ObjectID = "mtd-Cd-XZx"; */
+"mtd-Cd-XZx.text" = "Длина логина не менее 3 символов";
+
+/* Class = "UIButton"; normalTitle = "Войти"; ObjectID = "n3H-gq-frg"; */
+"n3H-gq-frg.normalTitle" = "Войти";
+
+/* Class = "UIButton"; normalTitle = "Забыли пароль?"; ObjectID = "nnv-L6-h5s"; */
+"nnv-L6-h5s.normalTitle" = "Забыли пароль?";
+
+/* Class = "UITextField"; placeholder = "Login"; ObjectID = "t52-Rx-n32"; */
+"t52-Rx-n32.placeholder" = "Login";
+
+/* Class = "UITextField"; placeholder = "Login or email"; ObjectID = "y5W-bO-IfO"; */
+"y5W-bO-IfO.placeholder" = "Login or email";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "ycg-ze-8aY"; */
+"ycg-ze-8aY.placeholder" = "Email";
