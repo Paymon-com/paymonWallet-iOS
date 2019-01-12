@@ -24,12 +24,8 @@ class EthereumWalletViewController: PaymonViewController {
     @IBOutlet weak var needBackUpHeight: NSLayoutConstraint!
     
     var publicKey : String!
+    var isPmnt = false
     
-    @IBOutlet weak var backItem: UIBarButtonItem!
-    
-    @IBAction func backClick(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
     @IBAction func needBackUpClick(_ sender: Any) {
         self.showBackupWallet()
     }
@@ -62,21 +58,33 @@ class EthereumWalletViewController: PaymonViewController {
             
             let alertRemove = UIAlertController(title: "Remove wallet".localized, message: "Before removing your wallet, make sure you back up your wallet".localized, preferredStyle: UIAlertController.Style.alert)
             
-            if !User.shared.isBackupEthWallet {
-                alertRemove.addAction(UIAlertAction(title: "Backup".localized, style: .default, handler: { (action) in
-                    self.showBackupWallet()
-                }))}
+            alertRemove.addAction(UIAlertAction(title: "Backup".localized, style: .default, handler: { (action) in
+                self.showBackupWallet()
+            }))
             
             alertRemove.addAction(UIAlertAction(title: "Remove".localized, style: .default, handler: { (action) in
-                EthereumManager.shared.deleteEthWallet() { isDeleted in
-                    if isDeleted {
-                        //TODO: добавить ввод пароля
-                        User.shared.deleteEthWallet()
-                        self.navigationController?.popViewController(animated: true)
-                    } else {
-                        _ = SimpleOkAlertController.init(title: "Remove wallet".localized, message: "Failed to delete wallet. Try later.".localized, vc: self)
+                if !self.isPmnt {
+                    EthereumManager.shared.deleteEthWallet() { isDeleted in
+                        if isDeleted {
+                            //TODO: добавить ввод пароля
+                            User.shared.deleteEthWallet()
+                            self.navigationController?.popViewController(animated: true)
+                        } else {
+                            _ = SimpleOkAlertController.init(title: "Remove wallet".localized, message: "Failed to delete wallet. Try later.".localized, vc: self)
+                        }
+                    }
+                } else {
+                    EthereumManager.shared.deletePmntWallet() { isDeleted in
+                        if isDeleted {
+                            //TODO: добавить ввод пароля
+                            User.shared.deletePmntWallet()
+                            self.navigationController?.popViewController(animated: true)
+                        } else {
+                            _ = SimpleOkAlertController.init(title: "Remove wallet".localized, message: "Failed to delete wallet. Try later.".localized, vc: self)
+                        }
                     }
                 }
+                
             }))
             alertRemove.addAction(UIAlertAction(title: "Cancel".localized, style: .destructive, handler: nil))
             
@@ -115,8 +123,8 @@ class EthereumWalletViewController: PaymonViewController {
         }
         
         if needBackUp != nil {
+            //TODO Добавить условие: Если один и тот же кошель, то убирать кнопку
             self.needBackUpHeight.constant = !User.shared.isBackupEthWallet ? 40 : 0
-            print(self.needBackUpHeight.constant)
         }
         
         walletWasCreated = NotificationCenter.default.addObserver(forName: .ethWalletWasCreated, object: nil, queue: nil) {
@@ -124,12 +132,8 @@ class EthereumWalletViewController: PaymonViewController {
             self.dismiss(animated: true, completion: nil)
         }
         
-        updateBalance = NotificationCenter.default.addObserver(forName: .updateBalance, object: nil, queue: nil) {
-            notification in
-            DispatchQueue.main.async {
-                self.cryptoBalance.text = String(format: "%.\(User.shared.symbCount)f", EthereumManager.shared.ethCryptoBalance)
-                self.fiatBalance.text = String(format: "%.2f", EthereumManager.shared.ethFiatBalance)
-            }
+        updateBalance = NotificationCenter.default.addObserver(forName: .updateBalance, object: nil, queue: nil) { notification in
+            self.getWalletInfo()
         }
     }
     
@@ -141,15 +145,14 @@ class EthereumWalletViewController: PaymonViewController {
     func setLayoutOptions() {
         
         self.balanceView.layer.cornerRadius = 30
-        
         let widthScreen = UIScreen.main.bounds.width
         
         self.balanceView.setGradientLayer(frame: CGRect(x: 0, y: 0, width: widthScreen, height: self.balanceView.frame.height), topColor: UIColor.AppColor.Blue.ethereumBalanceLight.cgColor, bottomColor: UIColor.AppColor.Blue.ethereumBalanceDark.cgColor)
         
         self.view.setGradientLayer(frame: self.view.bounds, topColor: UIColor.AppColor.Black.primaryBlackLight.cgColor, bottomColor: UIColor.AppColor.Black.primaryBlack.cgColor)
         
-        self.title = "Ethereum wallet".localized
-        self.backItem.title = "Back".localized
+        self.title = !isPmnt ? "Ethereum wallet".localized : "Paymon Token wallet".localized
+//        self.backItem.title = "Back".localized
         self.needBackUp.layer.cornerRadius = needBackUp.frame.height/2
         self.needBackUp.setTitle("We strongly recommend making a backup!".localized, for: .normal)
         self.needBackUp.titleLabel?.numberOfLines = 0
@@ -164,10 +167,11 @@ class EthereumWalletViewController: PaymonViewController {
     func getWalletInfo() {
         DispatchQueue.main.async {
             self.fiatSymbol.text = User.shared.currencyCodeSymb
-            self.cryptoBalance.text = String(format: "%.\(User.shared.symbCount)f", EthereumManager.shared.ethCryptoBalance)
-            self.fiatBalance.text = String(format: "%.2f", EthereumManager.shared.ethFiatBalance)
+            self.cryptoBalance.text = !self.isPmnt ? String(format: "%.\(User.shared.symbCount)f", EthereumManager.shared.ethCryptoBalance) : String(format: "%.\(User.shared.symbCount)f", EthereumManager.shared.pmntCryptoBalance)
+
+            self.fiatBalance.text = !self.isPmnt ? String(format: "%.2f", EthereumManager.shared.ethFiatBalance) : String(format: "%.2f", EthereumManager.shared.pmntFiatBalance)
         }
-        publicKey = EthereumManager.shared.ethSender?.address
+        publicKey = !self.isPmnt ? EthereumManager.shared.ethSender?.address : EthereumManager.shared.pmntSender?.address
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

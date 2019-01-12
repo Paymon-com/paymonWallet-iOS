@@ -93,16 +93,23 @@ class MoneyViewController: PaymonViewController, UITableViewDelegate, UITableVie
             if let cell = tableView.cellForRow(at: indexPath) as? MoneyCreatedTableViewCell {
                 
                 switch cell.cryptoType {
-                case .bitcoin?:
-                    if CryptoManager.shared.btcInfoIsLoaded {
-                        guard let bitcoinWalletNavigationController = StoryBoard.bitcoin.instantiateInitialViewController() as? PaymonNavigationController else {return}
-                        self.navigationController?.present(bitcoinWalletNavigationController, animated: true, completion: nil)
+                case .paymon?:
+                    if CryptoManager.shared.pmntInfoIsLoaded {
+                        guard let ethereumWalletViewController = StoryBoard.ethereum.instantiateViewController(withIdentifier: VCIdentifier.ethereumWalletViewController) as? EthereumWalletViewController else {return}
+                        ethereumWalletViewController.isPmnt = true
+                        
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(ethereumWalletViewController, animated: true)
+                        }
+                    } else {
+                        print("eth info dont loaded")
                     }
                 case .ethereum?:
                     if CryptoManager.shared.ethInfoIsLoaded {
-                        guard let ethereumWalletNavigationController = StoryBoard.ethereum.instantiateInitialViewController() as? PaymonNavigationController else {return}
+                        guard let ethereumWalletViewController = StoryBoard.ethereum.instantiateViewController(withIdentifier: VCIdentifier.ethereumWalletViewController) as? EthereumWalletViewController else {return}
+                        
                         DispatchQueue.main.async {
-                            self.navigationController?.present(ethereumWalletNavigationController, animated: true, completion: nil)
+                            self.navigationController?.pushViewController(ethereumWalletViewController, animated: true)
                         }
                     } else {
                         print("eth info dont loaded")

@@ -70,22 +70,26 @@ class EthereumManager {
         }
     }
     
-    func fiatBalanceDidUpdate() {
+    func fiatBalanceDidUpdate(currency : String) {
         DispatchQueue.main.async {
-            CryptoManager.shared.ethInfoIsLoaded = true;
+            if currency == Money.eth {
+                CryptoManager.shared.ethInfoIsLoaded = true;
+            } else {
+                CryptoManager.shared.pmntInfoIsLoaded = true;
+            }
             NotificationCenter.default.post(name: .updateBalance, object: nil)
         }
     }
     
     var ethFiatBalance : Double! = 0.0 {
         didSet {
-            fiatBalanceDidUpdate()
+            fiatBalanceDidUpdate(currency : Money.eth)
         }
     }
     
     var pmntFiatBalance : Double! = 0.0 {
         didSet {
-            fiatBalanceDidUpdate()
+            fiatBalanceDidUpdate(currency : Money.pmnt)
         }
     }
     
@@ -129,14 +133,11 @@ class EthereumManager {
         if ethSender == nil {
             queue.addOperation {
                 if (self.ethKeystoreManager?.addresses.count == 0) {
-                    print("Cant create eth sender")
                     return
                 } else {
                     self.ethKs = self.ethKeystoreManager?.walletForAddress((self.ethKeystoreManager?.addresses[0])!) as? EthereumKeystoreV3
                 }
-                print("Set Eth sender")
                 guard let EthSender = self.ethKs?.addresses.first else {return}
-                print("lolka")
                 self.ethSender = EthSender
 
                 print("Eth sender \(EthSender)")

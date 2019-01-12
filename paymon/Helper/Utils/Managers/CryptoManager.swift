@@ -11,7 +11,7 @@ import Foundation
 class CryptoManager {
     
     static let shared = CryptoManager()
-    var btcInfoIsLoaded = false
+    var pmntInfoIsLoaded = false
     var ethInfoIsLoaded = false
     
     func getPaymonWalletInfo() -> CellMoneyData {
