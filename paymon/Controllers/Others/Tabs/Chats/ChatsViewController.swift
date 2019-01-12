@@ -30,7 +30,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
 
         segment.selectedSegmentIndex = 1
         setChatsList()
-        if User.isAuthenticated {
+        if User.shared.isAuthenticated {
             MessageManager.shared.loadChats()
         }
     }
@@ -73,7 +73,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         print(allChats)
         allChats.addObserver(self)
         
-        if User.isAuthenticated {
+        if User.shared.isAuthenticated {
             MessageManager.shared.loadChats()
         }
     }

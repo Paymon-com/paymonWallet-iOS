@@ -16,24 +16,20 @@ class CryptoManager {
     
     func getPaymonWalletInfo() -> CellMoneyData {
         
-        let paymonData = CellCreatedMoneyData()
-        let userHavePaymonWallet = false
-        if (userHavePaymonWallet) {
-
-            /*Block for test. Here we get Paymon wallet info*/
-            paymonData.currancyAmount = 12.572
-            paymonData.fiatAmount = 6723.13
-            paymonData.cryptoHint = Money.pmnt
-            paymonData.icon = Money.pmncIcon
-            paymonData.fiatHint = User.currencyCode
-            paymonData.fiatColor = UIColor.AppColor.Green.rub
-            paymonData.cryptoColor = UIColor.AppColor.Blue.paymon
-            paymonData.cryptoType = .paymon
-            /*******************/
-            return paymonData
+        let ethereumData = CellCreatedMoneyData()
+        
+        if EthereumManager.shared.pmntSender != nil {
+            ethereumData.currancyAmount = EthereumManager.shared.pmntCryptoBalance
+            ethereumData.fiatAmount = EthereumManager.shared.pmntFiatBalance
+            ethereumData.cryptoHint = Money.pmnt
+            ethereumData.icon = Money.pmntIcon
+            ethereumData.fiatHint = User.shared.currencyCode
+            ethereumData.fiatColor = UIColor.AppColor.Green.rub
+            ethereumData.cryptoColor = UIColor.AppColor.Gray.ethereum
+            ethereumData.cryptoType = .paymon
+            return ethereumData
         } else {
-            return getNotCreatedData(cryptoType: .paymon)
-
+            return self.getNotCreatedData(cryptoType: .paymon)
         }
     }
     
@@ -41,12 +37,12 @@ class CryptoManager {
         
         let ethereumData = CellCreatedMoneyData()
         
-        if EthereumManager.shared.EthSender != nil {
-            ethereumData.currancyAmount = EthereumManager.shared.EthCryptoBalance
-            ethereumData.fiatAmount = EthereumManager.shared.EthFiatBalance
+        if EthereumManager.shared.ethSender != nil {
+            ethereumData.currancyAmount = EthereumManager.shared.ethCryptoBalance
+            ethereumData.fiatAmount = EthereumManager.shared.ethFiatBalance
             ethereumData.cryptoHint = Money.eth
             ethereumData.icon = Money.ethIcon
-            ethereumData.fiatHint = User.currencyCode
+            ethereumData.fiatHint = User.shared.currencyCode
             ethereumData.fiatColor = UIColor.AppColor.Green.rub
             ethereumData.cryptoColor = UIColor.AppColor.Gray.ethereum
             ethereumData.cryptoType = .ethereum
@@ -57,35 +53,29 @@ class CryptoManager {
         
     }
     
-    func getBitcoinWalletInfo() -> CellMoneyData {
-        let bitcoinData = CellCreatedMoneyData()
-        
-            if BitcoinManager.shared.wallet == nil {
-//                let keychain = Keychain()
-//                if let seed = keychain.get(for: "seed_\(String(describing: User.currentUser.id))") {
-//                    BitcoinManager.shared.importWallet(seed: seed)
-//                } else {
-//                    return self.getNotCreatedData(cryptoType: .bitcoin)
-//                }
-                return self.getNotCreatedData(cryptoType: .bitcoin)
-
-            }
-        
-            if User.currentUser != nil {
-//                bitcoinData.currancyAmount = BitcoinManager.shared.balance
-//                bitcoinData.fiatAmount = BitcoinManager.shared.fiatBalance
-                bitcoinData.cryptoHint = Money.btc
-                bitcoinData.icon = Money.btcIcon
-                bitcoinData.fiatHint = User.currencyCode
-                bitcoinData.fiatColor = UIColor.AppColor.Green.rub
-                bitcoinData.cryptoColor = UIColor.AppColor.Orange.bitcoin
-                bitcoinData.cryptoType = .bitcoin
-                return bitcoinData
-            } else {
-                return self.getNotCreatedData(cryptoType: .bitcoin)
-            }
-           
-    }
+//    func getBitcoinWalletInfo() -> CellMoneyData {
+//        let bitcoinData = CellCreatedMoneyData()
+//
+//            if BitcoinManager.shared.wallet == nil {
+//                return self.getNotCreatedData(cryptoType: .bitcoin)
+//
+//            }
+//
+//            if User.shared.currentUser != nil {
+////                bitcoinData.currancyAmount = BitcoinManager.shared.balance
+////                bitcoinData.fiatAmount = BitcoinManager.shared.fiatBalance
+//                bitcoinData.cryptoHint = Money.btc
+//                bitcoinData.icon = Money.btcIcon
+//                bitcoinData.fiatHint = User.currencyCode
+//                bitcoinData.fiatColor = UIColor.AppColor.Green.rub
+//                bitcoinData.cryptoColor = UIColor.AppColor.Orange.bitcoin
+//                bitcoinData.cryptoType = .bitcoin
+//                return bitcoinData
+//            } else {
+//                return self.getNotCreatedData(cryptoType: .bitcoin)
+//            }
+//
+//    }
     
     func getNotCreatedData(cryptoType : CryptoType) -> CellMoneyData {
         let notCreated = CellMoneyData()
@@ -99,7 +89,7 @@ class CryptoManager {
             notCreated.icon = Money.ethIcon
         case .paymon:
             notCreated.cryptoColor = UIColor.AppColor.Blue.paymon
-            notCreated.icon = Money.pmncIcon
+            notCreated.icon = Money.pmntIcon
         }
     
         notCreated.cryptoType = cryptoType

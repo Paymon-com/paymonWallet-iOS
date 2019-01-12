@@ -14,6 +14,6 @@ class ChatsTableCretedGroupCell: UITableViewCell {
     @IBOutlet weak var label: UILabel!
     
     func configure(group : GroupData) {
-        self.label.text = "\(Utils.formatUserName(User.currentUser)) "+"created the group chat ".localized+"\"\(group.title!)\""
+        self.label.text = "\(Utils.formatUserName(User.shared.currentUser)) "+"created the group chat ".localized+"\"\(group.title!)\""
     }
 }

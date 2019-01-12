@@ -44,7 +44,7 @@ class MessageDataManager {
         saveMessage(messageObject: messageObject)
         
         if messageObject.to_peer is RPC.PM_peerUser {
-            guard let uid = messageObject.from_id == User.currentUser.id ? messageObject.to_peer.user_id : messageObject.from_id else {
+            guard let uid = messageObject.from_id == User.shared.currentUser.id ? messageObject.to_peer.user_id : messageObject.from_id else {
                     return
                 }
             if let user = UserDataManager.shared.getUserByIdSync(id: uid) {

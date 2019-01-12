@@ -45,14 +45,12 @@ class MoneyNotCreatedTableViewCell: UITableViewCell {
 //            guard let createNewBtcWalletViewController = StoryBoard.money.instantiateViewController(withIdentifier: VCIdentifier.createNewBtcWalletViewController) as? CreateNewBtcWalletViewController else {return}
 //            viewController.navigationController?.pushViewController(createNewBtcWalletViewController, animated: true)
         break
-            
-        case .ethereum?:
+        case .ethereum?, .paymon?:
             guard let createNewEthWalletViewController = StoryBoard.money.instantiateViewController(withIdentifier: VCIdentifier.createNewEthWalletViewController) as? CreateNewEthWalletViewController else {return}
+            if cryptoType == .paymon {
+                createNewEthWalletViewController.isPmnt = true
+            }
             viewController.navigationController?.pushViewController(createNewEthWalletViewController, animated: true)
-            break
-            
-        case .paymon?:
-            
             break
         default:
             break

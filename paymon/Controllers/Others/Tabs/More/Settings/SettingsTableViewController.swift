@@ -27,7 +27,7 @@ class SettingsTableViewController : UITableViewController {
     }
     
     @IBAction func logOutClick(_ sender: Any) {
-        let logOutMenu = UIAlertController(title: "Logged in as ".localized+"\(Utils.formatUserName(User.currentUser))", message: nil, preferredStyle: .actionSheet)
+        let logOutMenu = UIAlertController(title: "Logged in as ".localized+"\(Utils.formatUserName(User.shared.currentUser))", message: nil, preferredStyle: .actionSheet)
         
         let cancel = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
         let logOut = UIAlertAction(title: "Log out".localized, style: .destructive, handler: { (alert: UIAlertAction!) -> Void in
@@ -35,7 +35,7 @@ class SettingsTableViewController : UITableViewController {
             
             let startViewController = StoryBoard.main.instantiateViewController(withIdentifier: VCIdentifier.mainNavigationController)
             
-            User.clearConfig()
+            User.shared.clearConfig()
             MessageManager.dispose()
             NetworkManager.shared.reconnect()
             appDelegate.window?.rootViewController = startViewController

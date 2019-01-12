@@ -23,7 +23,7 @@ public class MessageManager {
 
         self.isChatsLoaded = true
 
-        if User.currentUser == nil {
+        if User.shared.currentUser == nil {
             self.isChatsLoaded = false
             return
         }
@@ -54,7 +54,7 @@ public class MessageManager {
         message.text = text
         message.flags = RPC.Message.MESSAGE_FLAG_FROM_ID
         message.date = Int32(Utils.currentTimeMillis() / 1000)
-        message.from_id = User.currentUser!.id
+        message.from_id = User.shared.currentUser!.id
         message.to_peer = isGroup ? RPC.PM_peerGroup(group_id: chatId) : RPC.PM_peerUser(user_id : chatId)
         message.to_id = chatId
         message.unread = true

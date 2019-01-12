@@ -73,7 +73,7 @@ open class Utils {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = NSLocale.current
         
-        if User.timeFormatIs24 {
+        if User.shared.timeFormatIs24 {
             dateFormatter.dateFormat = "HH:mm"
         } else {
             dateFormatter.dateFormat = "hh:mm a"
@@ -89,7 +89,7 @@ open class Utils {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = NSLocale.current
         
-        if User.timeFormatIs24 {
+        if User.shared.timeFormatIs24 {
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         } else {
             dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
@@ -128,7 +128,7 @@ open class Utils {
             pattern = "HH:mm"
         }
         
-        if !User.timeFormatIs24 {
+        if !User.shared.timeFormatIs24 {
             pattern = pattern.replacingOccurrences(of: "HH:mm", with: "hh:mm a")
         }
         
@@ -163,7 +163,7 @@ open class Utils {
             pattern = "HH:mm"
         }
         
-        if !User.timeFormatIs24 {
+        if !User.shared.timeFormatIs24 {
             pattern = pattern.replacingOccurrences(of: "HH:mm", with: "hh:mm a")
         }
         
@@ -181,7 +181,7 @@ open class Utils {
         
         switch(interval) {
         case ExchangeRatesConst.hour, ExchangeRatesConst.day:
-            if User.timeFormatIs24 {
+            if User.shared.timeFormatIs24 {
                 dateFormatter.dateFormat = "HH:mm"
             } else {
                 dateFormatter.dateFormat = "hh:mm a"

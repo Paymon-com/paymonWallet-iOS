@@ -43,9 +43,9 @@ class EthereumTransferInformationViewController: UIViewController {
         let feeForView = gasLimit * Double(gasPrice) / Money.fromWei * course
         totalAmountValue = amountToSend / Money.fromWei * course + feeForView
         
-        networkFeeAmount.text = String(format: "\(User.currencyCodeSymb) %.2f", feeForView)
-        yourWalletBalance.text = String(format: "\(User.currencyCodeSymb) %.2f", balanceValue)
-        totalAmount.text = String(format: "\(User.currencyCodeSymb) %.2f",totalAmountValue)
+        networkFeeAmount.text = String(format: "\(User.shared.currencyCodeSymb) %.2f", feeForView)
+        yourWalletBalance.text = String(format: "\(User.shared.currencyCodeSymb) %.2f", balanceValue)
+        totalAmount.text = String(format: "\(User.shared.currencyCodeSymb) %.2f",totalAmountValue)
         
         setLayoutOptions()
     }
@@ -58,7 +58,7 @@ class EthereumTransferInformationViewController: UIViewController {
                 DispatchQueue.main.async {
                     let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
                 }
-                EthereumManager.shared.send(gasPrice: BigUInt(String(self.gasPrice))!, gasLimit: Int64(self.gasLimit), value: Int64(self.amountToSend), toAddress: self.toAddress, password: User.passwordEthWallet) { (isSent, txid) in
+                EthereumManager.shared.send(gasPrice: BigUInt(String(self.gasPrice))!, gasLimit: Int64(self.gasLimit), value: Int64(self.amountToSend), toAddress: self.toAddress, password: User.shared.passwordEthWallet) { (isSent, txid) in
                     DispatchQueue.main.async {
                         MBProgressHUD.hide(for: self.view, animated: true)
                     }
@@ -87,7 +87,7 @@ class EthereumTransferInformationViewController: UIViewController {
         alertCheckPassword.addAction(UIAlertAction(title: "Cancel".localized, style: .default, handler: nil))
         alertCheckPassword.addAction(UIAlertAction(title: "Ok".localized, style: .default, handler: { (nil) in
             let textField = alertCheckPassword.textFields![0] as UITextField
-            if User.passwordEthWallet == textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
+            if User.shared.passwordEthWallet == textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
                 completionHandler(true)
             } else {
                 completionHandler(false)

@@ -41,12 +41,12 @@ class BackupEthWalletViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        if password == User.passwordEthWallet {
+        if password == User.shared.passwordEthWallet {
             if let url = EthereumManager.shared.getUrlEthWallet() {
                 let shareActivity = UIActivityViewController(activityItems: ["Backup Ethereum wallet from the Paymon app".localized, url], applicationActivities: nil)
                 shareActivity.completionWithItemsHandler = { (activity, success, items, error) in
                     if success {
-                        User.backUpEthWallet()
+                        User.shared.backUpEthWallet()
                         self.navigationController?.popViewController(animated: true)
                     } else {
                         _ = SimpleOkAlertController.init(title: "Backup".localized, message: "Backup failed. Try later.".localized, vc: self)

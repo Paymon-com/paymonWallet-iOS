@@ -100,7 +100,7 @@ class PasscodeViewController: PaymonViewController {
                 newPassword.append(i)
             }
             
-            if newPassword == User.securityPasscodeValue {
+            if newPassword == User.shared.securityPasscodeValue {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let tabsViewController = StoryBoard.tabs.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
                 
@@ -125,7 +125,7 @@ class PasscodeViewController: PaymonViewController {
                 }
                 
                 if repeatNewPassword == newPassword {
-                    User.savePasscode(passcodeValue: newPassword, setPasscode: true)
+                    User.shared.savePasscode(passcodeValue: newPassword, setPasscode: true)
                     self.dismiss(animated: true, completion: nil)
                 } else {
                     repeatNewPassword = ""

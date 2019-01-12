@@ -17,7 +17,7 @@ class MainNavigationController: UINavigationController {
         
         if isLoggedIn() {
                     
-            if User.securityPasscode {
+            if User.shared.securityPasscode {
                 let passcodeViewController = StoryBoard.passcode.instantiateViewController(withIdentifier: VCIdentifier.passcodeViewController) as! PasscodeViewController
                 viewControllers = [passcodeViewController]
             } else {
@@ -33,7 +33,7 @@ class MainNavigationController: UINavigationController {
     }
     
     func isLoggedIn() -> Bool {
-        return User.currentUser != nil
+        return User.shared.currentUser != nil
     }
     
     func setLayoutOptions() {

@@ -46,7 +46,7 @@ class GroupSettingViewController: PaymonViewController, UITableViewDataSource, U
         
         groupTitle.text = group.title
         creatorId = group.creatorId
-        isCreator = creatorId == User.currentUser?.id
+        isCreator = creatorId == User.shared.currentUser?.id
         
         self.groupTitle.delegate = self
         self.navigationController?.delegate = self

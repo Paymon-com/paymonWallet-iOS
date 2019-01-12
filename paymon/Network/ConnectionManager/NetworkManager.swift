@@ -134,9 +134,9 @@ class NetworkManager: NSObject, NetworkManagerDelegate {
 
                     ChatsDataManager.shared.updateChatsPhotoUrl(id: peerUser.user_id, url: update.url)
 
-                    if User.currentUser?.id == peerUser.user_id {
-                        User.currentUser?.photoUrl.url = update.url
-                        User.saveConfig()
+                    if User.shared.currentUser?.id == peerUser.user_id {
+                        User.shared.currentUser?.photoUrl.url = update.url
+                        User.shared.saveConfig()
                     }
 
                 } else if let peerGroup = update.peer as? RPC.PM_peerGroup {
@@ -297,7 +297,7 @@ class NetworkManager: NSObject, NetworkManagerDelegate {
     }
 
     func sendPacketNowOrLater(_ packet: Packet, onComplete: PacketResponseFunc?, messageID: Int64) {
-        if User.isAuthenticated {
+        if User.shared.isAuthenticated {
             sendPacket(packet, onComplete:onComplete)
         } else {
             futureRequests.append(FutureRequest(id: messageID, packet: packet, callback: onComplete))

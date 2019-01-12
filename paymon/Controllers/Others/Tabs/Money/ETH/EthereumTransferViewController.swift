@@ -93,7 +93,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
         
-        ExchangeRateParser.shared.parseCourse(crypto: Money.eth, fiat: User.currencyCode) { result in
+        ExchangeRateParser.shared.parseCourse(crypto: Money.eth, fiat: User.shared.currencyCode) { result in
             self.course = result
             
             DispatchQueue.main.async {
@@ -105,8 +105,8 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     
     func getYourWalletInfo() {
         
-        yourWalletBalanceValue = Double(EthereumManager.shared.EthFiatBalance)
-        yourWalletBalance.text = String(format: "\(User.currencyCodeSymb) %.2f", yourWalletBalanceValue)
+        yourWalletBalanceValue = Double(EthereumManager.shared.ethFiatBalance)
+        yourWalletBalance.text = String(format: "\(User.shared.currencyCodeSymb) %.2f", yourWalletBalanceValue)
         
     }
     
@@ -183,8 +183,8 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
         self.walletInfoView.alpha = 0
         self.line.alpha = 0
         
-        self.fiatHint.text = User.currencyCode
-        self.fiat.placeholder = User.currencyCode
+        self.fiatHint.text = User.shared.currencyCode
+        self.fiat.placeholder = User.shared.currencyCode
         self.feeHint.text = "Network fee".localized
         self.gasLimit.placeholder = "Gas limit".localized
         self.gasPriceHint.text = "Gas price (Gwei)".localized
@@ -265,7 +265,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
         
         let value = Decimal(cryptoValue) * Decimal(Money.fromWei)
         let fee = Decimal(gasLimitValue) * Decimal(gasPrice.text!) * Decimal(Money.fromGwei)
-        if value + fee < Decimal(EthereumManager.shared.EthBalance.description) {
+        if value + fee < Decimal(EthereumManager.shared.ethBalance.description) {
             
             let transferInfoVC = StoryBoard.ethereum.instantiateViewController(withIdentifier: VCIdentifier.ethereumTransferInformationViewController) as! EthereumTransferInformationViewController
             

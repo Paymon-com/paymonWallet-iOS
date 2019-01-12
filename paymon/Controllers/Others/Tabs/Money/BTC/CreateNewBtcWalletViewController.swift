@@ -109,8 +109,8 @@
 //    }
 //    
 //    func walletCreated() {
-//        User.saveBtcPasswordWallet(password: password)
-//        User.saveSeed(rowSeed: rowForBackup)
+//        User.shared.saveBtcPasswordWallet(password: password)
+//        User.shared.saveSeed(rowSeed: rowForBackup)
 //        DispatchQueue.main.async {
 //            MBProgressHUD.hide(for: self.view, animated: true)
 //            self.navigationController?.popViewController(animated: true)

@@ -51,10 +51,10 @@ class SignInViewController: PaymonViewController, UITextFieldDelegate {
                     if !isConfirmed {
                     
                         let alert = UIAlertController(title: "Confirmation email".localized,
-                        message: String(format: NSLocalizedString("You did not verify your account by email \n %@ \n\n Send mail again?".localized, comment: ""), User.currentUser.email), preferredStyle: .alert)
+                        message: String(format: NSLocalizedString("You did not verify your account by email \n %@ \n\n Send mail again?".localized, comment: ""), User.shared.currentUser.email), preferredStyle: .alert)
                         
                         alert.addAction(UIAlertAction(title: "Cancel".localized, style: .default, handler: { (action) in
-                            User.clearConfig()
+                            User.shared.clearConfig()
                             NetworkManager.shared.reset()
                             NetworkManager.shared.reconnect()
                         }))
@@ -81,7 +81,7 @@ class SignInViewController: PaymonViewController, UITextFieldDelegate {
                                     print("Error: email was not sent \(String(describing: error))")
                                 }
                                 
-                                User.clearConfig()
+                                User.shared.clearConfig()
                                 NetworkManager.shared.reset()
                                 NetworkManager.shared.reconnect()
                             }

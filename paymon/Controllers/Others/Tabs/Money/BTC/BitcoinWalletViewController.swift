@@ -56,7 +56,7 @@
 //        
 //        funcsMenu.addAction(cancel)
 //        funcsMenu.addAction(recovery)
-//        if !User.isBackupBtcWallet {
+//        if !User.shared.isBackupBtcWallet {
 //            let backup = UIAlertAction(title: "Backup".localized, style: .default, handler: { (alert: UIAlertAction!) -> Void in
 //                guard let backupViewController = self.storyboard?.instantiateViewController(withIdentifier: VCIdentifier.backupBtcWalletViewController) as? BackupBtcWalletViewController else {return}
 //                
@@ -81,7 +81,7 @@
 //    override func viewWillAppear(_ animated: Bool) {
 //        
 //        if needBackUp != nil {
-//            self.needBackUpHeight.constant = !User.isBackupBtcWallet ? 40 : 0
+//            self.needBackUpHeight.constant = !User.shared.isBackupBtcWallet ? 40 : 0
 //        }
 //        
 //        walletWasCreated = NotificationCenter.default.addObserver(forName: .ethWalletWasCreated, object: nil, queue: nil) {
@@ -119,7 +119,7 @@
 //        self.needBackUp.setTitle("We strongly recommend making a backup".localized, for: .normal)
 //
 //        self.needBackUp.setGradientLayer(frame: CGRect(x: 0, y: 0, width: widthScreen, height: self.needBackUp.frame.height), topColor: UIColor.white.cgColor, bottomColor: UIColor.AppColor.Blue.primaryBlueUltraLight.cgColor)
-//        self.needBackUpHeight.constant = !User.isBackupBtcWallet ? 40 : 0
+//        self.needBackUpHeight.constant = !User.shared.isBackupBtcWallet ? 40 : 0
 //
 //    }
 //    

@@ -37,7 +37,7 @@ class CreateGroupViewController: PaymonViewController , UITableViewDataSource, U
         for user in UserDataManager.shared.getUserByContact(isContact: true)! {
             
             print("login: \(user.login), isContact \(user.isContact)")
-            if user.id == User.currentUser.id {
+            if user.id == User.shared.currentUser.id {
                 continue
             }
             

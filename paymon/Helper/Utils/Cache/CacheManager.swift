@@ -25,7 +25,7 @@ public class CacheManager {
         )
         
         do {
-            try dataStack.addStorageAndWait(SQLiteStore(fileName: "Paymon_\(String(describing: User.currentUser.id!)).sqlite",
+            try dataStack.addStorageAndWait(SQLiteStore(fileName: "Paymon_\(String(describing: User.shared.currentUser.id!)).sqlite",
                 localStorageOptions: .recreateStoreOnModelMismatch))
         } catch let error {
             print("Error init db", error)
@@ -33,14 +33,14 @@ public class CacheManager {
         
         CoreStore.defaultStack = self.dataStack
         CacheManager.isAddedStorage = true
-        UserDataManager.shared.updateOrCreateUser(userObject: User.currentUser)
+        UserDataManager.shared.updateOrCreateUser(userObject: User.shared.currentUser)
         
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: .setMainController, object: nil)
         }
         
 //        let _ = dataStack.addStorage(
-//            SQLiteStore(fileName: "Paymon_\(String(describing: User.currentUser.id!)).sqlite",
+//            SQLiteStore(fileName: "Paymon_\(String(describing: User.shared.currentUser.id!)).sqlite",
 //                localStorageOptions: .preventProgressiveMigration),
 //
 //            completion: { (result) -> Void in

@@ -74,6 +74,6 @@
 //        User.notificationVibration = switchVibration.isOn
 //        User.notificationTransactions = switchTransactions.isOn
 //        
-////        User.saveNotificationSettings()
+////        User.shared.saveNotificationSettings()
 //    }
 //}

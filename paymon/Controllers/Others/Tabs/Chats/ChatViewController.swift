@@ -243,7 +243,7 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     }
  
     public func loadMessages(offset : Int32, count : Int32) {
-        if User.currentUser == nil || chatID == 0 {
+        if User.shared.currentUser == nil || chatID == 0 {
             return
         }
         let packet = RPC.PM_getChatMessages()
@@ -294,7 +294,7 @@ extension ChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let message = messages[indexPath] as ChatMessageData? {
-            if message.fromId == User.currentUser!.id {
+            if message.fromId == User.shared.currentUser!.id {
                 if message.itemType == 0 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "ChatMessageViewCell", for: indexPath) as! ChatMessageViewCell
                     cell.configure(message: message)

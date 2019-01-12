@@ -57,7 +57,7 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
     
     func updateString() {
         
-        guard let user = User.currentUser as RPC.UserObject? else {
+        guard let user = User.shared.currentUser as RPC.UserObject? else {
             return
         }
         
@@ -95,11 +95,11 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
                 let _ = MBProgressHUD.showAdded(to: self.parent!.parent!.view, animated: true)
             }
 
-            User.currentUser!.first_name = self.nameInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            User.currentUser!.last_name = self.surnameInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            User.currentUser!.ethAddress = self.ethInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            User.currentUser!.btcAddress = self.btcInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            User.currentUser!.pmntAddress = self.pmntInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            User.shared.currentUser!.first_name = self.nameInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            User.shared.currentUser!.last_name = self.surnameInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            User.shared.currentUser!.ethAddress = self.ethInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            User.shared.currentUser!.btcAddress = self.btcInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            User.shared.currentUser!.pmntAddress = self.pmntInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
 
             
             UserManager.shared.updateProfileInfo() { isUpdated in
@@ -108,7 +108,7 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
                 }
                 
                 if isUpdated {
-                    User.saveConfig()
+                    User.shared.saveConfig()
                     DispatchQueue.main.async {
                         
                         Utils.showSuccesHud(vc: self.parent!.parent!)

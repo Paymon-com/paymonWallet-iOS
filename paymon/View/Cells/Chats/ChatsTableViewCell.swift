@@ -22,8 +22,8 @@ class ChatsTableViewCell : UITableViewCell {
         self.lastMessageTime.text = Utils.formatDateTime(timestamp: chat.time)
         self.photo.loadPhoto(url: chat.photoUrl)
         
-        if chat.lastMessageFromId == User.currentUser.id {
-            self.lastMessagePhoto.loadPhoto(url: User.currentUser.photoUrl.url)
+        if chat.lastMessageFromId == User.shared.currentUser.id {
+            self.lastMessagePhoto.loadPhoto(url: User.shared.currentUser.photoUrl.url)
         } else {
             lastMessagePhotoWidth.constant = 0
             prePhotoWidth.constant = 0

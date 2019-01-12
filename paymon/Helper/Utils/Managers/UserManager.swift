@@ -13,9 +13,9 @@ public class UserManager {
     static let shared = UserManager()
     
     func authSuccess() {
-        User.isAuthenticated = true
-        User.saveConfig()
-        User.loadConfig()
+        User.shared.isAuthenticated = true
+        User.shared.saveConfig()
+        User.shared.loadConfig()
     }
     
     func signUpNewUser(login : String, password : String, email : String, completionHandler: @escaping (Bool) -> ()) {
@@ -48,7 +48,7 @@ public class UserManager {
          NetworkManager.shared.sendPacket(auth) { p, e in
 
             if let user = p as? RPC.PM_userSelf {
-                User.currentUser = user
+                User.shared.currentUser = user
 
                 if user.confirmed {
                     self.authSuccess()
@@ -66,7 +66,7 @@ public class UserManager {
 
     func updateProfileInfo(completionHandler: @escaping (Bool) -> ()) {
         
-        guard let user = User.currentUser else {return}
+        guard let user = User.shared.currentUser else {return}
 
         NetworkManager.shared.sendPacket(user) { response, error in
             
@@ -121,7 +121,7 @@ public class UserManager {
         print("auth by token")
             let auth = RPC.PM_authToken()
             
-            guard let user = User.currentUser else {
+            guard let user = User.shared.currentUser else {
                 return
             }
  
@@ -134,7 +134,7 @@ public class UserManager {
                     print("Error auth by token", e as Any)
 
                 } else {
-                    User.currentUser = p as? RPC.PM_userSelf
+                    User.shared.currentUser = p as? RPC.PM_userSelf
                     self.authSuccess()
                     MessageManager.shared.loadChats()
                     
@@ -185,8 +185,8 @@ public class UserManager {
     
     func showEmail(isShow : Bool, completionHandler: @escaping (Bool) -> ()){
         
-        User.currentUser.isEmailHidden = isShow
-        guard let user = User.currentUser else {return}
+        User.shared.currentUser.isEmailHidden = isShow
+        guard let user = User.shared.currentUser else {return}
         
         NetworkManager.shared.sendPacket(user) { response, error in
             

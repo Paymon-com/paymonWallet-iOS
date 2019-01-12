@@ -25,7 +25,7 @@ class SettingsSecurityTableViewController: UITableViewController {
         passwordProtectCell.textLabel!.text! = "Password protect".localized
         
         switchPasswordProtect.onTintColor = UIColor.AppColor.Blue.primaryBlue
-        switchPasswordProtect.setOn(User.securityPasscode, animated: false)
+        switchPasswordProtect.setOn(User.shared.securityPasscode, animated: false)
 
         passwordProtectCell.accessoryView = switchPasswordProtect
         
@@ -64,7 +64,7 @@ class SettingsSecurityTableViewController: UITableViewController {
             
             self.present(passcodeViewController, animated: true, completion: nil)
         } else {
-            User.savePasscode(passcodeValue: "", setPasscode : false)
+            User.shared.savePasscode(passcodeValue: "", setPasscode : false)
         }
     }
     

@@ -102,7 +102,7 @@ class RestoreEthViewController: UIViewController, UIDocumentPickerDelegate {
                     MBProgressHUD.hide(for: self.view, animated: true)
                 }
                 if isRestored {
-                    User.saveEthPasswordWallet(password: self.password)
+                    User.shared.saveEthPasswordWallet(password: self.password)
                     DispatchQueue.main.async {
                         self.navigationController?.popViewController(animated: true)
                     }
@@ -141,10 +141,10 @@ class RestoreEthViewController: UIViewController, UIDocumentPickerDelegate {
             return
         }
         
-        if !User.passwordEthWallet.isEmpty {
+        if !User.shared.passwordEthWallet.isEmpty {
             let alertRemove = UIAlertController(title: "Restore wallet".localized, message: "Before you restore another wallet, make sure you back up your old wallet.".localized, preferredStyle: UIAlertController.Style.alert)
             
-            if !User.isBackupEthWallet {
+            if !User.shared.isBackupEthWallet {
                 alertRemove.addAction(UIAlertAction(title: "Backup".localized, style: .default, handler: { (action) in
                     guard let backupViewController = self.storyboard?.instantiateViewController(withIdentifier: VCIdentifier.backupEthWalletViewController) as? BackupEthWalletViewController else {return}
                     

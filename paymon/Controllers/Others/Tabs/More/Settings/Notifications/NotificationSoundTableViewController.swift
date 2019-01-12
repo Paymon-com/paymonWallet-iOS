@@ -62,7 +62,7 @@
 //        
 //        User.notificationMessageSound = soundItem.url.lastPathComponent
 //        
-////        User.saveNotificationSettings()
+////        User.shared.saveNotificationSettings()
 //        
 //    }
 //    

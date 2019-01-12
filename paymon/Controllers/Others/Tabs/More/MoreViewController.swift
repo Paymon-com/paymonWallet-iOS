@@ -22,7 +22,7 @@ class MoreViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        guard let user = User.currentUser as RPC.UserObject? else {
+        guard let user = User.shared.currentUser as RPC.UserObject? else {
             return
         }
         DispatchQueue.main.async {

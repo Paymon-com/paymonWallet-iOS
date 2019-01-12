@@ -36,7 +36,7 @@ class UpdateProfileViewController: PaymonViewController, UIImagePickerController
 
         setLayoutOptions()
         
-        if let user = User.currentUser {
+        if let user = User.shared.currentUser {
             avatar.loadPhoto(url: user.photoUrl.url)
         }
         self.updateItem.isEnabled = false
@@ -113,7 +113,7 @@ class UpdateProfileViewController: PaymonViewController, UIImagePickerController
                     }
                 } else {
                     _ = SimpleOkAlertController.init(title: "Update failed".localized, message: "An error occurred during the update".localized, vc: self)
-                    PMFileManager.shared.cancelFileUpload(fileID: Int64(User.currentUser.id));
+                    PMFileManager.shared.cancelFileUpload(fileID: Int64(User.shared.currentUser.id));
                 }
             }
         }
