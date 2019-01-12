@@ -97,7 +97,7 @@ class RestoreEthViewController: UIViewController, UIDocumentPickerDelegate {
         do {
             let privateKey = try Data(contentsOf: urlForRestore)
             print(privateKey.base64EncodedString())
-            EthereumManager.shared.restoreWallet(jsonData: privateKey, password: password) { ( isRestored, state) in
+            EthereumManager.shared.restoreEthWallet(jsonData: privateKey, password: password) { ( isRestored, state) in
                 DispatchQueue.main.async {
                     MBProgressHUD.hide(for: self.view, animated: true)
                 }

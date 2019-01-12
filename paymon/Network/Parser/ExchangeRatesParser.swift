@@ -53,7 +53,7 @@ class ExchangeRateParser{
                     if let rates = json[crypto] as? [String: Any] {
                         if let result = rates[fiat] as? Double {
                             switch crypto {
-                            case Money.eth: EthereumManager.shared.course = result
+                            case Money.eth: EthereumManager.shared.EthCourse = result
                             case Money.btc: BitcoinManager.shared.course = result
                             default: break
                             }

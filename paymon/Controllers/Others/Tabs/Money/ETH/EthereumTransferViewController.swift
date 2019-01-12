@@ -105,7 +105,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     
     func getYourWalletInfo() {
         
-        yourWalletBalanceValue = Double(EthereumManager.shared.fiatBalance)
+        yourWalletBalanceValue = Double(EthereumManager.shared.EthFiatBalance)
         yourWalletBalance.text = String(format: "\(User.currencyCodeSymb) %.2f", yourWalletBalanceValue)
         
     }
@@ -265,7 +265,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
         
         let value = Decimal(cryptoValue) * Decimal(Money.fromWei)
         let fee = Decimal(gasLimitValue) * Decimal(gasPrice.text!) * Decimal(Money.fromGwei)
-        if value + fee < Decimal(EthereumManager.shared.balance.description) {
+        if value + fee < Decimal(EthereumManager.shared.EthBalance.description) {
             
             let transferInfoVC = StoryBoard.ethereum.instantiateViewController(withIdentifier: VCIdentifier.ethereumTransferInformationViewController) as! EthereumTransferInformationViewController
             

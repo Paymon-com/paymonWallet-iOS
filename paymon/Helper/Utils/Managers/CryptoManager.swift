@@ -23,7 +23,7 @@ class CryptoManager {
             /*Block for test. Here we get Paymon wallet info*/
             paymonData.currancyAmount = 12.572
             paymonData.fiatAmount = 6723.13
-            paymonData.cryptoHint = Money.pmnc
+            paymonData.cryptoHint = Money.pmnt
             paymonData.icon = Money.pmncIcon
             paymonData.fiatHint = User.currencyCode
             paymonData.fiatColor = UIColor.AppColor.Green.rub
@@ -41,9 +41,9 @@ class CryptoManager {
         
         let ethereumData = CellCreatedMoneyData()
         
-        if EthereumManager.shared.sender != nil {
-            ethereumData.currancyAmount = EthereumManager.shared.cryptoBalance
-            ethereumData.fiatAmount = EthereumManager.shared.fiatBalance
+        if EthereumManager.shared.EthSender != nil {
+            ethereumData.currancyAmount = EthereumManager.shared.EthCryptoBalance
+            ethereumData.fiatAmount = EthereumManager.shared.EthFiatBalance
             ethereumData.cryptoHint = Money.eth
             ethereumData.icon = Money.ethIcon
             ethereumData.fiatHint = User.currencyCode

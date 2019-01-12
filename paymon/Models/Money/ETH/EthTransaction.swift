@@ -41,7 +41,7 @@ class EthTransactions {
                 image = bimage
             }
             
-            let transactionType : TransactionType = tx.from.lowercased() == EthereumManager.shared.sender!.address.lowercased() ? .sent : .received
+            let transactionType : TransactionType = tx.from.lowercased() == EthereumManager.shared.EthSender!.address.lowercased() ? .sent : .received
             let value = Decimal(tx.value) / Decimal(Money.fromWei)
             
             result.append(Transaction(type: transactionType, from: tx.from, amount: String(value.double), time: Utils.formatDateTime(timestamp: Int32(tx.timeStamp)!), avatar: image, txInfo : tx))

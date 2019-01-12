@@ -15,7 +15,7 @@ class LaunchScreenViewController : UIViewController {
     override func viewDidLoad() {
         setMainController = NotificationCenter.default.addObserver(forName: .setMainController, object: nil, queue: nil) {
             notification in
-            EthereumManager.shared.initWallet()
+            EthereumManager.shared.initEthWallet()
             self.showMainController()
         }
     }

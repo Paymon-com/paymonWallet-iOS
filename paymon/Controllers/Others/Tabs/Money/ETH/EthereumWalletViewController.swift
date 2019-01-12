@@ -68,7 +68,7 @@ class EthereumWalletViewController: PaymonViewController {
                 }))}
             
             alertRemove.addAction(UIAlertAction(title: "Remove".localized, style: .default, handler: { (action) in
-                EthereumManager.shared.deleteWallet() { isDeleted in
+                EthereumManager.shared.deleteEthWallet() { isDeleted in
                     if isDeleted {
                         //TODO: добавить ввод пароля
                         User.deleteEthWallet()
@@ -126,8 +126,8 @@ class EthereumWalletViewController: PaymonViewController {
         updateBalance = NotificationCenter.default.addObserver(forName: .updateBalance, object: nil, queue: nil) {
             notification in
             DispatchQueue.main.async {
-                self.cryptoBalance.text = String(format: "%.\(User.symbCount)f", EthereumManager.shared.cryptoBalance)
-                self.fiatBalance.text = String(format: "%.2f", EthereumManager.shared.fiatBalance)
+                self.cryptoBalance.text = String(format: "%.\(User.symbCount)f", EthereumManager.shared.EthCryptoBalance)
+                self.fiatBalance.text = String(format: "%.2f", EthereumManager.shared.EthFiatBalance)
             }
         }
     }
@@ -156,17 +156,17 @@ class EthereumWalletViewController: PaymonViewController {
         self.needBackUp.titleLabel?.adjustsFontSizeToFitWidth = true
         
         self.needBackUp.setGradientLayer(frame: CGRect(x: 0, y: 0, width: widthScreen, height: self.needBackUp.frame.height), topColor: UIColor.white.cgColor, bottomColor: UIColor.AppColor.Blue.primaryBlueUltraLight.cgColor)
-        self.needBackUpHeight.constant = !User.isBackupBtcWallet ? 40 : 0
+        self.needBackUpHeight.constant = !User.isBackupEthWallet ? 40 : 0
         
     }
     
     func getWalletInfo() {
         DispatchQueue.main.async {
             self.fiatSymbol.text = User.currencyCodeSymb
-            self.cryptoBalance.text = String(format: "%.\(User.symbCount)f", EthereumManager.shared.cryptoBalance)
-            self.fiatBalance.text = String(format: "%.2f", EthereumManager.shared.fiatBalance)
+            self.cryptoBalance.text = String(format: "%.\(User.symbCount)f", EthereumManager.shared.EthCryptoBalance)
+            self.fiatBalance.text = String(format: "%.2f", EthereumManager.shared.EthFiatBalance)
         }
-        publicKey = EthereumManager.shared.sender?.address
+        publicKey = EthereumManager.shared.EthSender?.address
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

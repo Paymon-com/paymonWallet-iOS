@@ -16,7 +16,7 @@ class UserInfoTableInfoUIView: UIView {
     
     func setLayoutOptions() {
         
-        self.layer.cornerRadius = self.frame.height/2
+        self.layer.cornerRadius = 30
         
     }
     

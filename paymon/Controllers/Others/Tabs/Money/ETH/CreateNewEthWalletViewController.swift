@@ -71,7 +71,7 @@ class CreateNewEthWalletViewController: UIViewController, UITextFieldDelegate {
             let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
         }
         
-        EthereumManager.shared.createWallet(password: password)
+        EthereumManager.shared.createEthWallet(password: password)
         
     }
     

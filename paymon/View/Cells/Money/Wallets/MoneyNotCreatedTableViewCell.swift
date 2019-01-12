@@ -42,8 +42,8 @@ class MoneyNotCreatedTableViewCell: UITableViewCell {
     @IBAction func createClick(_ sender: Any) {
         switch cryptoType {
         case .bitcoin?:
-            guard let createNewBtcWalletViewController = StoryBoard.money.instantiateViewController(withIdentifier: VCIdentifier.createNewBtcWalletViewController) as? CreateNewBtcWalletViewController else {return}
-            viewController.navigationController?.pushViewController(createNewBtcWalletViewController, animated: true)
+//            guard let createNewBtcWalletViewController = StoryBoard.money.instantiateViewController(withIdentifier: VCIdentifier.createNewBtcWalletViewController) as? CreateNewBtcWalletViewController else {return}
+//            viewController.navigationController?.pushViewController(createNewBtcWalletViewController, animated: true)
         break
             
         case .ethereum?:
@@ -62,8 +62,8 @@ class MoneyNotCreatedTableViewCell: UITableViewCell {
     @IBAction func restoreClick(_ sender: Any) {
         switch cryptoType {
         case .bitcoin?:
-            guard let restoreBtcViewController = StoryBoard.bitcoin.instantiateViewController(withIdentifier: VCIdentifier.restoreBtcViewController) as? RestoreBtcViewController else {return}
-            viewController.navigationController?.pushViewController(restoreBtcViewController, animated: true)
+//            guard let restoreBtcViewController = StoryBoard.bitcoin.instantiateViewController(withIdentifier: VCIdentifier.restoreBtcViewController) as? RestoreBtcViewController else {return}
+//            viewController.navigationController?.pushViewController(restoreBtcViewController, animated: true)
             break
             
         case .ethereum?:

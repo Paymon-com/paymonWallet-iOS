@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import AudioToolbox
 
 /// loding constant which will show on loadingView
 let kLoading = "Loading"
@@ -26,6 +27,7 @@ extension UIView {
     }
     
     func shake() {
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.07
         animation.repeatCount = 3

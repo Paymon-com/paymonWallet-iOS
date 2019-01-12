@@ -10,9 +10,9 @@ class User {
     public static var isAuthenticated = false
     public static var notificationWorry = true
     public static var notificationVibration = true
-    public static var notificationTransactions = false
-    public static var notificationMessageSound = ""
-    public static var notificationTransactionSound = ""
+//    public static var notificationTransactions = false
+//    public static var notificationMessageSound = ""
+//    public static var notificationTransactionSound = ""
 
     public static var securityPasscode = false
     public static var securityPasscodeValue = ""
@@ -20,13 +20,16 @@ class User {
     public static var userId : String = ""
     public static var currencyCode : String = "USD"
     public static var currencyCodeSymb : String = "$"
+    
     public static var passwordBtcWallet : String = ""
     public static var passwordEthWallet : String = ""
+    public static var passwordPmntWallet : String = ""
 
     public static var symbCount : Int32 = 2
-    public static var rowSeed : String = ""
-    public static var isBackupBtcWallet : Bool = false
+//    public static var rowSeed : String = ""
+//    public static var isBackupBtcWallet : Bool = false
     public static var isBackupEthWallet : Bool = false
+    public static var isBackupPmntWallet : Bool = false
 
     
     public static func saveConfig() {
@@ -99,16 +102,20 @@ class User {
         self.userId = String(currentUser.id)
         
         isBackupEthWallet = KeychainWrapper.standard.bool(forKey: UserDefaultKey.IS_ETH_WALLET_BACKUP + userId) ?? false
-        isBackupBtcWallet = KeychainWrapper.standard.bool(forKey: UserDefaultKey.IS_BTC_WALLET_BACKUP + userId) ?? false
-        rowSeed = KeychainWrapper.standard.string(forKey: UserDefaultKey.ROW_SEED_FOR_BACKUP + userId) ?? ""
-        passwordBtcWallet = KeychainWrapper.standard.string(forKey: UserDefaultKey.PASSWORD_BTC_WALLET + userId) ?? ""
+        isBackupPmntWallet = KeychainWrapper.standard.bool(forKey: UserDefaultKey.IS_PMNT_WALLET_BACKUP + userId) ?? false
+
+//        isBackupBtcWallet = KeychainWrapper.standard.bool(forKey: UserDefaultKey.IS_BTC_WALLET_BACKUP + userId) ?? false
+//        rowSeed = KeychainWrapper.standard.string(forKey: UserDefaultKey.ROW_SEED_FOR_BACKUP + userId) ?? ""
+//        passwordBtcWallet = KeychainWrapper.standard.string(forKey: UserDefaultKey.PASSWORD_BTC_WALLET + userId) ?? ""
         passwordEthWallet = KeychainWrapper.standard.string(forKey: UserDefaultKey.PASSWORD_ETH_WALLET + userId) ?? ""
+        passwordPmntWallet = KeychainWrapper.standard.string(forKey: UserDefaultKey.PASSWORD_PMNT_WALLET + userId) ?? ""
+
         currencyCode = KeychainWrapper.standard.string(forKey: UserDefaultKey.CURRENCY_CODE + userId) ?? "USD"
-        setCurrencyCodeSymb()
         symbCount = Int32(KeychainWrapper.standard.integer(forKey: UserDefaultKey.SYMB_COUNT + userId) ?? 2)
         timeFormatIs24 = KeychainWrapper.standard.bool(forKey: UserDefaultKey.TIME_FORMAT + userId) ?? true
         securityPasscode = KeychainWrapper.standard.bool(forKey: UserDefaultKey.SECURITY_PASSCODE + userId) ?? false
         securityPasscodeValue = KeychainWrapper.standard.string(forKey: UserDefaultKey.SECURITY_PASSCODE_VALUE + userId) ?? ""
+        setCurrencyCodeSymb()
         
     }
     
@@ -135,24 +142,24 @@ class User {
         KeychainWrapper.standard.set(Int(symbCount), forKey: UserDefaultKey.SYMB_COUNT + userId)
     }
     
-    public static func saveBtcPasswordWallet(password : String) {
-        self.passwordBtcWallet = password
-        KeychainWrapper.standard.set(password, forKey: UserDefaultKey.PASSWORD_BTC_WALLET + userId)
-    }
+//    public static func saveBtcPasswordWallet(password : String) {
+//        self.passwordBtcWallet = password
+//        KeychainWrapper.standard.set(password, forKey: UserDefaultKey.PASSWORD_BTC_WALLET + userId)
+//    }
     
-    public static func saveSeed(rowSeed : String) {
-        self.rowSeed = rowSeed
-        self.isBackupBtcWallet = false
-        KeychainWrapper.standard.set(rowSeed, forKey: UserDefaultKey.ROW_SEED_FOR_BACKUP + userId)
-        KeychainWrapper.standard.set(false, forKey: UserDefaultKey.IS_BTC_WALLET_BACKUP + userId)
-    }
-    
-    public static func backUpBtcWallet() {
-        self.isBackupBtcWallet = true
-        self.rowSeed = ""
-        KeychainWrapper.standard.removeObject(forKey: UserDefaultKey.ROW_SEED_FOR_BACKUP + userId)
-        KeychainWrapper.standard.set(true, forKey: UserDefaultKey.IS_BTC_WALLET_BACKUP + userId)
-    }
+//    public static func saveSeed(rowSeed : String) {
+//        self.rowSeed = rowSeed
+//        self.isBackupBtcWallet = false
+//        KeychainWrapper.standard.set(rowSeed, forKey: UserDefaultKey.ROW_SEED_FOR_BACKUP + userId)
+//        KeychainWrapper.standard.set(false, forKey: UserDefaultKey.IS_BTC_WALLET_BACKUP + userId)
+//    }
+//
+//    public static func backUpBtcWallet() {
+//        self.isBackupBtcWallet = true
+//        self.rowSeed = ""
+//        KeychainWrapper.standard.removeObject(forKey: UserDefaultKey.ROW_SEED_FOR_BACKUP + userId)
+//        KeychainWrapper.standard.set(true, forKey: UserDefaultKey.IS_BTC_WALLET_BACKUP + userId)
+//    }
     
     public static func saveEthPasswordWallet(password : String) {
         self.passwordEthWallet = password
@@ -160,9 +167,20 @@ class User {
         KeychainWrapper.standard.set(password, forKey: UserDefaultKey.PASSWORD_ETH_WALLET + userId)
     }
     
+    public static func savePmntPasswordWallet(password : String) {
+        self.passwordPmntWallet = password
+        self.isBackupPmntWallet = false
+        KeychainWrapper.standard.set(password, forKey: UserDefaultKey.PASSWORD_PMNT_WALLET + userId)
+    }
+    
     public static func backUpEthWallet() {
         self.isBackupEthWallet = true
         KeychainWrapper.standard.set(true, forKey: UserDefaultKey.IS_ETH_WALLET_BACKUP + userId)
+    }
+    
+    public static func backUpPmntWallet() {
+        self.isBackupPmntWallet = true
+        KeychainWrapper.standard.set(true, forKey: UserDefaultKey.IS_PMNT_WALLET_BACKUP + userId)
     }
     
     public static func deleteEthWallet() {
@@ -172,24 +190,33 @@ class User {
         KeychainWrapper.standard.set("", forKey: UserDefaultKey.PASSWORD_ETH_WALLET + userId)
     }
     
+    public static func deletePmntWallet() {
+        self.isBackupPmntWallet = false
+        self.passwordPmntWallet = ""
+        KeychainWrapper.standard.set(false, forKey: UserDefaultKey.IS_PMNT_WALLET_BACKUP + userId)
+        KeychainWrapper.standard.set("", forKey: UserDefaultKey.PASSWORD_PMNT_WALLET + userId)
+    }
+    
 
     public static func clearConfig() {
         isAuthenticated = false
         currentUser = nil
         notificationWorry = true
         notificationVibration = true
-        notificationTransactions = false
-        notificationMessageSound = "Note.mp3"
+//        notificationTransactions = false
+//        notificationMessageSound = "Note.mp3"
         securityPasscode = false
         securityPasscodeValue = ""
         timeFormatIs24 = true
         currencyCode = "USD"
         passwordBtcWallet = ""
         passwordEthWallet = ""
+        passwordPmntWallet = ""
         symbCount = 2
-        rowSeed = ""
+//        rowSeed = ""
         isBackupEthWallet = false
-        isBackupBtcWallet = false
+        isBackupPmntWallet = false
+//        isBackupBtcWallet = false
         CacheManager.shared.removeDb()
         saveConfig()
     }
