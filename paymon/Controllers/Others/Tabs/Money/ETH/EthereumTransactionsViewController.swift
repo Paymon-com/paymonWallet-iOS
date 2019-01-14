@@ -141,7 +141,12 @@ class EthereumTransactionsViewController: UIViewController, UITableViewDelegate,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? TransactionTableViewCell {
             guard let ethTxInfoViewController = self.storyboard?.instantiateViewController(withIdentifier: VCIdentifier.ethTxInfoViewController) as? EthTxInfoViewController else {return}
-            ethTxInfoViewController.tx = cell.txEthInfo
+            if !isPmnt {
+                ethTxInfoViewController.txEth = cell.txEthInfo
+            } else {
+                ethTxInfoViewController.txPmnt = cell.txPmntInfo
+                ethTxInfoViewController.isPmnt = true
+            }
             
             self.navigationController?.pushViewController(ethTxInfoViewController, animated: true)
         }

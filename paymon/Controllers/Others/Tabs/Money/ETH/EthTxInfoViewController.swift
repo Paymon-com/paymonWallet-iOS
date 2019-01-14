@@ -12,25 +12,27 @@ import UIKit
 class EthTxInfoViewController : PaymonViewController, UITableViewDelegate, UITableViewDataSource  {
     @IBOutlet weak var tableView: UITableView!
     
-    var tx : EthTransaction!
+    var txEth : EthTransaction!
+    var txPmnt : PmntTransaction!
     var txInfo : [EthTxInfoData] = []
+    
+    var isPmnt = false
     
     override func viewDidLoad() {
         setLayoutOptions()
         tableView.delegate = self
         tableView.dataSource = self
         
-        if tx != nil {
-            txInfo.append(EthTxInfoData(title: "Hash".localized, info: tx.hash))
-            txInfo.append(EthTxInfoData(title: "Confirmations".localized, info: tx.confirmations))
-            txInfo.append(EthTxInfoData(title: "Date".localized, info: tx.timeStamp))
-            txInfo.append(EthTxInfoData(title: "From".localized, info: tx.from))
-            txInfo.append(EthTxInfoData(title: "To".localized, info: tx.to))
-            txInfo.append(EthTxInfoData(title: "Value".localized, info: tx.value))
-            txInfo.append(EthTxInfoData(title: "Gas Limit".localized, info: tx.gas))
-            txInfo.append(EthTxInfoData(title: "Gas Used By Transaction".localized, info: tx.gasUsed))
-            txInfo.append(EthTxInfoData(title: "Gas Price".localized, info: tx.gasPrice))
-        }
+        txInfo.append(EthTxInfoData(title: "Hash".localized, info: !isPmnt ? txEth.hash : txPmnt.hash))
+        txInfo.append(EthTxInfoData(title: "Confirmations".localized, info: !isPmnt ? txEth.confirmations : txPmnt.confirmations))
+        txInfo.append(EthTxInfoData(title: "Date".localized, info: !isPmnt ? txEth.timeStamp : txPmnt.timeStamp))
+        txInfo.append(EthTxInfoData(title: "From".localized, info: !isPmnt ? txEth.from : txPmnt.from))
+            txInfo.append(EthTxInfoData(title: "To".localized, info: !isPmnt ? txEth.to : txPmnt.to))
+        txInfo.append(EthTxInfoData(title: "Value".localized, info: !isPmnt ? txEth.value : txPmnt.value))
+        txInfo.append(EthTxInfoData(title: "Gas Limit".localized, info: !isPmnt ? txEth.gas : txPmnt.gas))
+        txInfo.append(EthTxInfoData(title: "Gas Used By Transaction".localized, info: !isPmnt ? txEth.gasUsed : txPmnt.gasUsed))
+        txInfo.append(EthTxInfoData(title: "Gas Price".localized, info: !isPmnt ? txEth.gasPrice : txPmnt.gasPrice))
+
         self.tableView.reloadData()
     }
     
@@ -42,7 +44,7 @@ class EthTxInfoViewController : PaymonViewController, UITableViewDelegate, UITab
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "txInfoCell") as? TxInfoTableViewCell else {
             return UITableViewCell()
         }
-        cell.configure(data: txInfo[indexPath.row], row: indexPath.row)
+        cell.configure(isPmnt : self.isPmnt, data: txInfo[indexPath.row], row: indexPath.row)
         return cell
     }
     

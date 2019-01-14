@@ -19,19 +19,19 @@ class TxInfoTableViewCell : UITableViewCell {
         lineHeight.constant = 0.5
     }
     
-    func configure(data : EthTxInfoData, row : Int) {
+    func configure(isPmnt : Bool, data : EthTxInfoData, row : Int) {
         self.title.text = data.title
 
         switch row {
         case 2:
             self.info.text = Utils.formatTxInfoTime(timestamp: Int32(data.info)!)
         case 5:
-            let decimalValue = Decimal(data.info) / Decimal(Money.fromWei)
-            self.info.text = String(format: "%.2f ETH", decimalValue.double)
+            
+            let decimalValue = !isPmnt ? Decimal(data.info) / Decimal(Money.fromWei) : Decimal(data.info) / Decimal(Money.fromGwei)
+            self.info.text = !isPmnt ? String(format: "%.2f PMNT", decimalValue.double) : String(format: "%.2f ETH", decimalValue.double)
         case 8:
             let decimalValue = Decimal(data.info) / Decimal(Money.fromWei)
             self.info.text = "\(decimalValue) ETH"
-            
         default:
             self.info.text = data.info
         }
