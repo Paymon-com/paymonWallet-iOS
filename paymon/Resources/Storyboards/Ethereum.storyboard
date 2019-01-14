@@ -138,7 +138,7 @@
                                 <rect key="frame" x="16" y="192" width="343" height="467"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <segue destination="FPY-DJ-rWr" kind="embed" id="0Gq-wI-jXN"/>
+                                    <segue destination="FPY-DJ-rWr" kind="embed" identifier="showTxTable" id="0Gq-wI-jXN"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ax7-mU-F4W">
@@ -1080,7 +1080,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nfW-9F-g7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="14" y="851"/>
+            <point key="canvasLocation" x="15" y="764"/>
         </scene>
         <!--Title-->
         <scene sceneID="WmL-lH-ni6">

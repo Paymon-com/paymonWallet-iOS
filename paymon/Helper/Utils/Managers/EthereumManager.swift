@@ -44,9 +44,16 @@ class EthereumManager {
     var ethKeyPath : String!
     var pmntKeyPath : String!
 
-    var transactions : [EthTransaction] = [] {
+    var ethTransactions : [EthTransaction] = [] {
         didSet {
             self.updateEthBalance()
+            NotificationCenter.default.post(name: .updateEthTransactions, object: nil)
+        }
+    }
+    
+    var pmntTransactions : [PmntTransaction] = [] {
+        didSet {
+            self.updatePmntBalance()
             NotificationCenter.default.post(name: .updateEthTransactions, object: nil)
         }
     }
@@ -342,16 +349,35 @@ class EthereumManager {
         }
     }
     
-    func updateTxHistory() {
+    func updateEthTxHistory() {
         
-        let urlString = "https://api-rinkeby.etherscan.io/api?module=account&action=txlist&address=\(ethSender!.address)&startblock=0&endblock=99999999&sort=desc&apikey=YourApiKeyToken"
+        let urlString = "https://api.etherscan.io/api?module=account&action=tokentx&address=\(String(describing: ethSender!.address))&startblock=0&endblock=999999999&sort=desc&apikey=YourApiKeyToken"
         Alamofire.request(urlString, method: .get).response(completionHandler: { response in
             if response.error == nil && response.data != nil {
                 do {
 //                    guard let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any] else {return}
 //                    print(json)
                     let ethResult : EthResult = try JSONDecoder().decode(EthResult.self, from: response.data!)
-                    self.transactions = ethResult.result
+                    self.ethTransactions = ethResult.result
+                } catch let error {
+                    print("TxUpdate: Error decode json", error)
+                }
+            } else {
+                print("Error parse http", response.error!)
+            }
+        })
+    }
+    
+    func updatePmntTxHistory() {
+        
+        let urlString = "https://api.etherscan.io/api?module=account&action=tokentx&address=\(String(describing: pmntSender!.address))&startblock=0&endblock=999999999&sort=desc&apikey=YourApiKeyToken"
+        Alamofire.request(urlString, method: .get).response(completionHandler: { response in
+            if response.error == nil && response.data != nil {
+                do {
+                    guard let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any] else {return}
+                    print(json)
+                    let pmntResult : PmntResult = try JSONDecoder().decode(PmntResult.self, from: response.data!)
+                    self.pmntTransactions = pmntResult.result
                 } catch let error {
                     print("TxUpdate: Error decode json", error)
                 }

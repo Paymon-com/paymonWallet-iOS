@@ -149,7 +149,9 @@ class EthereumWalletViewController: PaymonViewController {
         self.present(funcsMenu, animated: true, completion: nil)
     }
     
+    
     override func viewDidLoad() {
+
         setLayoutOptions()
         getWalletInfo()
     }
@@ -198,7 +200,6 @@ class EthereumWalletViewController: PaymonViewController {
         self.view.setGradientLayer(frame: self.view.bounds, topColor: UIColor.AppColor.Black.primaryBlackLight.cgColor, bottomColor: UIColor.AppColor.Black.primaryBlack.cgColor)
         
         self.title = !isPmnt ? "Ethereum wallet".localized : "Paymon Token wallet".localized
-//        self.backItem.title = "Back".localized
         self.needBackUp.layer.cornerRadius = needBackUp.frame.height/2
         self.needBackUp.setTitle("We strongly recommend making a backup!".localized, for: .normal)
         self.needBackUp.titleLabel?.numberOfLines = 0
@@ -221,8 +222,13 @@ class EthereumWalletViewController: PaymonViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let transferViewController = segue.destination as? EthereumTransferViewController else {return}
-        transferViewController.publicKey = publicKey
+        if let transferViewController = segue.destination as? EthereumTransferViewController {
+            transferViewController.publicKey = publicKey
+        } else if let txViewController = segue.destination as? EthereumTransactionsViewController {
+            if isPmnt {
+                txViewController.isPmnt = true
+            }
+        }
     }
     
     @IBAction func unWindToFinance(_ segue: UIStoryboardSegue) {

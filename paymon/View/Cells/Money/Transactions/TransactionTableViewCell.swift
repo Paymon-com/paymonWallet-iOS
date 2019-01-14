@@ -16,16 +16,20 @@ class TransactionTableViewCell: UITableViewCell {
     @IBOutlet weak var amount: UILabel!
     @IBOutlet weak var time: UILabel!
 
-    var txInfo : EthTransaction!
+    var txEthInfo : EthTransaction?
+    var txPmntInfo : PmntTransaction?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         lineHeight.constant = 0.5
     }
     
-    func configure(data: Transaction) {
-        self.txInfo = data.txInfo
-        print("cell tx info \(self.txInfo.confirmations)")
+    func configure(isPmnt : Bool, data: Transaction) {
+        if !isPmnt {
+            self.txEthInfo = data.txEthInfo
+        } else {
+            self.txPmntInfo = data.txPmntInfo
+        }
         self.avatar.image = data.avatar
         self.amount.text = data.amount
         self.time.text = data.time

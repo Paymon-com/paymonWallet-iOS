@@ -88,6 +88,16 @@ class MoneyViewController: PaymonViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showTxTable" {
+            DispatchQueue.main.async {
+                if let txTableViewController = segue.destination as? EthereumTransactionsViewController {
+                    txTableViewController.isPmnt = true
+                }
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DispatchQueue.main.async {
             if let cell = tableView.cellForRow(at: indexPath) as? MoneyCreatedTableViewCell {

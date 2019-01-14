@@ -115,7 +115,7 @@ class BitcoinTransactionsViewController: UIViewController, UITableViewDelegate, 
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellTransaction") as? TransactionTableViewCell else {return UITableViewCell()}
             let data = transactionsShow[indexPath.row]
-            cell.configure(data: data)
+//            cell.configure(isPmnt : self.isPmnt, data: data)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellEmpty") as! TransEmptyTableViewCell
