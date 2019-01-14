@@ -1124,7 +1124,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="next" smartDashesType="no" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="next" secureTextEntry="YES" smartDashesType="no" textContentType="password"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t8m-Oc-chz" userLabel="Login Text Field">
                                                 <rect key="frame" x="0.0" y="41" width="343" height="40"/>
@@ -1134,7 +1134,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="go" smartDashesType="no" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="go" secureTextEntry="YES" smartDashesType="no" textContentType="password"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -1232,7 +1232,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="next" smartDashesType="no" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="next" secureTextEntry="YES" smartDashesType="no" textContentType="password"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IHK-sA-FpV" userLabel="Login Text Field">
                                                 <rect key="frame" x="0.0" y="41" width="343" height="40"/>
@@ -1242,7 +1242,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="go" smartDashesType="no" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="go" secureTextEntry="YES" smartDashesType="no" textContentType="password"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -1269,14 +1269,40 @@
                                     <action selector="restoreClick:" destination="Phx-3c-eK3" eventType="touchUpInside" id="pty-e2-NfA"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gID-5k-Enc">
+                                <rect key="frame" x="16" y="611" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.062745098040000002" green="0.52549019610000003" blue="0.75294117650000003" alpha="0.20054587339999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="hAM-Jg-r2z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Use my Ethereum wallet">
+                                    <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="0.8015324519" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="useMyEtherWalletClick:" destination="Phx-3c-eK3" eventType="touchUpInside" id="Ncc-kN-oxe"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFc-lX-IdM">
+                                <rect key="frame" x="16" y="560" width="343" height="43"/>
+                                <string key="text">If your PMNT tokens are stored on the main Ethereum wallet, click the "Use my Etereum wallet" button to display the PMNT wallet balance.</string>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ZFc-lX-IdM" firstAttribute="leading" secondItem="IhF-Sc-SFk" secondAttribute="leading" constant="16" id="0aq-Tc-Qaj"/>
+                            <constraint firstItem="IhF-Sc-SFk" firstAttribute="trailing" secondItem="ZFc-lX-IdM" secondAttribute="trailing" constant="16" id="4qt-hq-ty2"/>
                             <constraint firstItem="0xO-Jk-eqR" firstAttribute="top" secondItem="pYi-Zr-z5l" secondAttribute="bottom" constant="16" id="59v-p7-oGy"/>
+                            <constraint firstItem="IhF-Sc-SFk" firstAttribute="bottom" secondItem="gID-5k-Enc" secondAttribute="bottom" constant="16" id="CSc-gY-9FJ"/>
                             <constraint firstItem="saA-cG-rjR" firstAttribute="leading" secondItem="IhF-Sc-SFk" secondAttribute="leading" constant="16" id="FNI-hc-03j"/>
                             <constraint firstItem="IhF-Sc-SFk" firstAttribute="trailing" secondItem="pYi-Zr-z5l" secondAttribute="trailing" constant="16" id="IuI-fY-Nav"/>
                             <constraint firstItem="F0Q-BZ-NLU" firstAttribute="leading" secondItem="IhF-Sc-SFk" secondAttribute="leading" constant="16" id="Jzj-56-kbO"/>
                             <constraint firstItem="IhF-Sc-SFk" firstAttribute="trailing" secondItem="rPv-FX-mwH" secondAttribute="trailing" constant="16" id="M38-dX-e4U"/>
+                            <constraint firstItem="gID-5k-Enc" firstAttribute="leading" secondItem="IhF-Sc-SFk" secondAttribute="leading" constant="16" id="NmX-kQ-Qep"/>
+                            <constraint firstItem="IhF-Sc-SFk" firstAttribute="trailing" secondItem="gID-5k-Enc" secondAttribute="trailing" constant="16" id="OO9-wz-EzM"/>
                             <constraint firstItem="IhF-Sc-SFk" firstAttribute="trailing" secondItem="F0Q-BZ-NLU" secondAttribute="trailing" constant="16" id="Qdi-Ob-YBy"/>
                             <constraint firstItem="IhF-Sc-SFk" firstAttribute="trailing" secondItem="saA-cG-rjR" secondAttribute="trailing" constant="16" id="UBZ-Ky-dP9"/>
                             <constraint firstItem="hez-LK-J04" firstAttribute="top" secondItem="IhF-Sc-SFk" secondAttribute="top" constant="8" id="Upc-ZN-Aav"/>
@@ -1290,6 +1316,7 @@
                             <constraint firstItem="F0Q-BZ-NLU" firstAttribute="top" secondItem="saA-cG-rjR" secondAttribute="bottom" constant="16" id="n1b-AH-yOp"/>
                             <constraint firstItem="rPv-FX-mwH" firstAttribute="leading" secondItem="IhF-Sc-SFk" secondAttribute="leading" constant="16" id="pwx-Ku-7xD"/>
                             <constraint firstItem="pYi-Zr-z5l" firstAttribute="top" secondItem="F0Q-BZ-NLU" secondAttribute="bottom" constant="8" id="qIV-xO-ddC"/>
+                            <constraint firstItem="gID-5k-Enc" firstAttribute="top" secondItem="ZFc-lX-IdM" secondAttribute="bottom" constant="8" id="v2f-gy-ebf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IhF-Sc-SFk"/>
                     </view>
@@ -1301,10 +1328,12 @@
                         <outlet property="fileName" destination="saA-cG-rjR" id="PdF-vP-WT3"/>
                         <outlet property="fileNameHeight" destination="EPy-Vy-Kgx" id="ZAW-Q2-puv"/>
                         <outlet property="hint" destination="hez-LK-J04" id="4p2-n1-EK4"/>
+                        <outlet property="hintUseMyEtherWallet" destination="ZFc-lX-IdM" id="IYN-uA-vB0"/>
                         <outlet property="passwordHint" destination="pYi-Zr-z5l" id="od9-fE-1Cm"/>
                         <outlet property="passwordView" destination="F0Q-BZ-NLU" id="ie2-LK-o29"/>
                         <outlet property="repeatPassword" destination="IHK-sA-FpV" id="PLo-Fa-1Ya"/>
                         <outlet property="restore" destination="0xO-Jk-eqR" id="v3x-WT-TZQ"/>
+                        <outlet property="useMyEtherWallet" destination="gID-5k-Enc" id="3Wo-lt-nbN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PG2-PA-bTO" userLabel="First Responder" sceneMemberID="firstResponder"/>

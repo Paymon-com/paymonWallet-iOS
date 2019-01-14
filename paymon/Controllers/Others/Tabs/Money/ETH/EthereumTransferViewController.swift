@@ -53,10 +53,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     var publicKey : String!
     var yourWalletBalanceValue : Double!
     var toAddress:String! = ""
-    
-    @objc func endEditing() {
-        self.view.endEditing(true)
-    }
+
     
     @IBAction func infoClick(_ sender: Any) {
         guard let infoViewController = self.storyboard!.instantiateViewController(withIdentifier: "GasInfoViewController") as? GasInfoViewController else {return}
@@ -117,9 +114,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
         setLayoutOptions()
         self.loading.startAnimating()
         
-        let tapper = UITapGestureRecognizer(target: self, action: #selector(endEditing))
-        tapper.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tapper)
+        self.view.addEndEditingTapper()
         
         fiat.delegate = self
         crypto.delegate = self
@@ -250,8 +245,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     @objc func addressDidChanged(_ textField : UITextField) {
         toAddress = textField.text
                 addressIsNotEmpty = !(toAddress?.isEmpty)! && (toAddress?.matches(Money.ETHEREUM_WALLET_REGEX))!
-        //TODO: remove after tests
-//        addressIsNotEmpty = true
+
         showSendButton()
         
     }

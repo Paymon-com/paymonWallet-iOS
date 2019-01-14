@@ -50,10 +50,6 @@ class BitcoinTransferViewController: PaymonViewController, UITextFieldDelegate {
     var yourWalletBalanceValue : Double!
     var toAddress:String! = ""
     
-    @objc func endEditing() {
-        self.view.endEditing(true)
-    }
-    
     @IBAction func feeSwitchClick(_ sender: Any) {
         if feeSwitch.isOn {
             fee.text = ""
@@ -104,9 +100,7 @@ class BitcoinTransferViewController: PaymonViewController, UITextFieldDelegate {
         setLayoutOptions()
         self.loading.startAnimating()
         
-        let tapper = UITapGestureRecognizer(target: self, action: #selector(endEditing))
-        tapper.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tapper)
+        self.view.addEndEditingTapper()
         
         fiat.delegate = self
         crypto.delegate = self
@@ -232,7 +226,7 @@ class BitcoinTransferViewController: PaymonViewController, UITextFieldDelegate {
         toAddress = textField.text
 //        addressIsNotEmpty = !(toAddress?.isEmpty)! && (toAddress?.matches(Money.BITCOIN_WALLET_REGEX))!
         //TODO: remove after tests
-        addressIsNotEmpty = true
+//        addressIsNotEmpty = true
         showSendButton()
 
     }

@@ -251,7 +251,7 @@
 "An error occurred during recovery"="Во время восстановления произошла ошибка";
 "The file does not exist"="Файл не существует";
 "If your PMNT tokens are stored on the main Ethereum wallet, click the \"Use my Etereum wallet\" button to display the PMNT wallet balance"="Если ваши PMNT токены хранятся на основном Ethereum кошельке, нажмите кнопку «Использовать мой Ethereum кошелек», чтобы отобразить баланс кошелька PMNT";
-"Use my Etereum wallet"="Испоьзовать мой Ethereum кошелек";
+"Use my Etereum wallet"="Использовать мой Ethereum кошелек";
 
 /*Money transfer*/
 

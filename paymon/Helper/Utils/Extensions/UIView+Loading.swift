@@ -37,6 +37,12 @@ extension UIView {
         self.layer.add(animation, forKey: "position")
     }
     
+    func addEndEditingTapper() {
+        let tapper = UITapGestureRecognizer(target: self, action: #selector(endEditing))
+        tapper.cancelsTouchesInView = false
+        self.addGestureRecognizer(tapper)
+    }
+
     func setGradientLayer(frame : CGRect, topColor : CGColor, bottomColor: CGColor) {
         let gradientLayer = CAGradientLayer()
         

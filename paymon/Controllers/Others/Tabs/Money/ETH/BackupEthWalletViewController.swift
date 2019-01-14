@@ -21,6 +21,7 @@ class BackupEthWalletViewController: UIViewController, UITextFieldDelegate {
     
     var password : String! = ""
     var repeatPasswordString: String! = ""
+    var isPmnt = false
     
     override func viewDidLoad() {
         setLayoutOptions()
@@ -41,31 +42,53 @@ class BackupEthWalletViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        if password == User.shared.passwordEthWallet {
-            if let url = EthereumManager.shared.getUrlEthWallet() {
-                let shareActivity = UIActivityViewController(activityItems: ["Backup Ethereum wallet from the Paymon app".localized, url], applicationActivities: nil)
-                shareActivity.completionWithItemsHandler = { (activity, success, items, error) in
-                    if success {
-                        User.shared.backUpEthWallet()
-                        self.navigationController?.popViewController(animated: true)
-                    } else {
-                        _ = SimpleOkAlertController.init(title: "Backup".localized, message: "Backup failed. Try later.".localized, vc: self)
+        if !isPmnt {
+            if password == User.shared.passwordEthWallet {
+                if let url = EthereumManager.shared.getUrlEthWallet() {
+                    let shareActivity = UIActivityViewController(activityItems: ["Backup Ethereum wallet from the Paymon app".localized, url], applicationActivities: nil)
+                    shareActivity.completionWithItemsHandler = { (activity, success, items, error) in
+                        if success {
+                            User.shared.backUpEthWallet()
+                            self.navigationController?.popViewController(animated: true)
+                        } else {
+                            _ = SimpleOkAlertController.init(title: "Backup".localized, message: "Backup failed. Try later.".localized, vc: self)
+                        }
                     }
+                    
+                    shareActivity.popoverPresentationController?.sourceView = self.view
+                    shareActivity.popoverPresentationController?.sourceRect = self.view.bounds
+                    
+                    self.present(shareActivity, animated: true)
+                } else {
+                    _ = SimpleOkAlertController.init(title: "Backup".localized, message: "The file does not exist".localized, vc: self)
                 }
-                
-                shareActivity.popoverPresentationController?.sourceView = self.view
-                shareActivity.popoverPresentationController?.sourceRect = self.view.bounds
-                
-                self.present(shareActivity, animated: true)
             } else {
-                _ = SimpleOkAlertController.init(title: "Backup".localized, message: "The file does not exist".localized, vc: self)
+                _ = SimpleOkAlertController.init(title: "Backup".localized, message: "Incorrect password".localized, vc: self)
             }
         } else {
-            _ = SimpleOkAlertController.init(title: "Backup".localized, message: "Incorrect password".localized, vc: self)
+            if password == User.shared.passwordPmntWallet {
+                if let url = EthereumManager.shared.getUrlPmntWallet() {
+                    let shareActivity = UIActivityViewController(activityItems: ["Backup Ethereum wallet from the Paymon app".localized, url], applicationActivities: nil)
+                    shareActivity.completionWithItemsHandler = { (activity, success, items, error) in
+                        if success {
+                            User.shared.backUpPmntWallet()
+                            self.navigationController?.popViewController(animated: true)
+                        } else {
+                            _ = SimpleOkAlertController.init(title: "Backup".localized, message: "Backup failed. Try later.".localized, vc: self)
+                        }
+                    }
+                    
+                    shareActivity.popoverPresentationController?.sourceView = self.view
+                    shareActivity.popoverPresentationController?.sourceRect = self.view.bounds
+                    
+                    self.present(shareActivity, animated: true)
+                } else {
+                    _ = SimpleOkAlertController.init(title: "Backup".localized, message: "The file does not exist".localized, vc: self)
+                }
+            } else {
+                _ = SimpleOkAlertController.init(title: "Backup".localized, message: "Incorrect password".localized, vc: self)
+            }
         }
-        
-        
-
     }
     
     func setLayoutOptions() {

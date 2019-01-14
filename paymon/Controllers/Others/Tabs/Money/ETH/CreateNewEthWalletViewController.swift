@@ -23,11 +23,11 @@ class CreateNewEthWalletViewController: UIViewController, UITextFieldDelegate {
     var password : String! = ""
     var repeatPasswordString: String! = ""
     var isPmnt = false
+    var isPmntCreatedFromEth = false
     
     private var ethwalletWasCreated: NSObjectProtocol!
     
     override func viewDidLoad() {
-
         ethwalletWasCreated = NotificationCenter.default.addObserver(forName: .ethWalletWasCreated, object: nil, queue: nil) {
             notification in
             self.walletCreated()
@@ -65,35 +65,50 @@ class CreateNewEthWalletViewController: UIViewController, UITextFieldDelegate {
         useMyEtherWallet.layer.cornerRadius = useMyEtherWallet.frame.height/2
     }
     
-    @IBAction func createWallet(_ sender: Any) {
-        
+    func checkInputPassword() -> Bool {
         password = newPassword.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         repeatPasswordString = repeatPassword.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if password.isEmpty {
             newPassword.shake()
-            return
+            return false
         }
         
         if repeatPasswordString.isEmpty || repeatPasswordString != password {
             repeatPassword.shake()
-            return
+            return false
         }
         
-        DispatchQueue.main.async {
-            let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
-        }
+        return true
+    }
+    
+    @IBAction func createWallet(_ sender: Any) {
         
-        if !isPmnt {
-            EthereumManager.shared.createEthWallet(password: password)
-        } else {
-            EthereumManager.shared.createPmntWallet(password: password)
+        if self.checkInputPassword() {
+            DispatchQueue.main.async {
+                let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
+            }
+            
+            if !isPmnt {
+                EthereumManager.shared.createEthWallet(password: password)
+            } else {
+                EthereumManager.shared.createPmntWallet(password: password)
+            }
         }
-        
     }
     
     @IBAction func createPmntWalletByEther(_ sender: Any) {
-        EthereumManager.shared.createPmntWalletByEthereum()
+        if self.checkInputPassword() {
+            isPmntCreatedFromEth = true
+            if User.shared.passwordEthWallet == self.password {
+                DispatchQueue.main.async {
+                    let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    EthereumManager.shared.createPmntWalletByEthereum()
+                }
+            } else {
+                _ = SimpleOkAlertController.init(title: "Restore wallet".localized, message: "Incorrect password".localized, vc: self)
+            }
+        }
     }
     
     func walletCreated() {
@@ -101,7 +116,7 @@ class CreateNewEthWalletViewController: UIViewController, UITextFieldDelegate {
             if !self.isPmnt {
                 User.shared.saveEthPasswordWallet(password: self.password)
             } else {
-                User.shared.savePmntPasswordWallet(password: self.password)
+                User.shared.savePmntPasswordWallet(password: self.password, isCreatedFromEth: self.isPmntCreatedFromEth)
             }
             MBProgressHUD.hide(for: self.view, animated: true)
             self.navigationController?.popViewController(animated: true)

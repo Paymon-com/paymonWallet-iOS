@@ -64,13 +64,12 @@ class MoneyNotCreatedTableViewCell: UITableViewCell {
 //            viewController.navigationController?.pushViewController(restoreBtcViewController, animated: true)
             break
             
-        case .ethereum?:
+        case .ethereum?, .paymon?:
             guard let restoreEthViewController = StoryBoard.ethereum.instantiateViewController(withIdentifier: VCIdentifier.restoreEthViewController) as? RestoreEthViewController else {return}
+            if cryptoType == .paymon {
+                restoreEthViewController.isPmnt = true
+            }
             viewController.navigationController?.pushViewController(restoreEthViewController, animated: true)
-            break
-            
-        case .paymon?:
-
             break
         default:
             break

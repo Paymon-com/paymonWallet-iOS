@@ -124,9 +124,7 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
             }
         }
 
-        let tapper = UITapGestureRecognizer(target: self, action: #selector(endEditing))
-        tapper.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapper)
+        self.view.addEndEditingTapper()
 
         self.nameInfo.delegate = self
         self.surnameInfo.delegate = self

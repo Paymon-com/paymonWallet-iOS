@@ -32,7 +32,7 @@ class EthereumWalletViewController: PaymonViewController {
     
     func showBackupWallet() {
         guard let backupViewController = self.storyboard?.instantiateViewController(withIdentifier: VCIdentifier.backupEthWalletViewController) as? BackupEthWalletViewController else {return}
-        
+            backupViewController.isPmnt = self.isPmnt
         self.navigationController?.pushViewController(backupViewController, animated: true)
     }
     
@@ -64,25 +64,62 @@ class EthereumWalletViewController: PaymonViewController {
             
             alertRemove.addAction(UIAlertAction(title: "Remove".localized, style: .default, handler: { (action) in
                 if !self.isPmnt {
-                    EthereumManager.shared.deleteEthWallet() { isDeleted in
-                        if isDeleted {
-                            //TODO: добавить ввод пароля
-                            User.shared.deleteEthWallet()
-                            self.navigationController?.popViewController(animated: true)
+                    let alertController = UIAlertController(title: "Remove wallet".localized, message: "Enter password".localized, preferredStyle: .alert)
+                    alertController.addTextField { textField in
+                        textField.placeholder = "Password".localized
+                        textField.isSecureTextEntry = true
+                    }
+                    let confirmAction = UIAlertAction(title: "OK", style: .default) { [weak alertController] _ in
+                        guard let alertController = alertController, let textField = alertController.textFields?.first else { return }
+                        if textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == User.shared.passwordEthWallet {
+                            EthereumManager.shared.deleteEthWallet() { isDeleted in
+                                if isDeleted {
+                                    User.shared.deleteEthWallet()
+                                    DispatchQueue.main.async {
+                                        self.navigationController?.popViewController(animated: true)
+                                    }
+                                    self.navigationController?.popViewController(animated: true)
+                                } else {
+                                    _ = SimpleOkAlertController.init(title: "Remove wallet".localized, message: "Failed to delete wallet. Try later.".localized, vc: self)
+                                }
+                            }
                         } else {
-                            _ = SimpleOkAlertController.init(title: "Remove wallet".localized, message: "Failed to delete wallet. Try later.".localized, vc: self)
+                            _ = SimpleOkAlertController.init(title: "Remove wallet".localized, message: "Incorrect password".localized, vc: self)
                         }
                     }
+                    let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+                    alertController.addAction(confirmAction)
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
                 } else {
-                    EthereumManager.shared.deletePmntWallet() { isDeleted in
-                        if isDeleted {
-                            //TODO: добавить ввод пароля
-                            User.shared.deletePmntWallet()
-                            self.navigationController?.popViewController(animated: true)
+                    
+                    let alertController = UIAlertController(title: "Remove wallet".localized, message: "Enter password".localized, preferredStyle: .alert)
+                    alertController.addTextField { textField in
+                        textField.placeholder = "Password".localized
+                        textField.isSecureTextEntry = true
+                    }
+                    let confirmAction = UIAlertAction(title: "OK", style: .default) { [weak alertController] _ in
+                        guard let alertController = alertController, let textField = alertController.textFields?.first else { return }
+                        if textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == User.shared.passwordPmntWallet {
+                            EthereumManager.shared.deletePmntWallet() { isDeleted in
+                                if isDeleted {
+                                    User.shared.deletePmntWallet()
+                                    DispatchQueue.main.async {
+                                        self.navigationController?.popViewController(animated: true)
+                                    }
+                                } else {
+                                    _ = SimpleOkAlertController.init(title: "Remove wallet".localized, message: "Failed to delete wallet. Try later.".localized, vc: self)
+                                }
+                            }
                         } else {
-                            _ = SimpleOkAlertController.init(title: "Remove wallet".localized, message: "Failed to delete wallet. Try later.".localized, vc: self)
+                            _ = SimpleOkAlertController.init(title: "Remove wallet".localized, message: "Incorrect password".localized, vc: self)
                         }
                     }
+                    let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+                    alertController.addAction(confirmAction)
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
                 }
                 
             }))
@@ -98,6 +135,7 @@ class EthereumWalletViewController: PaymonViewController {
         
         let recovery = UIAlertAction(title: "Recovery".localized, style: .default, handler: { (alert: UIAlertAction!) -> Void in
             guard let restoreEthViewController = StoryBoard.ethereum.instantiateViewController(withIdentifier: VCIdentifier.restoreEthViewController) as? RestoreEthViewController else {return}
+            restoreEthViewController.isPmnt = self.isPmnt
             self.navigationController?.pushViewController(restoreEthViewController, animated: true)
         })
         
@@ -123,8 +161,16 @@ class EthereumWalletViewController: PaymonViewController {
         }
         
         if needBackUp != nil {
-            //TODO Добавить условие: Если один и тот же кошель, то убирать кнопку
-            self.needBackUpHeight.constant = !User.shared.isBackupEthWallet ? 40 : 0
+            if isPmnt {
+                if User.shared.isPmntCreatedFromEth {
+                    self.needBackUpHeight.constant = !User.shared.isBackupEthWallet ? 40 : 0
+                } else {
+                    self.needBackUpHeight.constant = !User.shared.isBackupPmntWallet ? 40 : 0
+                }
+            } else {
+                self.needBackUpHeight.constant = !User.shared.isBackupEthWallet ? 40 : 0
+            }
+            
         }
         
         walletWasCreated = NotificationCenter.default.addObserver(forName: .ethWalletWasCreated, object: nil, queue: nil) {

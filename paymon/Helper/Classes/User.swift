@@ -33,6 +33,8 @@ class User {
 //     var isBackupBtcWallet : Bool = false
      var isBackupEthWallet : Bool = false
      var isBackupPmntWallet : Bool = false
+    
+    var isPmntCreatedFromEth = false
 
     var isSettingsWasSet = false
     
@@ -107,6 +109,8 @@ class User {
             
             self.userId = String(currentUser.id)
             
+            isPmntCreatedFromEth = KeychainWrapper.standard.bool(forKey: UserDefaultKey.IS_PMNT_CREATED_FROM_ETH + userId) ?? false
+
             isBackupEthWallet = KeychainWrapper.standard.bool(forKey: UserDefaultKey.IS_ETH_WALLET_BACKUP + userId) ?? false
             print("isBeckup eth wallet - \(isBackupEthWallet)")
             isBackupPmntWallet = KeychainWrapper.standard.bool(forKey: UserDefaultKey.IS_PMNT_WALLET_BACKUP + userId) ?? false
@@ -171,13 +175,13 @@ class User {
     
      func saveEthPasswordWallet(password : String) {
         self.passwordEthWallet = password
-        self.isBackupEthWallet = false
         KeychainWrapper.standard.set(password, forKey: UserDefaultKey.PASSWORD_ETH_WALLET + userId)
     }
     
-     func savePmntPasswordWallet(password : String) {
+    func savePmntPasswordWallet(password : String, isCreatedFromEth : Bool) {
         self.passwordPmntWallet = password
-        self.isBackupPmntWallet = false
+        self.isPmntCreatedFromEth = isCreatedFromEth
+        KeychainWrapper.standard.set(isCreatedFromEth, forKey: UserDefaultKey.IS_PMNT_CREATED_FROM_ETH + userId)
         KeychainWrapper.standard.set(password, forKey: UserDefaultKey.PASSWORD_PMNT_WALLET + userId)
     }
     
@@ -224,6 +228,7 @@ class User {
 //        rowSeed = ""
         isBackupEthWallet = false
         isBackupPmntWallet = false
+        isPmntCreatedFromEth = false
 //        isBackupBtcWallet = false
         CacheManager.shared.removeDb()
         saveConfig()
