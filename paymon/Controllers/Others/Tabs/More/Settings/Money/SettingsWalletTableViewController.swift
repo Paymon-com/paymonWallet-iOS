@@ -38,11 +38,11 @@ class SettingsWalletTableViewController: UITableViewController {
             case 0:
                 rubCell.accessoryType = .checkmark
                 usdCell.accessoryType = .none
-                User.saveCurrencyCode(currencyCode: Money.rub)
+                User.shared.saveCurrencyCode(currencyCode: Money.rub)
             case 1:
                 rubCell.accessoryType = .none
                 usdCell.accessoryType = .checkmark
-                User.saveCurrencyCode(currencyCode: Money.usd)
+                User.shared.saveCurrencyCode(currencyCode: Money.usd)
             default:
                 break
             }
@@ -52,18 +52,18 @@ class SettingsWalletTableViewController: UITableViewController {
                 twoSymb.accessoryType = .checkmark
                 fourSymb.accessoryType = .none
                 sixSymb.accessoryType = .none
-                User.saveSymbCount(symbCount: 2)
+                User.shared.saveSymbCount(symbCount: 2)
             case 1:
                 twoSymb.accessoryType = .none
                 fourSymb.accessoryType = .checkmark
                 sixSymb.accessoryType = .none
-                User.saveSymbCount(symbCount: 4)
+                User.shared.saveSymbCount(symbCount: 4)
 
             case 2:
                 twoSymb.accessoryType = .none
                 fourSymb.accessoryType = .none
                 sixSymb.accessoryType = .checkmark
-                User.saveSymbCount(symbCount: 6)
+                User.shared.saveSymbCount(symbCount: 6)
 
             default:
                 break
@@ -74,7 +74,7 @@ class SettingsWalletTableViewController: UITableViewController {
     }
     
     func loadCurrencySettings() {
-        if let userCurrency = User.currencyCode as String? {
+        if let userCurrency = User.shared.currencyCode as String? {
             switch userCurrency {
             case Money.rub:
                 rubCell.accessoryType = .checkmark
@@ -90,7 +90,7 @@ class SettingsWalletTableViewController: UITableViewController {
     }
     
     func loadSymbolsSettings() {
-        if let userSymbCount = User.symbCount as Int32? {
+        if let userSymbCount = User.shared.symbCount as Int32? {
             switch userSymbCount {
             case 2:
                 twoSymb.accessoryType = .checkmark
@@ -138,6 +138,6 @@ class SettingsWalletTableViewController: UITableViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        ExchangeRateParser.shared.parseCourseForWallet(crypto: Money.btc, fiat: User.currencyCode)
+        ExchangeRateParser.shared.parseCourseForWallet(crypto: [Money.eth,Money.pmnt], fiat: User.shared.currencyCode)
     }
 }

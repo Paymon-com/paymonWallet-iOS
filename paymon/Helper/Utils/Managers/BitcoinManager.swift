@@ -40,7 +40,7 @@ public class BitcoinManager {
 //
 //    func importWallet(seed: Data) {
 //        let keychain = Keychain()
-//        keychain.set(seed, for: "seed_\(String(describing: User.currentUser.id))")
+//        keychain.set(seed, for: "seed_\(String(describing: User.shared.currentUser.id))")
 //        self.wallet = HDWallet(seed: seed, network: network)
 //    }
 //
@@ -48,7 +48,7 @@ public class BitcoinManager {
 //
 //        let alertRemove = UIAlertController(title: "Remove wallet".localized, message: "Before removing your wallet, make sure you back up your wallet".localized, preferredStyle: UIAlertController.Style.alert)
 //
-//        if !User.isBackupBtcWallet {
+//        if !User.shared.isBackupBtcWallet {
 //            alertRemove.addAction(UIAlertAction(title: "Backup".localized, style: UIAlertAction.Style.default, handler: { (action) in
 //            self.backup(vc: vc)
 //        }))}
@@ -56,7 +56,7 @@ public class BitcoinManager {
 //
 //        alertRemove.addAction(UIAlertAction(title: "Remove".localized, style: UIAlertAction.Style.default, handler: { (action) in
 //            let keychain = Keychain()
-//            keychain.delete(for: "seed_\(String(describing: User.currentUser.id))")
+//            keychain.delete(for: "seed_\(String(describing: User.shared.currentUser.id))")
 //            self.stopSync()
 //            self.wallet = nil
 //        }))
@@ -76,7 +76,7 @@ public class BitcoinManager {
 //
 //    func restoreBySeed(seed: Data, vc: UIViewController) {
 //        let keychain = Keychain()
-//        keychain.set(seed, for: "seed_\(String(describing: User.currentUser.id))")
+//        keychain.set(seed, for: "seed_\(String(describing: User.shared.currentUser.id))")
 //        self.wallet = HDWallet(seed: seed, network: network)
 //
 //    }

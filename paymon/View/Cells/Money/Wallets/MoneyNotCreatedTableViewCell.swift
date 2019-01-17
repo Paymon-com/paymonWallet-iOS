@@ -42,17 +42,15 @@ class MoneyNotCreatedTableViewCell: UITableViewCell {
     @IBAction func createClick(_ sender: Any) {
         switch cryptoType {
         case .bitcoin?:
-            guard let createNewBtcWalletViewController = StoryBoard.money.instantiateViewController(withIdentifier: VCIdentifier.createNewBtcWalletViewController) as? CreateNewBtcWalletViewController else {return}
-            viewController.navigationController?.pushViewController(createNewBtcWalletViewController, animated: true)
+//            guard let createNewBtcWalletViewController = StoryBoard.money.instantiateViewController(withIdentifier: VCIdentifier.createNewBtcWalletViewController) as? CreateNewBtcWalletViewController else {return}
+//            viewController.navigationController?.pushViewController(createNewBtcWalletViewController, animated: true)
         break
-            
-        case .ethereum?:
+        case .ethereum?, .paymon?:
             guard let createNewEthWalletViewController = StoryBoard.money.instantiateViewController(withIdentifier: VCIdentifier.createNewEthWalletViewController) as? CreateNewEthWalletViewController else {return}
+            if cryptoType == .paymon {
+                createNewEthWalletViewController.isPmnt = true
+            }
             viewController.navigationController?.pushViewController(createNewEthWalletViewController, animated: true)
-            break
-            
-        case .paymon?:
-            
             break
         default:
             break
@@ -62,17 +60,16 @@ class MoneyNotCreatedTableViewCell: UITableViewCell {
     @IBAction func restoreClick(_ sender: Any) {
         switch cryptoType {
         case .bitcoin?:
-            guard let restoreBtcViewController = StoryBoard.bitcoin.instantiateViewController(withIdentifier: VCIdentifier.restoreBtcViewController) as? RestoreBtcViewController else {return}
-            viewController.navigationController?.pushViewController(restoreBtcViewController, animated: true)
+//            guard let restoreBtcViewController = StoryBoard.bitcoin.instantiateViewController(withIdentifier: VCIdentifier.restoreBtcViewController) as? RestoreBtcViewController else {return}
+//            viewController.navigationController?.pushViewController(restoreBtcViewController, animated: true)
             break
             
-        case .ethereum?:
+        case .ethereum?, .paymon?:
             guard let restoreEthViewController = StoryBoard.ethereum.instantiateViewController(withIdentifier: VCIdentifier.restoreEthViewController) as? RestoreEthViewController else {return}
+            if cryptoType == .paymon {
+                restoreEthViewController.isPmnt = true
+            }
             viewController.navigationController?.pushViewController(restoreEthViewController, animated: true)
-            break
-            
-        case .paymon?:
-
             break
         default:
             break

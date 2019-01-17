@@ -24,6 +24,11 @@ class EthereumTransferInformationViewController: UIViewController {
     @IBOutlet weak var yourWalletBalance: UILabel!
     @IBOutlet weak var fromHint: UILabel!
     
+    @IBOutlet weak var toWalletPicture: UIImageView!
+    @IBOutlet weak var yourWalletPicture: UIImageView!
+    @IBOutlet weak var yourWalletPictureWidth: NSLayoutConstraint!
+    @IBOutlet weak var toWalletPictureWidth: NSLayoutConstraint!
+    
     @IBOutlet weak var stackView: UIView!
 
     var balanceValue : Double!
@@ -34,47 +39,73 @@ class EthereumTransferInformationViewController: UIViewController {
     var course:Double!
     
     var gasPrice : Int64!
+    var isPmnt = false
+    var user : User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        user = User.shared
         toWallet.text = toAddress
+        course = EthereumManager.shared.ethCourse
         
         let feeForView = gasLimit * Double(gasPrice) / Money.fromWei * course
-        totalAmountValue = amountToSend / Money.fromWei * course + feeForView
+        totalAmountValue = amountToSend * (!isPmnt ? course : EthereumManager.shared.pmntCourse) + feeForView
         
-        networkFeeAmount.text = String(format: "\(User.currencyCodeSymb) %.2f", feeForView)
-        yourWalletBalance.text = String(format: "\(User.currencyCodeSymb) %.2f", balanceValue)
-        totalAmount.text = String(format: "\(User.currencyCodeSymb) %.2f",totalAmountValue)
+        networkFeeAmount.text = String(format: "≈ \(user.currencyCodeSymb) %.\(user.symbCount)f", feeForView)
+        yourWalletBalance.text = String(format: "\(user.currencyCodeSymb) %.\(user.symbCount)f", balanceValue)
+        totalAmount.text = String(format: "≈ \(user.currencyCodeSymb) %.\(user.symbCount)f",totalAmountValue)
         
         setLayoutOptions()
     }
     
     @IBAction func sendClick(_ sender: Any) {
-        print(toAddress!)
         self.checkPasswordWallet(vc: self, completionHandler: { (isSuccess:Bool) in
             if isSuccess {
 
                 DispatchQueue.main.async {
                     let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
                 }
-                EthereumManager.shared.send(gasPrice: BigUInt(String(self.gasPrice))!, gasLimit: Int64(self.gasLimit), value: Int64(self.amountToSend), toAddress: self.toAddress, password: User.passwordEthWallet) { (isSent, txid) in
-                    DispatchQueue.main.async {
-                        MBProgressHUD.hide(for: self.view, animated: true)
+                
+                if !self.isPmnt {
+                    EthereumManager.shared.sendEth(gasPrice: BigUInt(String(self.gasPrice))!, gasLimit: Int64(self.gasLimit), value: Int64(self.amountToSend * Money.fromWei), toAddress: self.toAddress, password: self.user.passwordEthWallet) { (isSent, txid) in
+                        DispatchQueue.main.async {
+                            MBProgressHUD.hide(for: self.view, animated: true)
+                        }
+                        if isSent {
+                            guard let paymentSuccessVC = self.storyboard?.instantiateViewController(withIdentifier: VCIdentifier.paymentSuccessViewController) as? PaymentSuccessViewController else {return}
+                            
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(paymentSuccessVC, animated: true)
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                _ = SimpleOkAlertController.init(title: "Ethereum transfer".localized, message: "Failed transfer, try later".localized, vc: self)
+                            }
+                            
+                        }
                     }
-                    if isSent {
-                        guard let paymentSuccessVC = self.storyboard?.instantiateViewController(withIdentifier: VCIdentifier.paymentSuccessViewController) as? PaymentSuccessViewController else {return}
-                        
+                } else {
+                    EthereumManager.shared.sendPmnt(gasPrice: BigUInt(String(self.gasPrice))!, gasLimit: Int64(self.gasLimit), value: Int64(self.amountToSend), toAddress: self.toAddress, password: self.user.passwordPmntWallet) { (isSent, txid) in
                         DispatchQueue.main.async {
-                            self.navigationController?.pushViewController(paymentSuccessVC, animated: true)
+                            MBProgressHUD.hide(for: self.view, animated: true)
                         }
-                    } else {
-                        DispatchQueue.main.async {
-                            _ = SimpleOkAlertController.init(title: "Ethereum transfer".localized, message: "Failed transfer, try later".localized, vc: self)
+                        if isSent {
+//                            ExchangeRateParser.shared.parseCourseForWallet(crypto: [Money.eth, Money.pmnt], fiat: User.shared.currencyCode)
+                            guard let paymentSuccessVC = self.storyboard?.instantiateViewController(withIdentifier: VCIdentifier.paymentSuccessViewController) as? PaymentSuccessViewController else {return}
+                            
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(paymentSuccessVC, animated: true)
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                _ = SimpleOkAlertController.init(title: "Paymon token transfer".localized, message: "Failed transfer, try later".localized, vc: self)
+                            }
+                            
                         }
-                        
                     }
                 }
+                
             } else {
                 _ = SimpleOkAlertController.init(title: "Security password".localized, message: "Incorrect password".localized, vc: self)
             }
@@ -87,7 +118,8 @@ class EthereumTransferInformationViewController: UIViewController {
         alertCheckPassword.addAction(UIAlertAction(title: "Cancel".localized, style: .default, handler: nil))
         alertCheckPassword.addAction(UIAlertAction(title: "Ok".localized, style: .default, handler: { (nil) in
             let textField = alertCheckPassword.textFields![0] as UITextField
-            if User.passwordEthWallet == textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
+            let passwordForCheck = !self.isPmnt ? self.user.passwordEthWallet : self.user.passwordPmntWallet
+            if passwordForCheck == textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
                 completionHandler(true)
             } else {
                 completionHandler(false)
@@ -116,7 +148,10 @@ class EthereumTransferInformationViewController: UIViewController {
         self.send.setGradientLayer(frame: CGRect(x: 0, y: 0, width: send.frame.width, height: self.send.frame.height), topColor: UIColor.AppColor.Blue.ethereumBalanceLight.cgColor, bottomColor: UIColor.AppColor.Blue.ethereumBalanceDark.cgColor)
         
         self.send.layer.cornerRadius = self.send.frame.width/2
-        
+        self.yourWalletPicture.image = isPmnt ? UIImage(named: "PaymonClear") : UIImage(named: "EtherClear")
+        self.yourWalletPictureWidth.constant = isPmnt ? 24 : 17
+        self.toWalletPicture.image = isPmnt ? UIImage(named: "PaymonClear") : UIImage(named: "EtherClear")
+        self.toWalletPictureWidth.constant = isPmnt ? 24 : 17
         toHint.text = "To".localized
         fromHint.text = "From".localized
         yourWallet.text = "Your wallet".localized

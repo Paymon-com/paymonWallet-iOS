@@ -17,6 +17,7 @@ class EthereumTransactionsViewController: UIViewController, UITableViewDelegate,
     
     var transactions : [Transaction] = []
     var transactionsShow : [Transaction] = []
+    var isPmnt = false
     
     @IBAction func filterClick(_ sender: Any) {
         let filterMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -57,13 +58,19 @@ class EthereumTransactionsViewController: UIViewController, UITableViewDelegate,
     
     @IBAction func updateClick(_ sender: Any) {
         
+        print("isPmnt = \(self.isPmnt)")
+        
         transactions.removeAll()
 
         DispatchQueue.main.async {
             self.transactionsTableView.reloadData()
             self.loading.startAnimating()
         }
-        EthereumManager.shared.updateTxHistory()
+        if !isPmnt {
+            EthereumManager.shared.updateEthTxHistory()
+        } else {
+            EthereumManager.shared.updatePmntTxHistory()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +81,7 @@ class EthereumTransactionsViewController: UIViewController, UITableViewDelegate,
     }
     
     func getLoadedTx() {
-        EthTransactions.getTransactions() { result in
+        EthTransactions.getTransactions(isPmnt : self.isPmnt) { result in
             self.transactions = result
             self.transactionsShow = result
 
@@ -87,6 +94,10 @@ class EthereumTransactionsViewController: UIViewController, UITableViewDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+//        if let ethViewController = self.parent as? EthereumWalletViewController {
+//            self.isPmnt = ethViewController.isPmnt
+//        }
         
         self.loading.startAnimating()
         
@@ -97,8 +108,12 @@ class EthereumTransactionsViewController: UIViewController, UITableViewDelegate,
         transactionsTableView.dataSource = self
         
         self.getLoadedTx()
-        EthereumManager.shared.updateTxHistory()
         
+        if !isPmnt {
+            EthereumManager.shared.updateEthTxHistory()
+        } else {
+            EthereumManager.shared.updatePmntTxHistory()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -115,7 +130,7 @@ class EthereumTransactionsViewController: UIViewController, UITableViewDelegate,
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellTransaction") as? TransactionTableViewCell else {return UITableViewCell()}
             let data = transactionsShow[indexPath.row]
 
-            cell.configure(data: data)
+            cell.configure(isPmnt : self.isPmnt, data: data)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellEmpty") as! TransEmptyTableViewCell
@@ -126,7 +141,12 @@ class EthereumTransactionsViewController: UIViewController, UITableViewDelegate,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? TransactionTableViewCell {
             guard let ethTxInfoViewController = self.storyboard?.instantiateViewController(withIdentifier: VCIdentifier.ethTxInfoViewController) as? EthTxInfoViewController else {return}
-            ethTxInfoViewController.tx = cell.txInfo
+            if !isPmnt {
+                ethTxInfoViewController.txEth = cell.txEthInfo
+            } else {
+                ethTxInfoViewController.txPmnt = cell.txPmntInfo
+                ethTxInfoViewController.isPmnt = true
+            }
             
             self.navigationController?.pushViewController(ethTxInfoViewController, animated: true)
         }

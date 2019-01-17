@@ -1088,7 +1088,7 @@ class RPC {
             }
             to_peer = try? Peer.deserialize(stream: stream, constructor: stream.readInt32(exception))
             
-            to_id = to_peer is PM_peerUser ? (User.currentUser.id == from_id ? to_peer.user_id : from_id) : to_peer.group_id
+            to_id = to_peer is PM_peerUser ? (User.shared.currentUser.id == from_id ? to_peer.user_id : from_id) : to_peer.group_id
             if (from_id == 0) {
                 if (to_peer.user_id != 0) {
                     from_id = to_peer.user_id

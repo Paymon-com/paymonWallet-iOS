@@ -16,43 +16,38 @@ public class CacheManager {
     static let shared = CacheManager()
     static var isAddedStorage = false
     private var dataStack : DataStack!
+    private var store : SQLiteStore!
     
     func initDb() {
         print("Start init")
-        dataStack = DataStack(
-            xcodeModelName: "paymon",
-            migrationChain: []
-        )
+        if dataStack == nil {
+            dataStack = DataStack(
+                xcodeModelName: "paymon",
+                migrationChain: []
+            )
+        }
+        
+        store = SQLiteStore(fileName: "Paymon_\(String(describing: User.shared.currentUser.id!)).sqlite",
+            localStorageOptions: .recreateStoreOnModelMismatch)
         
         do {
-            try dataStack.addStorageAndWait(SQLiteStore(fileName: "Paymon_\(String(describing: User.currentUser.id!)).sqlite",
-                localStorageOptions: .recreateStoreOnModelMismatch))
+            try dataStack.addStorageAndWait(store)
         } catch let error {
             print("Error init db", error)
         }
         
         CoreStore.defaultStack = self.dataStack
         CacheManager.isAddedStorage = true
-        UserDataManager.shared.updateOrCreateUser(userObject: User.currentUser)
+        UserDataManager.shared.updateOrCreateUser(userObject: User.shared.currentUser)
         
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: .setMainController, object: nil)
         }
-        
-//        let _ = dataStack.addStorage(
-//            SQLiteStore(fileName: "Paymon_\(String(describing: User.currentUser.id!)).sqlite",
-//                localStorageOptions: .preventProgressiveMigration),
-//
-//            completion: { (result) -> Void in
-//                if result.isSuccess {
-//                    print("Added storage Paymon")
-        
-//                }
-//        })
     }
     
     func removeDb() {
         CoreStore.defaultStack = DataStack()
+        CoreStore.defaultStack.refreshAndMergeAllObjects()
         CacheManager.isAddedStorage = false
     }
 }

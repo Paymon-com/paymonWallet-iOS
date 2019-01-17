@@ -6,15 +6,19 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
     
     @IBOutlet weak var surnameInfo: UITextField!
     @IBOutlet weak var nameInfo: UITextField!
+    @IBOutlet weak var ethInfo: UITextField!
+    @IBOutlet weak var pmntInfo: UITextField!
+    @IBOutlet weak var btcInfo: UITextField!
     
     private var observerUpdateProfile : NSObjectProtocol!
 
     var nameString = ""
     var surnameString = ""
+    var eth = ""
+    var pmnt = ""
+    var btc = ""
     
     static var needRemoveObservers = true
-    var newCountry : String!
-
     
     @objc func endEditing() {
         self.view.endEditing(true)
@@ -22,31 +26,30 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
-        //TODO: дописать return
         textField.resignFirstResponder()
+        if textField == nameInfo {
+            surnameInfo.becomeFirstResponder()
+        } else if textField == surnameInfo {
+            ethInfo.becomeFirstResponder()
+        } else if textField == ethInfo {
+            pmntInfo.becomeFirstResponder()
+        } else if textField == pmntInfo {
+            btcInfo.becomeFirstResponder()
+        } else if textField == btcInfo {
+            self.endEditing()
+        }
         return true
 
     }
 
     @objc func textFieldDidChanged(_ textField : UITextField) {
         
-        if (nameInfo.text != nameString || surnameInfo.text != surnameString) {
+        if (nameInfo.text != nameString || surnameInfo.text != surnameString || ethInfo.text != eth || pmntInfo.text != pmnt || btcInfo.text != btc) {
 
             NotificationCenter.default.post(name: .updateProfileInfoTrue, object: nil)
 
         } else {
 
-            NotificationCenter.default.post(name: .updateProfileInfoFalse, object: nil)
-
-        }
-    }
-
-    @objc func segmentControlChangeValue(_ segmentControl : UISegmentedControl) {
-        if (nameInfo.text != nameString || surnameInfo.text != surnameString) {
-
-            NotificationCenter.default.post(name: .updateProfileInfoTrue, object: nil)
-
-        } else {
             NotificationCenter.default.post(name: .updateProfileInfoFalse, object: nil)
 
         }
@@ -54,23 +57,25 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
     
     func updateString() {
         
-        guard let user = User.currentUser as RPC.UserObject? else {
+        guard let user = User.shared.currentUser as RPC.UserObject? else {
             return
         }
         
         nameString = user.first_name ?? ""
         surnameString = user.last_name ?? ""
+        eth = user.ethAddress ?? ""
+        btc = user.btcAddress ?? ""
+        pmnt = user.pmntAddress ?? ""
     }
 
     func updateView () {
         
-        guard let user = User.currentUser as RPC.UserObject? else {
-            return
-        }
-        
         DispatchQueue.main.async {
-            self.nameInfo.text = user.first_name ?? ""
-            self.surnameInfo.text = user.last_name ?? ""
+            self.nameInfo.text = self.nameString
+            self.surnameInfo.text = self.surnameString
+            self.ethInfo.text = self.eth
+            self.btcInfo.text = self.btc
+            self.pmntInfo.text = self.pmnt
 
         }
     }
@@ -90,8 +95,12 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
                 let _ = MBProgressHUD.showAdded(to: self.parent!.parent!.view, animated: true)
             }
 
-            User.currentUser!.first_name = self.nameInfo.text!
-            User.currentUser!.last_name = self.surnameInfo.text!
+            User.shared.currentUser!.first_name = self.nameInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            User.shared.currentUser!.last_name = self.surnameInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            User.shared.currentUser!.ethAddress = self.ethInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            User.shared.currentUser!.btcAddress = self.btcInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            User.shared.currentUser!.pmntAddress = self.pmntInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+
             
             UserManager.shared.updateProfileInfo() { isUpdated in
                 DispatchQueue.main.async {
@@ -99,7 +108,7 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
                 }
                 
                 if isUpdated {
-                    User.saveConfig()
+                    User.shared.saveConfig()
                     DispatchQueue.main.async {
                         
                         Utils.showSuccesHud(vc: self.parent!.parent!)
@@ -115,19 +124,26 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
             }
         }
 
-        let tapper = UITapGestureRecognizer(target: self, action: #selector(endEditing))
-        tapper.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapper)
+        self.view.addEndEditingTapper()
 
         self.nameInfo.delegate = self
         self.surnameInfo.delegate = self
+        self.ethInfo.delegate = self
+        self.btcInfo.delegate = self
+        self.pmntInfo.delegate = self
         
         self.nameInfo.placeholder = "Name".localized
         self.surnameInfo.placeholder = "Surname".localized
+        self.ethInfo.placeholder = "Ethereum wallet".localized
+        self.btcInfo.placeholder = "Bitcoin wallet".localized
+        self.pmntInfo.placeholder = "Paymon Token wallet".localized
+
 
         nameInfo.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: .editingChanged)
         surnameInfo.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: .editingChanged)
-
+        ethInfo.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: .editingChanged)
+        btcInfo.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: .editingChanged)
+        pmntInfo.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: .editingChanged)
 
         updateString()
         updateView()
@@ -156,6 +172,12 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
             return newLength <= 128
         case surnameInfo:
             return newLength <= 128
+        case ethInfo:
+            return newLength <= 50
+        case btcInfo:
+            return newLength <= 50
+        case pmntInfo:
+            return newLength <= 50
         default: break
         }
         

@@ -68,7 +68,7 @@ public class GroupManager {
                     _ = SimpleOkAlertController.init(title: "Update failed".localized, message: "An error occurred during the update".localized, vc: vc)
                     
                     //TODO переписать в Кастомный алерт
-                    PMFileManager.shared.cancelFileUpload(fileID: Int64(User.currentUser.id));
+                    PMFileManager.shared.cancelFileUpload(fileID: Int64(User.shared.currentUser.id));
                 }
             }
         }

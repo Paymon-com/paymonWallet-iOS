@@ -43,7 +43,7 @@ class MoneyCreatedTableViewCell: UITableViewCell {
     
     func configure(data: CellCreatedMoneyData) {
         self.icon.image = UIImage(named: data.icon)
-        self.cryptoAmount.text = String(format: "%.\(User.symbCount)f", data.currancyAmount)
+        self.cryptoAmount.text = String(format: "%.\(User.shared.symbCount)f", data.currancyAmount)
         self.fiatAmount.text = String(format: "%.2f", data.fiatAmount)
         self.cryptoHint.text = data.cryptoHint
         self.fiatHint.text = data.fiatHint

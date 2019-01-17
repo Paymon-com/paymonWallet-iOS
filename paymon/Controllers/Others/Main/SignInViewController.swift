@@ -51,10 +51,10 @@ class SignInViewController: PaymonViewController, UITextFieldDelegate {
                     if !isConfirmed {
                     
                         let alert = UIAlertController(title: "Confirmation email".localized,
-                        message: String(format: NSLocalizedString("You did not verify your account by email \n %@ \n\n Send mail again?".localized, comment: ""), User.currentUser.email), preferredStyle: .alert)
+                        message: String(format: NSLocalizedString("You did not verify your account by email \n %@ \n\n Send mail again?".localized, comment: ""), User.shared.currentUser.email), preferredStyle: .alert)
                         
                         alert.addAction(UIAlertAction(title: "Cancel".localized, style: .default, handler: { (action) in
-                            User.clearConfig()
+                            User.shared.clearConfig()
                             NetworkManager.shared.reset()
                             NetworkManager.shared.reconnect()
                         }))
@@ -81,7 +81,7 @@ class SignInViewController: PaymonViewController, UITextFieldDelegate {
                                     print("Error: email was not sent \(String(describing: error))")
                                 }
                                 
-                                User.clearConfig()
+                                User.shared.clearConfig()
                                 NetworkManager.shared.reset()
                                 NetworkManager.shared.reconnect()
                             }
@@ -110,16 +110,19 @@ class SignInViewController: PaymonViewController, UITextFieldDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        setMainController = NotificationCenter.default.addObserver(forName: .setMainController, object: nil, queue: nil) {
-            notification in
-            DispatchQueue.main.async {
-                let tabsViewController = StoryBoard.tabs.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
-                self.present(tabsViewController, animated: true)
-            }
-            
-        }
+        
         setLayoutOptions()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setMainController = NotificationCenter.default.addObserver(forName: .setMainController, object: nil, queue: nil) {
+            notification in
+            let tabsViewController = StoryBoard.tabs.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
+            DispatchQueue.main.async {
+                self.present(tabsViewController, animated: true)
+            }
+        }
     }
     
     func setLayoutOptions() {

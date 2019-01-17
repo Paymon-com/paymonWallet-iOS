@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import AudioToolbox
 
 /// loding constant which will show on loadingView
 let kLoading = "Loading"
@@ -26,6 +27,7 @@ extension UIView {
     }
     
     func shake() {
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.07
         animation.repeatCount = 3
@@ -35,6 +37,12 @@ extension UIView {
         self.layer.add(animation, forKey: "position")
     }
     
+    func addEndEditingTapper() {
+        let tapper = UITapGestureRecognizer(target: self, action: #selector(endEditing))
+        tapper.cancelsTouchesInView = false
+        self.addGestureRecognizer(tapper)
+    }
+
     func setGradientLayer(frame : CGRect, topColor : CGColor, bottomColor: CGColor) {
         let gradientLayer = CAGradientLayer()
         

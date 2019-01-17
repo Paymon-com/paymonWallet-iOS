@@ -135,11 +135,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwH-kc-fay" userLabel="Update Profile Table Contanier" customClass="UserInfoTableInfoUIView" customModule="paymon" customModuleProvider="target">
-                                <rect key="frame" x="16" y="178" width="343" height="55"/>
+                                <rect key="frame" x="16" y="178" width="343" height="220"/>
                                 <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="481" id="I3f-ho-2Ny"/>
-                                    <constraint firstAttribute="height" constant="55" id="gHM-t7-5IV"/>
+                                    <constraint firstAttribute="height" constant="220" id="gHM-t7-5IV"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -292,7 +292,7 @@
             <objects>
                 <tableViewController title="Update Profile Info Table" id="obF-ep-Ilk" customClass="UpdateProfileInfoTableViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="vgs-v1-GmK">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="55"/>
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="220"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
@@ -309,7 +309,7 @@
                                                     <rect key="frame" x="172.5" y="11" width="154.5" height="33"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gRc-ei-4zC">
                                                     <rect key="frame" x="171" y="11" width="1" height="33"/>
@@ -322,7 +322,7 @@
                                                     <rect key="frame" x="16" y="11" width="154.5" height="33"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -349,6 +349,98 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="55" id="Wwq-sz-UIc">
+                                        <rect key="frame" x="0.0" y="55" width="343" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wwq-sz-UIc" id="LHu-Mg-fuJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ethereum wallet" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pYT-zr-Tgo" userLabel="Name">
+                                                    <rect key="frame" x="16" y="11" width="311" height="33"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                </textField>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rzb-kL-CiH">
+                                                    <rect key="frame" x="8" y="54" width="327" height="1"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="Xqj-cr-NHv"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="rzb-kL-CiH" secondAttribute="trailing" constant="8" id="IBr-0A-NnT"/>
+                                                <constraint firstItem="rzb-kL-CiH" firstAttribute="leading" secondItem="LHu-Mg-fuJ" secondAttribute="leading" constant="8" id="RoJ-Wj-OVs"/>
+                                                <constraint firstItem="pYT-zr-Tgo" firstAttribute="centerY" secondItem="LHu-Mg-fuJ" secondAttribute="centerY" id="YfP-cW-ujW"/>
+                                                <constraint firstItem="pYT-zr-Tgo" firstAttribute="top" secondItem="LHu-Mg-fuJ" secondAttribute="topMargin" id="jml-y5-27c"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="pYT-zr-Tgo" secondAttribute="bottom" id="mHh-h6-TJT"/>
+                                                <constraint firstAttribute="trailing" secondItem="pYT-zr-Tgo" secondAttribute="trailing" constant="16" id="nsa-c1-6kI"/>
+                                                <constraint firstItem="pYT-zr-Tgo" firstAttribute="leading" secondItem="LHu-Mg-fuJ" secondAttribute="leading" constant="16" id="uDU-4t-T7x"/>
+                                                <constraint firstAttribute="bottom" secondItem="rzb-kL-CiH" secondAttribute="bottom" id="vuY-bQ-wPf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="55" id="ksK-DS-fn1">
+                                        <rect key="frame" x="0.0" y="110" width="343" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ksK-DS-fn1" id="AwN-rG-Neo">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Paymon Token Wallet" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fv3-Ra-Af3" userLabel="Name">
+                                                    <rect key="frame" x="16" y="11" width="311" height="33"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                </textField>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fU-yU-Mc2">
+                                                    <rect key="frame" x="8" y="54" width="327" height="1"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="Pht-Rn-l2N"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="fv3-Ra-Af3" firstAttribute="centerY" secondItem="AwN-rG-Neo" secondAttribute="centerY" id="2bG-SN-l12"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="fv3-Ra-Af3" secondAttribute="bottom" id="4Xa-gG-8LB"/>
+                                                <constraint firstAttribute="trailing" secondItem="8fU-yU-Mc2" secondAttribute="trailing" constant="8" id="7IC-fJ-ITC"/>
+                                                <constraint firstItem="fv3-Ra-Af3" firstAttribute="leading" secondItem="AwN-rG-Neo" secondAttribute="leading" constant="16" id="9bO-et-LXZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="fv3-Ra-Af3" secondAttribute="trailing" constant="16" id="TTp-FX-MgJ"/>
+                                                <constraint firstItem="8fU-yU-Mc2" firstAttribute="leading" secondItem="AwN-rG-Neo" secondAttribute="leading" constant="8" id="lnz-rS-LX1"/>
+                                                <constraint firstAttribute="bottom" secondItem="8fU-yU-Mc2" secondAttribute="bottom" id="t5i-cz-Ovr"/>
+                                                <constraint firstItem="fv3-Ra-Af3" firstAttribute="top" secondItem="AwN-rG-Neo" secondAttribute="topMargin" id="wSn-rO-xPU"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="55" id="xuO-LQ-05s">
+                                        <rect key="frame" x="0.0" y="165" width="343" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xuO-LQ-05s" id="Kto-Ch-B8F">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Bitcoin wallet" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ROb-Sh-btX" userLabel="Name">
+                                                    <rect key="frame" x="16" y="11" width="311" height="33"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ROb-Sh-btX" firstAttribute="centerY" secondItem="Kto-Ch-B8F" secondAttribute="centerY" id="UNY-gY-3pd"/>
+                                                <constraint firstItem="ROb-Sh-btX" firstAttribute="leading" secondItem="Kto-Ch-B8F" secondAttribute="leading" constant="16" id="cNf-Tz-AHj"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ROb-Sh-btX" secondAttribute="bottom" id="iJR-WA-2El"/>
+                                                <constraint firstAttribute="trailing" secondItem="ROb-Sh-btX" secondAttribute="trailing" constant="16" id="iay-Df-CjG"/>
+                                                <constraint firstItem="ROb-Sh-btX" firstAttribute="top" secondItem="Kto-Ch-B8F" secondAttribute="topMargin" id="zUE-kh-V4T"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="CKC-NT-p5c">
@@ -360,13 +452,16 @@
                         </sections>
                     </tableView>
                     <connections>
+                        <outlet property="btcInfo" destination="ROb-Sh-btX" id="Moe-Qn-uwb"/>
+                        <outlet property="ethInfo" destination="pYT-zr-Tgo" id="3Wh-0U-Luy"/>
                         <outlet property="nameInfo" destination="odE-Pr-L54" id="2oP-VU-M4K"/>
+                        <outlet property="pmntInfo" destination="fv3-Ra-Af3" id="bSe-W4-DZc"/>
                         <outlet property="surnameInfo" destination="fPV-dd-uma" id="GAW-E2-Ro8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="47M-oq-dRV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2950" y="1827"/>
+            <point key="canvasLocation" x="2924" y="1746.9265367316343"/>
         </scene>
     </scenes>
     <resources>

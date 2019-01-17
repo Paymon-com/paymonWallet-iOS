@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -494,7 +495,7 @@
         <!--Title-->
         <scene sceneID="Hdw-VQ-sep">
             <objects>
-                <viewController storyboardIdentifier="CreateNewBtcWalletViewController" id="2Ki-0q-QZe" customClass="CreateNewBtcWalletViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2Ki-0q-QZe" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Juh-sm-HqY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -713,7 +714,7 @@
         <!--Title-->
         <scene sceneID="Iqi-JB-ZUS">
             <objects>
-                <viewController storyboardIdentifier="CreateNewEthWalletViewController" id="Xvs-ce-ciZ" customClass="CreateNewEthWalletViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateNewEthWalletViewController" hidesBottomBarWhenPushed="YES" id="Xvs-ce-ciZ" customClass="CreateNewEthWalletViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R3T-fN-lSD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -732,7 +733,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="next" smartDashesType="no" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="next" secureTextEntry="YES" smartDashesType="no" textContentType="password"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repeat password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0ZS-ez-5Lf" userLabel="Login Text Field">
                                                 <rect key="frame" x="0.0" y="41" width="343" height="40"/>
@@ -742,7 +743,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="go" smartDashesType="no" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="go" secureTextEntry="YES" smartDashesType="no" textContentType="password"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -755,7 +756,7 @@
                                     <constraint firstItem="LEN-kt-RUu" firstAttribute="top" secondItem="eZY-SM-F00" secondAttribute="top" id="h3H-hN-WcS"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new password" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBs-85-6dy">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new password" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBs-85-6dy">
                                 <rect key="frame" x="16" y="186" width="343" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
@@ -767,18 +768,45 @@
                                 <color key="textColor" red="0.062745098040000002" green="0.52549019610000003" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zN-IJ-0yI">
+                                <rect key="frame" x="16" y="611" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.062745098040000002" green="0.52549019610000003" blue="0.75294117650000003" alpha="0.20054587339999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="mXo-dc-mIB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Use my Ethereum wallet">
+                                    <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="0.8015324519" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="createPmntWalletByEther:" destination="Xvs-ce-ciZ" eventType="touchUpInside" id="JQP-Sl-H9D"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPg-CM-WGx">
+                                <rect key="frame" x="16" y="560" width="343" height="43"/>
+                                <string key="text">If your PMNT tokens are stored on the main Ethereum wallet, click the "Use my Etereum wallet" button to display the PMNT wallet balance.</string>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="6zN-IJ-0yI" firstAttribute="top" secondItem="zPg-CM-WGx" secondAttribute="bottom" constant="8" id="0bH-tt-dcV"/>
+                            <constraint firstItem="2RC-En-6zH" firstAttribute="bottom" secondItem="6zN-IJ-0yI" secondAttribute="bottom" constant="16" id="GOf-Oh-V2A"/>
+                            <constraint firstItem="2RC-En-6zH" firstAttribute="trailing" secondItem="6zN-IJ-0yI" secondAttribute="trailing" constant="16" id="Ick-6m-Trl"/>
                             <constraint firstItem="HBs-85-6dy" firstAttribute="leading" secondItem="2RC-En-6zH" secondAttribute="leading" constant="16" id="Ky3-7s-iFH"/>
                             <constraint firstItem="2RC-En-6zH" firstAttribute="trailing" secondItem="Pyj-d9-VE3" secondAttribute="trailing" constant="16" id="M2L-gN-ajb"/>
                             <constraint firstItem="2RC-En-6zH" firstAttribute="trailing" secondItem="HBs-85-6dy" secondAttribute="trailing" constant="16" id="OKp-9a-x4I"/>
+                            <constraint firstItem="2RC-En-6zH" firstAttribute="trailing" secondItem="zPg-CM-WGx" secondAttribute="trailing" constant="16" id="P61-QJ-JRh"/>
                             <constraint firstItem="eZY-SM-F00" firstAttribute="top" secondItem="Pyj-d9-VE3" secondAttribute="bottom" constant="8" id="TMJ-0C-acN"/>
                             <constraint firstItem="eZY-SM-F00" firstAttribute="leading" secondItem="2RC-En-6zH" secondAttribute="leading" constant="16" id="b1f-qv-Sgw"/>
                             <constraint firstItem="Pyj-d9-VE3" firstAttribute="top" secondItem="2RC-En-6zH" secondAttribute="top" constant="8" id="c01-4i-vO3"/>
                             <constraint firstItem="HBs-85-6dy" firstAttribute="top" secondItem="eZY-SM-F00" secondAttribute="bottom" constant="8" id="d7x-uX-dNP"/>
+                            <constraint firstItem="6zN-IJ-0yI" firstAttribute="leading" secondItem="2RC-En-6zH" secondAttribute="leading" constant="16" id="dqd-8o-2QO"/>
                             <constraint firstItem="Pyj-d9-VE3" firstAttribute="leading" secondItem="2RC-En-6zH" secondAttribute="leading" constant="16" id="fTt-64-Hd5"/>
                             <constraint firstItem="2RC-En-6zH" firstAttribute="trailing" secondItem="eZY-SM-F00" secondAttribute="trailing" constant="16" id="qkC-cn-Thb"/>
+                            <constraint firstItem="zPg-CM-WGx" firstAttribute="leading" secondItem="2RC-En-6zH" secondAttribute="leading" constant="16" id="rlG-w4-M9e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2RC-En-6zH"/>
                     </view>
@@ -792,10 +820,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="hint" destination="Pyj-d9-VE3" id="00h-Ap-04s"/>
+                        <outlet property="hintUseMyEtherWallet" destination="zPg-CM-WGx" id="BO1-5A-k3a"/>
                         <outlet property="newPassword" destination="ezf-fY-NRu" id="HbT-Vg-a3i"/>
                         <outlet property="passwordHint" destination="HBs-85-6dy" id="PFc-O0-rze"/>
                         <outlet property="repeatPassword" destination="0ZS-ez-5Lf" id="F0e-fQ-yb5"/>
                         <outlet property="stackViews" destination="eZY-SM-F00" id="5Ly-sW-ZvO"/>
+                        <outlet property="useMyEtherWallet" destination="6zN-IJ-0yI" id="IQ8-E3-etC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFj-GN-NqD" userLabel="First Responder" sceneMemberID="firstResponder"/>

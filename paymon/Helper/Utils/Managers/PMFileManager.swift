@@ -90,7 +90,7 @@ class PMFileManager {
             uploadingFile.currentPart = 0
             uploadingFile.currentUploaded = 0
             uploadingFile.name = "photoURL.jpg"
-            uploadingFile.id = Int64(User.currentUser.id)
+            uploadingFile.id = Int64(User.shared.currentUser.id)
 
             let file = RPC.PM_file()
             file.partsCount = uploadingFile.partsCount

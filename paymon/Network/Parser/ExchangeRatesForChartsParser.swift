@@ -39,7 +39,7 @@ class ExchangeRatesForChartsParser {
                 if let rates = json["Data"] as? [[String: Any]] {
                     for rate in rates {
                         let timeChart = Utils.formatDateTimeCharts(timestamp: Int64(rate["time"] as! Int), interval: interval)
-//                        print(timeChart)
+
                         result.values.append(rate["close"] as? Double ?? Double(rate["close"] as! Int))
                         result.dates.append(timeChart)
 

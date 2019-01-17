@@ -50,10 +50,6 @@ class BitcoinTransferViewController: PaymonViewController, UITextFieldDelegate {
     var yourWalletBalanceValue : Double!
     var toAddress:String! = ""
     
-    @objc func endEditing() {
-        self.view.endEditing(true)
-    }
-    
     @IBAction func feeSwitchClick(_ sender: Any) {
         if feeSwitch.isOn {
             fee.text = ""
@@ -80,7 +76,7 @@ class BitcoinTransferViewController: PaymonViewController, UITextFieldDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
         
-        ExchangeRateParser.shared.parseCourse(crypto: Money.btc, fiat: User.currencyCode) { result in
+        ExchangeRateParser.shared.parseCourse(crypto: Money.btc, fiat: User.shared.currencyCode) { result in
             self.course = result
             
             DispatchQueue.main.async {
@@ -93,7 +89,7 @@ class BitcoinTransferViewController: PaymonViewController, UITextFieldDelegate {
     func getYourWalletInfo() {
 
         yourWalletBalanceValue = BitcoinManager.shared.fiatBalance.double
-        yourWalletBalance.text = String(format: "\(User.currencyCodeSymb) %.2f", yourWalletBalanceValue)
+        yourWalletBalance.text = String(format: "\(User.shared.currencyCodeSymb) %.2f", yourWalletBalanceValue)
 
     }
     
@@ -104,9 +100,7 @@ class BitcoinTransferViewController: PaymonViewController, UITextFieldDelegate {
         setLayoutOptions()
         self.loading.startAnimating()
         
-        let tapper = UITapGestureRecognizer(target: self, action: #selector(endEditing))
-        tapper.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tapper)
+        self.view.addEndEditingTapper()
         
         fiat.delegate = self
         crypto.delegate = self
@@ -165,8 +159,8 @@ class BitcoinTransferViewController: PaymonViewController, UITextFieldDelegate {
         self.walletInfoView.alpha = 0
         self.line.alpha = 0
         
-        self.fiatHint.text = User.currencyCode
-        self.fiat.placeholder = User.currencyCode
+        self.fiatHint.text = User.shared.currencyCode
+        self.fiat.placeholder = User.shared.currencyCode
         self.feeHint.text = "Network fee".localized
         self.fee.placeholder = Money.btc
         self.feeSwitch.onTintColor = UIColor.AppColor.Blue.primaryBlue
@@ -232,7 +226,7 @@ class BitcoinTransferViewController: PaymonViewController, UITextFieldDelegate {
         toAddress = textField.text
 //        addressIsNotEmpty = !(toAddress?.isEmpty)! && (toAddress?.matches(Money.BITCOIN_WALLET_REGEX))!
         //TODO: remove after tests
-        addressIsNotEmpty = true
+//        addressIsNotEmpty = true
         showSendButton()
 
     }

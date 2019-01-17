@@ -94,6 +94,23 @@ class FriendProfileViewController: PaymonViewController {
             self.funcsMenu.addAction(ethereum)
         }
         
+        if !friend.pmntAddress.isEmpty {
+            let pmnt = UIAlertAction(title: "Paymon Token", style: .default, handler: { (alert: UIAlertAction!) -> Void in
+                guard let keysViewController = StoryBoard.money.instantiateViewController(withIdentifier: VCIdentifier.keysViewController) as? KeysViewController else {return}
+                
+                keysViewController.keyValue = self.friend.pmntAddress
+                keysViewController.currency = Money.eth
+                
+                let transitionDelegate = DeckTransitioningDelegate()
+                keysViewController.transitioningDelegate = transitionDelegate
+                keysViewController.modalPresentationStyle = .custom
+                
+                self.present(keysViewController, animated: true, completion: nil)
+            })
+            
+            self.funcsMenu.addAction(pmnt)
+        }
+        
         let cancel = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
         self.funcsMenu.addAction(cancel)
         self.hideMenu(isHidden: false)

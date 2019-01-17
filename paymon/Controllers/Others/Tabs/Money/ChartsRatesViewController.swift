@@ -92,9 +92,6 @@ class ChartsRatesViewController: PaymonViewController, UITabBarDelegate, Scrolla
         
         (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .landscape
         setLayoutOptions()
-//        graphView = createMultiPlotGraphOne(CGRect(x: 0, y: 10, width: self.view.frame.height, height: self.viewForGraph.frame.width-80))
-
-//        viewForGraph.addSubview(graphView)
 
         tabBar.delegate = self
         tabBar.selectedItem = tabBar.items![0]
@@ -164,6 +161,10 @@ class ChartsRatesViewController: PaymonViewController, UITabBarDelegate, Scrolla
         referenceLines.referenceLineColor = UIColor.white.withAlphaComponent(0.2)
         referenceLines.referenceLineLabelColor = UIColor.white
         referenceLines.relativePositions = [0, 0.2, 0.4, 0.6, 0.8, 1]
+        
+        if crypto == Money.pmnt {
+            referenceLines.referenceLineNumberOfDecimalPlaces = 7
+        }
         
         referenceLines.dataPointLabelColor = UIColor.white.withAlphaComponent(1)
         

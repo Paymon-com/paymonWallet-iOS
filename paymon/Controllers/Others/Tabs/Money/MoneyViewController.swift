@@ -19,7 +19,9 @@ class MoneyViewController: PaymonViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ExchangeRateParser.shared.parseCourseForWallet(crypto: Money.eth, fiat: User.currencyCode)
+//        if EthereumManager.shared.ethSender == nil {
+//            ExchangeRateParser.shared.parseCourseForWallet(crypto: Money.eth, fiat: User.shared.currencyCode)
+//        }
 
         moneyTableView.delegate = self
         moneyTableView.dataSource = self
@@ -88,21 +90,38 @@ class MoneyViewController: PaymonViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showTxTable" {
+            DispatchQueue.main.async {
+                if let txTableViewController = segue.destination as? EthereumTransactionsViewController {
+                    txTableViewController.isPmnt = true
+                }
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DispatchQueue.main.async {
             if let cell = tableView.cellForRow(at: indexPath) as? MoneyCreatedTableViewCell {
                 
                 switch cell.cryptoType {
-                case .bitcoin?:
-                    if CryptoManager.shared.btcInfoIsLoaded {
-                        guard let bitcoinWalletNavigationController = StoryBoard.bitcoin.instantiateInitialViewController() as? PaymonNavigationController else {return}
-                        self.navigationController?.present(bitcoinWalletNavigationController, animated: true, completion: nil)
+                case .paymon?:
+                    if CryptoManager.shared.pmntInfoIsLoaded {
+                        guard let ethereumWalletViewController = StoryBoard.ethereum.instantiateViewController(withIdentifier: VCIdentifier.ethereumWalletViewController) as? EthereumWalletViewController else {return}
+                        ethereumWalletViewController.isPmnt = true
+                        
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(ethereumWalletViewController, animated: true)
+                        }
+                    } else {
+                        print("eth info dont loaded")
                     }
                 case .ethereum?:
                     if CryptoManager.shared.ethInfoIsLoaded {
-                        guard let ethereumWalletNavigationController = StoryBoard.ethereum.instantiateInitialViewController() as? PaymonNavigationController else {return}
+                        guard let ethereumWalletViewController = StoryBoard.ethereum.instantiateViewController(withIdentifier: VCIdentifier.ethereumWalletViewController) as? EthereumWalletViewController else {return}
+                        
                         DispatchQueue.main.async {
-                            self.navigationController?.present(ethereumWalletNavigationController, animated: true, completion: nil)
+                            self.navigationController?.pushViewController(ethereumWalletViewController, animated: true)
                         }
                     } else {
                         print("eth info dont loaded")

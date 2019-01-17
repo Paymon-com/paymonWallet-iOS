@@ -17,6 +17,8 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var addressView: UIView!
     @IBOutlet weak var amountAndWalletView: UIView!
     
+    @IBOutlet weak var walletPicture: UIImageView!
+    @IBOutlet weak var walletPictureWidth: NSLayoutConstraint!
     @IBOutlet weak var gasPriceHint: UILabel!
     @IBOutlet weak var address: UITextField!
     @IBOutlet weak var fiat: UITextField!
@@ -36,8 +38,9 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var gasPriceView: UIView!
     @IBOutlet weak var gasPrice: UILabel!
     
-    private var setBtcAddress : NSObjectProtocol!
     @IBOutlet weak var gasPriceSlider: UISlider!
+    
+    var isPmnt = false
     
     let minValueFee:Double! = 21000
     
@@ -53,10 +56,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     var publicKey : String!
     var yourWalletBalanceValue : Double!
     var toAddress:String! = ""
-    
-    @objc func endEditing() {
-        self.view.endEditing(true)
-    }
+
     
     @IBAction func infoClick(_ sender: Any) {
         guard let infoViewController = self.storyboard!.instantiateViewController(withIdentifier: "GasInfoViewController") as? GasInfoViewController else {return}
@@ -72,7 +72,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
             gasLimit.isEnabled = true
             gasLimit.font = UIFont(name: (gasLimit.font?.fontName)!, size: 22)
             gasLimit.textColor = UIColor.white.withAlphaComponent(0.75)
-            gasLimitValue = 0
+            gasLimit.text = "\(21000)"
         } else {
             gasLimit.text = "Standart fee".localized
             gasLimit.isEnabled = false
@@ -83,17 +83,21 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func yourWalletClick(_ sender: Any) {
-        guard let keysViewController = self.storyboard?.instantiateViewController(withIdentifier: VCIdentifier.keysViewController) as? KeysViewController else {return}
+        guard let keysViewController = StoryBoard.money.instantiateViewController(withIdentifier: VCIdentifier.keysViewController) as? KeysViewController else {return}
         
         keysViewController.keyValue = self.publicKey
         keysViewController.currency = Money.eth
         
-        self.present(keysViewController, animated: true, completion: nil)
+        let transitionDelegate = DeckTransitioningDelegate()
+        keysViewController.transitioningDelegate = transitionDelegate
+        keysViewController.modalPresentationStyle = .custom
+        present(keysViewController, animated: true, completion: nil)
         
     }
     override func viewWillAppear(_ animated: Bool) {
         
-        ExchangeRateParser.shared.parseCourse(crypto: Money.eth, fiat: User.currencyCode) { result in
+        let crypto = !isPmnt ? Money.eth : Money.pmnt
+        ExchangeRateParser.shared.parseCourse(crypto: crypto, fiat: User.shared.currencyCode) { result in
             self.course = result
             
             DispatchQueue.main.async {
@@ -105,8 +109,8 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     
     func getYourWalletInfo() {
         
-        yourWalletBalanceValue = Double(EthereumManager.shared.fiatBalance)
-        yourWalletBalance.text = String(format: "\(User.currencyCodeSymb) %.2f", yourWalletBalanceValue)
+        yourWalletBalanceValue = !isPmnt ? Double(EthereumManager.shared.ethFiatBalance) : Double(EthereumManager.shared.pmntFiatBalance)
+        yourWalletBalance.text = String(format: "\(User.shared.currencyCodeSymb) %.2f", yourWalletBalanceValue)
         
     }
     
@@ -117,9 +121,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
         setLayoutOptions()
         self.loading.startAnimating()
         
-        let tapper = UITapGestureRecognizer(target: self, action: #selector(endEditing))
-        tapper.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tapper)
+        self.view.addEndEditingTapper()
         
         fiat.delegate = self
         crypto.delegate = self
@@ -132,18 +134,6 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        setBtcAddress = NotificationCenter.default.addObserver(forName: .setBtcAddress, object: nil, queue: OperationQueue.main ){ notification in
-            
-            if let course = notification.object as? Double {
-                self.course = course
-                
-                DispatchQueue.main.async {
-                    self.loading.stopAnimating()
-                    self.showAmountAndInfoView()
-                }
-            }
-        }
         
     }
     
@@ -172,9 +162,9 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
         self.amountAndWalletView.layer.cornerRadius = 30
         
         self.title = "Transfer".localized
-        self.address.placeholder = "Ethereum address".localized
+        self.address.placeholder = !isPmnt ? "Ethereum address".localized : "Paymon Token address".localized
         self.yourWallet.setTitle("Your wallet".localized, for: .normal)
-        
+        self.cryptoHint.text = !isPmnt ? Money.eth : Money.pmnt
         self.fiatHint.alpha = 0
         self.cryptoHint.alpha = 0
         self.send.alpha = 0
@@ -183,8 +173,11 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
         self.walletInfoView.alpha = 0
         self.line.alpha = 0
         
-        self.fiatHint.text = User.currencyCode
-        self.fiat.placeholder = User.currencyCode
+        self.fiatHint.text = User.shared.currencyCode
+        self.fiat.placeholder = User.shared.currencyCode
+        self.crypto.placeholder = isPmnt ? Money.pmnt : Money.eth
+        self.walletPicture.image = isPmnt ? UIImage(named: "PaymonClear") : UIImage(named: "EtherClear")
+        self.walletPictureWidth.constant = isPmnt ? 24 : 17
         self.feeHint.text = "Network fee".localized
         self.gasLimit.placeholder = "Gas limit".localized
         self.gasPriceHint.text = "Gas price (Gwei)".localized
@@ -250,36 +243,42 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     @objc func addressDidChanged(_ textField : UITextField) {
         toAddress = textField.text
                 addressIsNotEmpty = !(toAddress?.isEmpty)! && (toAddress?.matches(Money.ETHEREUM_WALLET_REGEX))!
-        //TODO: remove after tests
-//        addressIsNotEmpty = true
+
         showSendButton()
         
     }
     
     @IBAction func sendClick(_ sender: Any) {
         
+        if isPmnt && EthereumManager.shared.pmntCryptoBalance.isLess(than: cryptoValue) {
+            _ = SimpleOkAlertController.init(title: "Transfer".localized, message: "You do not have enough PMNT tokens".localized, vc: self)
+            return
+        }
+        
         if gasLimitValue < minValueFee {
             _ = SimpleOkAlertController.init(title: "Network fee".localized, message: "The minimum gas limit is 21000 Gwei".localized, vc: self)
             return
         }
         
-        let value = Decimal(cryptoValue) * Decimal(Money.fromWei)
+        let value = !isPmnt ? Decimal(cryptoValue) * Decimal(Money.fromWei) : 0
         let fee = Decimal(gasLimitValue) * Decimal(gasPrice.text!) * Decimal(Money.fromGwei)
-        if value + fee < Decimal(EthereumManager.shared.balance.description) {
-            
+        let ethBalance = Decimal(EthereumManager.shared.ethBalance.description)
+        
+        if value + fee < ethBalance {
+//            print("balance \(Decimal(balance) * Decimal(Money.fromGwei))")
+//            print("value + fee \(value + fee)")
             let transferInfoVC = StoryBoard.ethereum.instantiateViewController(withIdentifier: VCIdentifier.ethereumTransferInformationViewController) as! EthereumTransferInformationViewController
-            
+            transferInfoVC.isPmnt = isPmnt
             transferInfoVC.toAddress = toAddress
-            transferInfoVC.balanceValue = yourWalletBalanceValue
-            transferInfoVC.amountToSend = cryptoValue * Money.fromWei
+            transferInfoVC.balanceValue = EthereumManager.shared.ethFiatBalance
+            transferInfoVC.amountToSend = cryptoValue
             transferInfoVC.gasLimit = gasLimitValue
-            transferInfoVC.course = course
             transferInfoVC.gasPrice = Int64(gasPrice.text!)! * Int64(Money.fromGwei)
             
             self.navigationController?.pushViewController(transferInfoVC, animated: true)
             
         } else {
-            _ = SimpleOkAlertController.init(title: "Transfer".localized, message: "You do not have enough money".localized, vc: self)
+            _ = SimpleOkAlertController.init(title: "Transfer".localized, message: "You do not have enough ETH tokens".localized, vc: self)
         }
     }
     
@@ -340,7 +339,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
         if let userInfo = notification.userInfo {
             let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
 
-            sendBottomConstraint.constant = notification.name == UIResponder.keyboardWillShowNotification ? keyboardFrame!.height + 16 : 16
+            sendBottomConstraint.constant = notification.name == UIResponder.keyboardWillShowNotification ? keyboardFrame!.height - 16 : 16
 
             UIView.animate(withDuration: 0,
                            delay: 0,

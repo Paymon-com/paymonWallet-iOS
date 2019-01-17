@@ -36,9 +36,9 @@ class SettingAccountTableViewController: UITableViewController {
         showEmailCell.accessoryView = switchShowEmail
         timeFormatCell.accessoryView = switchTimeFormat
 
-        if User.currentUser != nil {
-            switchShowEmail.setOn(User.currentUser.isEmailHidden, animated: false)
-            switchTimeFormat.setOn(User.timeFormatIs24, animated: false)
+        if User.shared.currentUser != nil {
+            switchShowEmail.setOn(User.shared.currentUser.isEmailHidden, animated: false)
+            switchTimeFormat.setOn(User.shared.timeFormatIs24, animated: false)
         }
         
         switchShowEmail.addTarget(self, action: #selector(switchShowEmailChange(_:)), for: .valueChanged)
@@ -82,7 +82,7 @@ class SettingAccountTableViewController: UITableViewController {
                 
                 self.canChange = isDone
                 if isDone {
-                    User.saveConfig()
+                    User.shared.saveConfig()
                     DispatchQueue.main.async {
                         Utils.showSuccesHud(vc: self)
                     }
@@ -95,6 +95,6 @@ class SettingAccountTableViewController: UITableViewController {
     
     @objc func switchTimeFormatChange(_ segmentControl : UISegmentedControl) {
 
-        User.saveTimeFormat(is24: switchTimeFormat.isOn)
+        User.shared.saveTimeFormat(is24: switchTimeFormat.isOn)
     }
 }

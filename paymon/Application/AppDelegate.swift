@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NotificationManagerListen
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        User.loadConfig()
+        User.shared.loadConfig()
         NetworkManager.shared.reconnect()
 
         NotificationManager.instance.addObserver(self, id: NotificationManager.didConnectedToServer)
@@ -139,11 +139,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NotificationManagerListen
 
     func didReceivedNotification(_ id: Int, _ args: [Any]) {
         if id == NotificationManager.didEstablishedSecuredConnection {
-            if User.currentUser != nil {
+            if User.shared.currentUser != nil {
                 UserManager.shared.authByToken()
             }
         } else if id == NotificationManager.didDisconnectedFromServer {
-            if !User.isAuthenticated {
+            if !User.shared.isAuthenticated {
                 NetworkManager.shared.reconnect()
             }
         }

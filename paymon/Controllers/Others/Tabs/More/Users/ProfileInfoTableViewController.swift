@@ -11,7 +11,7 @@ class ProfileInfoTableViewController : UITableViewController {
     
     func updateView() {
         
-        guard let user = User.currentUser else {
+        guard let user = User.shared.currentUser else {
             return
         }
         
