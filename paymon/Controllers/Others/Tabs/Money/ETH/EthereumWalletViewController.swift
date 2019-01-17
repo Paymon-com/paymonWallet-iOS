@@ -224,6 +224,7 @@ class EthereumWalletViewController: PaymonViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let transferViewController = segue.destination as? EthereumTransferViewController {
             transferViewController.publicKey = publicKey
+            transferViewController.isPmnt = isPmnt
         } else if let txViewController = segue.destination as? EthereumTransactionsViewController {
             if isPmnt {
                 txViewController.isPmnt = true

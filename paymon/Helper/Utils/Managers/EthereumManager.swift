@@ -60,7 +60,7 @@ class EthereumManager {
     
     func walletDidCreated(currency : String) {
         DispatchQueue.main.async {
-            ExchangeRateParser.shared.parseCourseForWallet(crypto: currency, fiat: User.shared.currencyCode)
+            ExchangeRateParser.shared.parseCourseForWallet(crypto: [Money.eth, Money.pmnt], fiat: User.shared.currencyCode)
             NotificationCenter.default.post(name: .ethWalletWasCreated, object: nil)
         }
     }
@@ -113,25 +113,27 @@ class EthereumManager {
         }
     }
     
+    func deinitWallet() {
+        ethSender = nil
+        pmntSender = nil
+    }
+    
     func initWeb() {
-        if ethKeyPath == nil {
-            queue.qualityOfService = .background
-            queue.maxConcurrentOperationCount = 1
-            queue.addOperation {
-                self.ethKeyPath = self.userDir + "/keystore_eth_\(User.shared.currentUser.id!)"+"/key_eth.json"
-                self.ethKeystoreManager = KeystoreManager.managerForPath(self.userDir + "/keystore_eth_\(User.shared.currentUser.id!)")
-                
-                self.pmntKeyPath = self.userDir + "/keystore_pmnt_\(User.shared.currentUser.id!)"+"/key_pmnt.json"
-                self.pmntKeystoreManager = KeystoreManager.managerForPath(self.userDir + "/keystore_pmnt_\(User.shared.currentUser.id!)")
-                
-                Web3.default = Web3(infura: .mainnet)
-                self.ethWeb3 = Web3.default
-                self.pmntWeb3 = Web3.default
-                
-                self.ethWeb3.addKeystoreManager(self.ethKeystoreManager!)
-                self.pmntWeb3.addKeystoreManager(self.pmntKeystoreManager!)
-                print("Success init web3")
-            }
+        queue.qualityOfService = .background
+        queue.maxConcurrentOperationCount = 1
+        queue.addOperation {
+            self.ethKeyPath = self.userDir + "/keystore_eth_\(User.shared.currentUser.id!)"+"/key_eth.json"
+            self.ethKeystoreManager = KeystoreManager.managerForPath(self.userDir + "/keystore_eth_\(User.shared.currentUser.id!)")
+            
+            self.pmntKeyPath = self.userDir + "/keystore_pmnt_\(User.shared.currentUser.id!)"+"/key_pmnt.json"
+            self.pmntKeystoreManager = KeystoreManager.managerForPath(self.userDir + "/keystore_pmnt_\(User.shared.currentUser.id!)")
+            
+            Web3.default = Web3(infura: .mainnet)
+            self.ethWeb3 = Web3.default
+            self.pmntWeb3 = Web3.default
+            
+            self.ethWeb3.addKeystoreManager(self.ethKeystoreManager!)
+            self.pmntWeb3.addKeystoreManager(self.pmntKeystoreManager!)
         }
     }
     
@@ -270,7 +272,7 @@ class EthereumManager {
             if self.ethKs != nil {
                 do {
                     if let privateKey = try self.ethKs.UNSAFE_getPrivateKeyData(password: password, account: self.ethKs.addresses.first!) as Data? {
-                        self.ethKs = try EthereumKeystoreV3(privateKey: privateKey)
+                        self.ethKs = try EthereumKeystoreV3(privateKey: privateKey, password: password)
                         
                         let keydata = try JSONEncoder().encode(self.ethKs!.keystoreParams)
                         FileManager.default.createFile(atPath: self.ethKeyPath, contents: keydata, attributes: nil)
@@ -315,7 +317,7 @@ class EthereumManager {
             if self.pmntKs != nil {
                 do {
                     if let privateKey = try self.pmntKs.UNSAFE_getPrivateKeyData(password: password, account: self.pmntKs.addresses.first!) as Data? {
-                        self.pmntKs = try EthereumKeystoreV3(privateKey: privateKey)
+                        self.pmntKs = try EthereumKeystoreV3(privateKey: privateKey, password: password)
                         
                         let keydata = try JSONEncoder().encode(self.pmntKs!.keystoreParams)
                         FileManager.default.createFile(atPath: self.pmntKeyPath, contents: keydata, attributes: nil)
@@ -351,7 +353,7 @@ class EthereumManager {
     
     func updateEthTxHistory() {
         
-        let urlString = "https://api.etherscan.io/api?module=account&action=tokentx&address=\(String(describing: ethSender!.address))&startblock=0&endblock=999999999&sort=desc&apikey=YourApiKeyToken"
+        let urlString = "https://api.etherscan.io/api?module=account&action=txlist&address=\(String(describing: ethSender!.address))&startblock=0&endblock=999999999&sort=desc&apikey=YourApiKeyToken"
         Alamofire.request(urlString, method: .get).response(completionHandler: { response in
             if response.error == nil && response.data != nil {
                 do {
@@ -390,11 +392,14 @@ class EthereumManager {
     func updateEthBalance() {
         queue.addOperation {
             if self.ethSender != nil {
-                let balance = try! self.ethWeb3.eth.getBalance(address: self.ethSender!)
-                self.ethBalance = balance
-                self.ethCryptoBalance = Double(balance) / Money.fromWei
-                self.ethFiatBalance = self.ethCryptoBalance * self.ethCourse
-                //TODO вылетало
+                do {
+                    let balance = try self.ethWeb3.eth.getBalance(address: self.ethSender!)
+                    self.ethBalance = balance
+                    self.ethCryptoBalance = Double(balance) / Money.fromWei
+                    self.ethFiatBalance = self.ethCryptoBalance * self.ethCourse
+                } catch let error {
+                    print("Error get Balance for ETH", error)
+                }
             }
         }
     }
@@ -411,11 +416,22 @@ class EthereumManager {
                 } catch let error {
                     print("Error get Balance for Pmnt contract", error)
                 }
+                
+                if self.ethSender == nil {
+                    do {
+                        let balance = try self.pmntWeb3.eth.getBalance(address: self.pmntSender!)
+                        self.ethBalance = balance
+                        self.ethCryptoBalance = Double(balance) / Money.fromWei
+                        self.ethFiatBalance = self.ethCryptoBalance * self.ethCourse
+                    } catch let error {
+                        print("Error get Balance for ETH", error)
+                    }
+                }
             }
         }
     }
     
-    func send(gasPrice : BigUInt, gasLimit : Int64, value : Int64, toAddress : String, password : String, completionHandler: @escaping ((Bool,String)) -> ()) {
+    func sendEth(gasPrice : BigUInt, gasLimit : Int64, value : Int64, toAddress : String, password : String, completionHandler: @escaping ((Bool,String)) -> ()) {
         queue.addOperation {
             let coldWalletABI = "[{\"payable\":true,\"type\":\"fallback\"}]"
             var options = Web3Options.default
@@ -429,9 +445,24 @@ class EthereumManager {
             let intermediateSend = try! self.ethWeb3.contract(coldWalletABI, at: self.ethSender).method(options: options)
             let sendingResult = try! intermediateSend.send(password: password)
             let txid = sendingResult.hash
-            //TODO: Notif tx was sent
             print("On Rinkeby TXid = " + txid)
             completionHandler((true, txid))
+        }
+    }
+    
+    func sendPmnt(gasPrice : BigUInt, gasLimit : Int64, value : Int64, toAddress : String, password : String, completionHandler: @escaping (Bool,String) -> ()) {
+        queue.addOperation {
+            let token = ERC20(Money.pmntContract, from: self.pmntSender!, password: password)
+            token.options.gasPrice = gasPrice
+            token.options.gasLimit = BigUInt(gasLimit)
+            do {
+                let transaction = try token.transfer(to: Address(toAddress), amount: NaturalUnits("\(value)"))
+                print("On Paymon token TXid = \(transaction.hash)")
+                completionHandler(true, transaction.hash)
+            } catch let error {
+                print("cant send pmnt \(error)")
+                completionHandler(false, "")
+            }
         }
     }
 }

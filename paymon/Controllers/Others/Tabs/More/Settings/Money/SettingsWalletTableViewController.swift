@@ -138,6 +138,6 @@ class SettingsWalletTableViewController: UITableViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        ExchangeRateParser.shared.parseCourseForWallet(crypto: Money.btc, fiat: User.shared.currencyCode)
+        ExchangeRateParser.shared.parseCourseForWallet(crypto: [Money.eth,Money.pmnt], fiat: User.shared.currencyCode)
     }
 }

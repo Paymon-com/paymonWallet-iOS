@@ -34,6 +34,7 @@ class StartViewController: PaymonViewController {
         super.viewWillAppear(animated)
 
         self.view.addUIViewBackground(name: "MainBackground")
+        print(navigationController?.viewControllers.count ?? 101)
 
     }
 

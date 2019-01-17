@@ -231,6 +231,8 @@ class User {
         isPmntCreatedFromEth = false
 //        isBackupBtcWallet = false
         CacheManager.shared.removeDb()
+        EthereumManager.shared.deinitWallet()
+        isSettingsWasSet = false
         saveConfig()
     }
 }

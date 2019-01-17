@@ -28,7 +28,7 @@ class TxInfoTableViewCell : UITableViewCell {
         case 5:
             
             let decimalValue = !isPmnt ? Decimal(data.info) / Decimal(Money.fromWei) : Decimal(data.info) / Decimal(Money.fromGwei)
-            self.info.text = !isPmnt ? String(format: "%.2f PMNT", decimalValue.double) : String(format: "%.2f ETH", decimalValue.double)
+            self.info.text = isPmnt ? String(format: "%.2f PMNT", decimalValue.double) : String(format: "%.2f ETH", decimalValue.double)
         case 8:
             let decimalValue = Decimal(data.info) / Decimal(Money.fromWei)
             self.info.text = "\(decimalValue) ETH"

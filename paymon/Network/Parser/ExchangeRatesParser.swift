@@ -44,22 +44,27 @@ class ExchangeRateParser{
         })
     }
     
-    func parseCourseForWallet(crypto: String, fiat: String) {
-        let urlString = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=\(crypto)&tsyms=\(fiat)"
+    func parseCourseForWallet(crypto: [String], fiat: String) {
+        var currencys = ""
+        for currency in crypto {
+            currencys.append("\(currency),")
+        }
+        let urlString = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=\(currencys)&tsyms=\(fiat)"
         Alamofire.request(urlString, method: .get).response(completionHandler: { response in
             if response.error == nil && response.data != nil {
                 do {
                     guard let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any] else {return}
-                    if let rates = json[crypto] as? [String: Any] {
-                        if let result = rates[fiat] as? Double {
-                            switch crypto {
-                            case Money.eth: EthereumManager.shared.ethCourse = result
-                            case Money.pmnt: EthereumManager.shared.pmntCourse = result
-                            default: break
+                    for currency in crypto {
+                        if let rates = json[currency] as? [String: Any] {
+                            if let result = rates[fiat] as? Double {
+                                switch currency {
+                                case Money.eth: EthereumManager.shared.ethCourse = result
+                                case Money.pmnt: EthereumManager.shared.pmntCourse = result
+                                default: break
+                                }
                             }
                         }
                     }
-                    
                 } catch let jsonError{
                     print("Error srializing json:", jsonError)
                 }

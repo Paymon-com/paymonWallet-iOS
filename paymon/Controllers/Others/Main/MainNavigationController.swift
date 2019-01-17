@@ -19,15 +19,21 @@ class MainNavigationController: UINavigationController {
                     
             if User.shared.securityPasscode {
                 let passcodeViewController = StoryBoard.passcode.instantiateViewController(withIdentifier: VCIdentifier.passcodeViewController) as! PasscodeViewController
-                viewControllers = [passcodeViewController]
+                DispatchQueue.main.async {
+                    self.setViewControllers([passcodeViewController], animated: true)
+                }
             } else {
                 let tabsViewController = StoryBoard.tabs.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
-                viewControllers = [tabsViewController]
+                DispatchQueue.main.async {
+                    self.setViewControllers([tabsViewController], animated: true)
+                }
             }
         } else {
             self.navigationBar.isHidden = false
             let startViewController = StoryBoard.main.instantiateViewController(withIdentifier: VCIdentifier.startViewController) as! StartViewController
-            viewControllers = [startViewController]
+            DispatchQueue.main.async {
+                self.setViewControllers([startViewController], animated: true)
+            }
         }
         
     }

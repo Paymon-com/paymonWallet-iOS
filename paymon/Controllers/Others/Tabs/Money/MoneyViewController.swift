@@ -19,7 +19,9 @@ class MoneyViewController: PaymonViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        ExchangeRateParser.shared.parseCourseForWallet(crypto: Money.eth, fiat: User.shared.currencyCode)
+//        if EthereumManager.shared.ethSender == nil {
+//            ExchangeRateParser.shared.parseCourseForWallet(crypto: Money.eth, fiat: User.shared.currencyCode)
+//        }
 
         moneyTableView.delegate = self
         moneyTableView.dataSource = self

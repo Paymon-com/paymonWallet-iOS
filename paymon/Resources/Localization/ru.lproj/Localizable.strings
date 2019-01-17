@@ -220,9 +220,11 @@
 "To find out the address of your wallet and the QR-code, hold the cell of wallet. \n\n To transfer, deposit or withdraw funds, click on the dell of wallet."="Чтобы узнать адрес вашего кошелька и QR-код, удерживайте ячейку кошелька. \n\n Чтобы перевести, внести или снять средства, щелкните по ячейке кошелька.";
 "Bitcoin wallet"="Bitcoin кошелек";
 "Ethereum wallet"="Ethereum кошелек";
-"Paymon Token wallet"="Paymon токен кошелек";
-"New Paymon Token wallet"="Новый Paymon токен кошелек";
+"Paymon Token wallet"="Paymon Токен кошелек";
+"New Paymon Token wallet"="Новый Paymon Токен кошелек";
 "Paymon Token"="Paymon Токен";
+"Paymon Token address"="Paymon Токен адрес";
+"Paymon token transfer"="Paymon Токен перевод";
 
 "Received"="Полученные";
 "Sent"="Отправленные";
@@ -267,7 +269,8 @@
 "Send"="Отправить";
 "Transactions list is empty"="Список транзакций пуст";
 "History"="История";
-"You do not have enough money"="У вас не достаточно средств";
+"You do not have enough ETH tokens"="У вас не достаточно ETH токенов";
+"You do not have enough PMNT tokens"="У вас не достаточно PMNT токенов";
 "To"="Получатель";
 "From"="Отправитель";
 "Network fee"="Комиссия сети";

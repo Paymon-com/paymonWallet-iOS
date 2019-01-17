@@ -64,7 +64,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        allChats.removeObserver(self)
+//        allChats.removeObserver(self)
     }
     
     func setChats() {
@@ -191,11 +191,11 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let mute = muteAction(at: indexPath)
-        let clear = clearAction(at: indexPath)
+//        let mute = muteAction(at: indexPath)
+//        let clear = clearAction(at: indexPath)
         let delete = deleteAction(at: indexPath)
         
-        return UISwipeActionsConfiguration(actions: [delete, clear, mute])
+        return UISwipeActionsConfiguration(actions: [delete])
     }
     
     @available(iOS 11.0, *)

@@ -282,7 +282,7 @@
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next"/>
                                                     </textField>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMs-Ll-eby">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMs-Ll-eby">
                                                         <rect key="frame" x="16" y="24.5" width="26" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="26" id="c4a-Oi-OQK"/>
@@ -304,17 +304,17 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWf-GZ-GZ5" userLabel="Crypto View">
                                                 <rect key="frame" x="180" y="0.0" width="163" height="63.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IM3-1A-7Yy">
-                                                        <rect key="frame" x="123" y="24.5" width="24" height="15"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PMNT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IM3-1A-7Yy">
+                                                        <rect key="frame" x="112" y="24.5" width="35" height="15"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="24" id="gS7-MG-feA"/>
+                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="36" id="gS7-MG-feA"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ETH" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RMK-uR-fyc" customClass="MoneyAmountTextField" customModule="paymon" customModuleProvider="target">
-                                                        <rect key="frame" x="8" y="18.5" width="107" height="27"/>
+                                                        <rect key="frame" x="8" y="18.5" width="96" height="27"/>
                                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next"/>
@@ -514,6 +514,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="l82-FN-RG6">
                         <barButtonItem key="rightBarButtonItem" image="Help" id="YBq-ZO-kr2">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="infoClick:" destination="tvd-lf-Vd9" id="KAN-el-kq0"/>
                             </connections>
@@ -542,6 +543,8 @@
                         <outlet property="sendBottomConstraint" destination="gh4-5q-qG5" id="5sh-fE-CDL"/>
                         <outlet property="sendImage" destination="zio-v5-oE6" id="MHn-Eq-CIa"/>
                         <outlet property="walletInfoView" destination="Jtf-QE-LY0" id="Eu9-Eo-cvn"/>
+                        <outlet property="walletPicture" destination="0yR-bj-lUf" id="5X5-h2-0tG"/>
+                        <outlet property="walletPictureWidth" destination="4EL-uE-vha" id="tzq-tf-7zl"/>
                         <outlet property="yourWallet" destination="Bkm-c9-bSX" id="cRV-IY-3So"/>
                         <outlet property="yourWalletBalance" destination="d9q-qk-jGv" id="Cln-d8-bGx"/>
                         <segue destination="2ni-0M-bl8" kind="show" identifier="TransferInformationViewController" id="uj3-87-Svu"/>
@@ -802,10 +805,14 @@
                         <outlet property="stackView" destination="ZAB-DZ-6Bm" id="SF0-2j-GEK"/>
                         <outlet property="toHint" destination="YHP-d5-ajU" id="yI1-Vh-brU"/>
                         <outlet property="toWallet" destination="Muh-Vx-hzh" id="UPo-iy-NdZ"/>
+                        <outlet property="toWalletPicture" destination="bvP-6E-ifV" id="wGC-bQ-bEl"/>
+                        <outlet property="toWalletPictureWidth" destination="Zhs-Pj-jKH" id="50f-6z-3Lc"/>
                         <outlet property="totalAmount" destination="YPR-mY-Efy" id="852-Op-HLp"/>
                         <outlet property="totalAmountHint" destination="QuZ-zm-Oca" id="6wa-vk-YVu"/>
                         <outlet property="yourWallet" destination="OhW-HI-Jri" id="CNt-2I-4tV"/>
                         <outlet property="yourWalletBalance" destination="1V9-Ra-WPR" id="nM4-6I-61Z"/>
+                        <outlet property="yourWalletPicture" destination="sLs-MW-8Db" id="luy-Sy-LW1"/>
+                        <outlet property="yourWalletPictureWidth" destination="gc1-56-awE" id="7NB-lV-w4u"/>
                         <segue destination="DB0-k2-yaO" kind="show" id="ci9-Om-11N"/>
                     </connections>
                 </viewController>
@@ -1424,7 +1431,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="1wt9q3go8qfhof81wt9q3go8qfhof8goafasdf43f1wt9dsfsadfasdfq3go8q 1wt9q3go8qfhof81wt9q3go8qfhof8goafasdf43f1wt9dsfsadfasdfq3go8q" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBg-3K-sjj">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="1wt9q3go8qfhof81wt9q3go8qfhof8goafasdf43f1wt9dsfsadfasdfq3go8q 1wt9q3go8qfhof81wt9q3go8qfhof8goafasdf43f1wt9dsfsadfasdfq3go8q" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBg-3K-sjj" customClass="CopyLabel" customModule="paymon" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="29" width="343" height="7"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                     <color key="textColor" red="0.68274689830000002" green="0.78635056950000004" blue="0.95144550120000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

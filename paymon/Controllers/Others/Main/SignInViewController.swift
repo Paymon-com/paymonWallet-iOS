@@ -110,16 +110,19 @@ class SignInViewController: PaymonViewController, UITextFieldDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        setMainController = NotificationCenter.default.addObserver(forName: .setMainController, object: nil, queue: nil) {
-            notification in
-            DispatchQueue.main.async {
-                let tabsViewController = StoryBoard.tabs.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
-                self.present(tabsViewController, animated: true)
-            }
-            
-        }
+        
         setLayoutOptions()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setMainController = NotificationCenter.default.addObserver(forName: .setMainController, object: nil, queue: nil) {
+            notification in
+            let tabsViewController = StoryBoard.tabs.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
+            DispatchQueue.main.async {
+                self.present(tabsViewController, animated: true)
+            }
+        }
     }
     
     func setLayoutOptions() {

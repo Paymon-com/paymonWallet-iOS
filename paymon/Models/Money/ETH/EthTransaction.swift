@@ -19,7 +19,7 @@ public class EthTransaction : Codable {
     var value : String
     var gas : String
     var gasPrice : String
-    var isError : String
+//    var isError : String
     var gasUsed : String
     var confirmations : String
 }
@@ -76,7 +76,7 @@ class EthTransactions {
                     image = bimage
                 }
                 
-                let transactionType : TransactionType = tx.from.lowercased() == EthereumManager.shared.ethSender!.address.lowercased() ? .sent : .received
+                let transactionType : TransactionType = tx.from.lowercased() == EthereumManager.shared.pmntSender!.address.lowercased() ? .sent : .received
                 let value = Decimal(tx.value) / Decimal(Money.fromGwei)
                 
                 result.append(Transaction(type: transactionType, from: tx.from, amount: String(value.double), time: Utils.formatDateTime(timestamp: Int32(tx.timeStamp)!), avatar: image, txEthInfo : nil, txPmntInfo: tx))
