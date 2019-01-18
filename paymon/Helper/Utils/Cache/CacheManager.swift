@@ -30,24 +30,25 @@ public class CacheManager {
         store = SQLiteStore(fileName: "Paymon_\(String(describing: User.shared.currentUser.id!)).sqlite",
             localStorageOptions: .recreateStoreOnModelMismatch)
         
-        do {
-            try dataStack.addStorageAndWait(store)
-        } catch let error {
-            print("Error init db", error)
-        }
+//        do {
+            dataStack.addStorage(store) { _ in
+                CoreStore.defaultStack = self.dataStack
+                CacheManager.isAddedStorage = true
+                UserDataManager.shared.updateOrCreateUser(userObject: User.shared.currentUser)
+                
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .setMainController, object: nil)
+                }
+            }
+//        } catch let error {
+//            print("Error init db", error)
+//        }
         
-        CoreStore.defaultStack = self.dataStack
-        CacheManager.isAddedStorage = true
-        UserDataManager.shared.updateOrCreateUser(userObject: User.shared.currentUser)
         
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: .setMainController, object: nil)
-        }
     }
     
     func removeDb() {
         CoreStore.defaultStack = DataStack()
-        CoreStore.defaultStack.refreshAndMergeAllObjects()
         CacheManager.isAddedStorage = false
     }
 }

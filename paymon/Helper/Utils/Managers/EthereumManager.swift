@@ -168,7 +168,7 @@ class EthereumManager {
                 guard let PmntSender = self.pmntKs?.addresses.first else {return}
                 self.pmntSender = PmntSender
                 
-                print("Eth sender \(PmntSender)")
+                print("Pmnt sender \(PmntSender)")
             }
         }
     }

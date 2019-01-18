@@ -99,6 +99,7 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     }
     
     func listMonitorDidChange(_ monitor: ListMonitor<ChatMessageData>) {
+
         self.tableView.endUpdates()
         if !firstLoaded {
             self.reloadChat()
@@ -108,13 +109,13 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     func listMonitor(_ monitor: ListMonitor<ChatMessageData>, didInsertObject object: ChatMessageData, toIndexPath indexPath: IndexPath) {
 
         if object.toId == chatID {
+            print("Insert row at: \(indexPath.row) in section: \(indexPath.section)")
                 self.tableView.re.insertRows(at: [indexPath], with: .none)
         }
     }
     
     func listMonitor(_ monitor: ListMonitor<ChatMessageData>, didDeleteObject object: ChatMessageData, fromIndexPath indexPath: IndexPath) {
         self.tableView.re.deleteRows(at: [indexPath], with: .left)
-
     }
     
     func listMonitor(_ monitor: ListMonitor<ChatMessageData>, didInsertSection sectionInfo: NSFetchedResultsSectionInfo, toSectionIndex sectionIndex: Int) {

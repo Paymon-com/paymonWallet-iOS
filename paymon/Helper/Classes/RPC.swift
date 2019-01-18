@@ -368,7 +368,6 @@ class RPC {
             photoUrl.readParams(stream: stream, exception: exception)
             confirmed = stream.read(exception)
             btcAddress = stream.readString(exception)
-            print("btc address \(String(describing: btcAddress))")
             ethAddress = stream.readString(exception)
             pmntAddress = stream.readString(exception)
 
