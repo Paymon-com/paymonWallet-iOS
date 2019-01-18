@@ -2,7 +2,8 @@ stages:
   - build
 
 before_script:
-     - pod install
+    - gem install cocoapods
+    - pod install
 
 build_project:
   stage: build
