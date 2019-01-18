@@ -9,7 +9,7 @@ build_project:
   stage: build
   script:
     - xcodebuild clean -workspace paymon.xcworkspace -scheme paymon | xcpretty
-    - xcodebuild test -workspace paymon.xcworkspace -scheme paymon -destination 'platform=iOS Simulator,name=iPhone 8,OS=12.1' | xcpretty -s
+    - xcodebuild build -workspace paymon.xcworkspace -scheme paymon | xcpretty
   tags:
     - ios_10-3
     - osx_10_14_2
