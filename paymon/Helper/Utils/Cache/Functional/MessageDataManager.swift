@@ -24,6 +24,8 @@ class MessageDataManager {
         messageData.text = messageObject.text
         messageData.itemType = Int16(messageObject.itemType.rawValue)
         messageData.action = messageObject.action != nil ? messageObject.action.type : 0
+        print("message created")
+
     }
     
     func saveMessage(messageObject : RPC.Message) {
@@ -32,7 +34,6 @@ class MessageDataManager {
                 self.saveChatMessageData(messageData: messageData, messageObject: messageObject)
             } else {
                 let messageData = transaction.create(Into<ChatMessageData>())
-                print("create")
                 self.saveChatMessageData(messageData: messageData, messageObject: messageObject)
             }
         }, completion: { (nil) -> Void in
