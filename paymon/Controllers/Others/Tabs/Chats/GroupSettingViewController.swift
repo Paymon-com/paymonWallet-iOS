@@ -21,6 +21,9 @@ class GroupSettingViewController: PaymonViewController, UITableViewDataSource, U
     @IBOutlet weak var addParticipants: UIButton!
     @IBOutlet weak var groupTitle: UITextField!
 
+    @IBOutlet weak var leaveView: UIView!
+    @IBOutlet weak var leaveChatHeight: NSLayoutConstraint!
+    @IBOutlet weak var leaveChat: UIButton!
     var groupId: Int32!
     var participants = [UserData]()
     var participantsIds = [Int32]()
@@ -74,7 +77,8 @@ class GroupSettingViewController: PaymonViewController, UITableViewDataSource, U
         
         groupTitle.layer.cornerRadius = groupTitle.frame.height/2
         addView.layer.cornerRadius = addView.frame.height/2
-        
+        leaveView.layer.cornerRadius = leaveView.frame.height/2
+
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: self.groupTitle.frame.height))
 
         groupTitle.leftView = paddingView
@@ -90,7 +94,9 @@ class GroupSettingViewController: PaymonViewController, UITableViewDataSource, U
         
         groupTitle.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: .editingChanged)
         self.done.isEnabled = false
-
+        leaveChatHeight.constant = isCreator ? 0 : 44
+        leaveChat.isHidden = isCreator
+        leaveChat.setTitle("Leave group".localized, for: .normal)
 
     }
     
@@ -105,8 +111,47 @@ class GroupSettingViewController: PaymonViewController, UITableViewDataSource, U
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    @IBAction func leaveChatClick(_ sender: Any) {
+        let alert = UIAlertController(title: "Leave group".localized, message: "Are you sure you want to leave the group?".localized, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Leave".localized, style: .default, handler: { (nil) in
+            
+            let leaveChat = RPC.PM_leaveChat(peer: RPC.PM_peerGroup(group_id: self.groupId));
+            
+            let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
+
+            NetworkManager.shared.sendPacket(leaveChat) { response, e in
+                if (response != nil && response is RPC.PM_boolTrue) {
+                    
+                    if let chatsData = ChatsDataManager.shared.getChatByIdSync(id: self.groupId) {
+                        ChatsDataManager.shared.removeChat(chatsData: chatsData) { _ in
+                            DispatchQueue.main.async {
+                                MBProgressHUD.hide(for: self.view, animated: true)
+                                var navigationArray = self.navigationController?.viewControllers
+                                navigationArray!.remove(at: (navigationArray?.count)! - 2)
+                                navigationArray!.remove(at: (navigationArray?.count)! - 1)
+                                
+                                guard let chatsViewController = StoryBoard.chat.instantiateViewController(withIdentifier: VCIdentifier.chatsViewController) as? ChatsViewController else {return}
+                                
+                                navigationArray!.append(chatsViewController)
+                                
+                                DispatchQueue.main.async {
+                                    self.navigationController?.viewControllers = navigationArray!
+                                }
+                            }
+                        }
+
+                    }
+                    
+                } else {
+                    let _ = SimpleOkAlertController(title: "Leave group".localized, message: "Failed to leave the group, please try again later".localized, vc: self)
+                }
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     
-    @IBAction func btnAddParticipantsTapped(_ sender: Any) {
+    @IBAction func addParticipantsClick(_ sender: Any) {
         let createGroupViewController = storyboard?.instantiateViewController(withIdentifier: "CreateGroupViewController") as! CreateGroupViewController
         createGroupViewController.isGroupAlreadyCreated = true
         createGroupViewController.chatID = groupId
@@ -145,7 +190,7 @@ class GroupSettingViewController: PaymonViewController, UITableViewDataSource, U
         
     }
 
-    @IBAction func btnDoneTapped(_ sender: Any) {
+    @IBAction func doneClick(_ sender: Any) {
         self.view.endEditing(true)
         self.done.isEnabled = false
         

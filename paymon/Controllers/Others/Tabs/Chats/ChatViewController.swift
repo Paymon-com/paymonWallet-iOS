@@ -41,8 +41,12 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         MessageManager.shared.sendMessage(text: text, isGroup: isGroup, chatId: chatID)
     }
     
+    @IBAction func setEditingg(_ sender: Any) {
+        self.tableView.isEditing = true
+        self.tableView.setEditing(true, animated: true)
+    }
+    
     func setLayoutOptions() {
-
         messageTextView.layer.cornerRadius = messageTextView.frame.height/2
         messageTextView.text = "To write a message".localized
         messageTextView.textColor = UIColor.white.withAlphaComponent(0.4)
@@ -171,9 +175,6 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-    }
-    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return false
     }
@@ -189,6 +190,7 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         
         tableView.re.delegate = self
         tableView.re.dataSource = self
+        
         messageTextView.delegate = self
         
         setMessages()
@@ -346,8 +348,11 @@ extension ChatViewController: UITableViewDelegate {
         messageTextView.endEditing(true)
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .insert
+    }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-
         let label = UILabel()
         label.text = messages.sectionInfoAtIndex(safeSectionIndex: reverseSections[section])!.name
         label.textColor = UIColor.white.withAlphaComponent(0.4)

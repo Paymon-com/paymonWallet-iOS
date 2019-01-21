@@ -919,6 +919,45 @@ class RPC {
             stream.write(id)
         }
     }
+    
+    class PM_leaveChat : Packet {
+        static let svuid:Int32 = 98277145
+        
+        var peer:RPC.Peer!
+        
+        init(peer : RPC.Peer) {
+            self.peer = peer
+        }
+        
+        override func readParams(stream: SerializableData, exception: UnsafeMutablePointer<Bool>?) {
+            peer = try? Peer.deserialize(stream: stream, constructor: stream.readInt32(exception))
+        }
+        
+        override func serializeToStream(stream: SerializableData) {
+            stream.write(PM_leaveChat.svuid)
+            peer.serializeToStream(stream: stream)
+        }
+    }
+    
+    class PM_clearChat : Packet {
+        static let svuid:Int32 = 523847389
+        
+        var peer:RPC.Peer!
+        
+        init(peer : RPC.Peer) {
+            self.peer = peer
+        }
+        
+        override func readParams(stream: SerializableData, exception: UnsafeMutablePointer<Bool>?) {
+            peer = try? Peer.deserialize(stream: stream, constructor: stream.readInt32(exception))
+        }
+        
+        override func serializeToStream(stream: SerializableData) {
+            stream.write(PM_clearChat.svuid)
+            peer.serializeToStream(stream: stream)
+        }
+    }
+
 
     class PM_chatsAndMessages : Packet {
         static let svuid:Int32 = 720223855

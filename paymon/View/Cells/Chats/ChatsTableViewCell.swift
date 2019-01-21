@@ -15,12 +15,14 @@ class ChatsTableViewCell : UITableViewCell {
     @IBOutlet weak var lastMessagePhoto: CircularImageView!
     @IBOutlet weak var lastMessagePhotoWidth: NSLayoutConstraint!
     @IBOutlet weak var prePhotoWidth: NSLayoutConstraint!
+    var chatId : Int32!
     
     func configure(chat: ChatsData) {
         self.title.text = chat.title
         self.lastMessageText.text = chat.lastMessageText
         self.lastMessageTime.text = Utils.formatDateTime(timestamp: chat.time)
         self.photo.loadPhoto(url: chat.photoUrl)
+        self.chatId = chat.id
         
         if chat.lastMessageFromId == User.shared.currentUser.id {
             self.lastMessagePhoto.loadPhoto(url: User.shared.currentUser.photoUrl.url)

@@ -174,13 +174,14 @@ class ChatsDataManager {
         }
     }
     
-    func removeChat(chatsData : ChatsData) {
+    func removeChat(chatsData : ChatsData, completionHandler: @escaping (Bool) -> ()) {
         CoreStore.perform(
             asynchronous: { (transaction) -> Void in
                 transaction.delete(chatsData)
         },
             completion: { _ in
                 CoreStore.defaultStack.refreshAndMergeAllObjects()
+                completionHandler(true)
         })
     }
 }

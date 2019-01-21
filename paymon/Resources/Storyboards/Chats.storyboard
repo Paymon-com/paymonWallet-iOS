@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6yX-Sc-QDf">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6yX-Sc-QDf">
                                 <rect key="frame" x="0.0" y="64" width="375" height="547"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -342,6 +342,11 @@
                                 <constraint firstAttribute="bottom" secondItem="omP-gh-Hq6" secondAttribute="bottom" id="lU6-49-MkB"/>
                             </constraints>
                         </view>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="y9r-Z0-v5B">
+                            <connections>
+                                <action selector="setEditingg:" destination="9H9-Yd-fzg" id="9kS-pP-VeV"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
@@ -506,19 +511,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="ChatsTable" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="74" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cyd-eX-Fm6">
+                            <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="ChatsTable" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cyd-eX-Fm6">
                                 <rect key="frame" x="0.0" y="120" width="375" height="454"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatsTableViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableViewCell" id="Kec-gi-zU3" customClass="ChatsTableViewCell" customModule="paymon" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="74"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatsTableViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableViewCell" rowHeight="80" id="Kec-gi-zU3" customClass="ChatsTableViewCell" customModule="paymon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kec-gi-zU3" id="pey-Xw-qtt">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NonPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="jKJ-w2-Too" customClass="CircularImageView" customModule="paymon" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="7" width="60" height="60"/>
+                                                    <rect key="frame" x="15" y="10" width="60" height="60"/>
                                                     <color key="backgroundColor" white="0.70620263400000005" alpha="0.15397135419999999" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="Ava-nf-5P9"/>
@@ -552,7 +557,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LdI-IP-8cq">
-                                                    <rect key="frame" x="83" y="73" width="292" height="1"/>
+                                                    <rect key="frame" x="83" y="79" width="292" height="1"/>
                                                     <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="2YM-3n-EG0"/>
@@ -604,15 +609,15 @@
                                             <outlet property="title" destination="e6K-8J-d0Q" id="vFf-TI-ZC1"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatsTableGroupViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableGroupViewCell" id="pGE-GW-JDa" customClass="ChatsTableGroupViewCell" customModule="paymon" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="102" width="375" height="74"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatsTableGroupViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableGroupViewCell" rowHeight="80" id="pGE-GW-JDa" customClass="ChatsTableGroupViewCell" customModule="paymon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="108" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pGE-GW-JDa" id="X3V-o1-Mnb">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NonPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="sLM-O0-unJ" customClass="CircularImageView" customModule="paymon" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="7" width="60" height="60"/>
+                                                    <rect key="frame" x="16" y="10" width="60" height="60"/>
                                                     <color key="backgroundColor" white="0.70620263400000005" alpha="0.15397135419999999" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="UBe-Sy-uf4"/>
@@ -651,7 +656,7 @@
                                                     <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mab-sT-su4">
-                                                    <rect key="frame" x="84" y="73" width="291" height="1"/>
+                                                    <rect key="frame" x="84" y="79" width="291" height="1"/>
                                                     <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="n3y-3t-Hkx"/>
@@ -993,7 +998,7 @@
                                                     <color key="titleColor" red="0.062745098040000002" green="0.52549019610000003" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="btnAddParticipantsTapped:" destination="YF1-hr-kBd" eventType="touchUpInside" id="k97-1r-DlI"/>
+                                                    <action selector="addParticipantsClick:" destination="YF1-hr-kBd" eventType="touchUpInside" id="k97-1r-DlI"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1011,13 +1016,13 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QeQ-Ur-niX">
                                         <rect key="frame" x="8" y="4" width="327" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                         <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Leave chat">
+                                        <state key="normal" title="Leave group">
                                             <color key="titleColor" red="0.78779815819999999" green="0.1187234502" blue="0.005801345292" alpha="0.71007612180000002" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="btnAddParticipantsTapped:" destination="YF1-hr-kBd" eventType="touchUpInside" id="sta-KI-xJg"/>
+                                            <action selector="leaveChatClick:" destination="YF1-hr-kBd" eventType="touchUpInside" id="oUa-WK-fPe"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1052,7 +1057,7 @@
                     <navigationItem key="navigationItem" id="0fM-yq-3CE">
                         <barButtonItem key="rightBarButtonItem" image="ArrowCheck" id="JIR-1b-hTR">
                             <connections>
-                                <action selector="btnDoneTapped:" destination="YF1-hr-kBd" id="Q3c-Md-OKA"/>
+                                <action selector="doneClick:" destination="YF1-hr-kBd" id="Q3c-Md-OKA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1063,6 +1068,9 @@
                         <outlet property="groupImage" destination="l9f-hv-fIw" id="II9-c0-x8v"/>
                         <outlet property="groupTitle" destination="jGZ-x2-6vQ" id="g84-Ap-IYh"/>
                         <outlet property="groupTitleHint" destination="jqi-Ci-lJJ" id="hjf-9y-zWH"/>
+                        <outlet property="leaveChat" destination="QeQ-Ur-niX" id="z3u-6s-e5p"/>
+                        <outlet property="leaveChatHeight" destination="iTb-Ji-L5b" id="BHt-cl-C6e"/>
+                        <outlet property="leaveView" destination="oz1-9J-f5q" id="KgA-qt-U6Y"/>
                         <outlet property="tableViewParticipants" destination="Qdq-bT-1um" id="6eS-aL-rP5"/>
                         <segue destination="g3b-7S-Ndw" kind="show" id="hEC-nK-7Gi"/>
                     </connections>
