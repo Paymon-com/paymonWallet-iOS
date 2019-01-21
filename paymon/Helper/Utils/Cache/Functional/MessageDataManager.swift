@@ -29,7 +29,7 @@ class MessageDataManager {
     }
     
     func saveMessage(messageObject : RPC.Message) {
-        CoreStore.defaultStack.perform(asynchronous: {(transaction) -> Void in
+        CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
             if let messageData = transaction.fetchOne(From<ChatMessageData>().where(\.id == messageObject.id)) {
                 self.saveChatMessageData(messageData: messageData, messageObject: messageObject)
             } else {
@@ -100,12 +100,14 @@ class MessageDataManager {
     
     func getMessagesByChatId(chatId : Int32) -> ListMonitor<ChatMessageData>? {
 
-        if let result = CoreStore.defaultStack.monitorSectionedList(
+        if let result = CacheManager.shared.dataStack.monitorSectionedList(
             From<ChatMessageData>()
+                
                 .sectionBy(\.dateString)
                 .where(\.toId == chatId)
+                .tweak { $0.fetchBatchSize = 5 }
                 .orderBy(.ascending(\.date))) as ListMonitor<ChatMessageData>? {
-            CoreStore.defaultStack.refreshAndMergeAllObjects()
+            CacheManager.shared.dataStack.refreshAndMergeAllObjects()
 
             return result
         } else {
@@ -116,7 +118,7 @@ class MessageDataManager {
     
     func getAllMessages() -> [ChatMessageData] {
         
-        guard let result = CoreStore.defaultStack.fetchAll(From<ChatMessageData>()) else {
+        guard let result = CacheManager.shared.dataStack.fetchAll(From<ChatMessageData>()) else {
             print("Could not get all user contacts")
             return [ChatMessageData]()
         }

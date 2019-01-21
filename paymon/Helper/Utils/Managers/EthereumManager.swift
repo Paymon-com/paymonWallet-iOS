@@ -67,13 +67,17 @@ class EthereumManager {
     
     var ethSender : Address? {
         didSet {
-            walletDidCreated(currency : Money.eth)
+            if ethSender != nil {
+                walletDidCreated(currency : Money.eth)
+            }
         }
     }
     
     var pmntSender : Address? {
         didSet {
-            walletDidCreated(currency : Money.pmnt)
+            if pmntSender != nil {
+                walletDidCreated(currency : Money.pmnt)
+            }
         }
     }
     

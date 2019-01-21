@@ -16,6 +16,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var chatsTable: UITableView!
     @IBOutlet weak var segment: UISegmentedControl!
+    private var removeObserver: NSObjectProtocol!
 
     var allChats : ListMonitor<ChatsData>!
     var refresher: UIRefreshControl!
@@ -44,6 +45,11 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
             self.endUpdateChats()
         }
         
+        removeObserver = NotificationCenter.default.addObserver(forName: .removeObserver, object: nil, queue: nil) { notification in
+            print("Removed observer")
+            self.allChats = nil
+        }
+        
         setLayoutOptions()
         
         chatsTable.dataSource = self
@@ -65,7 +71,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        allChats.removeObserver(self)
+//        NotificationCenter.default.removeObserver(removeObserver)
     }
     
     func setChats() {

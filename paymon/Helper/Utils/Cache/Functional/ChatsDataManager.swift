@@ -57,7 +57,7 @@ class ChatsDataManager {
     }
     
     func updateGroupChats(groupObject : GroupData, messageObject : RPC.Message, lastMessagePhotoUrl : String) {
-            CoreStore.defaultStack.perform(asynchronous: {(transaction) -> Void in
+            CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
                 
                 if let chatsData = transaction.fetchOne(From<ChatsData>().where(\.id == groupObject.id)) {
                     self.saveGroupChatMessageData(chatsData : chatsData, groupObject : groupObject, messageObject : messageObject, lastMessagePhotoUrl : lastMessagePhotoUrl)
@@ -70,7 +70,7 @@ class ChatsDataManager {
     }
     
     func updateUserChats(userObject: UserData, messageObject : RPC.Message) {
-            CoreStore.defaultStack.perform(asynchronous: {(transaction) -> Void in
+            CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
                 
                 if let chatsData = transaction.fetchOne(From<ChatsData>().where(\.id == userObject.id)) {
                     self.saveUserChatMessageData(chatsData : chatsData, userObject : userObject, messageObject : messageObject)
@@ -82,7 +82,7 @@ class ChatsDataManager {
     }
     
     func updateUserChats(userObject: RPC.UserObject, messageObject : RPC.Message) {
-            CoreStore.defaultStack.perform(asynchronous: {(transaction) -> Void in
+            CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
                 
                 if let chatsData = transaction.fetchOne(From<ChatsData>().where(\.id == userObject.id)) {
                     self.saveUserChatMessageData(chatsData : chatsData, userObject : userObject, messageObject : messageObject)
@@ -95,7 +95,7 @@ class ChatsDataManager {
     
     func getChatById(chatId : Int32) -> ChatsData? {
         
-        guard let chatData = CoreStore.fetchOne(
+        guard let chatData = CacheManager.shared.dataStack.fetchOne(
             From<ChatsData>()
                 .where(\.id == chatId)
             ) as ChatsData? else {
@@ -109,7 +109,7 @@ class ChatsDataManager {
         var result : ChatsData! = nil
         
         DispatchQueue.main.sync {
-            if let user = CoreStore.fetchOne(
+            if let user = CacheManager.shared.dataStack.fetchOne(
                 From<ChatsData>()
                     .where(\.id == id)
                 ) as ChatsData? {
@@ -120,7 +120,7 @@ class ChatsDataManager {
     }
     
     func updateChatsInfo(chatId : Int32, itemType : Int16, lastMessageText : String, photoUrl : String, time : Int32) {
-            CoreStore.defaultStack.perform(asynchronous: {(transaction) -> Void in
+            CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
                 if let chatsData = transaction.fetchOne(From<ChatsData>().where(\.id == chatId)) {
                     chatsData.itemType = itemType
                     chatsData.lastMessageText = lastMessageText
@@ -131,7 +131,7 @@ class ChatsDataManager {
     }
     
     func updateChatsPhotoUrl(id : Int32, url : String) {
-        CoreStore.defaultStack.perform(asynchronous: {(transaction) -> Void in
+        CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
             if let chatsData = transaction.fetchOne(From<ChatsData>().where(\.id == id)) {
                 chatsData.photoUrl = url
             }
@@ -140,21 +140,21 @@ class ChatsDataManager {
     
     func getChatsDataByChatType(isGroup : Bool) -> [ChatsData] {
         
-        guard let result = CoreStore.defaultStack.fetchAll(From<ChatsData>()
+        guard let result = CacheManager.shared.dataStack.fetchAll(From<ChatsData>()
             .where(\.isGroup == isGroup)) else {
             print("Could not get all user contacts")
             return [ChatsData]()
         }
-        CoreStore.defaultStack.refreshAndMergeAllObjects()
+        CacheManager.shared.dataStack.refreshAndMergeAllObjects()
         return result
     }
     
     func getChatsByChatType(isGroup : Bool) -> ListMonitor<ChatsData>? {
         
-        if let result = CoreStore.defaultStack.monitorList(From<ChatsData>()
+        if let result = CacheManager.shared.dataStack.monitorList(From<ChatsData>()
             .where(\.isGroup == isGroup)
             .orderBy(.descending(\.time))) as ListMonitor<ChatsData>? {
-            CoreStore.defaultStack.refreshAndMergeAllObjects()
+            CacheManager.shared.dataStack.refreshAndMergeAllObjects()
 
             return result
         } else {
@@ -164,9 +164,9 @@ class ChatsDataManager {
     }
     
     func getAllChats() -> ListMonitor<ChatsData>? {
-        if let result = CoreStore.defaultStack.monitorList(From<ChatsData>()
+        if let result = CacheManager.shared.dataStack.monitorList(From<ChatsData>()
             .orderBy(.descending(\.time))) as ListMonitor<ChatsData>? {
-            CoreStore.defaultStack.refreshAndMergeAllObjects()
+            CacheManager.shared.dataStack.refreshAndMergeAllObjects()
             return result
         } else {
             print("Could not get all chats")
@@ -175,12 +175,12 @@ class ChatsDataManager {
     }
     
     func removeChat(chatsData : ChatsData, completionHandler: @escaping (Bool) -> ()) {
-        CoreStore.perform(
+        CacheManager.shared.dataStack.perform(
             asynchronous: { (transaction) -> Void in
                 transaction.delete(chatsData)
         },
             completion: { _ in
-                CoreStore.defaultStack.refreshAndMergeAllObjects()
+                CacheManager.shared.dataStack.refreshAndMergeAllObjects()
                 completionHandler(true)
         })
     }

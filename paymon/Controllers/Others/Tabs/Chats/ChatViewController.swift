@@ -26,6 +26,7 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     @IBOutlet weak var chatTitle: UILabel!
     @IBOutlet weak var chatSubtitle: UILabel!
     @IBOutlet weak var customTitleView: UIView!
+    
     var messages : ListMonitor<ChatMessageData>!
     var reverseSections : [Int] = []
     var chatID: Int32!
@@ -226,7 +227,6 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         super.viewWillDisappear(animated)
         
         messages.removeObserver(self)
-        NotificationCenter.default.removeObserver(self)
         
         if let nc = UIApplication.shared.keyWindow?.rootViewController as? MainNavigationController {
             nc.navigationBar.isHidden = true

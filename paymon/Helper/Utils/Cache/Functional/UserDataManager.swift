@@ -44,7 +44,7 @@ class UserDataManager {
     
     func updateOrCreateUser(userObject : RPC.UserObject) {
         do {
-            try CoreStore.defaultStack.perform(synchronous: {(transaction) -> Void in
+            try CacheManager.shared.dataStack.perform(synchronous: {(transaction) -> Void in
                 
                 if let userData = transaction.fetchOne(From<UserData>().where(\.id == userObject.id)) {
                     self.setUserDataInfo(userData: userData, userObject: userObject)
@@ -62,7 +62,7 @@ class UserDataManager {
     
     func updateUser(userObject : UserData) {
         do {
-            try CoreStore.defaultStack.perform(synchronous: {(transaction) -> Void in
+            try CacheManager.shared.dataStack.perform(synchronous: {(transaction) -> Void in
                 let userData = transaction.fetchOne(From<UserData>().where(\.id == userObject.id))
                 self.setUserDataInfo(userData: userData!, userObject: userObject)
             })
@@ -74,7 +74,7 @@ class UserDataManager {
     
     func createUser(userObject : RPC.UserObject) {
         do {
-            try CoreStore.defaultStack.perform(synchronous: {(transaction) -> Void in
+            try CacheManager.shared.dataStack.perform(synchronous: {(transaction) -> Void in
                 
                 let userData = transaction.create(Into<UserData>())
                 self.setUserDataInfo(userData: userData, userObject: userObject)
@@ -87,7 +87,7 @@ class UserDataManager {
     
     
     func updateUserPhotoUrl(id : Int32, url : String) {
-        CoreStore.defaultStack.perform(asynchronous: {(transaction) -> Void in
+        CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
             if let userContatctData = transaction.fetchOne(From<UserData>().where(\.id == id)) {
                 userContatctData.photoUrl = url
             }
@@ -95,7 +95,7 @@ class UserDataManager {
     }
     
     func updateUserContact(id : Int32, isContact : Bool) {
-        CoreStore.defaultStack.perform(asynchronous: {(transaction) -> Void in
+        CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
             if let userContatctData = transaction.fetchOne(From<UserData>().where(\.id == id)) {
                 userContatctData.isContact = isContact
             }
@@ -107,7 +107,7 @@ class UserDataManager {
         var result : UserData! = nil
         
         DispatchQueue.main.sync {
-            if let user = CoreStore.fetchOne(
+            if let user = CacheManager.shared.dataStack.fetchOne(
                 From<UserData>()
                     .where(\.id == id)
                 ) as UserData? {
@@ -119,7 +119,7 @@ class UserDataManager {
     
     func getUserById(id : Int32) -> UserData? {
         
-        guard let user = CoreStore.fetchOne(
+        guard let user = CacheManager.shared.dataStack.fetchOne(
             From<UserData>()
                 .where(\.id == id)
             ) as UserData? else {
@@ -131,7 +131,7 @@ class UserDataManager {
     
     func getUserByContact(isContact : Bool) -> [UserData]? {
         
-        if let result = CoreStore.defaultStack.fetchAll(From<UserData>()
+        if let result = CacheManager.shared.dataStack.fetchAll(From<UserData>()
             .where(\.isContact == isContact)) as [UserData]? {
             
             return result
@@ -143,7 +143,7 @@ class UserDataManager {
     
     func getAllUsers() -> [UserData] {
         
-        guard let result = CoreStore.defaultStack.fetchAll(From<UserData>()) else {
+        guard let result = CacheManager.shared.dataStack.fetchAll(From<UserData>()) else {
             print("Could not get all user contacts")
             return [UserData]()
         }

@@ -99,8 +99,8 @@ class User {
     
      func setUserSettings() {
         if !isSettingsWasSet {
-            EthereumManager.shared.initEthWallet()
-            EthereumManager.shared.initPmntWallet()
+//            EthereumManager.shared.initEthWallet()
+//            EthereumManager.shared.initPmntWallet()
             
             if !CacheManager.isAddedStorage {
                 print("init DB")
@@ -230,7 +230,9 @@ class User {
         isBackupPmntWallet = false
         isPmntCreatedFromEth = false
 //        isBackupBtcWallet = false
+        
         CacheManager.shared.removeDb()
+        
         EthereumManager.shared.deinitWallet()
         isSettingsWasSet = false
         saveConfig()
