@@ -166,7 +166,6 @@ class ChatsDataManager {
     func getAllChats() -> ListMonitor<ChatsData>? {
         if let result = CacheManager.shared.dataStack.monitorList(From<ChatsData>()
             .orderBy(.descending(\.time))) as ListMonitor<ChatsData>? {
-            CacheManager.shared.dataStack.refreshAndMergeAllObjects()
             return result
         } else {
             print("Could not get all chats")

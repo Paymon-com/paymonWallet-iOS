@@ -11,7 +11,6 @@ import UIKit
 class MoreTableViewController: UITableViewController {
 
     @IBOutlet weak var help: UILabel!
-    @IBOutlet weak var games: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,14 +19,24 @@ class MoreTableViewController: UITableViewController {
     
     func setLayoutOptions() {
         help.text = "Help".localized
-        games.text = "Games".localized
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 2 {
+        if indexPath.row == 1 {
             let alert = UIAlertController(title: "FAQ".localized, message: "Open in browser?".localized, preferredStyle: .alert)
             let ok = UIAlertAction(title: "Open".localized, style: .default, handler: { _ in
                 
+            })
+            let cancel = UIAlertAction(title: "Cancel".localized, style: .default, handler: nil)
+            alert.addAction(cancel)
+            alert.addAction(ok)
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+            }
+        } else if indexPath.row == 0 {
+            let alert = UIAlertController(title: "Web.Profit".localized, message: "Open in browser?".localized, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "Open".localized, style: .default, handler: { _ in
+                UIApplication.shared.open(URL(string: Urls.profitWeb)!, options: [:], completionHandler: nil)
             })
             let cancel = UIAlertAction(title: "Cancel".localized, style: .default, handler: nil)
             alert.addAction(cancel)

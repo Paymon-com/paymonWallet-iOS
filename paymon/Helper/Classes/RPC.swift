@@ -957,6 +957,76 @@ class RPC {
             peer.serializeToStream(stream: stream)
         }
     }
+    
+    class PM_deleteDialogMessages : Packet {
+        static let svuid:Int32 = 357613531
+
+        var messageIDs : [Int64]!
+        
+        override func readParams(stream: SerializableData, exception: UnsafeMutablePointer<Bool>?) {
+            let magic:Int32 = stream.readInt32(exception)
+            if (magic != SVUID_ARRAY) {
+                
+                print("Error delete dialog messages desz")
+                
+                return
+            }
+            let count:Int32 = stream.readInt32(exception)
+            var mid : Int64 = 0
+            for _ in 0..<count {
+                mid = stream.readInt64(exception)
+                if (exception != nil) {
+                    return
+                }
+                messageIDs.append(mid)
+            }
+        }
+        
+        override func serializeToStream(stream: SerializableData) {
+            stream.write(PM_deleteDialogMessages.svuid)
+            stream.write(SVUID_ARRAY)
+            let count = messageIDs.count
+            stream.write(Int32(count))
+            for i in 0..<count {
+                stream.write(messageIDs[i])
+            }
+        }
+    }
+    
+    class PM_deleteGroupMessages : Packet {
+        static let svuid:Int32 = 943281791
+        
+        var messageIDs : [Int64]!
+        
+        override func readParams(stream: SerializableData, exception: UnsafeMutablePointer<Bool>?) {
+            let magic:Int32 = stream.readInt32(exception)
+            if (magic != SVUID_ARRAY) {
+                
+                print("Error delete group messages desz")
+                
+                return
+            }
+            let count:Int32 = stream.readInt32(exception)
+            var mid : Int64 = 0
+            for _ in 0..<count {
+                mid = stream.readInt64(exception)
+                if (exception != nil) {
+                    return
+                }
+                messageIDs.append(mid)
+            }
+        }
+        
+        override func serializeToStream(stream: SerializableData) {
+            stream.write(PM_deleteDialogMessages.svuid)
+            stream.write(SVUID_ARRAY)
+            let count = messageIDs.count
+            stream.write(Int32(count))
+            for i in 0..<count {
+                stream.write(messageIDs[i])
+            }
+        }
+    }
 
 
     class PM_chatsAndMessages : Packet {

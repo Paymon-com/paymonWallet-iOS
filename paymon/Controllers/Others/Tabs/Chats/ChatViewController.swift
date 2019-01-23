@@ -6,10 +6,10 @@
 import UIKit
 import UserNotifications
 import CoreStore
-import ReverseExtension
 import MBProgressHUD
 
 class ChatViewController: PaymonViewController, ListSectionObserver {
+    
     typealias ListEntityType = ChatMessageData
     
     @IBOutlet weak var messageTextView: UITextView!
@@ -20,20 +20,28 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     @IBOutlet weak var sendButtonImage: UIImageView!
     @IBOutlet weak var messagesView: UIView!
     @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var chatTableView: UITableView!
     @IBOutlet weak var constraintViewBottom: NSLayoutConstraint!
 
     @IBOutlet weak var chatTitle: UILabel!
     @IBOutlet weak var chatSubtitle: UILabel!
     @IBOutlet weak var customTitleView: UIView!
+    @IBOutlet weak var doneItem: UIBarButtonItem!
+    @IBOutlet weak var actionMenuBottomSpace: NSLayoutConstraint!
+    @IBOutlet weak var deleteMessages: UIButton!
     
+    var mainTint : UIColor!
+    
+    let standartBottomSpace = CGFloat(-52)
     var messages : ListMonitor<ChatMessageData>!
-    var reverseSections : [Int] = []
     var chatID: Int32!
     var isGroup: Bool!
     var startView = true
+    var messagesForDelete : [Int64 : Int64] = [:]
+    
     var messageCountForUpdate : Int! = 0
     var firstLoaded = false
+    var isEdit = false
     
     @IBAction func onSendClicked() {
         guard let text = messageTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines), !text.isEmpty, text != "To write a message".localized else {return}
@@ -42,17 +50,70 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         MessageManager.shared.sendMessage(text: text, isGroup: isGroup, chatId: chatID)
     }
     
-    @IBAction func setEditingg(_ sender: Any) {
-        self.tableView.isEditing = true
-        self.tableView.setEditing(true, animated: true)
+    @IBAction func deleteMessagesClick(_ sender: Any) {
+        if isEdit {
+            let alertController = UIAlertController(title: "Remove messages".localized, message: "Are you sure you want to delete these messages?".localized, preferredStyle: .alert)
+            
+            let confirmAction = UIAlertAction(title: "Remove".localized, style: .default) { _ in
+                var messagesIDs : [Int64] = []
+                for id in self.messagesForDelete.values {
+                    messagesIDs.append(id)
+                }
+                
+                if !self.isGroup {
+                    let deleteDialogMessages = RPC.PM_deleteDialogMessages()
+                    deleteDialogMessages.messageIDs = messagesIDs
+                    NetworkManager.shared.sendPacket(deleteDialogMessages) { response, error in
+                        if error != nil || response == nil {
+                            print("error delete dialog messages")
+                            return
+                        }
+                        if response is RPC.PM_boolTrue {
+                            MessageDataManager.shared.deleteMessages(messageIDs: messagesIDs)
+                        }
+                    }
+
+                } else {
+                    let deleteGroupMessages = RPC.PM_deleteGroupMessages()
+                    deleteGroupMessages.messageIDs = messagesIDs
+                    NetworkManager.shared.sendPacket(deleteGroupMessages) { response, error in
+                        if error != nil || response == nil {
+                            print("error delete group messages")
+                            return
+                        }
+                        if response is RPC.PM_boolTrue {
+                            MessageDataManager.shared.deleteMessages(messageIDs: messagesIDs)
+                        }
+                    }
+                }
+                
+                self.setEditMode()
+                
+            }
+            let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+    }
+    
+    @IBAction func doneClick(_ sender: Any) {
+        setEditMode()
     }
     
     func setLayoutOptions() {
+        chatTableView.transform = CGAffineTransform(rotationAngle: -(CGFloat)(Double.pi))
         messageTextView.layer.cornerRadius = messageTextView.frame.height/2
         messageTextView.text = "To write a message".localized
         messageTextView.textColor = UIColor.white.withAlphaComponent(0.4)
         messageTextView.translatesAutoresizingMaskIntoConstraints = false
         messageTextView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+
+        mainTint = doneItem.tintColor
+        doneItem.title = "Done".localized
+        doneItem.tintColor = isEdit ? mainTint : UIColor.clear
+        doneItem.isEnabled = isEdit
 
         textViewDidChange(messageTextView)
         
@@ -61,6 +122,8 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         self.view.setGradientLayer(frame: self.view.bounds, topColor: UIColor.AppColor.Black.primaryBlackLight.cgColor, bottomColor: UIColor.AppColor.Black.primaryBlack.cgColor)
         
         sendButton.layer.cornerRadius = sendButton.frame.height/2
+        deleteMessages.layer.cornerRadius = deleteMessages.frame.height/2
+        deleteMessages.setTitle("Remove".uppercased().localized, for: .normal)
         customTitleView.sizeToFit()
         if self.backButton != nil {
             self.backButton.title = "Back".localized
@@ -96,16 +159,16 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     }
     
     func listMonitorDidRefetch(_ monitor: ListMonitor<ChatMessageData>) {
-        self.tableView.reloadData()
+        self.chatTableView.reloadData()
     }
     
     func listMonitorWillChange(_ monitor: ListMonitor<ChatMessageData>) {
-        self.tableView.beginUpdates()
+        self.chatTableView.beginUpdates()
     }
     
     func listMonitorDidChange(_ monitor: ListMonitor<ChatMessageData>) {
 
-        self.tableView.endUpdates()
+        self.chatTableView.endUpdates()
         if !firstLoaded {
             self.reloadChat()
         }
@@ -115,32 +178,32 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
 
         if object.toId == chatID {
             print("Insert row at: \(indexPath.row) in section: \(indexPath.section)")
-                self.tableView.re.insertRows(at: [indexPath], with: .none)
+                self.chatTableView.insertRows(at: [indexPath], with: .none)
         }
     }
     
     func listMonitor(_ monitor: ListMonitor<ChatMessageData>, didDeleteObject object: ChatMessageData, fromIndexPath indexPath: IndexPath) {
-        self.tableView.re.deleteRows(at: [indexPath], with: .left)
+        self.chatTableView.deleteRows(at: [indexPath], with: .left)
     }
     
     func listMonitor(_ monitor: ListMonitor<ChatMessageData>, didInsertSection sectionInfo: NSFetchedResultsSectionInfo, toSectionIndex sectionIndex: Int) {
-            self.tableView.re.insertSections(IndexSet(integer: sectionIndex), with: .none)
+            self.chatTableView.insertSections(IndexSet(integer: sectionIndex), with: .none)
     }
     
     func listMonitor(_ monitor: ListMonitor<ChatMessageData>, didUpdateObject object: ChatMessageData, atIndexPath indexPath: IndexPath) {
         
         let message = messages[indexPath]
         
-        if let cell = tableView.re.cellForRow(at: indexPath) as? ChatMessageViewCell {
+        if let cell = chatTableView.cellForRow(at: indexPath) as? ChatMessageViewCell {
             cell.configure(message: message)
-        } else if let cell = tableView.re.cellForRow(at: indexPath) as? GroupChatMessageRcvViewCell {
+        } else if let cell = chatTableView.cellForRow(at: indexPath) as? GroupChatMessageRcvViewCell {
             cell.configure(message: message)
             if cell.photo.gestureRecognizers?.count != 0 {
                 let tapPhoto = UITapGestureRecognizer(target: self, action: #selector(self.clickPhoto(_:)))
                 cell.photo.isUserInteractionEnabled = true
                 cell.photo.addGestureRecognizer(tapPhoto)
             }
-        } else if let cell = tableView.re.cellForRow(at: indexPath) as?  ChatMessageRcvViewCell {
+        } else if let cell = chatTableView.cellForRow(at: indexPath) as?  ChatMessageRcvViewCell {
             cell.configure(message: message)
         }
     }
@@ -149,8 +212,8 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         print("Show table")
         DispatchQueue.main.async {
             MBProgressHUD.hide(for: self.view, animated: true)
-            self.tableView.reloadData()
-            self.tableView.isHidden = false
+            self.chatTableView.reloadData()
+            self.chatTableView.isHidden = false
         }
     }
     
@@ -175,34 +238,34 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
             firstLoaded = true
         }
     }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.isHidden = true
-
+        self.chatTableView.isHidden = true
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         setLayoutOptions()
         
-        tableView.re.delegate = self
-        tableView.re.dataSource = self
+        chatTableView.delegate = self
+        chatTableView.dataSource = self
         
         messageTextView.delegate = self
         
         setMessages()
         
-        self.tableView.re.scrollViewDidReachTop = { scrollView in
-            if self.firstLoaded {
-                print("top")
-//                self.loadMessages(offset: 10, count: 10)
-            }
-        }
-
+//        self.chatTableView.scrollViewDidReachTop = { scrollView in
+//            if self.firstLoaded {
+//                print("top")
+////                self.loadMessages(offset: 10, count: 10)
+//            }
+//        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
 
     @objc func handleKeyboardNotification(notification: NSNotification) {
@@ -267,45 +330,62 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
             }
         }
     }
-    
-    public func reverseSection(sectionsCount : Int) {
-        reverseSections = []
-        for i in 0..<sectionsCount {
-            reverseSections.append(i)
-        }
-        reverseSections.sort {
-            return $0 > $1
-        }
+}
+
+extension ChatViewController : MoreActionDelegate {
+    func showEditButton() {
+        setEditMode()
     }
     
+    func setEditMode() {
+        isEdit = !isEdit
+        self.chatTableView.setEditing(isEdit, animated: true)
+        self.chatTableView.allowsMultipleSelectionDuringEditing = true
+        self.doneItem.isEnabled = isEdit
+        doneItem.tintColor = isEdit ? mainTint : UIColor.clear
+        messagesForDelete.removeAll()
+        showActionMenu()
+    }
+    
+    func showActionMenu() {
+        messagesView.isHidden = isEdit
+        actionMenuBottomSpace.constant = isEdit ? 0 : standartBottomSpace
+    }
 }
 
 
 extension ChatViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        let sectionsCount = messages.numberOfSections()
-        reverseSection(sectionsCount: sectionsCount)
-        
-        return sectionsCount
+        return messages.numberOfSections()
     }
-
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.numberOfObjectsInSection(section)
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if let message = messages[indexPath] as ChatMessageData? {
             if message.fromId == User.shared.currentUser!.id {
                 if message.itemType == 0 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "ChatMessageViewCell", for: indexPath) as! ChatMessageViewCell
                     cell.configure(message: message)
+                    cell.bubble.delegate = self
+                    cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi));
                     return cell
                 } else if message.itemType == 5 {
                     if let group = GroupDataManager.shared.getGroupById(id: message.toId) {
                         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatsTableCretedGroupCell") as! ChatsTableCretedGroupCell
                         cell.configure(group : group)
+                        cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi));
                         return cell
                     }
                 }
@@ -317,12 +397,14 @@ extension ChatViewController: UITableViewDataSource {
                         let tapPhoto = UITapGestureRecognizer(target: self, action: #selector(self.clickPhoto(_:)))
                         cell.photo.isUserInteractionEnabled = true
                         cell.photo.addGestureRecognizer(tapPhoto)
+                        cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi));
                         return cell
                     } else if message.itemType == 5 {
                         if let group = GroupDataManager.shared.getGroupById(id: message.toId) {
                             if let creator = UserDataManager.shared.getUserById(id: group.creatorId) {
                                 let cell = tableView.dequeueReusableCell(withIdentifier: "ChatsTableCretedGroupCell") as! ChatsTableCretedGroupCell
                                 cell.label.text = "\(Utils.formatUserDataName(creator)) "+"created the group chat ".localized+"\"\(group.title!)\""
+                                cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi));
                                 return cell
                             }
                         }
@@ -330,6 +412,7 @@ extension ChatViewController: UITableViewDataSource {
                 } else {
                     if message.itemType == 0 {
                         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatMessageRcvViewCell") as! ChatMessageRcvViewCell
+                        cell.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi));
                         cell.configure(message: message)
                         return cell
                     }
@@ -343,22 +426,30 @@ extension ChatViewController: UITableViewDataSource {
 }
 
 extension ChatViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        messageTextView.endEditing(true)
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if isEdit {
+            guard let cell = tableView.cellForRow(at: indexPath) as? ChatMessageViewCell else {return}
+            messagesForDelete.removeValue(forKey: cell.id)
+        }
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .insert
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isEdit {
+            guard let cell = tableView.cellForRow(at: indexPath) as? ChatMessageViewCell else {return}
+            messagesForDelete[cell.id] = cell.id
+        }
+        messageTextView.endEditing(true)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
-        label.text = messages.sectionInfoAtIndex(safeSectionIndex: reverseSections[section])!.name
+        label.text = messages.sectionInfoAtIndex(safeSectionIndex: section)!.name
         label.textColor = UIColor.white.withAlphaComponent(0.4)
         label.center = tableView.center
         label.font = UIFont.boldSystemFont(ofSize: 10)
         label.textAlignment = .center
+        label.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi));
         return label
     }
 }
@@ -398,14 +489,18 @@ extension ChatViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
 
         if textView.textColor == UIColor.white.withAlphaComponent(0.4) {
-            textView.text = ""
-            textView.textColor = UIColor.white.withAlphaComponent(0.8)
+            DispatchQueue.main.async {
+                textView.text = ""
+                textView.textColor = UIColor.white.withAlphaComponent(0.8)
+            }
         }
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = "To write a message".localized
-            textView.textColor = UIColor.white.withAlphaComponent(0.4)
+            DispatchQueue.main.async {
+                textView.text = "To write a message".localized
+                textView.textColor = UIColor.white.withAlphaComponent(0.4)
+            }
         }
     }
 }

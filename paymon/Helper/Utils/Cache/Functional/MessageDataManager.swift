@@ -105,8 +105,8 @@ class MessageDataManager {
                 
                 .sectionBy(\.dateString)
                 .where(\.toId == chatId)
-                .tweak { $0.fetchBatchSize = 5 }
-                .orderBy(.ascending(\.date))) as ListMonitor<ChatMessageData>? {
+                .tweak { $0.fetchBatchSize = 30 }
+                .orderBy(.descending(\.date))) as ListMonitor<ChatMessageData>? {
             CacheManager.shared.dataStack.refreshAndMergeAllObjects()
 
             return result
@@ -124,6 +124,36 @@ class MessageDataManager {
         }
         
         return result
+    }
+    
+    func getMessageByIdSync(id : Int64) -> ChatMessageData? {
+        
+        var result : ChatMessageData! = nil
+        
+        DispatchQueue.main.sync {
+            if let msg = CacheManager.shared.dataStack.fetchOne(
+                From<ChatMessageData>()
+                    .where(\.id == id)
+                ) as ChatMessageData? {
+                result = msg
+            }
+        }
+        return result
+    }
+    
+    func deleteMessage(msgID : Int64) {
+        if let chatMessageData = getMessageByIdSync(id: msgID) {
+            CacheManager.shared.dataStack.perform(
+                asynchronous: { (transaction) -> Void in
+                    transaction.delete(chatMessageData) },
+                completion: { _ in })
+        }
+    }
+    
+    func deleteMessages(messageIDs : [Int64]) {
+        for id in messageIDs {
+            deleteMessage(msgID: id)
+        }
     }
     
 }

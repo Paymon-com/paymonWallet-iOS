@@ -101,6 +101,9 @@
 "Failed to leave the group, please try again later"="Покинуть группу не удалось, пожалуйста попробуйте позже";
 "Failed to clear the history, please try again later"="Очистить историю не удалось, пожалуйста попробуйте позже";
 "Clear the history"="Очистить историю";
+"Done"="Принять";
+"Remove messages"="Удаление сообщений";
+"Are you sure you want to delete these messages?"="Вы уверены, что хотите удалить эти сообщения?";
 
 /*Group settings*/
 "Are you sure to remove this user?"="Вы уверены, что хотите удалить этого пользователя из группы?";

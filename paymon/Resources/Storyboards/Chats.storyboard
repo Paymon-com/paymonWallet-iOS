@@ -18,11 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6yX-Sc-QDf">
+                            <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6yX-Sc-QDf">
                                 <rect key="frame" x="0.0" y="64" width="375" height="547"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatsTableCretedGroupCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableCretedGroupCell" rowHeight="44" id="ylm-UG-6sp" userLabel="ChatsTableCretedGroupCell" customClass="ChatsTableCretedGroupCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="ChatsTableCretedGroupCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChatsTableCretedGroupCell" rowHeight="44" id="ylm-UG-6sp" userLabel="ChatsTableCretedGroupCell" customClass="ChatsTableCretedGroupCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ylm-UG-6sp" id="bbX-Ll-9ym">
@@ -48,14 +48,14 @@
                                             <outlet property="label" destination="2ma-5r-SzY" id="zHG-jS-zBE"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatMessageViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChatMessageViewCell" id="2II-6p-JRj" customClass="ChatMessageViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatMessageViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatMessageViewCell" id="2II-6p-JRj" customClass="ChatMessageViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2II-6p-JRj" id="5Ed-nb-Wim">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2l-8G-Q7q">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2l-8G-Q7q" customClass="CopyAndDeleteUIView" customModule="paymon" customModuleProvider="target">
                                                     <rect key="frame" x="173.5" y="2" width="185.5" height="40"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="sdgfsdfgsdfgsdfg" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaT-8b-9kX">
@@ -97,7 +97,7 @@
                                             <outlet property="timeLabel" destination="tKz-XW-pTn" id="Nur-OT-aDq"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatMessageRcvViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChatMessageRcvViewCell" id="1WE-QC-rgw" customClass="ChatMessageRcvViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="ChatMessageRcvViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChatMessageRcvViewCell" id="1WE-QC-rgw" customClass="ChatMessageRcvViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1WE-QC-rgw" id="GPn-D2-XHf">
@@ -153,7 +153,7 @@
                                             <outlet property="timeLabel" destination="0fx-YJ-HaD" id="Iij-7w-jo5"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="GroupChatMessageRcvViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChatMessageRcvViewCell" id="k7W-c6-lKS" customClass="GroupChatMessageRcvViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="GroupChatMessageRcvViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChatMessageRcvViewCell" id="k7W-c6-lKS" customClass="GroupChatMessageRcvViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="160" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="k7W-c6-lKS" id="9aW-6D-1mj">
@@ -275,28 +275,70 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCQ-Zm-69A" userLabel="ActionView">
+                                <rect key="frame" x="0.0" y="671" width="375" height="48"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2OI-Yc-l4Y">
+                                        <rect key="frame" x="8" y="8" width="175.5" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.062745098040000002" green="0.52549019610000003" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addParticipantsClick:" destination="YF1-hr-kBd" eventType="touchUpInside" id="OwO-YP-V1R"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZrT-wn-fJ3">
+                                        <rect key="frame" x="191.5" y="8" width="175.5" height="32"/>
+                                        <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                        <state key="normal" title="Delete">
+                                            <color key="titleColor" red="0.78779815819999999" green="0.27001753874653228" blue="0.18501013985337425" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addParticipantsClick:" destination="YF1-hr-kBd" eventType="touchUpInside" id="bnP-Md-tbd"/>
+                                            <action selector="deleteMessagesClick:" destination="9H9-Yd-fzg" eventType="touchUpInside" id="73u-9B-diX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10226362179487179" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="2OI-Yc-l4Y" secondAttribute="bottom" constant="8" id="46F-6m-vSo"/>
+                                    <constraint firstItem="ZrT-wn-fJ3" firstAttribute="top" secondItem="zCQ-Zm-69A" secondAttribute="top" constant="8" id="CQo-gb-mGh"/>
+                                    <constraint firstItem="2OI-Yc-l4Y" firstAttribute="top" secondItem="zCQ-Zm-69A" secondAttribute="top" constant="8" id="JFj-J3-xeL"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZrT-wn-fJ3" secondAttribute="trailing" constant="8" id="Jew-lz-GlK"/>
+                                    <constraint firstItem="2OI-Yc-l4Y" firstAttribute="leading" secondItem="zCQ-Zm-69A" secondAttribute="leading" constant="8" id="NpD-vU-qB4"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZrT-wn-fJ3" secondAttribute="bottom" constant="8" id="f9D-lM-NG5"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="lLd-6f-Awn"/>
+                                    <constraint firstItem="2OI-Yc-l4Y" firstAttribute="width" secondItem="ZrT-wn-fJ3" secondAttribute="width" id="pgh-N5-XeE"/>
+                                    <constraint firstItem="ZrT-wn-fJ3" firstAttribute="leading" secondItem="2OI-Yc-l4Y" secondAttribute="trailing" constant="8" id="ruI-oQ-Hbt"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="9eE-ad-oA1" firstAttribute="top" secondItem="6yX-Sc-QDf" secondAttribute="bottom" id="2LB-wB-VAQ"/>
                             <constraint firstItem="9eE-ad-oA1" firstAttribute="top" secondItem="6yX-Sc-QDf" secondAttribute="bottom" constant="4" id="A6N-6O-08H"/>
+                            <constraint firstItem="zCQ-Zm-69A" firstAttribute="trailing" secondItem="jPt-0K-biK" secondAttribute="trailing" id="BVb-hc-his"/>
                             <constraint firstItem="jPt-0K-biK" firstAttribute="trailing" secondItem="6yX-Sc-QDf" secondAttribute="trailing" id="IO0-Wn-i4S"/>
                             <constraint firstItem="jPt-0K-biK" firstAttribute="trailing" secondItem="6yX-Sc-QDf" secondAttribute="trailing" id="JQx-a2-Pwn"/>
                             <constraint firstItem="9eE-ad-oA1" firstAttribute="trailing" secondItem="jPt-0K-biK" secondAttribute="trailing" id="OAy-MO-b4d"/>
                             <constraint firstItem="6yX-Sc-QDf" firstAttribute="leading" secondItem="jPt-0K-biK" secondAttribute="leading" id="QZH-36-Sav"/>
                             <constraint firstItem="9eE-ad-oA1" firstAttribute="top" secondItem="6yX-Sc-QDf" secondAttribute="bottom" id="TI0-9d-5sR"/>
                             <constraint firstItem="6yX-Sc-QDf" firstAttribute="top" secondItem="jPt-0K-biK" secondAttribute="top" id="Wh0-O2-ozf"/>
+                            <constraint firstItem="jPt-0K-biK" firstAttribute="bottom" secondItem="zCQ-Zm-69A" secondAttribute="bottom" constant="-52" id="XUR-JY-FLO"/>
                             <constraint firstItem="6yX-Sc-QDf" firstAttribute="leading" secondItem="jPt-0K-biK" secondAttribute="leading" id="gpT-dq-QZY"/>
                             <constraint firstItem="9eE-ad-oA1" firstAttribute="leading" secondItem="jPt-0K-biK" secondAttribute="leading" id="hxf-fg-T5P"/>
+                            <constraint firstItem="zCQ-Zm-69A" firstAttribute="leading" secondItem="jPt-0K-biK" secondAttribute="leading" id="l85-MO-vzZ"/>
                             <constraint firstItem="9eE-ad-oA1" firstAttribute="top" secondItem="6yX-Sc-QDf" secondAttribute="bottom" constant="8" id="tcW-Nf-4BS"/>
                             <constraint firstItem="9eE-ad-oA1" firstAttribute="bottom" secondItem="jPt-0K-biK" secondAttribute="bottom" id="wGY-eD-ofC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jPt-0K-biK"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="IO0-Wn-i4S"/>
                                 <exclude reference="gpT-dq-QZY"/>
+                                <exclude reference="IO0-Wn-i4S"/>
                                 <exclude reference="2LB-wB-VAQ"/>
                                 <exclude reference="TI0-9d-5sR"/>
                                 <exclude reference="tcW-Nf-4BS"/>
@@ -342,25 +384,28 @@
                                 <constraint firstAttribute="bottom" secondItem="omP-gh-Hq6" secondAttribute="bottom" id="lU6-49-MkB"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="y9r-Z0-v5B">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="IBb-dI-8jf">
                             <connections>
-                                <action selector="setEditingg:" destination="9H9-Yd-fzg" id="9kS-pP-VeV"/>
+                                <action selector="doneClick:" destination="9H9-Yd-fzg" id="dUS-fX-XLa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="actionMenuBottomSpace" destination="XUR-JY-FLO" id="xzf-fu-aQM"/>
                         <outlet property="backButton" destination="h85-wP-JOD" id="rbh-6q-DRP"/>
                         <outlet property="chatSubtitle" destination="EQz-3Z-R9m" id="t3z-PP-tN5"/>
+                        <outlet property="chatTableView" destination="6yX-Sc-QDf" id="JH1-3J-bNw"/>
                         <outlet property="chatTitle" destination="pev-jC-rtN" id="THP-Qd-XsB"/>
                         <outlet property="constraintViewBottom" destination="wGY-eD-ofC" id="KCb-ca-cqH"/>
                         <outlet property="customTitleView" destination="sRQ-wK-Akv" id="0M1-bS-TdE"/>
+                        <outlet property="deleteMessages" destination="ZrT-wn-fJ3" id="GWJ-FO-4lB"/>
+                        <outlet property="doneItem" destination="IBb-dI-8jf" id="hyX-qF-1Pe"/>
                         <outlet property="messageTextView" destination="BqD-sE-vot" id="RhF-XC-DaF"/>
                         <outlet property="messageTextViewHeight" destination="cFt-Re-rc3" id="oxT-JW-iPg"/>
                         <outlet property="messagesView" destination="9eE-ad-oA1" id="b4q-Lb-QLW"/>
                         <outlet property="sendButton" destination="wdY-No-vN5" id="9FU-q9-0OW"/>
                         <outlet property="sendButtonImage" destination="qfd-71-qqy" id="YF4-Ur-ffh"/>
-                        <outlet property="tableView" destination="6yX-Sc-QDf" id="JH1-3J-bNw"/>
                         <segue destination="YF1-hr-kBd" kind="show" id="Cy4-Ig-RUd"/>
                         <segue destination="D2t-fs-wwg" kind="show" id="g7m-dt-gHT"/>
                     </connections>
@@ -390,7 +435,7 @@
                                 <rect key="frame" x="8" y="172" width="359" height="446"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ContactTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactTableViewCell" id="Kop-2N-uEl" customClass="ContactTableViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="ContactTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactTableViewCell" id="Kop-2N-uEl" customClass="ContactTableViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="359" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kop-2N-uEl" id="PRr-d1-YQX">
@@ -515,7 +560,7 @@
                                 <rect key="frame" x="0.0" y="120" width="375" height="454"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatsTableViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableViewCell" rowHeight="80" id="Kec-gi-zU3" customClass="ChatsTableViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="ChatsTableViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableViewCell" rowHeight="80" id="Kec-gi-zU3" customClass="ChatsTableViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kec-gi-zU3" id="pey-Xw-qtt">
@@ -609,7 +654,7 @@
                                             <outlet property="title" destination="e6K-8J-d0Q" id="vFf-TI-ZC1"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatsTableGroupViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableGroupViewCell" rowHeight="80" id="pGE-GW-JDa" customClass="ChatsTableGroupViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="ChatsTableGroupViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableGroupViewCell" rowHeight="80" id="pGE-GW-JDa" customClass="ChatsTableGroupViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="108" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pGE-GW-JDa" id="X3V-o1-Mnb">
@@ -775,7 +820,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ContactsTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupContactsTableViewCell" id="41q-LX-XYf" customClass="GroupContactsTableViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="ContactsTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupContactsTableViewCell" id="41q-LX-XYf" customClass="GroupContactsTableViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="41q-LX-XYf" id="7SQ-YP-VnS">
@@ -865,7 +910,7 @@
                                 <rect key="frame" x="0.0" y="266" width="375" height="401"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="GroupSettingContactsTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupSettingContactsTableViewCell" id="3gT-oH-bLF" customClass="GroupSettingContactsTableViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="GroupSettingContactsTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupSettingContactsTableViewCell" id="3gT-oH-bLF" customClass="GroupSettingContactsTableViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3gT-oH-bLF" id="40g-bL-Xfg">
@@ -1016,10 +1061,10 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QeQ-Ur-niX">
                                         <rect key="frame" x="8" y="4" width="327" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                         <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Leave group">
-                                            <color key="titleColor" red="0.78779815819999999" green="0.1187234502" blue="0.005801345292" alpha="0.71007612180000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.78779815819999999" green="0.2700175387" blue="0.18501013990000001" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="leaveChatClick:" destination="YF1-hr-kBd" eventType="touchUpInside" id="oUa-WK-fPe"/>
@@ -1257,14 +1302,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" alpha="0.85000002384185791" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Email" translatesAutoresizingMaskIntoConstraints="NO" id="eYT-Hb-Put">
-                                                    <rect key="frame" x="16" y="15.5" width="24" height="24"/>
+                                                    <rect key="frame" x="20" y="15.5" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="B6y-Eh-Swl"/>
                                                         <constraint firstAttribute="width" constant="24" id="kT8-6h-u0B"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sei-Dm-dyL">
-                                                    <rect key="frame" x="56" y="0.0" width="271" height="55"/>
+                                                    <rect key="frame" x="60" y="0.0" width="492" height="55"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>

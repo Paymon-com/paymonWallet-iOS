@@ -15,7 +15,7 @@ target 'paymon' do
     pod 'ScrollableGraphView'
     pod 'SDWebImage', '~> 4.0'
     pod 'FLAnimatedImage', '~> 1.0'
-    pod 'ReverseExtension'
+    #pod 'ReverseExtension'
     pod 'web3swift', :git => 'https://github.com/bankex/web3swift.git'
     pod 'KeychainAccess'
     pod 'BlockiesSwift'

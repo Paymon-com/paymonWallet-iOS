@@ -107,6 +107,7 @@
 		B06123AF2189F084009408C0 /* CreateNewBtcWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06123AE2189F084009408C0 /* CreateNewBtcWalletViewController.swift */; };
 		B06642FD219ACF6600D55FA7 /* RestoreBtcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06642FC219ACF6600D55FA7 /* RestoreBtcViewController.swift */; };
 		B06960842152A6D500B1E693 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06960832152A6D500B1E693 /* CircularImageView.swift */; };
+		B06E295C21F7150B00079E1E /* CopyAndDeleteUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E295B21F7150B00079E1E /* CopyAndDeleteUIView.swift */; };
 		B07010C5216E05B4005C8685 /* DeepLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07010C4216E05B4005C8685 /* DeepLinkManager.swift */; };
 		B07010C8216E0C15005C8685 /* DeepLinkNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07010C7216E0C15005C8685 /* DeepLinkNavigator.swift */; };
 		B074796221AC022300FBD2F6 /* EthereumTransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B074796121AC022300FBD2F6 /* EthereumTransactionsViewController.swift */; };
@@ -366,6 +367,7 @@
 		B06123AE2189F084009408C0 /* CreateNewBtcWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewBtcWalletViewController.swift; sourceTree = "<group>"; };
 		B06642FC219ACF6600D55FA7 /* RestoreBtcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreBtcViewController.swift; sourceTree = "<group>"; };
 		B06960832152A6D500B1E693 /* CircularImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
+		B06E295B21F7150B00079E1E /* CopyAndDeleteUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyAndDeleteUIView.swift; sourceTree = "<group>"; };
 		B07010C4216E05B4005C8685 /* DeepLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkManager.swift; sourceTree = "<group>"; };
 		B07010C7216E0C15005C8685 /* DeepLinkNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkNavigator.swift; sourceTree = "<group>"; };
 		B074796121AC022300FBD2F6 /* EthereumTransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumTransactionsViewController.swift; sourceTree = "<group>"; };
@@ -930,6 +932,7 @@
 			children = (
 				B042CB8B2137F92400B8F195 /* CopyLabel.swift */,
 				B0C396B4210A7CF200E0C344 /* SimpleOkAlertController.swift */,
+				B06E295B21F7150B00079E1E /* CopyAndDeleteUIView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1623,6 +1626,7 @@
 				B0C7447A21149BBF008885C1 /* ChartsRatesViewController.swift in Sources */,
 				0EA66B97210F7E7900CC1162 /* NotificationSoundViewController.swift in Sources */,
 				B0AC1D2A211472DA004D8577 /* ExchangeRetesViewController.swift in Sources */,
+				B06E295C21F7150B00079E1E /* CopyAndDeleteUIView.swift in Sources */,
 				B019550120FFAA3E00F3DDB0 /* DecimalExtension.swift in Sources */,
 				0EB732432136FD2A0069B383 /* NewContactViewController.swift in Sources */,
 				B0F2D5F321905C1600BE6938 /* SettingsWalletViewController.swift in Sources */,

@@ -20,6 +20,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
 
     var allChats : ListMonitor<ChatsData>!
     var refresher: UIRefreshControl!
+    var isUpdated = false
     
     private var endUpdateChatsObserver: NSObjectProtocol!
 
@@ -30,6 +31,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     @objc func refresh() {
         self.navigationItem.title = "Update...".localized
 
+        isUpdated = false
         segment.selectedSegmentIndex = 1
         setChatsList()
         if User.shared.isAuthenticated {
@@ -39,7 +41,6 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         endUpdateChatsObserver = NotificationCenter.default.addObserver(forName: .endUpdateChats, object: nil, queue: nil) {
             notification in
             self.endUpdateChats()
@@ -81,6 +82,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         allChats.addObserver(self)
         
         if User.shared.isAuthenticated {
+            isUpdated = false
             MessageManager.shared.loadChats()
         }
     }
@@ -116,6 +118,8 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     }
     
     func endUpdateChats() {
+        self.isUpdated = true
+
         DispatchQueue.main.async {
             self.navigationItem.title = "Chats".localized
             if self.refresher.isRefreshing {
@@ -330,16 +334,20 @@ extension ChatsViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let chat = allChats[indexPath]
-        tableView.deselectRow(at: indexPath, animated: true)
-        let chatViewController = storyboard?.instantiateViewController(withIdentifier: VCIdentifier.chatViewController) as! ChatViewController
-        chatViewController.setValue(chat.title, forKey: "title")
-        chatViewController.isGroup = chat.isGroup
-        chatViewController.chatID = chat.id
-        print(chat.id)
-        
-        self.navigationItem.title = "Chats".localized
-
-        self.navigationController?.pushViewController(chatViewController, animated: true)
+//        if isUpdated {
+            let chat = allChats[indexPath]
+            tableView.deselectRow(at: indexPath, animated: true)
+            let chatViewController = storyboard?.instantiateViewController(withIdentifier: VCIdentifier.chatViewController) as! ChatViewController
+            chatViewController.setValue(chat.title, forKey: "title")
+            chatViewController.isGroup = chat.isGroup
+            chatViewController.chatID = chat.id
+            print(chat.id)
+            
+            self.navigationItem.title = "Chats".localized
+            
+            DispatchQueue.main.async {
+                self.navigationController?.pushViewController(chatViewController, animated: true)
+            }
+//        }
     }
 }

@@ -45,7 +45,6 @@ class NewContactViewController: PaymonViewController, UISearchBarDelegate {
         tapper.cancelsTouchesInView = false
         inviteFriendsView.isUserInteractionEnabled = true
         inviteFriendsView.addGestureRecognizer(tapper)
-
     }
     
     @objc func inviteFriendsClick() {
