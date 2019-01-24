@@ -144,7 +144,7 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
             }
             
         } else {
-            chatSubtitle.text = "online"
+            chatSubtitle.text = ""
         }
     }
     

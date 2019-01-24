@@ -14,16 +14,16 @@ class AboutProgramTableViewController: UITableViewController {
     @IBOutlet weak var privacyCell: UITableViewCell!
     @IBOutlet weak var termsCell: UITableViewCell!
     
-    @IBOutlet weak var licenseCell: UITableViewCell!
-    @IBOutlet weak var evaluationCell: UITableViewCell!
+//    @IBOutlet weak var licenseCell: UITableViewCell!
+//    @IBOutlet weak var evaluationCell: UITableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         privacyCell.textLabel?.text = "Privacy policy".localized
         termsCell.textLabel?.text = "Agreements".localized
-        licenseCell.textLabel?.text = "Licenses".localized
-        evaluationCell.textLabel?.text = "Rate app".localized
+//        licenseCell.textLabel?.text = "Licenses".localized
+//        evaluationCell.textLabel?.text = "Rate app".localized
         
     }
     
@@ -40,7 +40,7 @@ class AboutProgramTableViewController: UITableViewController {
             officialDocsViewController.text = OfficialDocs.agreements
             officialDocsViewController.titleString = "Agreements".localized
             self.navigationController?.pushViewController(officialDocsViewController, animated: true)
-        case 3: break
+//        case 3: break
 //            if #available(iOS 10.0, *) {
 //                SKStoreReviewController.requestReview()
 //            }

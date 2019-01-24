@@ -183,7 +183,7 @@ class NewContactViewController: PaymonViewController, UISearchBarDelegate {
             if let value = contact.name?.isEmpty, !value {
                 let initialLetter = contact.name?.substring(toIndex: 1) .uppercased()
                 if initialLetter != "" {
-                    var letterArray = phoneContactsDict[initialLetter!] ?? [Contact]()
+                    var letterArray = phoneContactsDict[initialLetter!] ?? [Contact]() 
                     letterArray.append(contact)
                     phoneContactsDict[initialLetter!]=letterArray
                 }

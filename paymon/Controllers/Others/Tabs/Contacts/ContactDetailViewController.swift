@@ -40,5 +40,11 @@ class ContactDetailViewController: UIViewController {
     }
 
     @IBAction func onClickInvitePaymon(_ sender: Any) {
+        let shareActivity = UIActivityViewController(activityItems: ["Hello! Have you seen the new crypto messenger Paymon? This is the fastest, most secure and most convenient application for communication and exchange of crypto-currencies. Join us!".localized,"\n","Android:",Urls.playMarket,"\n","iOS:",Urls.appStore], applicationActivities: [])
+        
+        shareActivity.popoverPresentationController?.sourceView = self.view
+        shareActivity.popoverPresentationController?.sourceRect = self.view.bounds
+        
+        present(shareActivity, animated: true)
     }
 }

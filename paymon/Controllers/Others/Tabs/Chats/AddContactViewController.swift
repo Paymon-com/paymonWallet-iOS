@@ -27,8 +27,8 @@ class AddContactViewController: UIViewController, UISearchBarDelegate {
     
     var contacts = [Contact]()
 
-    var outputDict = [String:[String]]()
-    var filteredOutput = [String:[String]]()
+    var outputDict = [String:[Contact]]()
+    var filteredOutput = [String:[Contact]]()
 
     
     override func viewDidLoad() {
@@ -136,18 +136,19 @@ class AddContactViewController: UIViewController, UISearchBarDelegate {
             contacts.append(con)
         }
         
-        for word in contacts {
-            if let value = word.name?.isEmpty, !value {
-                let initialLetter = word.name?.substring(toIndex: 1) .uppercased()
+        for contact in contacts {
+            if let value = contact.name?.isEmpty, !value {
+                let initialLetter = contact.name?.substring(toIndex: 1) .uppercased()
                 if initialLetter != "" {
-                    var letterArray = outputDict[initialLetter!] ?? [String]()
-                    letterArray.append(word.name!)
+                    var letterArray = outputDict[initialLetter!] ?? [Contact]()
+                    letterArray.append(contact)
                     outputDict[initialLetter!] = letterArray
-                    filteredOutput = outputDict
+                    
                 }
             }
         }
-        
+        filteredOutput = outputDict
+
         DispatchQueue.main.async {
             self.contactTableView.reloadData()
         }
@@ -177,7 +178,7 @@ extension AddContactViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ContactTableViewCell") as? ContactTableViewCell else {
             fatalError("Unable to deque tableview cell")
         }
-        cell.name.text = data?[indexPath.row]
+        cell.name.text = data?[indexPath.row].name
         
         return cell
     }
@@ -185,6 +186,14 @@ extension AddContactViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let a = Array(filteredOutput.keys).sorted()
         return a[section]
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let a = Array(filteredOutput.keys).sorted()
+        let data = filteredOutput[a[indexPath.section]]
+        guard let detailView = StoryBoard.contacts.instantiateViewController(withIdentifier: VCIdentifier.contactDetailViewController) as? ContactDetailViewController else {return}
+        detailView.contact = data?[indexPath.row]
+        navigationController?.pushViewController(detailView, animated: true)
     }
 }
 
