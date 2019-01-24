@@ -8,6 +8,7 @@ import UIKit
 import Contacts
 import ContactsUI
 import CoreStore
+import MBProgressHUD
 
 class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectionObserver {
     typealias ListEntityType = ChatsData
@@ -15,9 +16,11 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var chatsTable: UITableView!
     @IBOutlet weak var segment: UISegmentedControl!
+    private var removeObserver: NSObjectProtocol!
 
     var allChats : ListMonitor<ChatsData>!
     var refresher: UIRefreshControl!
+    var isUpdated = false
     
     private var endUpdateChatsObserver: NSObjectProtocol!
 
@@ -28,6 +31,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     @objc func refresh() {
         self.navigationItem.title = "Update...".localized
 
+        isUpdated = false
         segment.selectedSegmentIndex = 1
         setChatsList()
         if User.shared.isAuthenticated {
@@ -37,10 +41,13 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         endUpdateChatsObserver = NotificationCenter.default.addObserver(forName: .endUpdateChats, object: nil, queue: nil) {
             notification in
             self.endUpdateChats()
+        }
+        
+        removeObserver = NotificationCenter.default.addObserver(forName: .removeObserver, object: nil, queue: nil) { notification in
+            self.allChats = nil
         }
         
         setLayoutOptions()
@@ -64,7 +71,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        allChats.removeObserver(self)
+//        NotificationCenter.default.removeObserver(removeObserver)
     }
     
     func setChats() {
@@ -74,6 +81,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         allChats.addObserver(self)
         
         if User.shared.isAuthenticated {
+            isUpdated = false
             MessageManager.shared.loadChats()
         }
     }
@@ -109,6 +117,8 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     }
     
     func endUpdateChats() {
+        self.isUpdated = true
+
         DispatchQueue.main.async {
             self.navigationItem.title = "Chats".localized
             if self.refresher.isRefreshing {
@@ -230,16 +240,72 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     
     @available(iOS 11.0, *)
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
-        
-        let action = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
-            //TODO: delete chat
+        var title = ""
+        let cell = chatsTable.cellForRow(at: indexPath)
+        if cell is ChatsTableViewCell {
+            title = "Delete".localized
+        } else if cell is ChatsTableGroupViewCell {
+            title = "Leave".localized
+        }
+        let action = UIContextualAction(style: .normal, title: title) { (action, view, completion) in
+            
+            if let actionCell = cell as? ChatsTableViewCell {
+                self.leaveAlert(chatId: actionCell.chatId, isGroup: false)
+            } else if let actionGroupCell = cell as? ChatsTableGroupViewCell {
+                self.leaveAlert(chatId: actionGroupCell.chatId, isGroup: true)
+            }
+            
             completion(true)
         }
         
-        action.image = #imageLiteral(resourceName: "Delete")
         action.backgroundColor = UIColor.AppColor.ChatsAction.red
         return action
         
+    }
+    
+    func leaveAlert(chatId : Int32, isGroup : Bool) {
+        let peer = isGroup ? RPC.PM_peerGroup(group_id: chatId) : RPC.PM_peerUser(user_id: chatId)
+
+        let funcsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let cancel = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+        let leave = UIAlertAction(title: "Leave".localized, style: .destructive, handler: { (alert: UIAlertAction!) -> Void in
+            let leaveChat = RPC.PM_leaveChat(peer: peer);
+            self.sendRequestLeaveOrClear(packet: leaveChat, chatId: chatId)
+
+        })
+        let clearHistory = UIAlertAction(title: "Clear the history".localized, style: .default, handler: { (alert: UIAlertAction!) -> Void in
+            let clearChat = RPC.PM_clearChat(peer: peer);
+            self.sendRequestLeaveOrClear(packet: clearChat, chatId: chatId)
+        })
+        
+        
+        funcsMenu.addAction(cancel)
+        funcsMenu.addAction(clearHistory)
+        if isGroup {
+            funcsMenu.addAction(leave)
+        }
+        
+        self.present(funcsMenu, animated: true, completion: nil)
+    }
+    
+    func sendRequestLeaveOrClear(packet : Packet, chatId : Int32) {
+        let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        NetworkManager.shared.sendPacket(packet) { response, e in
+            if (response != nil && response is RPC.PM_boolTrue) {
+                
+                if let chatsData = ChatsDataManager.shared.getChatByIdSync(id: chatId) {
+                    ChatsDataManager.shared.removeChat(chatsData: chatsData) { _ in
+                        DispatchQueue.main.async {
+                            MBProgressHUD.hide(for: self.view, animated: true)
+                        }
+                    }
+                }
+            } else {
+                let _ = SimpleOkAlertController(title: "Clear the history".localized, message: "Failed to clear the history, please try again later".localized, vc: self)
+            }
+        }
     }
 }
 
@@ -266,7 +332,6 @@ extension ChatsViewController: UITableViewDataSource {
 extension ChatsViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
         let chat = allChats[indexPath]
         tableView.deselectRow(at: indexPath, animated: true)
         let chatViewController = storyboard?.instantiateViewController(withIdentifier: VCIdentifier.chatViewController) as! ChatViewController
@@ -276,7 +341,9 @@ extension ChatsViewController: UITableViewDelegate {
         print(chat.id)
         
         self.navigationItem.title = "Chats".localized
-
-        self.navigationController?.pushViewController(chatViewController, animated: true)
+        
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(chatViewController, animated: true)
+        }
     }
 }

@@ -13,6 +13,8 @@ class MessageDataManager {
     
     static let shared = MessageDataManager()
     
+    let dispatchGroup = DispatchGroup()
+    
     func saveChatMessageData(messageData : ChatMessageData, messageObject : RPC.Message) {
         messageData.id = messageObject.id
         messageData.unread = messageObject.unread
@@ -24,20 +26,19 @@ class MessageDataManager {
         messageData.text = messageObject.text
         messageData.itemType = Int16(messageObject.itemType.rawValue)
         messageData.action = messageObject.action != nil ? messageObject.action.type : 0
-        print("message created")
-
     }
     
     func saveMessage(messageObject : RPC.Message) {
-        CoreStore.defaultStack.perform(asynchronous: {(transaction) -> Void in
+        dispatchGroup.enter()
+        CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
             if let messageData = transaction.fetchOne(From<ChatMessageData>().where(\.id == messageObject.id)) {
                 self.saveChatMessageData(messageData: messageData, messageObject: messageObject)
             } else {
                 let messageData = transaction.create(Into<ChatMessageData>())
                 self.saveChatMessageData(messageData: messageData, messageObject: messageObject)
             }
-        }, completion: { (nil) -> Void in
-            
+        }, completion: { _ -> Void in
+            self.dispatchGroup.leave()
         })
     }
     
@@ -72,6 +73,15 @@ class MessageDataManager {
         }
     }
     
+    func addMoreOldMessages(_ messages : [RPC.Message]) {
+        for message in messages {
+            saveMessage(messageObject: message)
+        }
+        self.dispatchGroup.notify(queue: .main, execute: {
+            NotificationCenter.default.post(name: .isLoadedMore, object: nil)
+        })
+    }
+    
     func setChatsDataByUserObject(userObject : RPC.UserObject, messageObject: RPC.Message) {
         let chatsData = ChatsDataManager.shared.getChatByIdSync(id: userObject.id)
         
@@ -100,28 +110,60 @@ class MessageDataManager {
     
     func getMessagesByChatId(chatId : Int32) -> ListMonitor<ChatMessageData>? {
 
-        if let result = CoreStore.defaultStack.monitorSectionedList(
+        if let result = CacheManager.shared.dataStack.monitorSectionedList(
             From<ChatMessageData>()
+                
                 .sectionBy(\.dateString)
                 .where(\.toId == chatId)
-                .orderBy(.ascending(\.date))) as ListMonitor<ChatMessageData>? {
-            CoreStore.defaultStack.refreshAndMergeAllObjects()
+                .tweak { $0.fetchBatchSize = 30 }
+                .orderBy(.descending(\.date))) as ListMonitor<ChatMessageData>? {
+            CacheManager.shared.dataStack.refreshAndMergeAllObjects()
 
             return result
         } else {
-            print("Could not get all chats")
+            print("Could not get all messages by chat id")
             return nil
         }
     }
     
     func getAllMessages() -> [ChatMessageData] {
         
-        guard let result = CoreStore.defaultStack.fetchAll(From<ChatMessageData>()) else {
-            print("Could not get all user contacts")
+        guard let result = CacheManager.shared.dataStack.fetchAll(From<ChatMessageData>()) else {
+            print("Could not get all messages")
             return [ChatMessageData]()
         }
         
         return result
+    }
+    
+    func getMessageByIdSync(id : Int64) -> ChatMessageData? {
+        
+        var result : ChatMessageData! = nil
+        
+        DispatchQueue.main.sync {
+            if let msg = CacheManager.shared.dataStack.fetchOne(
+                From<ChatMessageData>()
+                    .where(\.id == id)
+                ) as ChatMessageData? {
+                result = msg
+            }
+        }
+        return result
+    }
+    
+    func deleteMessage(msgID : Int64) {
+        if let chatMessageData = getMessageByIdSync(id: msgID) {
+            CacheManager.shared.dataStack.perform(
+                asynchronous: { (transaction) -> Void in
+                    transaction.delete(chatMessageData) },
+                completion: { _ in })
+        }
+    }
+    
+    func deleteMessages(messageIDs : [Int64]) {
+        for id in messageIDs {
+            deleteMessage(msgID: id)
+        }
     }
     
 }

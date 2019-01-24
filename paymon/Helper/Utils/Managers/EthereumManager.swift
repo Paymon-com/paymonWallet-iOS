@@ -67,13 +67,17 @@ class EthereumManager {
     
     var ethSender : Address? {
         didSet {
-            walletDidCreated(currency : Money.eth)
+            if ethSender != nil {
+                walletDidCreated(currency : Money.eth)
+            }
         }
     }
     
     var pmntSender : Address? {
         didSet {
-            walletDidCreated(currency : Money.pmnt)
+            if pmntSender != nil {
+                walletDidCreated(currency : Money.pmnt)
+            }
         }
     }
     
@@ -191,7 +195,7 @@ class EthereumManager {
         initWeb()
         queue.addOperation {
             if (self.ethKeystoreManager?.addresses.count == 0) {
-                self.ethKs = try! EthereumKeystoreV3(password: password)
+                self.ethKs = try! EthereumKeystoreV3(password: password, aesMode: "aes-128-ctr")
                 let keydata = try! JSONEncoder().encode(self.ethKs!.keystoreParams)
                 FileManager.default.createFile(atPath: self.ethKeyPath, contents: keydata, attributes: nil)
             } else {
@@ -206,7 +210,7 @@ class EthereumManager {
         initWeb()
         queue.addOperation {
             if (self.pmntKeystoreManager?.addresses.count == 0) {
-                self.pmntKs = try! EthereumKeystoreV3(password: password)
+                self.pmntKs = try! EthereumKeystoreV3(password: password, aesMode: "aes-128-ctr")
                 let keydata = try! JSONEncoder().encode(self.pmntKs!.keystoreParams)
                 FileManager.default.createFile(atPath: self.pmntKeyPath, contents: keydata, attributes: nil)
             } else {
@@ -272,7 +276,7 @@ class EthereumManager {
             if self.ethKs != nil {
                 do {
                     if let privateKey = try self.ethKs.UNSAFE_getPrivateKeyData(password: password, account: self.ethKs.addresses.first!) as Data? {
-                        self.ethKs = try EthereumKeystoreV3(privateKey: privateKey, password: password)
+                        self.ethKs = try EthereumKeystoreV3(privateKey: privateKey, password: password, aesMode: "aes-128-ctr")
                         
                         let keydata = try JSONEncoder().encode(self.ethKs!.keystoreParams)
                         FileManager.default.createFile(atPath: self.ethKeyPath, contents: keydata, attributes: nil)
@@ -317,7 +321,7 @@ class EthereumManager {
             if self.pmntKs != nil {
                 do {
                     if let privateKey = try self.pmntKs.UNSAFE_getPrivateKeyData(password: password, account: self.pmntKs.addresses.first!) as Data? {
-                        self.pmntKs = try EthereumKeystoreV3(privateKey: privateKey, password: password)
+                        self.pmntKs = try EthereumKeystoreV3(privateKey: privateKey, password: password, aesMode: "aes-128-ctr")
                         
                         let keydata = try JSONEncoder().encode(self.pmntKs!.keystoreParams)
                         FileManager.default.createFile(atPath: self.pmntKeyPath, contents: keydata, attributes: nil)

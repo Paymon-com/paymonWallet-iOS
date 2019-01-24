@@ -30,7 +30,7 @@ class GroupDataManager {
     
     func updateGroup(groupObject : RPC.Group) {
         do {
-            try CoreStore.defaultStack.perform(synchronous: {(transaction) -> Void in
+            try CacheManager.shared.dataStack.perform(synchronous: {(transaction) -> Void in
                 
                 if let groupData = transaction.fetchOne(From<GroupData>().where(\.id == groupObject.id)) {
 //                    print("Group существует, я ее обновлю")
@@ -48,7 +48,7 @@ class GroupDataManager {
     
     func updateGroup(groupObject : GroupData) {
         do {
-            try CoreStore.defaultStack.perform(synchronous: {(transaction) -> Void in
+            try CacheManager.shared.dataStack.perform(synchronous: {(transaction) -> Void in
                 
                 if let groupData = transaction.fetchOne(From<GroupData>().where(\.id == groupObject.id)) {
 //                    print("Group существует, я ее обновлю")
@@ -67,7 +67,7 @@ class GroupDataManager {
     }
     
     func updateGroupUrl(id : Int32, url : String) {
-        CoreStore.defaultStack.perform(asynchronous: {(transaction) -> Void in
+        CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
             if let groupData = transaction.fetchOne(From<GroupData>().where(\.id == id)) {
                 groupData.photoUrl = url
             }
@@ -75,7 +75,7 @@ class GroupDataManager {
     }
     
     func updateGroupTitle(id : Int32, title : String) {
-        CoreStore.defaultStack.perform(asynchronous: {(transaction) -> Void in
+        CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
             if let groupData = transaction.fetchOne(From<GroupData>().where(\.id == id)) {
                 groupData.title = title
             }
@@ -89,7 +89,7 @@ class GroupDataManager {
     }
     
     func getAllGroups() -> [GroupData] {
-        guard let result = CoreStore.defaultStack.fetchAll(From<GroupData>()) else {
+        guard let result = CacheManager.shared.dataStack.fetchAll(From<GroupData>()) else {
             print("Could not get all groups")
             return [GroupData]()
         }
@@ -102,7 +102,7 @@ class GroupDataManager {
         var result : GroupData! = nil
         
         DispatchQueue.main.sync {
-            if let group = CoreStore.fetchOne(
+            if let group = CacheManager.shared.dataStack.fetchOne(
                 From<GroupData>()
                     .where(\.id == id)
                 ) as GroupData? {
@@ -114,7 +114,7 @@ class GroupDataManager {
     
     func getGroupById(id : Int32) -> GroupData? {
         
-        guard let group = CoreStore.fetchOne(
+        guard let group = CacheManager.shared.dataStack.fetchOne(
             From<GroupData>()
                 .where(\.id == id)
             ) as GroupData? else {

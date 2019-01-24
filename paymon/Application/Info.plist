@@ -30,10 +30,6 @@
 	<string>App want to access contact of your phone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Using for uploading photos</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Main</string>
 	<key>UIMainStoryboardFile</key>

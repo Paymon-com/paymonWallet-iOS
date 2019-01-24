@@ -35,7 +35,9 @@ class SettingsTableViewController : UITableViewController {
             
             if let startViewController = StoryBoard.main.instantiateViewController(withIdentifier: VCIdentifier.startViewController) as? PaymonViewController {
                 User.shared.clearConfig()
+                
                 MessageManager.dispose()
+                
                 NetworkManager.shared.reconnect()
                 DispatchQueue.main.async {
                     self.navigationController?.setViewControllers([startViewController], animated: true)

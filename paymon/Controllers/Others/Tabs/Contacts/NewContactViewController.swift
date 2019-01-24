@@ -45,7 +45,6 @@ class NewContactViewController: PaymonViewController, UISearchBarDelegate {
         tapper.cancelsTouchesInView = false
         inviteFriendsView.isUserInteractionEnabled = true
         inviteFriendsView.addGestureRecognizer(tapper)
-
     }
     
     @objc func inviteFriendsClick() {
@@ -99,7 +98,7 @@ class NewContactViewController: PaymonViewController, UISearchBarDelegate {
                 if let usersPacket = packet as? RPC.PM_users {
                     for packetUser in usersPacket.users {
                         
-                        let data = ChatsData(context: (CoreStore.defaultStack.unsafeContext()))
+                        let data = ChatsData(context: (CacheManager.shared.dataStack.unsafeContext()))
                         
                         data.id = packetUser.id
                         data.photoUrl = packetUser.photoUrl.url

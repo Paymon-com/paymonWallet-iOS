@@ -13,6 +13,7 @@ class ChatsTableGroupViewCell : UITableViewCell {
     @IBOutlet weak var photo: CircularImageView!
     
     @IBOutlet weak var lastMessagePhoto: CircularImageView!
+    var chatId : Int32!
     
     func configure(chat: ChatsData) {
         self.title.text = chat.title
@@ -20,6 +21,7 @@ class ChatsTableGroupViewCell : UITableViewCell {
         self.lastMessageTime.text = Utils.formatDateTime(timestamp: chat.time)
         self.photo.loadPhoto(url: chat.photoUrl)
         self.lastMessagePhoto.loadPhoto(url: chat.lastMessagePhotoUrl)
+        self.chatId = chat.id
         
         switch chat.itemType {
             case 0: self.lastMessageText.textColor = UIColor.white.withAlphaComponent(0.6)

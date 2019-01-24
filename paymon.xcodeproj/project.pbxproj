@@ -107,12 +107,13 @@
 		B06123AF2189F084009408C0 /* CreateNewBtcWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06123AE2189F084009408C0 /* CreateNewBtcWalletViewController.swift */; };
 		B06642FD219ACF6600D55FA7 /* RestoreBtcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06642FC219ACF6600D55FA7 /* RestoreBtcViewController.swift */; };
 		B06960842152A6D500B1E693 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06960832152A6D500B1E693 /* CircularImageView.swift */; };
+		B06E295C21F7150B00079E1E /* CopyAndDeleteUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E295B21F7150B00079E1E /* CopyAndDeleteUIView.swift */; };
 		B07010C5216E05B4005C8685 /* DeepLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07010C4216E05B4005C8685 /* DeepLinkManager.swift */; };
 		B07010C8216E0C15005C8685 /* DeepLinkNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07010C7216E0C15005C8685 /* DeepLinkNavigator.swift */; };
 		B074796221AC022300FBD2F6 /* EthereumTransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B074796121AC022300FBD2F6 /* EthereumTransactionsViewController.swift */; };
 		B07F357A217DCEC6001360AD /* GroupContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07F3579217DCEC6001360AD /* GroupContactsTableViewCell.swift */; };
 		B0817C622133F9FD003A1604 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0817C612133F9FC003A1604 /* QRScannerViewController.swift */; };
-		B08336522153CF81008958BC /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B08336512153CF80008958BC /* libcryptopp.a */; };
+		B08336522153CF81008958BC /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B08336512153CF80008958BC /* libcryptopp.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B08CA88B21030F2100AAA805 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CA88A21030F2100AAA805 /* SignInViewController.swift */; };
 		B08DFD86215928BE002B5C1A /* UserInfoTableInfoUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08DFD85215928BE002B5C1A /* UserInfoTableInfoUIView.swift */; };
 		B08DFD89215936ED002B5C1A /* CellChatData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08DFD88215936ED002B5C1A /* CellChatData.swift */; };
@@ -280,7 +281,6 @@
 		B00977FE214C60B000191B90 /* Games.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Games.storyboard; sourceTree = "<group>"; };
 		B0097800214C622C00191B90 /* More.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		B0097803214C654C00191B90 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
-		B00AFD72216CC65700EC45AF /* paymon.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = paymon.entitlements; sourceTree = "<group>"; };
 		B00AFD73216CE09100EC45AF /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
 		B00EFC48219C41EA004ECC89 /* libBRCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBRCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01954D820FFA92000F3DDB0 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -366,6 +366,7 @@
 		B06123AE2189F084009408C0 /* CreateNewBtcWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewBtcWalletViewController.swift; sourceTree = "<group>"; };
 		B06642FC219ACF6600D55FA7 /* RestoreBtcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreBtcViewController.swift; sourceTree = "<group>"; };
 		B06960832152A6D500B1E693 /* CircularImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
+		B06E295B21F7150B00079E1E /* CopyAndDeleteUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyAndDeleteUIView.swift; sourceTree = "<group>"; };
 		B07010C4216E05B4005C8685 /* DeepLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkManager.swift; sourceTree = "<group>"; };
 		B07010C7216E0C15005C8685 /* DeepLinkNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkNavigator.swift; sourceTree = "<group>"; };
 		B074796121AC022300FBD2F6 /* EthereumTransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumTransactionsViewController.swift; sourceTree = "<group>"; };
@@ -825,7 +826,6 @@
 		B099C9A620FDD20300718608 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				B00AFD72216CC65700EC45AF /* paymon.entitlements */,
 				B099C98120FCF7DC00718608 /* Info.plist */,
 				B099C97520FCF7DB00718608 /* AppDelegate.swift */,
 				B099C9C920FDD46200718608 /* paymon-Bridging-Header.h */,
@@ -930,6 +930,7 @@
 			children = (
 				B042CB8B2137F92400B8F195 /* CopyLabel.swift */,
 				B0C396B4210A7CF200E0C344 /* SimpleOkAlertController.swift */,
+				B06E295B21F7150B00079E1E /* CopyAndDeleteUIView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1382,13 +1383,13 @@
 						LastSwiftMigration = 0940;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Keychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1487,7 +1488,6 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
-				"${BUILT_PRODUCTS_DIR}/ReverseExtension/ReverseExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/ScrollableGraphView/ScrollableGraphView.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
@@ -1507,7 +1507,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReverseExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScrollableGraphView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
@@ -1623,6 +1622,7 @@
 				B0C7447A21149BBF008885C1 /* ChartsRatesViewController.swift in Sources */,
 				0EA66B97210F7E7900CC1162 /* NotificationSoundViewController.swift in Sources */,
 				B0AC1D2A211472DA004D8577 /* ExchangeRetesViewController.swift in Sources */,
+				B06E295C21F7150B00079E1E /* CopyAndDeleteUIView.swift in Sources */,
 				B019550120FFAA3E00F3DDB0 /* DecimalExtension.swift in Sources */,
 				0EB732432136FD2A0069B383 /* NewContactViewController.swift in Sources */,
 				B0F2D5F321905C1600BE6938 /* SettingsWalletViewController.swift in Sources */,
@@ -1897,6 +1897,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = CX6AZ34SLQ;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1972,6 +1973,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = CX6AZ34SLQ;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2012,10 +2014,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = paymon/Application/paymon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5YNJ6HYTVJ;
+				DEVELOPMENT_TEAM = CX6AZ34SLQ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2038,7 +2039,7 @@
 					"\"$(SRCROOT)/Modules/breadwallet-core/secp256k1\"",
 				);
 				INFOPLIST_FILE = paymon/Application/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2049,7 +2050,7 @@
 					"$(PROJECT_DIR)/Pods/OpenSSL-Universal/lib-ios",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.paymon.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.paymon.max;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2070,10 +2071,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = paymon/Application/paymon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5YNJ6HYTVJ;
+				DEVELOPMENT_TEAM = CX6AZ34SLQ;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"/usr/local/cryptopp-ios/include",
@@ -2083,7 +2083,7 @@
 					"\"$(SRCROOT)/Modules/breadwallet-core/secp256k1\"",
 				);
 				INFOPLIST_FILE = paymon/Application/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2094,7 +2094,7 @@
 					"$(PROJECT_DIR)/Pods/OpenSSL-Universal/lib-ios",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.paymon.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.paymon.max;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
