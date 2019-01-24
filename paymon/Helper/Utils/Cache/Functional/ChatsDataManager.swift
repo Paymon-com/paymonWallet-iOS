@@ -145,7 +145,7 @@ class ChatsDataManager {
             print("Could not get all user contacts")
             return [ChatsData]()
         }
-        CacheManager.shared.dataStack.refreshAndMergeAllObjects()
+//        CacheManager.shared.dataStack.refreshAndMergeAllObjects()
         return result
     }
     
@@ -154,7 +154,7 @@ class ChatsDataManager {
         if let result = CacheManager.shared.dataStack.monitorList(From<ChatsData>()
             .where(\.isGroup == isGroup)
             .orderBy(.descending(\.time))) as ListMonitor<ChatsData>? {
-            CacheManager.shared.dataStack.refreshAndMergeAllObjects()
+//            CacheManager.shared.dataStack.refreshAndMergeAllObjects()
 
             return result
         } else {
@@ -179,7 +179,7 @@ class ChatsDataManager {
                 transaction.delete(chatsData)
         },
             completion: { _ in
-                CacheManager.shared.dataStack.refreshAndMergeAllObjects()
+//                CacheManager.shared.dataStack.refreshAndMergeAllObjects()
                 completionHandler(true)
         })
     }

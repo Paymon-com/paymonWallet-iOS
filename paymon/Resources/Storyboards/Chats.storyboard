@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="547"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="ChatsTableCretedGroupCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChatsTableCretedGroupCell" rowHeight="44" id="ylm-UG-6sp" userLabel="ChatsTableCretedGroupCell" customClass="ChatsTableCretedGroupCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatsTableCretedGroupCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChatsTableCretedGroupCell" rowHeight="44" id="ylm-UG-6sp" userLabel="ChatsTableCretedGroupCell" customClass="ChatsTableCretedGroupCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ylm-UG-6sp" id="bbX-Ll-9ym">
@@ -97,7 +97,7 @@
                                             <outlet property="timeLabel" destination="tKz-XW-pTn" id="Nur-OT-aDq"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="ChatMessageRcvViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChatMessageRcvViewCell" id="1WE-QC-rgw" customClass="ChatMessageRcvViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatMessageRcvViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChatMessageRcvViewCell" id="1WE-QC-rgw" customClass="ChatMessageRcvViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1WE-QC-rgw" id="GPn-D2-XHf">
@@ -153,7 +153,7 @@
                                             <outlet property="timeLabel" destination="0fx-YJ-HaD" id="Iij-7w-jo5"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="GroupChatMessageRcvViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChatMessageRcvViewCell" id="k7W-c6-lKS" customClass="GroupChatMessageRcvViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="GroupChatMessageRcvViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupChatMessageRcvViewCell" id="k7W-c6-lKS" customClass="GroupChatMessageRcvViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="160" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="k7W-c6-lKS" id="9aW-6D-1mj">
@@ -337,8 +337,8 @@
                         <viewLayoutGuide key="safeArea" id="jPt-0K-biK"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="gpT-dq-QZY"/>
                                 <exclude reference="IO0-Wn-i4S"/>
+                                <exclude reference="gpT-dq-QZY"/>
                                 <exclude reference="2LB-wB-VAQ"/>
                                 <exclude reference="TI0-9d-5sR"/>
                                 <exclude reference="tcW-Nf-4BS"/>
@@ -406,8 +406,8 @@
                         <outlet property="messagesView" destination="9eE-ad-oA1" id="b4q-Lb-QLW"/>
                         <outlet property="sendButton" destination="wdY-No-vN5" id="9FU-q9-0OW"/>
                         <outlet property="sendButtonImage" destination="qfd-71-qqy" id="YF4-Ur-ffh"/>
-                        <segue destination="YF1-hr-kBd" kind="show" id="Cy4-Ig-RUd"/>
-                        <segue destination="D2t-fs-wwg" kind="show" id="g7m-dt-gHT"/>
+                        <segue destination="YF1-hr-kBd" kind="show" identifier="GroupSettingViewController" id="Cy4-Ig-RUd"/>
+                        <segue destination="D2t-fs-wwg" kind="show" identifier="FriendProfileViewController" id="g7m-dt-gHT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iKj-8n-cNZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -435,7 +435,7 @@
                                 <rect key="frame" x="8" y="172" width="359" height="446"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="ContactTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactTableViewCell" id="Kop-2N-uEl" customClass="ContactTableViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ContactTableViewCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactTableViewCell" id="Kop-2N-uEl" customClass="ContactTableViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="359" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kop-2N-uEl" id="PRr-d1-YQX">
@@ -560,7 +560,7 @@
                                 <rect key="frame" x="0.0" y="120" width="375" height="454"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="ChatsTableViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableViewCell" rowHeight="80" id="Kec-gi-zU3" customClass="ChatsTableViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatsTableViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableViewCell" rowHeight="80" id="Kec-gi-zU3" customClass="ChatsTableViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kec-gi-zU3" id="pey-Xw-qtt">
@@ -654,7 +654,7 @@
                                             <outlet property="title" destination="e6K-8J-d0Q" id="vFf-TI-ZC1"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="ChatsTableGroupViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableGroupViewCell" rowHeight="80" id="pGE-GW-JDa" customClass="ChatsTableGroupViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatsTableGroupViewCell" selectionStyle="gray" indentationWidth="10" reuseIdentifier="ChatsTableGroupViewCell" rowHeight="80" id="pGE-GW-JDa" customClass="ChatsTableGroupViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="108" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pGE-GW-JDa" id="X3V-o1-Mnb">
@@ -798,8 +798,8 @@
                         <outlet property="chatsTable" destination="cyd-eX-Fm6" id="w5a-OA-FqY"/>
                         <outlet property="searchBar" destination="DhL-bV-BP6" id="vKG-hC-qNP"/>
                         <outlet property="segment" destination="A7J-7x-8zM" id="wHu-4F-QQW"/>
-                        <segue destination="9H9-Yd-fzg" kind="show" id="CuY-4o-mEj"/>
-                        <segue destination="uPV-OI-pZN" kind="show" id="7Ms-wK-CHw"/>
+                        <segue destination="9H9-Yd-fzg" kind="show" identifier="ChatViewController" id="CuY-4o-mEj"/>
+                        <segue destination="uPV-OI-pZN" kind="show" identifier="AddContactViewController" id="7Ms-wK-CHw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OhT-2c-n3Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -820,7 +820,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="ContactsTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupContactsTableViewCell" id="41q-LX-XYf" customClass="GroupContactsTableViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ContactsTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupContactsTableViewCell" id="41q-LX-XYf" customClass="GroupContactsTableViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="41q-LX-XYf" id="7SQ-YP-VnS">
@@ -910,7 +910,7 @@
                                 <rect key="frame" x="0.0" y="266" width="375" height="401"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="GroupSettingContactsTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupSettingContactsTableViewCell" id="3gT-oH-bLF" customClass="GroupSettingContactsTableViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="GroupSettingContactsTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupSettingContactsTableViewCell" id="3gT-oH-bLF" customClass="GroupSettingContactsTableViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3gT-oH-bLF" id="40g-bL-Xfg">
@@ -1117,7 +1117,7 @@
                         <outlet property="leaveChatHeight" destination="iTb-Ji-L5b" id="BHt-cl-C6e"/>
                         <outlet property="leaveView" destination="oz1-9J-f5q" id="KgA-qt-U6Y"/>
                         <outlet property="tableViewParticipants" destination="Qdq-bT-1um" id="6eS-aL-rP5"/>
-                        <segue destination="g3b-7S-Ndw" kind="show" id="hEC-nK-7Gi"/>
+                        <segue destination="g3b-7S-Ndw" kind="show" identifier="CreateGroupViewController" id="hEC-nK-7Gi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ndm-xG-A3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1302,14 +1302,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" alpha="0.85000002384185791" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Email" translatesAutoresizingMaskIntoConstraints="NO" id="eYT-Hb-Put">
-                                                    <rect key="frame" x="20" y="15.5" width="24" height="24"/>
+                                                    <rect key="frame" x="16" y="15.5" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="B6y-Eh-Swl"/>
                                                         <constraint firstAttribute="width" constant="24" id="kT8-6h-u0B"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sei-Dm-dyL">
-                                                    <rect key="frame" x="60" y="0.0" width="492" height="55"/>
+                                                    <rect key="frame" x="56" y="0.0" width="271" height="55"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>

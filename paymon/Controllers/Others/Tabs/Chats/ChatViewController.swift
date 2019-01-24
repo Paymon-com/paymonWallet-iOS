@@ -29,10 +29,14 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     @IBOutlet weak var doneItem: UIBarButtonItem!
     @IBOutlet weak var actionMenuBottomSpace: NSLayoutConstraint!
     @IBOutlet weak var deleteMessages: UIButton!
+
+    private var isLoadedMore: NSObjectProtocol!
     
     var mainTint : UIColor!
     
     let standartBottomSpace = CGFloat(-52)
+    let indentTop = CGFloat(100.0)
+    
     var messages : ListMonitor<ChatMessageData>!
     var chatID: Int32!
     var isGroup: Bool!
@@ -42,6 +46,7 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     var messageCountForUpdate : Int! = 0
     var firstLoaded = false
     var isEdit = false
+    var isLoadingMore = false
     
     @IBAction func onSendClicked() {
         guard let text = messageTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines), !text.isEmpty, text != "To write a message".localized else {return}
@@ -76,6 +81,7 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
                 } else {
                     let deleteGroupMessages = RPC.PM_deleteGroupMessages()
                     deleteGroupMessages.messageIDs = messagesIDs
+                    print(deleteGroupMessages.messageIDs)
                     NetworkManager.shared.sendPacket(deleteGroupMessages) { response, error in
                         if error != nil || response == nil {
                             print("error delete group messages")
@@ -177,8 +183,7 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     func listMonitor(_ monitor: ListMonitor<ChatMessageData>, didInsertObject object: ChatMessageData, toIndexPath indexPath: IndexPath) {
 
         if object.toId == chatID {
-            print("Insert row at: \(indexPath.row) in section: \(indexPath.section)")
-                self.chatTableView.insertRows(at: [indexPath], with: .none)
+            self.chatTableView.insertRows(at: [indexPath], with: .none)
         }
     }
     
@@ -209,7 +214,6 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     }
     
     func showTable() {
-        print("Show table")
         DispatchQueue.main.async {
             MBProgressHUD.hide(for: self.view, animated: true)
             self.chatTableView.reloadData()
@@ -246,6 +250,11 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
+        isLoadedMore = NotificationCenter.default.addObserver(forName: .isLoadedMore, object: nil, queue: nil) { notification in
+            self.isLoadingMore = false
+        }
 
         setLayoutOptions()
         
@@ -255,18 +264,8 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         messageTextView.delegate = self
         
         setMessages()
-        
-//        self.chatTableView.scrollViewDidReachTop = { scrollView in
-//            if self.firstLoaded {
-//                print("top")
-////                self.loadMessages(offset: 10, count: 10)
-//            }
-//        }
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
+
 
     @objc func handleKeyboardNotification(notification: NSNotification) {
 
@@ -290,6 +289,8 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         super.viewWillDisappear(animated)
         
         messages.removeObserver(self)
+        
+        NotificationCenter.default.removeObserver(isLoadedMore)
         
         if let nc = UIApplication.shared.keyWindow?.rootViewController as? MainNavigationController {
             nc.navigationBar.isHidden = true
@@ -323,9 +324,8 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
             if let packet = response as? RPC.PM_chatMessages {
                 if (packet.messages.count != 0) {
                     self.messageCountForUpdate = packet.messages.count
-                    print("message count update \(self.messageCountForUpdate)")
                     self.reloadChat()
-                    MessageDataManager.shared.updateMessages(packet.messages)
+                    MessageDataManager.shared.addMoreOldMessages(packet.messages)
                 }
             }
         }
@@ -426,6 +426,16 @@ extension ChatViewController: UITableViewDataSource {
 }
 
 extension ChatViewController: UITableViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
+        
+        if !isLoadingMore && (maximumOffset - contentOffset <= indentTop) {
+            isLoadingMore = true
+            loadMessages(offset: Int32(messages.numberOfObjects()), count : 30)
+        }
+    }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if isEdit {

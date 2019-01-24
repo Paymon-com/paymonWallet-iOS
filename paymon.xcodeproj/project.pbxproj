@@ -113,7 +113,7 @@
 		B074796221AC022300FBD2F6 /* EthereumTransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B074796121AC022300FBD2F6 /* EthereumTransactionsViewController.swift */; };
 		B07F357A217DCEC6001360AD /* GroupContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07F3579217DCEC6001360AD /* GroupContactsTableViewCell.swift */; };
 		B0817C622133F9FD003A1604 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0817C612133F9FC003A1604 /* QRScannerViewController.swift */; };
-		B08336522153CF81008958BC /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B08336512153CF80008958BC /* libcryptopp.a */; };
+		B08336522153CF81008958BC /* libcryptopp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B08336512153CF80008958BC /* libcryptopp.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		B08CA88B21030F2100AAA805 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CA88A21030F2100AAA805 /* SignInViewController.swift */; };
 		B08DFD86215928BE002B5C1A /* UserInfoTableInfoUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08DFD85215928BE002B5C1A /* UserInfoTableInfoUIView.swift */; };
 		B08DFD89215936ED002B5C1A /* CellChatData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08DFD88215936ED002B5C1A /* CellChatData.swift */; };
@@ -281,7 +281,6 @@
 		B00977FE214C60B000191B90 /* Games.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Games.storyboard; sourceTree = "<group>"; };
 		B0097800214C622C00191B90 /* More.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		B0097803214C654C00191B90 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
-		B00AFD72216CC65700EC45AF /* paymon.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = paymon.entitlements; sourceTree = "<group>"; };
 		B00AFD73216CE09100EC45AF /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
 		B00EFC48219C41EA004ECC89 /* libBRCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBRCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01954D820FFA92000F3DDB0 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -827,7 +826,6 @@
 		B099C9A620FDD20300718608 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				B00AFD72216CC65700EC45AF /* paymon.entitlements */,
 				B099C98120FCF7DC00718608 /* Info.plist */,
 				B099C97520FCF7DB00718608 /* AppDelegate.swift */,
 				B099C9C920FDD46200718608 /* paymon-Bridging-Header.h */,
@@ -1385,13 +1383,13 @@
 						LastSwiftMigration = 0940;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Keychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1490,7 +1488,6 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
-				"${BUILT_PRODUCTS_DIR}/ReverseExtension/ReverseExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/ScrollableGraphView/ScrollableGraphView.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
@@ -1510,7 +1507,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReverseExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScrollableGraphView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
@@ -1901,6 +1897,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = CX6AZ34SLQ;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1976,6 +1973,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = CX6AZ34SLQ;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2016,10 +2014,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = paymon/Application/paymon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5YNJ6HYTVJ;
+				DEVELOPMENT_TEAM = CX6AZ34SLQ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2042,7 +2039,7 @@
 					"\"$(SRCROOT)/Modules/breadwallet-core/secp256k1\"",
 				);
 				INFOPLIST_FILE = paymon/Application/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2053,7 +2050,7 @@
 					"$(PROJECT_DIR)/Pods/OpenSSL-Universal/lib-ios",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.paymon.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.paymon.max;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2074,10 +2071,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = paymon/Application/paymon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5YNJ6HYTVJ;
+				DEVELOPMENT_TEAM = CX6AZ34SLQ;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"/usr/local/cryptopp-ios/include",
@@ -2087,7 +2083,7 @@
 					"\"$(SRCROOT)/Modules/breadwallet-core/secp256k1\"",
 				);
 				INFOPLIST_FILE = paymon/Application/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2098,7 +2094,7 @@
 					"$(PROJECT_DIR)/Pods/OpenSSL-Universal/lib-ios",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.paymon.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.paymon.max;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

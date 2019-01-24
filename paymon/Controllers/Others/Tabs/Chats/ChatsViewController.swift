@@ -47,7 +47,6 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         }
         
         removeObserver = NotificationCenter.default.addObserver(forName: .removeObserver, object: nil, queue: nil) { notification in
-            print("Removed observer")
             self.allChats = nil
         }
         
@@ -333,21 +332,18 @@ extension ChatsViewController: UITableViewDataSource {
 extension ChatsViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-//        if isUpdated {
-            let chat = allChats[indexPath]
-            tableView.deselectRow(at: indexPath, animated: true)
-            let chatViewController = storyboard?.instantiateViewController(withIdentifier: VCIdentifier.chatViewController) as! ChatViewController
-            chatViewController.setValue(chat.title, forKey: "title")
-            chatViewController.isGroup = chat.isGroup
-            chatViewController.chatID = chat.id
-            print(chat.id)
-            
-            self.navigationItem.title = "Chats".localized
-            
-            DispatchQueue.main.async {
-                self.navigationController?.pushViewController(chatViewController, animated: true)
-            }
-//        }
+        let chat = allChats[indexPath]
+        tableView.deselectRow(at: indexPath, animated: true)
+        let chatViewController = storyboard?.instantiateViewController(withIdentifier: VCIdentifier.chatViewController) as! ChatViewController
+        chatViewController.setValue(chat.title, forKey: "title")
+        chatViewController.isGroup = chat.isGroup
+        chatViewController.chatID = chat.id
+        print(chat.id)
+        
+        self.navigationItem.title = "Chats".localized
+        
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(chatViewController, animated: true)
+        }
     }
 }

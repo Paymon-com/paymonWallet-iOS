@@ -13,6 +13,8 @@ class MessageDataManager {
     
     static let shared = MessageDataManager()
     
+    let dispatchGroup = DispatchGroup()
+    
     func saveChatMessageData(messageData : ChatMessageData, messageObject : RPC.Message) {
         messageData.id = messageObject.id
         messageData.unread = messageObject.unread
@@ -24,11 +26,10 @@ class MessageDataManager {
         messageData.text = messageObject.text
         messageData.itemType = Int16(messageObject.itemType.rawValue)
         messageData.action = messageObject.action != nil ? messageObject.action.type : 0
-        print("message created")
-
     }
     
     func saveMessage(messageObject : RPC.Message) {
+        dispatchGroup.enter()
         CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
             if let messageData = transaction.fetchOne(From<ChatMessageData>().where(\.id == messageObject.id)) {
                 self.saveChatMessageData(messageData: messageData, messageObject: messageObject)
@@ -36,8 +37,8 @@ class MessageDataManager {
                 let messageData = transaction.create(Into<ChatMessageData>())
                 self.saveChatMessageData(messageData: messageData, messageObject: messageObject)
             }
-        }, completion: { (nil) -> Void in
-            
+        }, completion: { _ -> Void in
+            self.dispatchGroup.leave()
         })
     }
     
@@ -70,6 +71,15 @@ class MessageDataManager {
                 
             }
         }
+    }
+    
+    func addMoreOldMessages(_ messages : [RPC.Message]) {
+        for message in messages {
+            saveMessage(messageObject: message)
+        }
+        self.dispatchGroup.notify(queue: .main, execute: {
+            NotificationCenter.default.post(name: .isLoadedMore, object: nil)
+        })
     }
     
     func setChatsDataByUserObject(userObject : RPC.UserObject, messageObject: RPC.Message) {
@@ -111,7 +121,7 @@ class MessageDataManager {
 
             return result
         } else {
-            print("Could not get all chats")
+            print("Could not get all messages by chat id")
             return nil
         }
     }
@@ -119,7 +129,7 @@ class MessageDataManager {
     func getAllMessages() -> [ChatMessageData] {
         
         guard let result = CacheManager.shared.dataStack.fetchAll(From<ChatMessageData>()) else {
-            print("Could not get all user contacts")
+            print("Could not get all messages")
             return [ChatMessageData]()
         }
         

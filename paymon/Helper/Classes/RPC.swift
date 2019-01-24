@@ -1018,7 +1018,7 @@ class RPC {
         }
         
         override func serializeToStream(stream: SerializableData) {
-            stream.write(PM_deleteDialogMessages.svuid)
+            stream.write(PM_deleteGroupMessages.svuid)
             stream.write(SVUID_ARRAY)
             let count = messageIDs.count
             stream.write(Int32(count))

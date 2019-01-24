@@ -49,5 +49,6 @@ extension Notification.Name {
     static let ethWalletWasCreated = Notification.Name(rawValue: "ethwalletWasCreated")
     static let updateEthTransactions = Notification.Name(rawValue: "updateEthTransactions")
     static let removeObserver = Notification.Name(rawValue: "removeObserver")
+    static let isLoadedMore = Notification.Name(rawValue: "isLoadedMore")
 
 }

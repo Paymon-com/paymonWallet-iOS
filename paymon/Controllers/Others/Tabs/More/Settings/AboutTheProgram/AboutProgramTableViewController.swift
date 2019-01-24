@@ -40,10 +40,10 @@ class AboutProgramTableViewController: UITableViewController {
             officialDocsViewController.text = OfficialDocs.agreements
             officialDocsViewController.titleString = "Agreements".localized
             self.navigationController?.pushViewController(officialDocsViewController, animated: true)
-        case 3:
-            if #available(iOS 10.0, *) {
-                SKStoreReviewController.requestReview()
-            }
+        case 3: break
+//            if #available(iOS 10.0, *) {
+//                SKStoreReviewController.requestReview()
+//            }
         default: break
         }
         
