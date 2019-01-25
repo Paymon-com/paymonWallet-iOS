@@ -5,23 +5,26 @@
 
 import UIKit
 
-class StartViewController: PaymonViewController {
+class StartViewController: UIViewController {
 
     @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var hintLbl: UILabel!
     @IBOutlet weak var signUpBtn: UIButton!
     @IBOutlet weak var signInBtn: UIButton!
     
     @IBOutlet weak var stackButtons: UIView!
     
+    var isNeedReconnect = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if isNeedReconnect {
+            NetworkManager.shared.reconnect()
+        }
         setLayoutOptions()
     }
 
     func setLayoutOptions() {
-        hintLbl.text = "Already have an account?".localized
         
         signInBtn.setTitle("sign in".localized, for: .normal)
         signUpBtn.setTitle("sign up".localized, for: .normal)

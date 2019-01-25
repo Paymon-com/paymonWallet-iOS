@@ -246,9 +246,9 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="Ecb-vP-l6K"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                     <state key="normal" title="Выход">
-                                                        <color key="titleColor" red="0.78779815819999999" green="0.2700175387" blue="0.18501013990000001" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="titleColor" red="1" green="0.35183411836624146" blue="0.24216151237487793" alpha="0.70999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="logOutClick:" destination="rTw-jc-ujB" eventType="touchUpInside" id="TdQ-8f-BVT"/>

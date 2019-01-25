@@ -38,6 +38,7 @@ class MessageDataManager {
                 self.saveChatMessageData(messageData: messageData, messageObject: messageObject)
             }
         }, completion: { _ -> Void in
+            print("save messages")
             self.dispatchGroup.leave()
         })
     }
@@ -65,7 +66,7 @@ class MessageDataManager {
             let gid = messageObject.to_peer.group_id
             if let group = GroupDataManager.shared.getGroupByIdSync(id: gid!) {
                 if let lastMessageUser = UserDataManager.shared.getUserByIdSync(id: messageObject.from_id) {
-                    ChatsDataManager.shared.updateGroupChats(groupObject : group, messageObject : messageObject, lastMessagePhotoUrl : lastMessageUser.photoUrl!)
+                    ChatsDataManager.shared.updateGroupChats(groupObject : group, messageObject : messageObject, lastMessagePhotoUrl: lastMessageUser.photoUrl!)
                 }
             } else {
                 
@@ -103,9 +104,15 @@ class MessageDataManager {
     }
     
     func updateMessages(_ messages : [RPC.Message]) {
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .isLoadedMore, object: nil)
+        }
         for message in messages {
             updateMessage(messageObject: message)
         }
+        self.dispatchGroup.notify(queue: .main, execute: {
+            NotificationCenter.default.post(name: .isLoadedMore, object: nil)
+        })
     }
     
     func getMessagesByChatId(chatId : Int32) -> ListMonitor<ChatMessageData>? {

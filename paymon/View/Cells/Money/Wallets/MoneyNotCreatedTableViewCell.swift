@@ -96,14 +96,13 @@ class MoneyNotCreatedTableViewCell: UITableViewCell {
         buttonsView.alpha = 0
         create.setTitle("Create".localized, for: .normal)
         restore.setTitle("Restore".localized, for: .normal)
-//        restore.titleLabel?.numberOfLines = 0
-//        restore.titleLabel?.minimumScaleFactor = 0.5
-//        restore.titleLabel?.adjustsFontSizeToFitWidth = true
 
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(closeAddFunc(swipe:)))
         leftSwipe.direction = UISwipeGestureRecognizer.Direction.left
-        
         self.addGestureRecognizer(leftSwipe)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(closeAdd))
+        background.addGestureRecognizer(tap)
     }
     
     func openAddFunc() {
@@ -122,17 +121,20 @@ class MoneyNotCreatedTableViewCell: UITableViewCell {
     @objc func closeAddFunc(swipe:UISwipeGestureRecognizer) {
 
         if (swipe.direction == UISwipeGestureRecognizer.Direction.left) {
-            
-            UIView.animate(withDuration: 0.1, animations: {
-                self.buttonsView.alpha = 0
-            })
-
-            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.add.alpha = 1
-                self.backgroundWidth.constant = self.widthScreen/2.5
-                self.layoutIfNeeded()
-            })
+            closeAdd()
         }
+    }
+    
+    @objc func closeAdd() {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.buttonsView.alpha = 0
+        })
+        
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.add.alpha = 1
+            self.backgroundWidth.constant = self.widthScreen/2.5
+            self.layoutIfNeeded()
+        })
     }
 
 }

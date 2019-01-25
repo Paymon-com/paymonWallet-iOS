@@ -24,7 +24,7 @@ class CreateGroupViewController: PaymonViewController , UITableViewDataSource, U
     var filteredOutput = [String:[UserData]]()
     
     var outputDict = [String:[UserData]]()
-    var tableSection = [String]()
+
     var saveSelected = false
 
     
@@ -78,19 +78,16 @@ class CreateGroupViewController: PaymonViewController , UITableViewDataSource, U
     
     func getUsersDict() {
         for user in usersData {
-            
-            let key = Utils.formatUserDataName(user)
-            
-            if  var users = outputDict[key] {
-                users.append(user)
-                outputDict[key] = users
-            } else {
-                outputDict[key] = [user]
+            if let title = Utils.formatUserDataName(user) as String? {
+                let initialLetter = title.substring(toIndex: 1).uppercased()
+                if initialLetter != "" {
+                    var letterArray = outputDict[initialLetter] ?? [UserData]()
+                    letterArray.append(user)
+                    outputDict[initialLetter] = letterArray
+                }
             }
-            
-            tableSection = [String](outputDict.keys).sorted()
         }
-        
+
         filteredOutput = outputDict
         
         DispatchQueue.main.async {
@@ -119,7 +116,6 @@ class CreateGroupViewController: PaymonViewController , UITableViewDataSource, U
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else {
             filteredOutput = outputDict
-            tableSection = [String](outputDict.keys).sorted()
             tblVContacts.reloadData()
             return
         }
@@ -128,7 +124,6 @@ class CreateGroupViewController: PaymonViewController , UITableViewDataSource, U
             
             return user.key.lowercased().contains(searchText.lowercased())
         })
-        tableSection = [String](filteredOutput.keys).sorted()
 
         tblVContacts.reloadData()
     }
@@ -229,12 +224,12 @@ class CreateGroupViewController: PaymonViewController , UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let key = tableSection[indexPath.section]
-        if let users = filteredOutput[key] {
-            let user = users[indexPath.row]
+        let a = Array(filteredOutput.keys).sorted()
+        if let data = filteredOutput[a[indexPath.section]] {
+    
             let cell = tableView.dequeueReusableCell(withIdentifier: "GroupContactsTableViewCell") as! GroupContactsTableViewCell
-            cell.configure(data: user)
-            cell.accessoryType = selectedUserData.contains(user) ? .checkmark : .none
+            cell.configure(data: data[indexPath.row])
+            cell.accessoryType = selectedUserData.contains(data[indexPath.row]) ? .checkmark : .none
             return cell
         } else {
             return UITableViewCell()
@@ -252,8 +247,9 @@ class CreateGroupViewController: PaymonViewController , UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let key = tableSection[indexPath.section]
-        if let users = filteredOutput[key] {
+        let a = Array(filteredOutput.keys).sorted()
+
+        if let users = filteredOutput[a[indexPath.section]] {
             tableView.deselectRow(at: indexPath, animated: true)
             if selectedUserData.contains(users[indexPath.row]) {
                 selectedUserData.removeObject(identicalTo: users[indexPath.row])
@@ -266,20 +262,16 @@ class CreateGroupViewController: PaymonViewController , UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        return String(tableSection[section].first!)
+        let a = Array(filteredOutput.keys).sorted()
+        return a[section]
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tableSection.count
+        return filteredOutput.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let key = tableSection[section]
-        if let users = filteredOutput[key] {
-            return users.count
-        }
-        
-        return 0
+        let a = Array(filteredOutput.keys).sorted()
+        return (filteredOutput[a[section]]?.count)!
     }
 }

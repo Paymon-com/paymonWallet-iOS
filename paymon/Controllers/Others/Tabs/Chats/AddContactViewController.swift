@@ -138,7 +138,7 @@ class AddContactViewController: UIViewController, UISearchBarDelegate {
         
         for contact in contacts {
             if let value = contact.name?.isEmpty, !value {
-                let initialLetter = contact.name?.substring(toIndex: 1) .uppercased()
+                let initialLetter = contact.name?.substring(toIndex: 1).uppercased()
                 if initialLetter != "" {
                     var letterArray = outputDict[initialLetter!] ?? [Contact]()
                     letterArray.append(contact)

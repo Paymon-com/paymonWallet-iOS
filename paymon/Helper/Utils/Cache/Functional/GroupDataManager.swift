@@ -36,7 +36,6 @@ class GroupDataManager {
 //                    print("Group существует, я ее обновлю")
                     self.setGroupDataInfo(groupData : groupData, groupObject : groupObject)
                 } else {
-//                    print("Group не существует, я ее создаю")
                     let groupData = transaction.create(Into<GroupData>())
                     self.setGroupDataInfo(groupData : groupData, groupObject : groupObject)
                 }
@@ -79,13 +78,7 @@ class GroupDataManager {
             if let groupData = transaction.fetchOne(From<GroupData>().where(\.id == id)) {
                 groupData.title = title
             }
-        }, completion: { _ in
-//            (result) -> Void in
-//            switch result {
-//            case .success: print("Success update groupData title")
-//            case .failure(let error): print("Failure update groupData title\(error)")
-//            }
-        })
+        }, completion: { _ in })
     }
     
     func getAllGroups() -> [GroupData] {
@@ -127,12 +120,7 @@ class GroupDataManager {
     
     func updateGroups(_ groups:[RPC.Group]) {
         for group in groups {
-            for userId in group.users {
-                if let user = ChatsDataManager.shared.getChatByIdSync(id: userId) {
-                    UserDataManager.shared.updateUserContact(id: user.id, isContact: true)
-                }
-                updateGroup(groupObject: group)
-            }
+            updateGroup(groupObject: group)
         }
     }
 }

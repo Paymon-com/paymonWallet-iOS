@@ -14,6 +14,7 @@ class ChatsTableGroupViewCell : UITableViewCell {
     
     @IBOutlet weak var lastMessagePhoto: CircularImageView!
     var chatId : Int32!
+    var creatorId : Int32!
     
     func configure(chat: ChatsData) {
         self.title.text = chat.title
@@ -22,6 +23,7 @@ class ChatsTableGroupViewCell : UITableViewCell {
         self.photo.loadPhoto(url: chat.photoUrl)
         self.lastMessagePhoto.loadPhoto(url: chat.lastMessagePhotoUrl)
         self.chatId = chat.id
+        self.creatorId = chat.creatorId
         
         switch chat.itemType {
             case 0: self.lastMessageText.textColor = UIColor.white.withAlphaComponent(0.6)

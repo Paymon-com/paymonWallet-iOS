@@ -17,12 +17,11 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     @IBOutlet weak var chatsTable: UITableView!
     @IBOutlet weak var segment: UISegmentedControl!
     private var removeObserver: NSObjectProtocol!
+    private var messagesSaved: NSObjectProtocol!
 
     var allChats : ListMonitor<ChatsData>!
     var refresher: UIRefreshControl!
     var isUpdated = false
-    
-    private var endUpdateChatsObserver: NSObjectProtocol!
 
     @IBAction func segmentChanges(_ sender: Any) {
         setChatsList()
@@ -41,10 +40,6 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        endUpdateChatsObserver = NotificationCenter.default.addObserver(forName: .endUpdateChats, object: nil, queue: nil) {
-            notification in
-            self.endUpdateChats()
-        }
         
         removeObserver = NotificationCenter.default.addObserver(forName: .removeObserver, object: nil, queue: nil) { notification in
             self.allChats = nil
@@ -68,10 +63,20 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
             segment.selectedSegmentIndex = 1
             allChats.refetch([.init(), OrderBy<ChatsData>(.descending(\.time))])
         }
+        
+        messagesSaved = NotificationCenter.default.addObserver(forName: .isLoadedMore, object: nil, queue: nil) { notification in
+            print("set enabled table")
+            
+            self.chatsTable.allowsSelection = !self.chatsTable.allowsSelection
+            
+            if self.chatsTable.allowsSelection {
+                self.endUpdateChats()
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        NotificationCenter.default.removeObserver(removeObserver)
+        NotificationCenter.default.removeObserver(messagesSaved)
     }
     
     func setChats() {
@@ -204,8 +209,15 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
 //        let mute = muteAction(at: indexPath)
 //        let clear = clearAction(at: indexPath)
         let delete = deleteAction(at: indexPath)
-        
-        return UISwipeActionsConfiguration(actions: [delete])
+
+        if let cell = chatsTable.cellForRow(at: indexPath) as? ChatsTableGroupViewCell {
+            if cell.creatorId != User.shared.currentUser.id {
+                return UISwipeActionsConfiguration(actions: [delete])
+            }
+            return UISwipeActionsConfiguration(actions: [])
+        } else {
+            return UISwipeActionsConfiguration(actions: [delete])
+        }
     }
     
     @available(iOS 11.0, *)
@@ -241,7 +253,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     @available(iOS 11.0, *)
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
         var title = ""
-        let cell = chatsTable.cellForRow(at: indexPath)
+        guard let cell = chatsTable.cellForRow(at: indexPath) else {return UIContextualAction()}
         if cell is ChatsTableViewCell {
             title = "Delete".localized
         } else if cell is ChatsTableGroupViewCell {

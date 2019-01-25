@@ -35,10 +35,12 @@ class GroupSettingViewController: PaymonViewController, UITableViewDataSource, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         if let groupData = GroupDataManager.shared.getGroupById(id: groupId) {
             participantsIds = groupData.users
             group = groupData
+            groupImage.loadPhoto(url: group.photoUrl)
+
         }
         
         for id in participantsIds {

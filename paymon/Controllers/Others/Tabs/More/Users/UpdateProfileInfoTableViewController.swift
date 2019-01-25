@@ -87,21 +87,78 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
         
     }
     
+    func checkForEmpty(textField : UITextField) -> Bool {
+        if (textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)! {
+            textField.shake()
+            return false
+        }
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         observerUpdateProfile = NotificationCenter.default.addObserver(forName: .updateProfile, object: nil, queue: nil ){ notification in
+            
+            if !self.checkForEmpty(textField: self.nameInfo) {
+                NotificationCenter.default.post(name: .updateProfileInfoTrue, object: nil)
+                return
+            }
+            User.shared.currentUser!.first_name = self.nameInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            if !self.checkForEmpty(textField: self.surnameInfo) {
+                NotificationCenter.default.post(name: .updateProfileInfoTrue, object: nil)
+                return
+            }
+            
+            User.shared.currentUser!.last_name = self.surnameInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            if let newEthAddress = self.ethInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                if !newEthAddress.isEmpty {
+                    if CryptoManager.shared.checkEthereumWallet(wallet: newEthAddress) {
+                        User.shared.currentUser!.ethAddress = newEthAddress
+                    } else {
+                        self.ethInfo.shake()
+                        NotificationCenter.default.post(name: .updateProfileInfoTrue, object: nil)
+                        return
+                    }
+                } else {
+                    User.shared.currentUser!.ethAddress = ""
+                }
+            }
+            
+            if let newPmntAddress = self.pmntInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                if !newPmntAddress.isEmpty {
+                    if CryptoManager.shared.checkEthereumWallet(wallet: newPmntAddress) {
+                        User.shared.currentUser!.pmntAddress = newPmntAddress
+                    } else {
+                        self.pmntInfo.shake()
+                        NotificationCenter.default.post(name: .updateProfileInfoTrue, object: nil)
+                        return
+                    }
+                } else {
+                    User.shared.currentUser!.pmntAddress = ""
+                }
+            }
+            
+            if let newBtcAddress = self.btcInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                if !newBtcAddress.isEmpty {
+                    if CryptoManager.shared.checkBitcoinWallet(wallet: newBtcAddress) {
+                        User.shared.currentUser!.btcAddress = newBtcAddress
+                    } else {
+                        self.btcInfo.shake()
+                        NotificationCenter.default.post(name: .updateProfileInfoTrue, object: nil)
+
+                        return
+                    }
+                } else {
+                    User.shared.currentUser!.btcAddress = ""
+                }
+            }
+
             DispatchQueue.main.async {
                 let _ = MBProgressHUD.showAdded(to: self.parent!.parent!.view, animated: true)
             }
-
-            User.shared.currentUser!.first_name = self.nameInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            User.shared.currentUser!.last_name = self.surnameInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            User.shared.currentUser!.ethAddress = self.ethInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            User.shared.currentUser!.btcAddress = self.btcInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            User.shared.currentUser!.pmntAddress = self.pmntInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-
-            
             UserManager.shared.updateProfileInfo() { isUpdated in
                 DispatchQueue.main.async {
                     MBProgressHUD.hide(for: self.parent!.parent!.view, animated: true)

@@ -40,9 +40,7 @@ public class MessageManager {
                 MessageDataManager.shared.updateMessages(packet.messages)
             }
             
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .endUpdateChats, object: nil)
-            }
+            
             self.isChatsLoaded = false
         }
     }

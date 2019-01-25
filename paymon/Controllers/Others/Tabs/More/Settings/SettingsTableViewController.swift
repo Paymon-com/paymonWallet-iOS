@@ -33,18 +33,15 @@ class SettingsTableViewController : UITableViewController {
         let logOut = UIAlertAction(title: "Log out".localized, style: .destructive, handler: { (alert: UIAlertAction!) -> Void in
 //            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
-            if let startViewController = StoryBoard.main.instantiateViewController(withIdentifier: VCIdentifier.startViewController) as? PaymonViewController {
+            if let startViewController = StoryBoard.main.instantiateViewController(withIdentifier: VCIdentifier.startViewController) as? StartViewController {
                 User.shared.clearConfig()
                 
                 MessageManager.dispose()
-                
-                NetworkManager.shared.reconnect()
+                startViewController.isNeedReconnect = true
                 DispatchQueue.main.async {
                     self.navigationController?.setViewControllers([startViewController], animated: true)
                 }
             }
-            
-            
         })
         
         logOutMenu.addAction(cancel)

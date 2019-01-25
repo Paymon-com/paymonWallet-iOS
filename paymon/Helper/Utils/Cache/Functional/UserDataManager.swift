@@ -35,7 +35,7 @@ class UserDataManager {
         userData.isEmailHidden = userObject.isEmailHidden
         userData.login = userObject.login
         userData.photoUrl = userObject.photoUrl
-        userData.isContact = false
+        userData.isContact = true
         userData.btcAddress = userObject.btcAddress 
         userData.ethAddress = userObject.ethAddress
         userData.pmntAddress = userObject.pmntAddress

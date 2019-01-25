@@ -18,6 +18,7 @@ public class ChatsData: NSManagedObject {
     @NSManaged public var lastMessageText: String
     @NSManaged public var time: Int32
     @NSManaged public var id: Int32
+    @NSManaged public var creatorId: Int32
     @NSManaged public var itemType: Int16
     @NSManaged public var lastMessagePhotoUrl: String
     @NSManaged public var lastMessageFromId: Int32

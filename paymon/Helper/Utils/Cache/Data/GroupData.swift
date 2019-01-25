@@ -16,5 +16,5 @@ public class GroupData: NSManagedObject {
     @NSManaged public var creatorId: Int32
     @NSManaged public var title: String?
     @NSManaged public var users: [Int32]
-    @NSManaged public var photoUrl: String?
+    @NSManaged public var photoUrl: String
 }

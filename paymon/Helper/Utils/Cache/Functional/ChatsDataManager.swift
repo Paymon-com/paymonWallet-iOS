@@ -15,7 +15,7 @@ class ChatsDataManager {
     
     func saveGroupChatMessageData(chatsData : ChatsData, groupObject : GroupData, messageObject : RPC.Message, lastMessagePhotoUrl : String) {
         chatsData.id = groupObject.id
-        chatsData.photoUrl = groupObject.photoUrl!
+        chatsData.photoUrl = groupObject.photoUrl
         chatsData.title = groupObject.title!
         chatsData.time = messageObject.date
         chatsData.itemType = Int16(messageObject.itemType.rawValue)
@@ -26,6 +26,7 @@ class ChatsDataManager {
         }
         chatsData.lastMessagePhotoUrl = lastMessagePhotoUrl
         chatsData.isGroup = true
+        chatsData.creatorId = groupObject.creatorId
     }
     
     func saveUserChatMessageData(chatsData : ChatsData, userObject : UserData, messageObject : RPC.Message) {
@@ -57,6 +58,7 @@ class ChatsDataManager {
     }
     
     func updateGroupChats(groupObject : GroupData, messageObject : RPC.Message, lastMessagePhotoUrl : String) {
+
             CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
                 
                 if let chatsData = transaction.fetchOne(From<ChatsData>().where(\.id == groupObject.id)) {
@@ -66,10 +68,13 @@ class ChatsDataManager {
                     let chatsData = transaction.create(Into<ChatsData>())
                     self.saveGroupChatMessageData(chatsData : chatsData, groupObject : groupObject, messageObject : messageObject, lastMessagePhotoUrl : lastMessagePhotoUrl)
                 }
-            }, completion: { (nil) -> Void in})
+            }, completion: { (nil) -> Void in
+                
+            })
     }
     
     func updateUserChats(userObject: UserData, messageObject : RPC.Message) {
+        
             CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
                 
                 if let chatsData = transaction.fetchOne(From<ChatsData>().where(\.id == userObject.id)) {
@@ -78,10 +83,13 @@ class ChatsDataManager {
                     let chatsData = transaction.create(Into<ChatsData>())
                     self.saveUserChatMessageData(chatsData : chatsData, userObject : userObject, messageObject : messageObject)
                 }
-            }, completion: { (nil) -> Void in})
+            }, completion: { (nil) -> Void in
+                
+            })
     }
     
     func updateUserChats(userObject: RPC.UserObject, messageObject : RPC.Message) {
+
             CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
                 
                 if let chatsData = transaction.fetchOne(From<ChatsData>().where(\.id == userObject.id)) {
@@ -90,7 +98,9 @@ class ChatsDataManager {
                     let chatsData = transaction.create(Into<ChatsData>())
                     self.saveUserChatMessageData(chatsData : chatsData, userObject : userObject, messageObject : messageObject)
                 }
-            }, completion: { (nil) -> Void in})
+            }, completion: { (nil) -> Void in
+                
+            })
     }
     
     func getChatById(chatId : Int32) -> ChatsData? {
@@ -120,6 +130,10 @@ class ChatsDataManager {
     }
     
     func updateChatsInfo(chatId : Int32, itemType : Int16, lastMessageText : String, photoUrl : String, time : Int32) {
+        
+        if let user = ChatsDataManager.shared.getChatByIdSync(id: chatId) {
+            UserDataManager.shared.updateUserContact(id: user.id, isContact: true)
+        }
             CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
                 if let chatsData = transaction.fetchOne(From<ChatsData>().where(\.id == chatId)) {
                     chatsData.itemType = itemType

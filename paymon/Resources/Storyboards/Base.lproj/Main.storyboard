@@ -76,24 +76,13 @@
                                     <constraint firstAttribute="height" constant="1" id="KQ2-Dq-myn"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HkI-Yf-MZM">
-                                <rect key="frame" x="0.0" y="417" width="375" height="17"/>
-                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Vqa-wa-k5b" firstAttribute="top" secondItem="eyo-ZN-HFs" secondAttribute="bottom" id="1MD-iI-GC5"/>
-                            <constraint firstItem="HkI-Yf-MZM" firstAttribute="trailing" secondItem="YUk-BO-qK4" secondAttribute="trailing" id="8TC-uu-mmm"/>
-                            <constraint firstItem="HkI-Yf-MZM" firstAttribute="top" secondItem="Vqa-wa-k5b" secondAttribute="bottom" constant="2" id="B4N-iN-WSM"/>
                             <constraint firstItem="nuD-7z-F9M" firstAttribute="top" secondItem="YUk-BO-qK4" secondAttribute="top" constant="64" id="DX2-s8-WCF"/>
-                            <constraint firstItem="HkI-Yf-MZM" firstAttribute="trailing" secondItem="YUk-BO-qK4" secondAttribute="trailing" id="FQO-MO-FNj"/>
-                            <constraint firstItem="HkI-Yf-MZM" firstAttribute="leading" secondItem="YUk-BO-qK4" secondAttribute="leading" id="Sye-JP-gEc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eyo-ZN-HFs" secondAttribute="trailing" id="UbZ-CU-Uas"/>
                             <constraint firstItem="YUk-BO-qK4" firstAttribute="trailing" secondItem="Vqa-wa-k5b" secondAttribute="trailing" constant="16" id="dEB-9m-SNg"/>
-                            <constraint firstItem="HkI-Yf-MZM" firstAttribute="leading" secondItem="YUk-BO-qK4" secondAttribute="leading" id="f6V-kd-x62"/>
                             <constraint firstItem="Vqa-wa-k5b" firstAttribute="leading" secondItem="YUk-BO-qK4" secondAttribute="leading" constant="16" id="iXh-Rw-LOB"/>
                             <constraint firstItem="eyo-ZN-HFs" firstAttribute="centerX" secondItem="d61-7d-Kja" secondAttribute="centerX" id="oPG-Y8-j8i"/>
                             <constraint firstItem="eyo-ZN-HFs" firstAttribute="leading" secondItem="d61-7d-Kja" secondAttribute="leadingMargin" id="qbp-A7-ipn"/>
@@ -105,7 +94,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="grp-5p-T8Q"/>
                     <connections>
-                        <outlet property="hintLbl" destination="HkI-Yf-MZM" id="apA-PW-AEm"/>
                         <outlet property="logoImageView" destination="nuD-7z-F9M" id="ZaT-Wl-IwA"/>
                         <outlet property="signInBtn" destination="Pgb-b7-MU7" id="rwb-nb-5Jg"/>
                         <outlet property="signUpBtn" destination="fah-Mv-7aF" id="wLQ-BG-6Z2"/>

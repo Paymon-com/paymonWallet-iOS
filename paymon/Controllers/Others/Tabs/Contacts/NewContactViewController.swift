@@ -204,7 +204,6 @@ class NewContactViewController: PaymonViewController, UISearchBarDelegate {
         existUsersFilteredArray = existUsersArray
 
         contactTableView.reloadData()
-        
     }
 }
 
