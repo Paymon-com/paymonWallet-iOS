@@ -65,7 +65,7 @@ class ChatsDataManager {
                     self.saveGroupChatMessageData(chatsData : chatsData, groupObject : groupObject, messageObject : messageObject, lastMessagePhotoUrl : lastMessagePhotoUrl)
                     
                 } else {
-                    let chatsData = transaction.create(Into<ChatsData>())
+                    guard let chatsData = transaction.create(Into<ChatsData>()) as ChatsData? else {return}
                     self.saveGroupChatMessageData(chatsData : chatsData, groupObject : groupObject, messageObject : messageObject, lastMessagePhotoUrl : lastMessagePhotoUrl)
                 }
             }, completion: { (nil) -> Void in
@@ -80,7 +80,7 @@ class ChatsDataManager {
                 if let chatsData = transaction.fetchOne(From<ChatsData>().where(\.id == userObject.id)) {
                     self.saveUserChatMessageData(chatsData : chatsData, userObject : userObject, messageObject : messageObject)
                 } else {
-                    let chatsData = transaction.create(Into<ChatsData>())
+                    guard let chatsData = transaction.create(Into<ChatsData>()) as ChatsData? else {return}
                     self.saveUserChatMessageData(chatsData : chatsData, userObject : userObject, messageObject : messageObject)
                 }
             }, completion: { (nil) -> Void in
@@ -95,7 +95,7 @@ class ChatsDataManager {
                 if let chatsData = transaction.fetchOne(From<ChatsData>().where(\.id == userObject.id)) {
                     self.saveUserChatMessageData(chatsData : chatsData, userObject : userObject, messageObject : messageObject)
                 } else {
-                    let chatsData = transaction.create(Into<ChatsData>())
+                    guard let chatsData = transaction.create(Into<ChatsData>()) as ChatsData? else {return}
                     self.saveUserChatMessageData(chatsData : chatsData, userObject : userObject, messageObject : messageObject)
                 }
             }, completion: { (nil) -> Void in

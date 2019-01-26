@@ -38,14 +38,12 @@ class MessageDataManager {
                 self.saveChatMessageData(messageData: messageData, messageObject: messageObject)
             }
         }, completion: { _ -> Void in
-            print("save messages")
             self.dispatchGroup.leave()
         })
     }
     
     func updateMessage(messageObject : RPC.Message) {
         saveMessage(messageObject: messageObject)
-        
         if messageObject.to_peer is RPC.PM_peerUser {
             guard let uid = messageObject.from_id == User.shared.currentUser.id ? messageObject.to_peer.user_id : messageObject.from_id else {
                     return

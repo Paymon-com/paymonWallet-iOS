@@ -209,6 +209,7 @@ class CreateGroupViewController: PaymonViewController , UITableViewDataSource, U
                             if (response != nil) {
                                 let group:RPC.Group! = response as! RPC.Group?
                                 GroupDataManager.shared.updateGroup(groupObject: group)
+                                MessageManager.shared.loadChats()
                                 self.moveToChat(group: group)
                             }
                         }
