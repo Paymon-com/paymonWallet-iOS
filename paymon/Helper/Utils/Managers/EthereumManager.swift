@@ -123,29 +123,32 @@ class EthereumManager {
     }
     
     func initWeb() {
-        queue.qualityOfService = .background
-        queue.maxConcurrentOperationCount = 1
-        queue.addOperation {
-            self.ethKeyPath = self.userDir + "/keystore_eth_\(User.shared.currentUser.id!)"+"/key_eth.json"
-            self.ethKeystoreManager = KeystoreManager.managerForPath(self.userDir + "/keystore_eth_\(User.shared.currentUser.id!)")
-            
-            self.pmntKeyPath = self.userDir + "/keystore_pmnt_\(User.shared.currentUser.id!)"+"/key_pmnt.json"
-            self.pmntKeystoreManager = KeystoreManager.managerForPath(self.userDir + "/keystore_pmnt_\(User.shared.currentUser.id!)")
-            
-            Web3.default = Web3(infura: .mainnet)
-            self.ethWeb3 = Web3.default
-            self.pmntWeb3 = Web3.default
-            
-            self.ethWeb3.addKeystoreManager(self.ethKeystoreManager!)
-            self.pmntWeb3.addKeystoreManager(self.pmntKeystoreManager!)
+        if ethWeb3 == nil || pmntWeb3 == nil {
+            queue.qualityOfService = .background
+            queue.maxConcurrentOperationCount = 1
+            queue.addOperation {
+                self.ethKeyPath = self.userDir + "/keystore_eth_\(User.shared.currentUser.id!)"+"/key_eth.json"
+                self.ethKeystoreManager = KeystoreManager.managerForPath(self.userDir + "/keystore_eth_\(User.shared.currentUser.id!)")
+                
+                self.pmntKeyPath = self.userDir + "/keystore_pmnt_\(User.shared.currentUser.id!)"+"/key_pmnt.json"
+                self.pmntKeystoreManager = KeystoreManager.managerForPath(self.userDir + "/keystore_pmnt_\(User.shared.currentUser.id!)")
+                
+                Web3.default = Web3(infura: .mainnet)
+                self.ethWeb3 = Web3.default
+                self.pmntWeb3 = Web3.default
+                
+                self.ethWeb3.addKeystoreManager(self.ethKeystoreManager!)
+                self.pmntWeb3.addKeystoreManager(self.pmntKeystoreManager!)
+            }
         }
     }
     
-    func initEthWallet() {
+    func initEthWallet(completionHandler: @escaping () -> ()) {
         initWeb()
         if ethSender == nil {
             queue.addOperation {
                 if (self.ethKeystoreManager?.addresses.count == 0) {
+                    completionHandler()
                     return
                 } else {
                     self.ethKs = self.ethKeystoreManager?.walletForAddress((self.ethKeystoreManager?.addresses[0])!) as? EthereumKeystoreV3
@@ -154,24 +157,26 @@ class EthereumManager {
                 self.ethSender = EthSender
 
                 print("Eth sender \(EthSender)")
+                completionHandler()
             }
         }
     }
     
-    func initPmntWallet() {
+    func initPmntWallet(completionHandler: @escaping () -> ()) {
+        print("init pmnt")
         initWeb()
         if pmntSender == nil {
             queue.addOperation {
                 if (self.pmntKeystoreManager?.addresses.count == 0) {
                     print("Cant create pmnt sender")
-
+                    completionHandler()
                     return
                 } else {
                     self.pmntKs = self.pmntKeystoreManager?.walletForAddress((self.pmntKeystoreManager?.addresses[0])!) as? EthereumKeystoreV3
                 }
                 guard let PmntSender = self.pmntKs?.addresses.first else {return}
                 self.pmntSender = PmntSender
-                
+                completionHandler()
                 print("Pmnt sender \(PmntSender)")
             }
         }

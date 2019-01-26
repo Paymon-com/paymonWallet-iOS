@@ -257,6 +257,7 @@
                     <navigationItem key="navigationItem" id="dEQ-S8-9po"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="exchangeRatesView" destination="pYP-1t-IrB" id="3iE-L5-6nS"/>
                         <outlet property="moneyTableView" destination="1VH-Cx-lCM" id="xEW-sM-Lcm"/>
                         <segue destination="2Ki-0q-QZe" kind="show" id="2P3-wd-7UT"/>
                         <segue destination="Xvs-ce-ciZ" kind="show" identifier="CreateNewEthWalletViewController" id="aNT-iy-47D"/>

@@ -91,7 +91,6 @@ class EthereumTransferInformationViewController: UIViewController {
                             MBProgressHUD.hide(for: self.view, animated: true)
                         }
                         if isSent {
-//                            ExchangeRateParser.shared.parseCourseForWallet(crypto: [Money.eth, Money.pmnt], fiat: User.shared.currencyCode)
                             guard let paymentSuccessVC = self.storyboard?.instantiateViewController(withIdentifier: VCIdentifier.paymentSuccessViewController) as? PaymentSuccessViewController else {return}
                             
                             DispatchQueue.main.async {

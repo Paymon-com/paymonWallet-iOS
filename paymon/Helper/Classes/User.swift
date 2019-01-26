@@ -99,8 +99,6 @@ class User {
     
      func setUserSettings() {
         if !isSettingsWasSet {
-//            EthereumManager.shared.initEthWallet()
-//            EthereumManager.shared.initPmntWallet()
             
             if !CacheManager.isAddedStorage {
                 print("init DB")

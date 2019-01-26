@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class MoneyViewController: PaymonViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -16,12 +17,25 @@ class MoneyViewController: PaymonViewController, UITableViewDelegate, UITableVie
     private var walletWasCreated: NSObjectProtocol!
     private var updateBalance: NSObjectProtocol!
     
+    @IBOutlet weak var exchangeRatesView: ExchangeRatesUIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        if EthereumManager.shared.ethSender == nil {
-//            ExchangeRateParser.shared.parseCourseForWallet(crypto: Money.eth, fiat: User.shared.currencyCode)
-//        }
+        moneyTableView.isHidden = true
+        exchangeRatesView.isHidden = true
+        
+        let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
+
+        EthereumManager.shared.initEthWallet() {
+            EthereumManager.shared.initPmntWallet() {
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.moneyTableView.isHidden = false
+                    self.exchangeRatesView.isHidden = false
+                }
+            }
+        }
+        
 
         moneyTableView.delegate = self
         moneyTableView.dataSource = self
@@ -43,8 +57,7 @@ class MoneyViewController: PaymonViewController, UITableViewDelegate, UITableVie
     func getWalletsInfo() {
         if moneyArray != nil {
             moneyArray.removeAll()
-            /* We get the data using the class CryptoManager*/
-//            moneyArray.append(CryptoManager.shared.getBitcoinWalletInfo())
+
             moneyArray.append(CryptoManager.shared.getEthereumWalletInfo())
             moneyArray.append(CryptoManager.shared.getPaymonWalletInfo())
         }
