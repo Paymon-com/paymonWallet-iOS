@@ -21,6 +21,11 @@ class MoreViewController: UIViewController {
         setLayoutOptions()
     }
     
+    @IBAction func openProfile(_ sender: Any) {
+        guard let profileViewController = StoryBoard.user.instantiateViewController(withIdentifier: VCIdentifier.profileViewController) as? ProfileViewController else {return}
+        self.navigationController?.pushViewController(profileViewController, animated: true)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         guard let user = User.shared.currentUser as RPC.UserObject? else {
             return

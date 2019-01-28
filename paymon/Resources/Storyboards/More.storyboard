@@ -57,7 +57,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4e4-T5-PFj">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="76"/>
                                         <connections>
-                                            <segue destination="sTN-SI-86y" kind="show" id="vmV-So-lGm"/>
+                                            <action selector="openProfile:" destination="Gof-9Q-T0O" eventType="touchUpInside" id="fpg-Y6-Cdw"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -230,14 +230,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fG0-Tw-PrT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="598" y="836"/>
-        </scene>
-        <!--ProfileViewController-->
-        <scene sceneID="jsS-yR-mmN">
-            <objects>
-                <viewControllerPlaceholder storyboardName="User" referencedIdentifier="ProfileViewController" id="sTN-SI-86y" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Hc-oz-DcG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1533" y="359"/>
         </scene>
         <!--Paymon Navigation Controller-->
         <scene sceneID="my2-Dd-UCe">
