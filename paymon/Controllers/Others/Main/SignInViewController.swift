@@ -143,7 +143,7 @@ class SignInViewController: PaymonViewController, UITextFieldDelegate {
         
         self.stackTestFields.layer.masksToBounds = true
         self.stackTestFields.layer.cornerRadius = 30
-        self.signIn.layer.cornerRadius = self.signIn.frame.height/2
+        self.signIn.layer.cornerRadius = 22
         
     }
     

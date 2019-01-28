@@ -600,6 +600,14 @@
 			path = More;
 			sourceTree = "<group>";
 		};
+		B0231B8121FF185300CD74EC /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				B0231B7F21FF0E1400CD74EC /* UseriPad.storyboard */,
+			);
+			path = iPad;
+			sourceTree = "<group>";
+		};
 		B03D137221318B0500F442AF /* Wallets */ = {
 			isa = PBXGroup;
 			children = (
@@ -979,6 +987,7 @@
 		B099C9B620FDD2A900718608 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				B0231B8121FF185300CD74EC /* iPad */,
 				B099C97E20FCF7DC00718608 /* LaunchScreen.storyboard */,
 				B099C97920FCF7DB00718608 /* Main.storyboard */,
 				B0E78F5C20FF97D4008A39D4 /* Tabs.storyboard */,
@@ -993,7 +1002,6 @@
 				B0097800214C622C00191B90 /* More.storyboard */,
 				B098FAD22164D6B6006C8EC7 /* Passcode.storyboard */,
 				B0A59F7621A6DD6200F8D8A2 /* Ethereum.storyboard */,
-				B0231B7F21FF0E1400CD74EC /* UseriPad.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
