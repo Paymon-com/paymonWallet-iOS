@@ -87,29 +87,29 @@ class UpdateProfileInfoTableViewController : UITableViewController, UITextFieldD
         
     }
     
-    func checkForEmpty(textField : UITextField) -> Bool {
-        if (textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)! {
-            textField.shake()
-            return false
-        }
-        return true
-    }
+//    func checkForEmpty(textField : UITextField) -> Bool {
+//        if (textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)! {
+//            textField.shake()
+//            return false
+//        }
+//        return true
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         observerUpdateProfile = NotificationCenter.default.addObserver(forName: .updateProfile, object: nil, queue: nil ){ notification in
             
-            if !self.checkForEmpty(textField: self.nameInfo) {
-                NotificationCenter.default.post(name: .updateProfileInfoTrue, object: nil)
-                return
-            }
+//            if !self.checkForEmpty(textField: self.nameInfo) {
+//                NotificationCenter.default.post(name: .updateProfileInfoTrue, object: nil)
+//                return
+//            }
             User.shared.currentUser!.first_name = self.nameInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             
-            if !self.checkForEmpty(textField: self.surnameInfo) {
-                NotificationCenter.default.post(name: .updateProfileInfoTrue, object: nil)
-                return
-            }
+//            if !self.checkForEmpty(textField: self.surnameInfo) {
+//                NotificationCenter.default.post(name: .updateProfileInfoTrue, object: nil)
+//                return
+//            }
             
             User.shared.currentUser!.last_name = self.surnameInfo.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             

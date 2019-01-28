@@ -88,10 +88,12 @@ class UserDataManager {
     
     func updateUserPhotoUrl(id : Int32, url : String) {
         CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
-            if let userContatctData = transaction.fetchOne(From<UserData>().where(\.id == id)) {
-                userContatctData.photoUrl = url
+            if let userData = transaction.fetchOne(From<UserData>().where(\.id == id)) {
+                userData.photoUrl = url
             }
-        }, completion: { _ in })
+        }, completion: { _ in
+            ChatsDataManager.shared.updateСhatPhotoUrl(id: id, url: url)
+        })
     }
     
     func updateUserContact(id : Int32, isContact : Bool) {

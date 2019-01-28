@@ -82,11 +82,6 @@ class ExchangeRateParser{
             if response.error == nil && response.data != nil {
                 do {
                     guard let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any] else {return}
-                    if let rates = json[Money.btc] as? [String: Any] {
-                        for rate in rates {
-                            result.append(ExchangeRate(crypto: Money.btc, fiat: rate.key, value: rate.value as? Double ?? Double(rate.value as! Int)))
-                        }
-                    }
                     
                     if let rates = json[Money.eth] as? [String: Any] {
                         for rate in rates {
@@ -97,6 +92,11 @@ class ExchangeRateParser{
                     if let rates = json[Money.pmnt] as? [String: Any] {
                         for rate in rates {
                             result.append(ExchangeRate(crypto: Money.pmnt, fiat: rate.key, value: rate.value as? Double ?? Double(rate.value as! Int)))
+                        }
+                    }
+                    if let rates = json[Money.btc] as? [String: Any] {
+                        for rate in rates {
+                            result.append(ExchangeRate(crypto: Money.btc, fiat: rate.key, value: rate.value as? Double ?? Double(rate.value as! Int)))
                         }
                     }
                     completionHandler(result)

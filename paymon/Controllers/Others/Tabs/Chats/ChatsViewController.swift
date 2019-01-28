@@ -286,7 +286,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
             self.sendRequestLeaveOrClear(packet: leaveChat, chatId: chatId)
 
         })
-        let clearHistory = UIAlertAction(title: "Clear the history".localized, style: .default, handler: { (alert: UIAlertAction!) -> Void in
+        let clearHistory = UIAlertAction(title: "Clear the history".localized, style: .destructive, handler: { (alert: UIAlertAction!) -> Void in
             let clearChat = RPC.PM_clearChat(peer: peer);
             self.sendRequestLeaveOrClear(packet: clearChat, chatId: chatId)
         })

@@ -144,14 +144,6 @@ class ChatsDataManager {
             }, completion: { (nil) -> Void in})
     }
     
-    func updateChatsPhotoUrl(id : Int32, url : String) {
-        CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
-            if let chatsData = transaction.fetchOne(From<ChatsData>().where(\.id == id)) {
-                chatsData.photoUrl = url
-            }
-        }, completion: {_ in})
-    }
-    
     func getChatsDataByChatType(isGroup : Bool) -> [ChatsData] {
         
         guard let result = CacheManager.shared.dataStack.fetchAll(From<ChatsData>()
@@ -196,5 +188,13 @@ class ChatsDataManager {
 //                CacheManager.shared.dataStack.refreshAndMergeAllObjects()
                 completionHandler(true)
         })
+    }
+    
+    func updateСhatPhotoUrl(id : Int32, url : String) {
+        CacheManager.shared.dataStack.perform(asynchronous: {(transaction) -> Void in
+            if let chatData = transaction.fetchOne(From<ChatsData>().where(\.id == id)) {
+                chatData.photoUrl = url
+            }
+        }, completion: { _ in })
     }
 }

@@ -70,7 +70,9 @@ class GroupDataManager {
             if let groupData = transaction.fetchOne(From<GroupData>().where(\.id == id)) {
                 groupData.photoUrl = url
             }
-        }, completion: { _ in })
+        }, completion: { _ in
+            ChatsDataManager.shared.updateСhatPhotoUrl(id: id, url: url)
+        })
     }
     
     func updateGroupTitle(id : Int32, title : String) {

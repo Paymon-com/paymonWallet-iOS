@@ -22,6 +22,8 @@ class ForgotPasswordEmailViewController: PaymonViewController, UITextFieldDelega
         view.addGestureRecognizer(tap)
         
         loginOrEmail.delegate = self
+        
+        NetworkManager.shared.reconnect()
     }
     
     func setLayoutOptions() {
@@ -69,7 +71,7 @@ class ForgotPasswordEmailViewController: PaymonViewController, UITextFieldDelega
                         self.navigationController?.pushViewController(forgotPasswordCodeViewController, animated: true)
                     }
                 } else {
-                    if error == 27 {
+                    if error == 26 {
                         _ = SimpleOkAlertController.init(title: "Recovery password".localized, message: "This login or e-mail address is not exist".localized, vc: self)
                     } else {
                         _ = SimpleOkAlertController.init(title: "Recovery password".localized, message: "An error occurred while sending the recovery code".localized, vc: self)

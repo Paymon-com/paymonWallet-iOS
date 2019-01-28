@@ -28,7 +28,7 @@ public class UserManager {
         
         let _ = NetworkManager.shared.sendPacket(register) { p,e in
 
-            if (p as? RPC.PM_userFull) != nil {
+            if p != nil {
                 completionHandler(true)
             } else if e != nil {
                 completionHandler(false)
@@ -77,8 +77,6 @@ public class UserManager {
             }
         }
     }
-    
-    
     
     func sendCodeRecoveryToEmail(loginOrEmail : String, completionHandler: @escaping ((Bool, Int32)) -> ()) {
         let sendCodeToEmail = RPC.PM_restorePasswordRequestCode()

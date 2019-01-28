@@ -17,6 +17,7 @@ class ExchangeRetesViewController: PaymonViewController, UITableViewDelegate, UI
     @IBOutlet weak var ratesTableView: UITableView!
     
     var exchangeRates : [ExchangeRate] = []
+    var showExchangeRates : [ExchangeRate] = []
     
     @IBAction func updateClick(_ sender: Any) {
         exchangeRates.removeAll()
@@ -26,11 +27,53 @@ class ExchangeRetesViewController: PaymonViewController, UITableViewDelegate, UI
         }
         ExchangeRateParser.shared.parseAllExchangeRates() { result in
             self.exchangeRates = result
+            self.showExchangeRates = result
             DispatchQueue.main.async {
                 self.ratesTableView.reloadData()
                 self.loading.stopAnimating()
             }
         }
+    }
+    
+    func filterRates(currency : String) -> [ExchangeRate] {
+        guard let filteredArray = self.exchangeRates.filter({transaction -> Bool in
+            return transaction.fiat == currency
+        }) as [ExchangeRate]? else {return []}
+        return filteredArray
+    }
+    
+    @IBAction func filterClick(_ sender: Any) {
+        let filterMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let cancel = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+        
+        let rub = UIAlertAction(title: Money.rub, style: .default, handler: { (alert: UIAlertAction!) -> Void in
+            self.showExchangeRates = self.filterRates(currency: Money.rub)
+            self.ratesTableView.reloadData()
+            
+        })
+        let usd = UIAlertAction(title: Money.usd, style: .default, handler: { (alert: UIAlertAction!) -> Void in
+            self.showExchangeRates = self.filterRates(currency: Money.usd)
+            self.ratesTableView.reloadData()
+        })
+        
+        let eur = UIAlertAction(title: Money.eur, style: .default, handler: { (alert: UIAlertAction!) -> Void in
+            self.showExchangeRates = self.filterRates(currency: Money.eur)
+            self.ratesTableView.reloadData()
+        })
+        
+        let all = UIAlertAction(title: "All".localized, style: .default, handler: { (alert: UIAlertAction!) -> Void in
+            self.showExchangeRates = self.exchangeRates
+            self.ratesTableView.reloadData()
+        })
+        
+        filterMenu.addAction(cancel)
+        filterMenu.addAction(usd)
+        filterMenu.addAction(rub)
+        filterMenu.addAction(eur)
+        filterMenu.addAction(all)
+        
+        self.present(filterMenu, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -50,6 +93,7 @@ class ExchangeRetesViewController: PaymonViewController, UITableViewDelegate, UI
         super.viewWillAppear(true)
         ExchangeRateParser.shared.parseAllExchangeRates() { result in
             self.exchangeRates = result
+            self.showExchangeRates = result
             DispatchQueue.main.async {
                 self.ratesTableView.reloadData()
                 self.loading.stopAnimating()
@@ -70,16 +114,16 @@ class ExchangeRetesViewController: PaymonViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exchangeRates.count
+        return showExchangeRates.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellExchange") as! ExchangeRatesTableViewCell
         
-        cell.amount.setTitle("\(exchangeRates[row].value)", for: .normal)
-        cell.cryptoLabel.text = exchangeRates[row].crypto
-        cell.fiatLabel.text = exchangeRates[row].fiat
+        cell.amount.setTitle("\(showExchangeRates[row].value)", for: .normal)
+        cell.cryptoLabel.text = showExchangeRates[row].crypto
+        cell.fiatLabel.text = showExchangeRates[row].fiat
         
         return cell
         

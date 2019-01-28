@@ -6,7 +6,7 @@ class SettingsNotificationTableViewController: UITableViewController {
     
     @IBOutlet weak var vibrationCell: UITableViewCell!
     @IBOutlet weak var disturbCell: UITableViewCell!
-    @IBOutlet weak var soundCell: UITableViewCell!
+//    @IBOutlet weak var soundCell: UITableViewCell!
     
     let switchTransactions = UISwitch()
     let switchVibration = UISwitch()
@@ -24,7 +24,7 @@ class SettingsNotificationTableViewController: UITableViewController {
     func setLayoutOptions() {
 //        transactionsCell.textLabel!.text! = "Transactions".localized
         vibrationCell.textLabel!.text! = "Vibration".localized
-        soundCell.textLabel!.text! = "Sound".localized
+//        soundCell.textLabel!.text! = "Sound".localized
         disturbCell.textLabel!.text! = "Do not disturb".localized
         
         switchTransactions.onTintColor = UIColor.AppColor.Blue.primaryBlue

@@ -132,8 +132,6 @@ class NetworkManager: NSObject, NetworkManagerDelegate {
                     
                     UserDataManager.shared.updateUserPhotoUrl(id: peerUser.user_id, url: update.url)
 
-                    ChatsDataManager.shared.updateChatsPhotoUrl(id: peerUser.user_id, url: update.url)
-
                     if User.shared.currentUser?.id == peerUser.user_id {
                         User.shared.currentUser?.photoUrl.url = update.url
                         User.shared.saveConfig()
