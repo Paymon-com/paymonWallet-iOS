@@ -25,10 +25,6 @@ class Packet {
         }
     }
 
-//    optional init() {
-//
-//    }
-
     public func readParams(stream: SerializableData, exception: UnsafeMutablePointer<Bool>?) {
 
     }

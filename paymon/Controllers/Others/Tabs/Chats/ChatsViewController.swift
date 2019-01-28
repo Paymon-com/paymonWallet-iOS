@@ -17,6 +17,8 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     @IBOutlet weak var chatsTable: UITableView!
     @IBOutlet weak var segment: UISegmentedControl!
     private var removeObserver: NSObjectProtocol!
+    private var coreStoreWasCreated: NSObjectProtocol!
+
     private var messagesSaved: NSObjectProtocol!
 
     var allChats : ListMonitor<ChatsData>!
@@ -45,17 +47,20 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
             self.allChats = nil
         }
         
+        coreStoreWasCreated = NotificationCenter.default.addObserver(forName: .coreStoreWasCreated, object: nil, queue: nil) { notification in
+            self.chatsTable.dataSource = self
+            self.chatsTable.delegate = self
+            self.setChats()
+        }
+        
         setLayoutOptions()
         
-        chatsTable.dataSource = self
-        chatsTable.delegate = self
+        
         searchBar.delegate = self
         
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(ChatsViewController.refresh), for: UIControl.Event.valueChanged)
         chatsTable.addSubview(refresher)
-        
-        setChats()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,8 +87,8 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     func setChats() {
         print("set chats")
         allChats = ChatsDataManager.shared.getAllChats()
-        print(allChats)
         allChats.addObserver(self)
+        self.chatsTable.reloadData()
         
         if User.shared.isAuthenticated {
             isUpdated = false

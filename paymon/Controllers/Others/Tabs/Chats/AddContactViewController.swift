@@ -29,7 +29,6 @@ class AddContactViewController: UIViewController, UISearchBarDelegate {
 
     var outputDict = [String:[Contact]]()
     var filteredOutput = [String:[Contact]]()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,9 +75,7 @@ class AddContactViewController: UIViewController, UISearchBarDelegate {
             return
         }
         
-        filteredOutput = outputDict.filter({contact -> Bool in
-            return contact.key.lowercased().contains(searchText.lowercased())
-        })
+        filteredOutput = outputDict.mapValues {$0.filter {$0.name?.lowercased().contains(searchText.lowercased()) ?? false} }.filter {$0.value.count != 0}
         
         contactTableView.reloadData()
     }

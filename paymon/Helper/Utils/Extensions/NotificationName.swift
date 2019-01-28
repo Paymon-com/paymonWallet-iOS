@@ -41,7 +41,8 @@ extension Notification.Name {
     static let updateMessagesId = Notification.Name(rawValue: "updateMessagesId")
     static let updateCharts = Notification.Name(rawValue: "updateCharts")
     static let setMainController = Notification.Name(rawValue: "setMainController")
-    
+    static let coreStoreWasCreated = Notification.Name(rawValue: "coreStoreWasCreated")
+
     static let updateBalance = Notification.Name(rawValue: "updateBalance")
     static let updateBtcTransactions = Notification.Name(rawValue: "updateBtcTransactions")
     

@@ -120,10 +120,7 @@ class CreateGroupViewController: PaymonViewController , UITableViewDataSource, U
             return
         }
 
-        filteredOutput = outputDict.filter({user -> Bool in
-            
-            return user.key.lowercased().contains(searchText.lowercased())
-        })
+        filteredOutput = outputDict.mapValues {$0.filter {Utils.formatUserDataName($0).lowercased().contains(searchText.lowercased()) } }.filter {$0.value.count != 0}
 
         tblVContacts.reloadData()
     }

@@ -98,8 +98,12 @@ class User {
     }
     
      func setUserSettings() {
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .setMainController, object: nil)
+        }
+
         if !isSettingsWasSet {
-            
+
             if !CacheManager.isAddedStorage {
                 print("init DB")
                 CacheManager.shared.initDb()
