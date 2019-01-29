@@ -107,6 +107,7 @@
 		B055A76A2148EA5C0068CA0A /* PaymonNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B055A7692148EA5B0068CA0A /* PaymonNavigationController.swift */; };
 		B06123AF2189F084009408C0 /* CreateNewBtcWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06123AE2189F084009408C0 /* CreateNewBtcWalletViewController.swift */; };
 		B06642FD219ACF6600D55FA7 /* RestoreBtcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06642FC219ACF6600D55FA7 /* RestoreBtcViewController.swift */; };
+		B068E71021FF45A50036B41F /* ChatsiPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B068E70F21FF45A50036B41F /* ChatsiPad.storyboard */; };
 		B06960842152A6D500B1E693 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06960832152A6D500B1E693 /* CircularImageView.swift */; };
 		B06E295C21F7150B00079E1E /* CopyAndDeleteUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E295B21F7150B00079E1E /* CopyAndDeleteUIView.swift */; };
 		B07010C5216E05B4005C8685 /* DeepLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07010C4216E05B4005C8685 /* DeepLinkManager.swift */; };
@@ -367,6 +368,7 @@
 		B055A7692148EA5B0068CA0A /* PaymonNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymonNavigationController.swift; sourceTree = "<group>"; };
 		B06123AE2189F084009408C0 /* CreateNewBtcWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewBtcWalletViewController.swift; sourceTree = "<group>"; };
 		B06642FC219ACF6600D55FA7 /* RestoreBtcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreBtcViewController.swift; sourceTree = "<group>"; };
+		B068E70F21FF45A50036B41F /* ChatsiPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatsiPad.storyboard; sourceTree = "<group>"; };
 		B06960832152A6D500B1E693 /* CircularImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
 		B06E295B21F7150B00079E1E /* CopyAndDeleteUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyAndDeleteUIView.swift; sourceTree = "<group>"; };
 		B07010C4216E05B4005C8685 /* DeepLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkManager.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 			isa = PBXGroup;
 			children = (
 				B0231B7F21FF0E1400CD74EC /* UseriPad.storyboard */,
+				B068E70F21FF45A50036B41F /* ChatsiPad.storyboard */,
 			);
 			path = iPad;
 			sourceTree = "<group>";
@@ -1455,6 +1458,7 @@
 				D820C6BA21036E09001D3B00 /* (null) in Resources */,
 				B098FAD32164D6B6006C8EC7 /* Passcode.storyboard in Resources */,
 				B0C396A9210A3EFA00E0C344 /* ForgotPassword.storyboard in Resources */,
+				B068E71021FF45A50036B41F /* ChatsiPad.storyboard in Resources */,
 				D820C6BB21036E09001D3B00 /* (null) in Resources */,
 				0E0F477D210BA137004B4A3C /* Contacts.storyboard in Resources */,
 				B099C98020FCF7DC00718608 /* LaunchScreen.storyboard in Resources */,

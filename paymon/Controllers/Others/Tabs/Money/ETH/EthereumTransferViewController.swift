@@ -74,7 +74,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
             gasLimit.textColor = UIColor.white.withAlphaComponent(0.75)
             gasLimit.text = "\(21000)"
         } else {
-            gasLimit.text = "Standart fee".localized
+            gasLimit.text = "21000".localized
             gasLimit.isEnabled = false
             gasLimit.font = UIFont(name: (gasLimit.font?.fontName)!, size: 14)
             gasLimit.textColor = UIColor.white.withAlphaComponent(0.4)
@@ -143,7 +143,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     
     func setLayoutOptions() {
         self.addressView.layer.cornerRadius = 30
-        gasLimit.text = "Standart fee".localized
+        gasLimit.text = "21000".localized
         gasLimit.isEnabled = false
         let widthScreen = UIScreen.main.bounds.width
         

@@ -134,7 +134,6 @@ public class UserManager {
                 } else {
                     User.shared.currentUser = p as? RPC.PM_userSelf
                     self.authSuccess()
-                    MessageManager.shared.loadChats()
                     
                     NotificationManager.instance.postNotificationName(id: NotificationManager.userAuthorized)
                     NetworkManager.shared.sendFutureRequests()

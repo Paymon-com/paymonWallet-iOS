@@ -44,7 +44,7 @@ class CreateNewEthWalletViewController: UIViewController, UITextFieldDelegate {
     func setLayoutOptions() {
         newPassword.placeholder = "New password".localized
         repeatPassword.placeholder = "Repeat password".localized
-        passwordHint.text = "Create a password for new Ethereum wallet".localized
+        passwordHint.text = "Create a password for new Ethereum wallet. Password length is at least 8 characters.".localized
         hint.text = "Use this password when recovering your wallet and when sending tokens".localized
         hintUseMyEtherWallet.text = "If your PMNT tokens are stored on the main Ethereum wallet, click the \"Use my Etereum wallet\" button to display the PMNT wallet balance".localized
         useMyEtherWallet.setTitle("Use my Etereum wallet".localized, for: .normal)
@@ -69,12 +69,12 @@ class CreateNewEthWalletViewController: UIViewController, UITextFieldDelegate {
         password = newPassword.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         repeatPasswordString = repeatPassword.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if password.isEmpty {
+        if password.isEmpty || password.count < 8{
             newPassword.shake()
             return false
         }
         
-        if repeatPasswordString.isEmpty || repeatPasswordString != password {
+        if repeatPasswordString.isEmpty || repeatPasswordString.count < 8 || repeatPasswordString != password {
             repeatPassword.shake()
             return false
         }

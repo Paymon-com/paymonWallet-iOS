@@ -215,14 +215,14 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
 //        let clear = clearAction(at: indexPath)
         let delete = deleteAction(at: indexPath)
 
-        if let cell = chatsTable.cellForRow(at: indexPath) as? ChatsTableGroupViewCell {
-            if cell.creatorId != User.shared.currentUser.id {
-                return UISwipeActionsConfiguration(actions: [delete])
-            }
-            return UISwipeActionsConfiguration(actions: [])
-        } else {
+//        if let cell = chatsTable.cellForRow(at: indexPath) as? ChatsTableGroupViewCell {
+//            if cell.creatorId != User.shared.currentUser.id {
+//                return UISwipeActionsConfiguration(actions: [delete])
+//            }
+//            return UISwipeActionsConfiguration(actions: [])
+//        } else {
             return UISwipeActionsConfiguration(actions: [delete])
-        }
+//        }
     }
     
     @available(iOS 11.0, *)
@@ -261,15 +261,19 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         guard let cell = chatsTable.cellForRow(at: indexPath) else {return UIContextualAction()}
         if cell is ChatsTableViewCell {
             title = "Delete".localized
-        } else if cell is ChatsTableGroupViewCell {
-            title = "Leave".localized
+        } else if let groupCell = cell as? ChatsTableGroupViewCell {
+            title = groupCell.creatorId == User.shared.currentUser.id ? "Delete".localized : "Leave".localized
         }
         let action = UIContextualAction(style: .normal, title: title) { (action, view, completion) in
             
             if let actionCell = cell as? ChatsTableViewCell {
                 self.leaveAlert(chatId: actionCell.chatId, isGroup: false)
             } else if let actionGroupCell = cell as? ChatsTableGroupViewCell {
-                self.leaveAlert(chatId: actionGroupCell.chatId, isGroup: true)
+                if actionGroupCell.creatorId == User.shared.currentUser.id {
+                    self.leaveAlert(chatId: actionGroupCell.chatId, isGroup: false)
+                } else {
+                    self.leaveAlert(chatId: actionGroupCell.chatId, isGroup: true)
+                }
             }
             
             completion(true)

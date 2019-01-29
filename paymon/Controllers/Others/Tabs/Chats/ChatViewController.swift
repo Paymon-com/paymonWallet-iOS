@@ -15,7 +15,6 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     @IBOutlet weak var messageTextView: UITextView!
 
     @IBOutlet weak var backButton: UIBarButtonItem!
-    @IBOutlet weak var messageTextViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var sendButtonImage: UIImageView!
     @IBOutlet weak var messagesView: UIView!
@@ -223,7 +222,6 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     
     func setMessages() {
         messages = MessageDataManager.shared.getMessagesByChatId(chatId: chatID)
-        
         messages.addObserver(self)
 
         if messages.numberOfObjects() == 1 {
@@ -288,7 +286,10 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        messages.removeObserver(self)
+        if messages != nil {
+            messages.removeObserver(self)
+        }
+        messages = nil
         
         NotificationCenter.default.removeObserver(isLoadedMore)
         
@@ -326,6 +327,9 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
                     self.messageCountForUpdate = packet.messages.count
                     self.reloadChat()
                     MessageDataManager.shared.addMoreOldMessages(packet.messages)
+                } else {
+                    self.messageCountForUpdate = 1
+                    self.reloadChat()
                 }
             }
         }
@@ -431,7 +435,7 @@ extension ChatViewController: UITableViewDelegate {
         let contentOffset = scrollView.contentOffset.y
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
         
-        if !isLoadingMore && (maximumOffset - contentOffset <= indentTop) {
+        if !isLoadingMore && (maximumOffset - contentOffset <= indentTop) && firstLoaded {
             isLoadingMore = true
             loadMessages(offset: Int32(messages.numberOfObjects()), count : 30)
         }
@@ -473,7 +477,7 @@ extension ChatViewController: UITextViewDelegate {
         
         textView.constraints.forEach{ (constraint) in
             if constraint.firstAttribute == .height {
-                constraint.constant = estimatedSize.height
+                constraint.constant = estimatedSize.height + 4
             }
         }
         
