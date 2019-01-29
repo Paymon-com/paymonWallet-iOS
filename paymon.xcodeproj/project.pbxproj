@@ -104,7 +104,6 @@
 		B0493E622112AAE800B7AA94 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0493E612112AAE700B7AA94 /* UIColor.swift */; };
 		B04B597121AEE68F004B9263 /* PaymentSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04B597021AEE68F004B9263 /* PaymentSuccessViewController.swift */; };
 		B04B597521B145FD004B9263 /* GasInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04B597421B145FD004B9263 /* GasInfoViewController.swift */; };
-		B055A76A2148EA5C0068CA0A /* PaymonNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B055A7692148EA5B0068CA0A /* PaymonNavigationController.swift */; };
 		B06123AF2189F084009408C0 /* CreateNewBtcWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06123AE2189F084009408C0 /* CreateNewBtcWalletViewController.swift */; };
 		B06642FD219ACF6600D55FA7 /* RestoreBtcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06642FC219ACF6600D55FA7 /* RestoreBtcViewController.swift */; };
 		B068E71021FF45A50036B41F /* ChatsiPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B068E70F21FF45A50036B41F /* ChatsiPad.storyboard */; };
@@ -175,7 +174,6 @@
 		B0D43B4921401D7D0052B1A9 /* ContactWasTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D43B4821401D7D0052B1A9 /* ContactWasTableViewCell.swift */; };
 		B0D43B5E214665D70052B1A9 /* GroupChatMessageRcvViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D43B5D214665D70052B1A9 /* GroupChatMessageRcvViewCell.swift */; };
 		B0D6D08021D376C200211AD2 /* EthTxInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D6D07F21D376C200211AD2 /* EthTxInfoData.swift */; };
-		B0E78F5D20FF97D4008A39D4 /* Tabs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0E78F5C20FF97D4008A39D4 /* Tabs.storyboard */; };
 		B0EA22AD216372EE00092B8A /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EA22AC216372EE00092B8A /* MoreTableViewController.swift */; };
 		B0EA22B02163840E00092B8A /* SettingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EA22AF2163840E00092B8A /* SettingAccountViewController.swift */; };
 		B0EA22B22163845200092B8A /* SettingAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EA22B12163845200092B8A /* SettingAccountTableViewController.swift */; };
@@ -365,7 +363,6 @@
 		B0493E612112AAE700B7AA94 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B04B597021AEE68F004B9263 /* PaymentSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSuccessViewController.swift; sourceTree = "<group>"; };
 		B04B597421B145FD004B9263 /* GasInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasInfoViewController.swift; sourceTree = "<group>"; };
-		B055A7692148EA5B0068CA0A /* PaymonNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymonNavigationController.swift; sourceTree = "<group>"; };
 		B06123AE2189F084009408C0 /* CreateNewBtcWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewBtcWalletViewController.swift; sourceTree = "<group>"; };
 		B06642FC219ACF6600D55FA7 /* RestoreBtcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreBtcViewController.swift; sourceTree = "<group>"; };
 		B068E70F21FF45A50036B41F /* ChatsiPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatsiPad.storyboard; sourceTree = "<group>"; };
@@ -443,7 +440,6 @@
 		B0D43B4821401D7D0052B1A9 /* ContactWasTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactWasTableViewCell.swift; sourceTree = "<group>"; };
 		B0D43B5D214665D70052B1A9 /* GroupChatMessageRcvViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatMessageRcvViewCell.swift; sourceTree = "<group>"; };
 		B0D6D07F21D376C200211AD2 /* EthTxInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthTxInfoData.swift; sourceTree = "<group>"; };
-		B0E78F5C20FF97D4008A39D4 /* Tabs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tabs.storyboard; sourceTree = "<group>"; };
 		B0EA22AC216372EE00092B8A /* MoreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		B0EA22AF2163840E00092B8A /* SettingAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAccountViewController.swift; sourceTree = "<group>"; };
 		B0EA22B12163845200092B8A /* SettingAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAccountTableViewController.swift; sourceTree = "<group>"; };
@@ -993,7 +989,6 @@
 				B0231B8121FF185300CD74EC /* iPad */,
 				B099C97E20FCF7DC00718608 /* LaunchScreen.storyboard */,
 				B099C97920FCF7DB00718608 /* Main.storyboard */,
-				B0E78F5C20FF97D4008A39D4 /* Tabs.storyboard */,
 				B01F0DEC2108700F008FB6F0 /* User.storyboard */,
 				0EA075AB21065EE7002FF527 /* Chats.storyboard */,
 				B0C396A8210A3EFA00E0C344 /* ForgotPassword.storyboard */,
@@ -1296,7 +1291,6 @@
 			isa = PBXGroup;
 			children = (
 				D816BA342120C3CE001B6FE8 /* PaymonViewController.swift */,
-				B055A7692148EA5B0068CA0A /* PaymonNavigationController.swift */,
 			);
 			path = SuperViewController;
 			sourceTree = "<group>";
@@ -1464,7 +1458,6 @@
 				B099C98020FCF7DC00718608 /* LaunchScreen.storyboard in Resources */,
 				0E074C14210E357200CB3853 /* Setting.storyboard in Resources */,
 				B01F0DE821086E5A008FB6F0 /* Localizable.strings in Resources */,
-				B0E78F5D20FF97D4008A39D4 /* Tabs.storyboard in Resources */,
 				B000A5C3215B848F00365024 /* GameBackground.gif in Resources */,
 				B099C97B20FCF7DB00718608 /* Main.storyboard in Resources */,
 				B043973921357956004DAAAA /* Assets.xcassets in Resources */,
@@ -1628,7 +1621,6 @@
 				B099C97620FCF7DB00718608 /* AppDelegate.swift in Sources */,
 				D849F8432113A07C009B425E /* KeyGenerator.cpp in Sources */,
 				B0817C622133F9FD003A1604 /* QRScannerViewController.swift in Sources */,
-				B055A76A2148EA5C0068CA0A /* PaymonNavigationController.swift in Sources */,
 				B03D1367212F5DEE00F442AF /* BitcoinWalletViewController.swift in Sources */,
 				B042CB8E2138239000B8F195 /* EthereumTransferInformationViewController.swift in Sources */,
 				B04B597121AEE68F004B9263 /* PaymentSuccessViewController.swift in Sources */,

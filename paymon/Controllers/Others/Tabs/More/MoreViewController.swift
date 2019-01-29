@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoreViewController: UIViewController {
+class MoreViewController: PaymonViewController {
 
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var avatar: CircularImageView!

@@ -24,6 +24,8 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     var allChats : ListMonitor<ChatsData>!
     var refresher: UIRefreshControl!
     var isUpdated = false
+    
+    var isAfterPasscode = false
 
     @IBAction func segmentChanges(_ sender: Any) {
         setChatsList()
@@ -40,21 +42,28 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         }
     }
     
+    func setChatsTable() {
+        self.chatsTable.dataSource = self
+        self.chatsTable.delegate = self
+        self.setChats()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         removeObserver = NotificationCenter.default.addObserver(forName: .removeObserver, object: nil, queue: nil) { notification in
             self.allChats = nil
         }
         
         coreStoreWasCreated = NotificationCenter.default.addObserver(forName: .coreStoreWasCreated, object: nil, queue: nil) { notification in
-            self.chatsTable.dataSource = self
-            self.chatsTable.delegate = self
-            self.setChats()
+            self.setChatsTable()
         }
         
         setLayoutOptions()
         
+        if isAfterPasscode {
+            setChatsTable()
+        }
         
         searchBar.delegate = self
         
@@ -138,15 +147,17 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     }
     
     func setChatsList() {
-        switch segment.selectedSegmentIndex {
-        case 0:
-            allChats.refetch([OrderBy<ChatsData>(.descending(\.time)), Where<ChatsData>("isGroup == %d", 0)])
-        case 1:
-            allChats.refetch([.init(), OrderBy<ChatsData>(.descending(\.time))])
-        case 2:
-            allChats.refetch([OrderBy<ChatsData>(.descending(\.time)), Where<ChatsData>("isGroup == %d", 1)])
-        default:
-            break
+        if allChats != nil {
+            switch segment.selectedSegmentIndex {
+            case 0:
+                allChats.refetch([OrderBy<ChatsData>(.descending(\.time)), Where<ChatsData>("isGroup == %d", 0)])
+            case 1:
+                allChats.refetch([.init(), OrderBy<ChatsData>(.descending(\.time))])
+            case 2:
+                allChats.refetch([OrderBy<ChatsData>(.descending(\.time)), Where<ChatsData>("isGroup == %d", 1)])
+            default:
+                break
+            }
         }
     }
     
@@ -185,6 +196,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     }
     
     func setLayoutOptions() {
+        
         
         self.view.setGradientLayer(frame: self.view.bounds, topColor: UIColor.AppColor.Black.primaryBlackLight.cgColor, bottomColor: UIColor.AppColor.Black.primaryBlack.cgColor)
         

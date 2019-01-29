@@ -101,10 +101,12 @@ class PasscodeViewController: PaymonViewController {
             }
             
             if newPassword == User.shared.securityPasscodeValue {
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                let tabsViewController = StoryBoard.tabs.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
-                
-                appDelegate.window?.rootViewController = tabsViewController
+                let tabsViewController = StoryBoard.main.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
+                tabsViewController.isAfterPasscode = true
+                DispatchQueue.main.async {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.window?.rootViewController = tabsViewController
+                }
             } else {
                 AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
                 clearInputRow()
@@ -187,10 +189,13 @@ extension PasscodeViewController : UICollectionViewDelegate, UICollectionViewDat
                     
                     if wasCorrect {
                         DispatchQueue.main.async {
-                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                            let tabsViewController = StoryBoard.tabs.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
-                            
-                            appDelegate.window?.rootViewController = tabsViewController
+                            let tabsViewController = StoryBoard.main.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
+                            tabsViewController.isAfterPasscode = true
+
+                            DispatchQueue.main.async {
+                                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                appDelegate.window?.rootViewController = tabsViewController
+                            }
                         }
                     } else {
                         print("incorrect Touch ID")

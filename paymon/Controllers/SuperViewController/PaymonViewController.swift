@@ -13,7 +13,10 @@ class PaymonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.setTransparent()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue): UIColor.white.withAlphaComponent(0.7)]
+        self.navigationController?.navigationBar.tintColor = UIColor.AppColor.Blue.primaryBlue
+
     }
 
     override func didReceiveMemoryWarning() {

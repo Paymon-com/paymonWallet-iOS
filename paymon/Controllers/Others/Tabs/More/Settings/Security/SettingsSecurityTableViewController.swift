@@ -21,6 +21,10 @@ class SettingsSecurityTableViewController: UITableViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
     func setLayoutOptions() {
         passwordProtectCell.textLabel!.text! = "Password protect".localized
         
@@ -59,6 +63,7 @@ class SettingsSecurityTableViewController: UITableViewController {
             passcodeViewController.isNewPassword = true
             
             let transitionDelegate = DeckTransitioningDelegate()
+            
             passcodeViewController.transitioningDelegate = transitionDelegate
             passcodeViewController.modalPresentationStyle = .custom
             
@@ -66,10 +71,5 @@ class SettingsSecurityTableViewController: UITableViewController {
         } else {
             User.shared.savePasscode(passcodeValue: "", setPasscode : false)
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
     }
 }
