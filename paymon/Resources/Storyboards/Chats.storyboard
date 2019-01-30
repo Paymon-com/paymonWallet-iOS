@@ -276,7 +276,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCQ-Zm-69A" userLabel="ActionView">
-                                <rect key="frame" x="0.0" y="671" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="723" width="375" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2OI-Yc-l4Y">
                                         <rect key="frame" x="8" y="8" width="175.5" height="32"/>
@@ -327,7 +327,7 @@
                             <constraint firstItem="6yX-Sc-QDf" firstAttribute="leading" secondItem="jPt-0K-biK" secondAttribute="leading" id="QZH-36-Sav"/>
                             <constraint firstItem="9eE-ad-oA1" firstAttribute="top" secondItem="6yX-Sc-QDf" secondAttribute="bottom" id="TI0-9d-5sR"/>
                             <constraint firstItem="6yX-Sc-QDf" firstAttribute="top" secondItem="jPt-0K-biK" secondAttribute="top" id="Wh0-O2-ozf"/>
-                            <constraint firstItem="jPt-0K-biK" firstAttribute="bottom" secondItem="zCQ-Zm-69A" secondAttribute="bottom" constant="-52" id="XUR-JY-FLO"/>
+                            <constraint firstItem="jPt-0K-biK" firstAttribute="bottom" secondItem="zCQ-Zm-69A" secondAttribute="bottom" constant="-104" id="XUR-JY-FLO"/>
                             <constraint firstItem="6yX-Sc-QDf" firstAttribute="leading" secondItem="jPt-0K-biK" secondAttribute="leading" id="gpT-dq-QZY"/>
                             <constraint firstItem="9eE-ad-oA1" firstAttribute="leading" secondItem="jPt-0K-biK" secondAttribute="leading" id="hxf-fg-T5P"/>
                             <constraint firstItem="zCQ-Zm-69A" firstAttribute="leading" secondItem="jPt-0K-biK" secondAttribute="leading" id="l85-MO-vzZ"/>

@@ -28,12 +28,13 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     @IBOutlet weak var doneItem: UIBarButtonItem!
     @IBOutlet weak var actionMenuBottomSpace: NSLayoutConstraint!
     @IBOutlet weak var deleteMessages: UIButton!
+    private var removeObserver: NSObjectProtocol!
 
     private var isLoadedMore: NSObjectProtocol!
     
     var mainTint : UIColor!
     
-    let standartBottomSpace = CGFloat(-52)
+    let standartBottomSpace = CGFloat(-104)
     let indentTop = CGFloat(100.0)
     
     var messages : ListMonitor<ChatMessageData>!
@@ -246,6 +247,10 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         super.viewDidLoad()
         self.chatTableView.isHidden = true
         
+        removeObserver = NotificationCenter.default.addObserver(forName: .removeObserver, object: nil, queue: nil) { notification in
+            self.messages = nil
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
         
@@ -289,7 +294,6 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         if messages != nil {
             messages.removeObserver(self)
         }
-        messages = nil
         
         NotificationCenter.default.removeObserver(isLoadedMore)
         
@@ -461,7 +465,7 @@ extension ChatViewController: UITableViewDelegate {
         label.text = messages.sectionInfoAtIndex(safeSectionIndex: section)!.name
         label.textColor = UIColor.white.withAlphaComponent(0.4)
         label.center = tableView.center
-        label.font = UIFont.boldSystemFont(ofSize: 10)
+        label.font = !SetterStoryboards.shared.isiPad ? UIFont.boldSystemFont(ofSize: 10) : UIFont.boldSystemFont(ofSize: 16)
         label.textAlignment = .center
         label.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi));
         return label

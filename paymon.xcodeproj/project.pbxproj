@@ -76,6 +76,8 @@
 		B019555B20FFAD7500F3DDB0 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = B019555420FFAD7400F3DDB0 /* Request.m */; };
 		B019555C20FFAD7500F3DDB0 /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019555520FFAD7500F3DDB0 /* RPC.swift */; };
 		B019556220FFADA500F3DDB0 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019555E20FFADA500F3DDB0 /* NetworkReachability.swift */; };
+		B01C180D2201DFB400A26CB7 /* ContactsiPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B01C180C2201DFB400A26CB7 /* ContactsiPad.storyboard */; };
+		B01C180F2201E45B00A26CB7 /* MoreiPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B01C180E2201E45B00A26CB7 /* MoreiPad.storyboard */; };
 		B01F0DE821086E5A008FB6F0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B01F0DEA21086E5A008FB6F0 /* Localizable.strings */; };
 		B01F0DED2108700F008FB6F0 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B01F0DEC2108700F008FB6F0 /* User.storyboard */; };
 		B01F0DF621087264008FB6F0 /* ProfileInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F0DF021087263008FB6F0 /* ProfileInfoTableViewController.swift */; };
@@ -330,6 +332,8 @@
 		B019555420FFAD7400F3DDB0 /* Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
 		B019555520FFAD7500F3DDB0 /* RPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
 		B019555E20FFADA500F3DDB0 /* NetworkReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
+		B01C180C2201DFB400A26CB7 /* ContactsiPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactsiPad.storyboard; sourceTree = "<group>"; };
+		B01C180E2201E45B00A26CB7 /* MoreiPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoreiPad.storyboard; sourceTree = "<group>"; };
 		B01F0DD42108661A008FB6F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B01F0DD52108661A008FB6F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		B01F0DD6210866FF008FB6F0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -603,6 +607,8 @@
 			children = (
 				B0231B7F21FF0E1400CD74EC /* UseriPad.storyboard */,
 				B068E70F21FF45A50036B41F /* ChatsiPad.storyboard */,
+				B01C180C2201DFB400A26CB7 /* ContactsiPad.storyboard */,
+				B01C180E2201E45B00A26CB7 /* MoreiPad.storyboard */,
 			);
 			path = iPad;
 			sourceTree = "<group>";
@@ -1451,12 +1457,14 @@
 				B00977FF214C60B000191B90 /* Games.storyboard in Resources */,
 				D820C6BA21036E09001D3B00 /* (null) in Resources */,
 				B098FAD32164D6B6006C8EC7 /* Passcode.storyboard in Resources */,
+				B01C180D2201DFB400A26CB7 /* ContactsiPad.storyboard in Resources */,
 				B0C396A9210A3EFA00E0C344 /* ForgotPassword.storyboard in Resources */,
 				B068E71021FF45A50036B41F /* ChatsiPad.storyboard in Resources */,
 				D820C6BB21036E09001D3B00 /* (null) in Resources */,
 				0E0F477D210BA137004B4A3C /* Contacts.storyboard in Resources */,
 				B099C98020FCF7DC00718608 /* LaunchScreen.storyboard in Resources */,
 				0E074C14210E357200CB3853 /* Setting.storyboard in Resources */,
+				B01C180F2201E45B00A26CB7 /* MoreiPad.storyboard in Resources */,
 				B01F0DE821086E5A008FB6F0 /* Localizable.strings in Resources */,
 				B000A5C3215B848F00365024 /* GameBackground.gif in Resources */,
 				B099C97B20FCF7DB00718608 /* Main.storyboard in Resources */,

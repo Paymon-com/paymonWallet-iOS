@@ -196,11 +196,13 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     }
     
     func setLayoutOptions() {
-        
-        
         self.view.setGradientLayer(frame: self.view.bounds, topColor: UIColor.AppColor.Black.primaryBlackLight.cgColor, bottomColor: UIColor.AppColor.Black.primaryBlack.cgColor)
         
         self.navigationItem.title = "Update...".localized
+        self.segment.layer.cornerRadius = self.segment.frame.height/2
+        self.segment.layer.masksToBounds = true
+        self.segment.layer.borderWidth = 1.0
+        self.segment.layer.borderColor = UIColor.gray.withAlphaComponent(0.7).cgColor
 
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.8)]
         searchBar.placeholder = "Search for users or groups".localized
@@ -211,7 +213,6 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         segment.setTitle("Groups".localized, forSegmentAt: 2)
         
         segment.selectedSegmentIndex = 1
-
     }
     
     @IBAction func onClickAddContact(_ sender: Any) {
