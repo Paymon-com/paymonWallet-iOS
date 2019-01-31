@@ -145,6 +145,9 @@ class EthereumWalletViewController: PaymonViewController {
         funcsMenu.addAction(backup)
         funcsMenu.addAction(delete)
         
+        if let popoverController = funcsMenu.popoverPresentationController {
+            popoverController.barButtonItem = (sender as! UIBarButtonItem)
+        }
         
         self.present(funcsMenu, animated: true, completion: nil)
     }
@@ -192,7 +195,7 @@ class EthereumWalletViewController: PaymonViewController {
     
     func setLayoutOptions() {
         
-        self.balanceView.layer.cornerRadius = 30
+        self.balanceView.layer.cornerRadius = self.balanceView.frame.height/2
         let widthScreen = UIScreen.main.bounds.width
         
         self.balanceView.setGradientLayer(frame: CGRect(x: 0, y: 0, width: widthScreen, height: self.balanceView.frame.height), topColor: UIColor.AppColor.Blue.ethereumBalanceLight.cgColor, bottomColor: UIColor.AppColor.Blue.ethereumBalanceDark.cgColor)

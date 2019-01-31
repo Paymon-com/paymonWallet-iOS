@@ -19,6 +19,12 @@ class SimpleOkAlertController: UIAlertController {
             
         }))
         
+        if let popoverController = self.popoverPresentationController {
+            popoverController.sourceView = vc.view
+            popoverController.sourceRect = CGRect(x: vc.view.bounds.midX, y: vc.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+        
         DispatchQueue.main.async {
             if !self.isBeingPresented {
                 vc.present(self, animated: true)

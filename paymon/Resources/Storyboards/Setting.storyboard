@@ -276,6 +276,7 @@
                         <outlet property="aboutApp" destination="DpM-Ys-Uxl" id="UEs-hz-02f"/>
                         <outlet property="account" destination="0xV-Hz-O2L" id="gAt-Ee-pwI"/>
                         <outlet property="logOut" destination="jg2-NY-fdl" id="eXf-1M-Sqm"/>
+                        <outlet property="logOutCell" destination="5qZ-mm-cbI" id="Jlx-zY-1Ad"/>
                         <outlet property="notifications" destination="E6C-Xa-mtO" id="qIg-Tb-pHm"/>
                         <outlet property="security" destination="0LZ-hC-qPO" id="hNK-gk-GyR"/>
                         <outlet property="wallet" destination="7fq-5h-kVM" id="oib-Kk-o2R"/>

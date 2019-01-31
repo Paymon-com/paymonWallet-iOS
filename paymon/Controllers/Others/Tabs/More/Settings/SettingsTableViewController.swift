@@ -10,6 +10,7 @@ class SettingsTableViewController : UITableViewController {
     @IBOutlet weak var security: UILabel!
     
     @IBOutlet weak var logOut: UIButton!
+    @IBOutlet weak var logOutCell: UITableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +47,12 @@ class SettingsTableViewController : UITableViewController {
         
         logOutMenu.addAction(cancel)
         logOutMenu.addAction(logOut)
+        
+        if let popoverController = logOutMenu.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
         
         self.present(logOutMenu, animated: true, completion: nil)
     }

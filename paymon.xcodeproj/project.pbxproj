@@ -89,6 +89,7 @@
 		B0229B1F2202E33A000B749D /* SettingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0229B1E2202E339000B749D /* SettingAccountViewController.swift */; };
 		B0229B212202E347000B749D /* SettingsSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0229B202202E347000B749D /* SettingsSecurityViewController.swift */; };
 		B0229B232202E538000B749D /* MoneyiPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0229B222202E538000B749D /* MoneyiPad.storyboard */; };
+		B0229B252202EF2E000B749D /* EthereumiPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0229B242202EF2E000B749D /* EthereumiPad.storyboard */; };
 		B0231B8021FF0E1400CD74EC /* UseriPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0231B7F21FF0E1400CD74EC /* UseriPad.storyboard */; };
 		B024C9B021E61F8C0022BC42 /* OfficialDocs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B024C9AF21E61F8C0022BC42 /* OfficialDocs.swift */; };
 		B024C9B221E6205A0022BC42 /* OfficialDocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B024C9B121E6205A0022BC42 /* OfficialDocsViewController.swift */; };
@@ -353,6 +354,7 @@
 		B0229B1E2202E339000B749D /* SettingAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingAccountViewController.swift; sourceTree = "<group>"; };
 		B0229B202202E347000B749D /* SettingsSecurityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSecurityViewController.swift; sourceTree = "<group>"; };
 		B0229B222202E538000B749D /* MoneyiPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoneyiPad.storyboard; sourceTree = "<group>"; };
+		B0229B242202EF2E000B749D /* EthereumiPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EthereumiPad.storyboard; sourceTree = "<group>"; };
 		B0231B7F21FF0E1400CD74EC /* UseriPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UseriPad.storyboard; sourceTree = "<group>"; };
 		B024C9AF21E61F8C0022BC42 /* OfficialDocs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialDocs.swift; sourceTree = "<group>"; };
 		B024C9B121E6205A0022BC42 /* OfficialDocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialDocsViewController.swift; sourceTree = "<group>"; };
@@ -618,6 +620,7 @@
 				B0229B162202CB68000B749D /* PasscodeiPad.storyboard */,
 				B0229B182202D8A5000B749D /* SettingiPad.storyboard */,
 				B0229B222202E538000B749D /* MoneyiPad.storyboard */,
+				B0229B242202EF2E000B749D /* EthereumiPad.storyboard */,
 			);
 			path = iPad;
 			sourceTree = "<group>";
@@ -1457,6 +1460,7 @@
 			files = (
 				0EA075AC21065EE7002FF527 /* Chats.storyboard in Resources */,
 				B0A59F7721A6DD6200F8D8A2 /* Ethereum.storyboard in Resources */,
+				B0229B252202EF2E000B749D /* EthereumiPad.storyboard in Resources */,
 				B0097801214C622C00191B90 /* More.storyboard in Resources */,
 				B03D1364212F548600F442AF /* Bitcoin.storyboard in Resources */,
 				B0231B8021FF0E1400CD74EC /* UseriPad.storyboard in Resources */,

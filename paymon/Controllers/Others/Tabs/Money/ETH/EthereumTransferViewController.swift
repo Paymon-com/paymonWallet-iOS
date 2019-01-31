@@ -76,7 +76,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
         } else {
             gasLimit.text = "21000".localized
             gasLimit.isEnabled = false
-            gasLimit.font = UIFont(name: (gasLimit.font?.fontName)!, size: 14)
+            gasLimit.font = UIFont(name: (gasLimit.font?.fontName)!, size: !SetterStoryboards.shared.isiPad ? 14 : 22)
             gasLimit.textColor = UIColor.white.withAlphaComponent(0.4)
             gasLimitValue = 21000
         }

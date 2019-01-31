@@ -73,6 +73,10 @@ class ExchangeRetesViewController: PaymonViewController, UITableViewDelegate, UI
         filterMenu.addAction(eur)
         filterMenu.addAction(all)
         
+        if let popoverController = filterMenu.popoverPresentationController {
+            popoverController.barButtonItem = (sender as! UIBarButtonItem)
+        }
+        
         self.present(filterMenu, animated: true, completion: nil)
     }
     
