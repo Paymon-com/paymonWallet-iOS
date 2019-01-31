@@ -26,6 +26,7 @@ class SettingsSecurityTableViewController: UITableViewController {
     }
     
     func setLayoutOptions() {
+        
         passwordProtectCell.textLabel!.text! = "Password protect".localized
         
         switchPasswordProtect.onTintColor = UIColor.AppColor.Blue.primaryBlue

@@ -113,7 +113,7 @@ class PasscodeViewController: PaymonViewController {
                 newPassword = ""
             }
             
-        } else if isNewPassword {
+        } else {
             
             if newPassword.isEmpty {
                 for i in inputKeyCode {
@@ -157,6 +157,9 @@ extension PasscodeViewController : UICollectionViewDelegate, UICollectionViewDat
         case 1, 2:
             cell.label.text = data.value
             cell.clearBackground()
+            if data.type == 1 {
+                cell.isHidden = isNewPassword
+            }
 
             return cell
         default:

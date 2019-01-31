@@ -108,7 +108,6 @@
                             <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="settingsClick:" destination="abj-fd-l8O" id="vds-yY-Nit"/>
-                                <segue destination="RgP-p3-TgD" kind="show" id="35B-Rd-EAT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -123,14 +122,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZg-VR-YSv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="623.20000000000005" y="408.84557721139436"/>
-        </scene>
-        <!--SettingsViewController-->
-        <scene sceneID="97h-nc-I2B">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Setting" referencedIdentifier="SettingsViewController" id="RgP-p3-TgD" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q1d-XB-ftX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1542" y="293"/>
         </scene>
         <!--More Information Table-->
         <scene sceneID="CTI-U5-w7t">

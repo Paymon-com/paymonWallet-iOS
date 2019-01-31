@@ -34,8 +34,7 @@ class SettingsNotificationTableViewController: UITableViewController {
 //        transactionsCell.accessoryView = switchTransactions
         vibrationCell.accessoryView = switchVibration
         disturbCell.accessoryView = switchWorry
-        
-        
+
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

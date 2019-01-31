@@ -21,6 +21,11 @@ class MoreViewController: PaymonViewController {
         setLayoutOptions()
     }
     
+    @IBAction func settingsClick(_ sender: Any) {
+        guard let settingsViewController = StoryBoard.setting.instantiateViewController(withIdentifier: VCIdentifier.settingsViewController) as? SettingsViewController else {return}
+        self.navigationController?.pushViewController(settingsViewController, animated: true)
+    }
+    
     @IBAction func openProfile(_ sender: Any) {
         guard let profileViewController = StoryBoard.user.instantiateViewController(withIdentifier: VCIdentifier.profileViewController) as? ProfileViewController else {return}
         self.navigationController?.pushViewController(profileViewController, animated: true)

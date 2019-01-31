@@ -107,8 +107,7 @@
                         <barButtonItem key="rightBarButtonItem" image="Settings" id="YZC-q0-Gu9">
                             <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="settingsClick:" destination="Gof-9Q-T0O" id="7S1-Cq-bIT"/>
-                                <segue destination="AfD-0T-GkA" kind="show" id="nB7-rj-FF8"/>
+                                <action selector="settingsClick:" destination="Gof-9Q-T0O" id="1Xu-tB-HMY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -123,14 +122,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ya8-Lt-b52" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="623.20000000000005" y="408.84557721139436"/>
-        </scene>
-        <!--SettingsViewController-->
-        <scene sceneID="mWF-gR-Vv7">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Setting" referencedIdentifier="SettingsViewController" id="AfD-0T-GkA" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kQ3-Me-FTE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1542" y="293"/>
         </scene>
         <!--More Information Table-->
         <scene sceneID="sEV-6R-gT8">

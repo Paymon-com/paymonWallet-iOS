@@ -13,6 +13,7 @@
         <!--Settings View Controller-->
         <scene sceneID="qZj-NI-Zzv">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WKm-jx-46B" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SettingsViewController" title="Settings View Controller" id="eer-zw-zyR" customClass="SettingsViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lle-Oy-otN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -36,7 +37,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="Qy9-iq-Gou"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WKm-jx-46B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1354" y="3151"/>
         </scene>
@@ -406,6 +406,7 @@
         <!--Settings Notification View Controller-->
         <scene sceneID="Bau-By-M4z">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdp-Dh-Rqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Settings Notification View Controller" id="61e-18-5be" customClass="SettingsNotificationViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="25m-vc-tn6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
@@ -429,7 +430,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="eio-Kh-9in"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdp-Dh-Rqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2894" y="1997"/>
         </scene>
@@ -501,6 +501,7 @@
         <!--Title-->
         <scene sceneID="02c-5N-hfQ">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2UM-JA-5OS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="GXR-Qm-fWE" customClass="NotificationSoundViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UXU-ke-eXX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -524,7 +525,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="bCW-fS-lyC"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2UM-JA-5OS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3574" y="2006"/>
         </scene>
@@ -562,6 +562,7 @@
         <!--Settings Security View Controller-->
         <scene sceneID="i7r-tf-ogl">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zye-6S-VNc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="1qO-sg-WLi" customClass="SettingsSecurityViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Ks-yH-BwO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
@@ -584,7 +585,6 @@
                         <viewLayoutGuide key="safeArea" id="Heo-QN-TO9"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zye-6S-VNc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2894" y="3931"/>
         </scene>
@@ -637,6 +637,7 @@
         <!--Title-->
         <scene sceneID="Clk-Gm-b8g">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YHo-w5-BxU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="f7e-4S-mu1" customClass="SettingAccountViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Ae-rs-k9U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
@@ -660,7 +661,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="pGH-Ys-VJF"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YHo-w5-BxU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2894" y="2612"/>
         </scene>
@@ -736,6 +736,7 @@
         <!--Settings Wallet View Controller-->
         <scene sceneID="hba-Pb-BsB">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RmE-qL-Asq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="2O9-8c-ryy" customClass="SettingsWalletViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xea-70-AYE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
@@ -759,7 +760,6 @@
                         <viewLayoutGuide key="safeArea" id="Nc9-ln-VQC"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RmE-qL-Asq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2894" y="3233"/>
         </scene>
