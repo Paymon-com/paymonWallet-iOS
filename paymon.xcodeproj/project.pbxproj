@@ -88,6 +88,7 @@
 		B0229B1D2202E330000B749D /* SettingsWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0229B1C2202E330000B749D /* SettingsWalletViewController.swift */; };
 		B0229B1F2202E33A000B749D /* SettingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0229B1E2202E339000B749D /* SettingAccountViewController.swift */; };
 		B0229B212202E347000B749D /* SettingsSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0229B202202E347000B749D /* SettingsSecurityViewController.swift */; };
+		B0229B232202E538000B749D /* MoneyiPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0229B222202E538000B749D /* MoneyiPad.storyboard */; };
 		B0231B8021FF0E1400CD74EC /* UseriPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0231B7F21FF0E1400CD74EC /* UseriPad.storyboard */; };
 		B024C9B021E61F8C0022BC42 /* OfficialDocs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B024C9AF21E61F8C0022BC42 /* OfficialDocs.swift */; };
 		B024C9B221E6205A0022BC42 /* OfficialDocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B024C9B121E6205A0022BC42 /* OfficialDocsViewController.swift */; };
@@ -351,6 +352,7 @@
 		B0229B1C2202E330000B749D /* SettingsWalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWalletViewController.swift; sourceTree = "<group>"; };
 		B0229B1E2202E339000B749D /* SettingAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingAccountViewController.swift; sourceTree = "<group>"; };
 		B0229B202202E347000B749D /* SettingsSecurityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSecurityViewController.swift; sourceTree = "<group>"; };
+		B0229B222202E538000B749D /* MoneyiPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoneyiPad.storyboard; sourceTree = "<group>"; };
 		B0231B7F21FF0E1400CD74EC /* UseriPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UseriPad.storyboard; sourceTree = "<group>"; };
 		B024C9AF21E61F8C0022BC42 /* OfficialDocs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialDocs.swift; sourceTree = "<group>"; };
 		B024C9B121E6205A0022BC42 /* OfficialDocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialDocsViewController.swift; sourceTree = "<group>"; };
@@ -615,6 +617,7 @@
 				B01C180E2201E45B00A26CB7 /* MoreiPad.storyboard */,
 				B0229B162202CB68000B749D /* PasscodeiPad.storyboard */,
 				B0229B182202D8A5000B749D /* SettingiPad.storyboard */,
+				B0229B222202E538000B749D /* MoneyiPad.storyboard */,
 			);
 			path = iPad;
 			sourceTree = "<group>";
@@ -1467,6 +1470,7 @@
 				B01C180D2201DFB400A26CB7 /* ContactsiPad.storyboard in Resources */,
 				B0C396A9210A3EFA00E0C344 /* ForgotPassword.storyboard in Resources */,
 				B068E71021FF45A50036B41F /* ChatsiPad.storyboard in Resources */,
+				B0229B232202E538000B749D /* MoneyiPad.storyboard in Resources */,
 				B0229B172202CB68000B749D /* PasscodeiPad.storyboard in Resources */,
 				D820C6BB21036E09001D3B00 /* (null) in Resources */,
 				0E0F477D210BA137004B4A3C /* Contacts.storyboard in Resources */,
