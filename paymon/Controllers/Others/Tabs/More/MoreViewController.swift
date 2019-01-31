@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoreViewController: UIViewController {
+class MoreViewController: PaymonViewController {
 
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var avatar: CircularImageView!
@@ -19,6 +19,16 @@ class MoreViewController: UIViewController {
         super.viewDidLoad()
 
         setLayoutOptions()
+    }
+    
+    @IBAction func settingsClick(_ sender: Any) {
+        guard let settingsViewController = StoryBoard.setting.instantiateViewController(withIdentifier: VCIdentifier.settingsViewController) as? SettingsViewController else {return}
+        self.navigationController?.pushViewController(settingsViewController, animated: true)
+    }
+    
+    @IBAction func openProfile(_ sender: Any) {
+        guard let profileViewController = StoryBoard.user.instantiateViewController(withIdentifier: VCIdentifier.profileViewController) as? ProfileViewController else {return}
+        self.navigationController?.pushViewController(profileViewController, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

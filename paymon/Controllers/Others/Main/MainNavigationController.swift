@@ -12,8 +12,6 @@ class MainNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setLayoutOptions()
         
         if isLoggedIn() {
                     
@@ -23,7 +21,7 @@ class MainNavigationController: UINavigationController {
                     self.pushViewController(passcodeViewController, animated: true)
                 }
             } else {
-                let tabsViewController = StoryBoard.tabs.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
+                let tabsViewController = StoryBoard.main.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
                 DispatchQueue.main.async {
                     self.pushViewController(tabsViewController, animated: true)
                 }
@@ -40,10 +38,5 @@ class MainNavigationController: UINavigationController {
     
     func isLoggedIn() -> Bool {
         return User.shared.currentUser != nil
-    }
-    
-    func setLayoutOptions() {
-        self.navigationBar.setTransparent()
-        self.navigationBar.titleTextAttributes = [NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue): UIColor.white.withAlphaComponent(0.7)]
     }
 }

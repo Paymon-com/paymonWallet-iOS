@@ -25,6 +25,8 @@ class MoneyNotCreatedTableViewCell: UITableViewCell {
     var heightBackground : CGFloat!
     var viewController : UIViewController!
     
+    var isiPad = false
+    
     @IBOutlet weak var backgroundWidth: NSLayoutConstraint!
     
     @IBAction func addClick(_ sender: Any) {
@@ -82,17 +84,18 @@ class MoneyNotCreatedTableViewCell: UITableViewCell {
     }
     
     func setLayoutOptions() {
+        self.isiPad = SetterStoryboards.shared.isiPad
         self.widthScreen = UIScreen.main.bounds.width
         
         self.background.setGradientLayer(frame: CGRect(x: 0, y: self.background.frame.minY, width: widthScreen, height: self.background.frame.height), topColor: UIColor.white.cgColor, bottomColor: UIColor.AppColor.Blue.primaryBlueUltraLight.cgColor)
-        self.background.layer.cornerRadius = 30
-        self.backgroundWidth.constant = self.widthScreen/2.5
+        self.background.layer.cornerRadius = !isiPad ? 30 : 50
+        self.backgroundWidth.constant = !isiPad ? self.widthScreen/2.5 : self.widthScreen/4
         
-        add.layer.cornerRadius = 20
+        add.layer.cornerRadius = !isiPad ? 20 : 25
         add.contentEdgeInsets = UIEdgeInsets(top: 6, left: 12, bottom: 8, right: 12)
         addRightConstraint.constant = 16
         
-        buttonsView.layer.cornerRadius = 30
+        buttonsView.layer.cornerRadius = !isiPad ? 30 : 50
         buttonsView.alpha = 0
         create.setTitle("Create".localized, for: .normal)
         restore.setTitle("Restore".localized, for: .normal)
@@ -132,7 +135,7 @@ class MoneyNotCreatedTableViewCell: UITableViewCell {
         
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.add.alpha = 1
-            self.backgroundWidth.constant = self.widthScreen/2.5
+            self.backgroundWidth.constant = !self.isiPad ? self.widthScreen/2.5 : self.widthScreen/4
             self.layoutIfNeeded()
         })
     }

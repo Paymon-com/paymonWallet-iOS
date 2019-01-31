@@ -118,7 +118,7 @@ class SignInViewController: PaymonViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         setMainController = NotificationCenter.default.addObserver(forName: .setMainController, object: nil, queue: nil) {
             notification in
-            let tabsViewController = StoryBoard.tabs.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
+            let tabsViewController = StoryBoard.main.instantiateViewController(withIdentifier: VCIdentifier.tabsViewController) as! TabsViewController
             DispatchQueue.main.async {
                 self.present(tabsViewController, animated: true)
             }
@@ -143,7 +143,7 @@ class SignInViewController: PaymonViewController, UITextFieldDelegate {
         
         self.stackTestFields.layer.masksToBounds = true
         self.stackTestFields.layer.cornerRadius = 30
-        self.signIn.layer.cornerRadius = self.signIn.frame.height/2
+        self.signIn.layer.cornerRadius = 22
         
     }
     

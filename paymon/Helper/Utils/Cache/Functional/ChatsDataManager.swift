@@ -185,7 +185,7 @@ class ChatsDataManager {
                 transaction.delete(chatsData)
         },
             completion: { _ in
-//                CacheManager.shared.dataStack.refreshAndMergeAllObjects()
+                MessageDataManager.shared.deleteAllMessagesByToId(chatId : chatsData.id)
                 completionHandler(true)
         })
     }

@@ -24,6 +24,8 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     var allChats : ListMonitor<ChatsData>!
     var refresher: UIRefreshControl!
     var isUpdated = false
+    
+    var isAfterPasscode = false
 
     @IBAction func segmentChanges(_ sender: Any) {
         setChatsList()
@@ -40,21 +42,28 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         }
     }
     
+    func setChatsTable() {
+        self.chatsTable.dataSource = self
+        self.chatsTable.delegate = self
+        self.setChats()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         removeObserver = NotificationCenter.default.addObserver(forName: .removeObserver, object: nil, queue: nil) { notification in
             self.allChats = nil
         }
         
         coreStoreWasCreated = NotificationCenter.default.addObserver(forName: .coreStoreWasCreated, object: nil, queue: nil) { notification in
-            self.chatsTable.dataSource = self
-            self.chatsTable.delegate = self
-            self.setChats()
+            self.setChatsTable()
         }
         
         setLayoutOptions()
         
+        if isAfterPasscode {
+            setChatsTable()
+        }
         
         searchBar.delegate = self
         
@@ -138,15 +147,17 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     }
     
     func setChatsList() {
-        switch segment.selectedSegmentIndex {
-        case 0:
-            allChats.refetch([OrderBy<ChatsData>(.descending(\.time)), Where<ChatsData>("isGroup == %d", 0)])
-        case 1:
-            allChats.refetch([.init(), OrderBy<ChatsData>(.descending(\.time))])
-        case 2:
-            allChats.refetch([OrderBy<ChatsData>(.descending(\.time)), Where<ChatsData>("isGroup == %d", 1)])
-        default:
-            break
+        if allChats != nil {
+            switch segment.selectedSegmentIndex {
+            case 0:
+                allChats.refetch([OrderBy<ChatsData>(.descending(\.time)), Where<ChatsData>("isGroup == %d", 0)])
+            case 1:
+                allChats.refetch([.init(), OrderBy<ChatsData>(.descending(\.time))])
+            case 2:
+                allChats.refetch([OrderBy<ChatsData>(.descending(\.time)), Where<ChatsData>("isGroup == %d", 1)])
+            default:
+                break
+            }
         }
     }
     
@@ -185,10 +196,13 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     }
     
     func setLayoutOptions() {
-        
         self.view.setGradientLayer(frame: self.view.bounds, topColor: UIColor.AppColor.Black.primaryBlackLight.cgColor, bottomColor: UIColor.AppColor.Black.primaryBlack.cgColor)
         
         self.navigationItem.title = "Update...".localized
+        self.segment.layer.cornerRadius = self.segment.frame.height/2
+        self.segment.layer.masksToBounds = true
+        self.segment.layer.borderWidth = 1.0
+        self.segment.layer.borderColor = UIColor.gray.withAlphaComponent(0.7).cgColor
 
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.8)]
         searchBar.placeholder = "Search for users or groups".localized
@@ -199,7 +213,6 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         segment.setTitle("Groups".localized, forSegmentAt: 2)
         
         segment.selectedSegmentIndex = 1
-
     }
     
     @IBAction func onClickAddContact(_ sender: Any) {
@@ -215,14 +228,14 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
 //        let clear = clearAction(at: indexPath)
         let delete = deleteAction(at: indexPath)
 
-        if let cell = chatsTable.cellForRow(at: indexPath) as? ChatsTableGroupViewCell {
-            if cell.creatorId != User.shared.currentUser.id {
-                return UISwipeActionsConfiguration(actions: [delete])
-            }
-            return UISwipeActionsConfiguration(actions: [])
-        } else {
+//        if let cell = chatsTable.cellForRow(at: indexPath) as? ChatsTableGroupViewCell {
+//            if cell.creatorId != User.shared.currentUser.id {
+//                return UISwipeActionsConfiguration(actions: [delete])
+//            }
+//            return UISwipeActionsConfiguration(actions: [])
+//        } else {
             return UISwipeActionsConfiguration(actions: [delete])
-        }
+//        }
     }
     
     @available(iOS 11.0, *)
@@ -261,15 +274,19 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         guard let cell = chatsTable.cellForRow(at: indexPath) else {return UIContextualAction()}
         if cell is ChatsTableViewCell {
             title = "Delete".localized
-        } else if cell is ChatsTableGroupViewCell {
-            title = "Leave".localized
+        } else if let groupCell = cell as? ChatsTableGroupViewCell {
+            title = groupCell.creatorId == User.shared.currentUser.id ? "Delete".localized : "Leave".localized
         }
         let action = UIContextualAction(style: .normal, title: title) { (action, view, completion) in
             
             if let actionCell = cell as? ChatsTableViewCell {
                 self.leaveAlert(chatId: actionCell.chatId, isGroup: false)
             } else if let actionGroupCell = cell as? ChatsTableGroupViewCell {
-                self.leaveAlert(chatId: actionGroupCell.chatId, isGroup: true)
+                if actionGroupCell.creatorId == User.shared.currentUser.id {
+                    self.leaveAlert(chatId: actionGroupCell.chatId, isGroup: false)
+                } else {
+                    self.leaveAlert(chatId: actionGroupCell.chatId, isGroup: true)
+                }
             }
             
             completion(true)
@@ -301,6 +318,12 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         funcsMenu.addAction(clearHistory)
         if isGroup {
             funcsMenu.addAction(leave)
+        }
+        
+        if let popoverController = funcsMenu.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
         }
         
         self.present(funcsMenu, animated: true, completion: nil)

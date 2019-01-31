@@ -32,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NotificationManagerListen
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        SetterStoryboards.shared.isiPad = UIScreen.main.bounds.size.height >= 1024 ? true : false
+        SetterStoryboards.shared.setStoryboard()
+        
+        
         User.shared.loadConfig()
         NetworkManager.shared.reconnect()
 

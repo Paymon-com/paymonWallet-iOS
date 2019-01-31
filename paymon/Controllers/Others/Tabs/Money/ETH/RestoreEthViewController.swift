@@ -123,7 +123,7 @@ class RestoreEthViewController: UIViewController, UIDocumentPickerDelegate {
         
         UIView.animate(withDuration: 0.5, animations: {
             self.downloadFileHeight.constant = 0
-            self.fileNameHeight.constant = 44
+            self.fileNameHeight.constant = !SetterStoryboards.shared.isiPad ? 44 : 64
             self.view.layoutIfNeeded()
         })
     }

@@ -171,4 +171,12 @@ class MessageDataManager {
         }
     }
     
+    func deleteAllMessagesByToId(chatId : Int32) {
+        CacheManager.shared.dataStack.perform(asynchronous: { (transaction) -> Void in
+            transaction.deleteAll(
+                From<ChatMessageData>()
+            .where(\.toId == chatId))
+        }, completion: {_ in})
+    }
+    
 }

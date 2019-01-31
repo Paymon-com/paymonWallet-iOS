@@ -69,7 +69,7 @@
 "Change password"="Изменить пароль";
 "This login or e-mail address is not exist"="Такой логин или адрес электронной почты не существует";
 "An error occurred while sending the recovery code"="Произошла ошибка при отправке кода восстановления";
-"You entered an invalid recovery code"="Вы ввели не верный код восстановления";
+"You entered an invalid recovery code"="Вы ввели неверный код восстановления";
 "An error occurred while changing the password"="Во время изменения пароля произошла ошибка";
 "Password changed successfully"="Пароль был успешно изменен";
 
@@ -190,7 +190,7 @@
 "Enter your secret password"="Введите ваш секретный пароль";
 "Input your password"="Введите пароль";
 "You can protect your application with a digital password"="Вы можете защитить свое приложение цифровым паролем";
-"Incorrect password"="Не верный пароль";
+"Incorrect password"="Неверный пароль";
 
 /*Account settings*/
 "Show email"="Показать электронный адрес";
@@ -286,7 +286,7 @@
 "Total amount"="Конечная сумма";
 "Transfer info"="Информация";
 "Create a password for new Bitcoin wallet"="Придумайте пароль для нового Bitcoin кошелька";
-"Create a password for new Ethereum wallet"="Придумайте пароль для нового Ethereum кошелька";
+"Create a password for new Ethereum wallet. Password length is at least 8 characters."="Придумайте пароль для нового Ethereum кошелька. Длина пароля не менее 8 символов.";
 "Use this password when recovering your wallet and when sending tokens"="Используйте этот пароль при восстановлении кошелька и при отправке денежных средств";
 
 "New Bitcoin wallet"="Новый Bitcoin кошелек";

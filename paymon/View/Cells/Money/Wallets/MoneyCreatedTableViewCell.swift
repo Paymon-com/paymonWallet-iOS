@@ -18,7 +18,8 @@ class MoneyCreatedTableViewCell: UITableViewCell {
     @IBOutlet weak var download: UILabel!
     
     var cryptoType : CryptoType!
-    
+    var isiPad = false
+
     @IBOutlet weak var background: UIView!
     var heightBackground : CGFloat!
     
@@ -29,12 +30,14 @@ class MoneyCreatedTableViewCell: UITableViewCell {
     }
     
     func setLayoutOptions() {
+        self.isiPad = SetterStoryboards.shared.isiPad
+
         download.text = "Download...".localized
 
         let width: CGFloat = UIScreen.main.bounds.width
         
         self.background.setGradientLayer(frame: CGRect(x: 0, y: self.background.frame.minY, width: width, height: self.background.frame.height), topColor: UIColor.white.cgColor, bottomColor: UIColor.AppColor.Blue.primaryBlueUltraLight.cgColor)
-        self.background.layer.cornerRadius = 30
+        self.background.layer.cornerRadius = !isiPad ? 30 : 50
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

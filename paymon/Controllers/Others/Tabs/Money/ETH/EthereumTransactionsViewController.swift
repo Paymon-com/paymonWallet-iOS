@@ -53,6 +53,10 @@ class EthereumTransactionsViewController: UIViewController, UITableViewDelegate,
         filterMenu.addAction(received)
         filterMenu.addAction(all)
         
+        if let popoverController = filterMenu.popoverPresentationController {
+            popoverController.barButtonItem = (sender as! UIBarButtonItem)
+        }
+        
         self.present(filterMenu, animated: true, completion: nil)
     }
     

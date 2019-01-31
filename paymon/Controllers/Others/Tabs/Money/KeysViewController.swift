@@ -38,8 +38,8 @@ class KeysViewController: UIViewController {
     @IBAction func shareClick(_ sender: Any) {
         let shareActivity = UIActivityViewController(activityItems: [keyValue], applicationActivities: [])
         
-        shareActivity.popoverPresentationController?.sourceView = self.view
-        shareActivity.popoverPresentationController?.sourceRect = self.view.bounds
+        shareActivity.popoverPresentationController?.sourceView = sender as! UIButton
+        shareActivity.popoverPresentationController?.sourceRect = (sender as! UIButton).bounds
         
         present(shareActivity, animated: true)
     }

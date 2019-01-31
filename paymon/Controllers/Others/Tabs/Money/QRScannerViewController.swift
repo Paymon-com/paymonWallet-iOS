@@ -101,7 +101,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
                         resultValid = false
                         
                         let errorScanAlert = UIAlertController(title: "QR-Code scan".localized, message:
-                            "Can't read this QR-code".localized, preferredStyle: .actionSheet)
+                            "Can't read this QR-code".localized, preferredStyle: .alert)
                         
                         errorScanAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
                             self.session.startRunning()

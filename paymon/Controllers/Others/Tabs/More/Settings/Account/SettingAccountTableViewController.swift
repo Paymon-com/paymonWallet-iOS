@@ -27,6 +27,7 @@ class SettingAccountTableViewController: UITableViewController {
     }
     
     func setLayoutOptions() {
+        
         showEmailCell.textLabel!.text! = "Hide email address".localized
         timeFormatCell.textLabel!.text! = "24-Hour Time".localized
 

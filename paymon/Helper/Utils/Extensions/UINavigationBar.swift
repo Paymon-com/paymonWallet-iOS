@@ -21,3 +21,12 @@ extension UITabBar {
         self.shadowImage = UIImage()
     }
 }
+
+class PaymonNavBar : UINavigationBar {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.setTransparent()
+        self.titleTextAttributes = [NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue): UIColor.white.withAlphaComponent(0.7)]
+        self.tintColor = UIColor.AppColor.Blue.primaryBlue
+    }
+}
