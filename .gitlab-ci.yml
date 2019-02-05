@@ -11,6 +11,4 @@ build_project:
     - set -o pipefail
     - xcodebuild build -workspace paymon.xcworkspace -scheme paymon -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty -c
   tags:
-    - ios_10-3
-    - osx_10_14_2
-    - xcode_10-1
+    - paymonteam-ios
