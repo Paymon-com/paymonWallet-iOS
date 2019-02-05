@@ -29,7 +29,7 @@ class PushNotificationManager {
         let answer = UNTextInputNotificationAction(identifier: PushNotification.Action.answer, title: "Answer".localized, options: [], textInputButtonTitle: "Send".localized, textInputPlaceholder: "To write a message".localized)
         
         let skip = UNNotificationAction(identifier: PushNotification.Action.skip, title: "Skip".localized, options: [])
-        let mute = UNNotificationAction(identifier: PushNotification.Action.mute, title: "Do not disturb for 8 hours".localized, options: [])
+//        let mute = UNNotificationAction(identifier: PushNotification.Action.mute, title: "Do not disturb for 8 hours".localized, options: [])
         
         let messages = UNNotificationCategory(identifier: PushNotification.Category.messages, actions: [answer, skip], intentIdentifiers: [], options: [])
         

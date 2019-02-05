@@ -198,9 +198,9 @@
 		B0FCA7BC2196ED53002D1D31 /* BackupBtcWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FCA7BB2196ED53002D1D31 /* BackupBtcWalletViewController.swift */; };
 		D816BA352120C3CE001B6FE8 /* PaymonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D816BA342120C3CE001B6FE8 /* PaymonViewController.swift */; };
 		D820C6B421012FD8001D3B00 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D820C6B121012FD7001D3B00 /* NetworkManager.swift */; };
-		D820C6BA21036E09001D3B00 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
-		D820C6BB21036E09001D3B00 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
-		D820C70C21037EDA001D3B00 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		D820C6BA21036E09001D3B00 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		D820C6BB21036E09001D3B00 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		D820C70C21037EDA001D3B00 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		D849F83B21139ADB009B425E /* NetworkManager_Wrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = D849F83A21139ADA009B425E /* NetworkManager_Wrapper.mm */; };
 		D849F8402113A07C009B425E /* BuffersStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D849F83C2113A07B009B425E /* BuffersStorage.cpp */; };
 		D849F8412113A07C009B425E /* ByteArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D849F83D2113A07B009B425E /* ByteArray.cpp */; };
@@ -1473,12 +1473,12 @@
 				B0097801214C622C00191B90 /* More.storyboard in Resources */,
 				B03D1364212F548600F442AF /* Bitcoin.storyboard in Resources */,
 				B0231B8021FF0E1400CD74EC /* UseriPad.storyboard in Resources */,
-				D820C70C21037EDA001D3B00 /* BuildFile in Resources */,
+				D820C70C21037EDA001D3B00 /* (null) in Resources */,
 				B0229B192202D8A5000B749D /* SettingiPad.storyboard in Resources */,
 				B01F0DED2108700F008FB6F0 /* User.storyboard in Resources */,
 				B0ACFFF021122EB6007BE95C /* Money.storyboard in Resources */,
 				B00977FF214C60B000191B90 /* Games.storyboard in Resources */,
-				D820C6BA21036E09001D3B00 /* BuildFile in Resources */,
+				D820C6BA21036E09001D3B00 /* (null) in Resources */,
 				B098FAD32164D6B6006C8EC7 /* Passcode.storyboard in Resources */,
 				B0B0883722082C580090DC6F /* GoogleService-Info.plist in Resources */,
 				B01C180D2201DFB400A26CB7 /* ContactsiPad.storyboard in Resources */,
@@ -1486,7 +1486,7 @@
 				B068E71021FF45A50036B41F /* ChatsiPad.storyboard in Resources */,
 				B0229B232202E538000B749D /* MoneyiPad.storyboard in Resources */,
 				B0229B172202CB68000B749D /* PasscodeiPad.storyboard in Resources */,
-				D820C6BB21036E09001D3B00 /* BuildFile in Resources */,
+				D820C6BB21036E09001D3B00 /* (null) in Resources */,
 				0E0F477D210BA137004B4A3C /* Contacts.storyboard in Resources */,
 				B099C98020FCF7DC00718608 /* LaunchScreen.storyboard in Resources */,
 				0E074C14210E357200CB3853 /* Setting.storyboard in Resources */,
@@ -1972,7 +1972,7 @@
 					"\"$(SRCROOT)/Modules/breadwallet-core/secp256k1\"",
 				);
 				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/Cellar/cryptopp/7.0.0/lib,
 					/usr/local/Cellar/openssl/1.0.2o_2/lib,
@@ -2042,7 +2042,7 @@
 					"\"$(SRCROOT)/Modules/breadwallet-core/secp256k1\"",
 				);
 				INFOPLIST_FILE = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/Cellar/cryptopp/7.0.0/lib,
 					/usr/local/Cellar/openssl/1.0.2o_2/lib,
@@ -2089,7 +2089,7 @@
 					"\"$(SRCROOT)/Modules/breadwallet-core/secp256k1\"",
 				);
 				INFOPLIST_FILE = paymon/Application/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2133,7 +2133,7 @@
 					"\"$(SRCROOT)/Modules/breadwallet-core/secp256k1\"",
 				);
 				INFOPLIST_FILE = paymon/Application/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
