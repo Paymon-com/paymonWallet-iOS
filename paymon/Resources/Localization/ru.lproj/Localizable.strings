@@ -48,6 +48,7 @@
 "You did not verify your account by email \n %@ \n\n Send mail again?"="Вы не подтвердили аккаунт по электронной почте \n %@ \n\n Отправить письмо еще раз?";
 "The letter was sent"="Письмо было отправлено";
 "The email was not sent. Check your internet connection."="Письмо не было отправлено. Проверьте подключение к интернету.";
+"Check your internet connection"="Проверьте подключение к интернету";
 
 "Login length is at least 3 characters"="Длина логина не менее 3 символов";
 "Password length is at least 8 characters"="Длина пароля не менее 8 символов";

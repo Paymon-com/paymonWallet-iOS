@@ -20,6 +20,8 @@ target 'paymon' do
     pod 'KeychainAccess'
     pod 'BlockiesSwift'
     pod 'DeckTransition', '~> 2.0'
+    pod 'Firebase/Core'
+    pod 'Firebase/Messaging'
 
     # Pods for paymon
 

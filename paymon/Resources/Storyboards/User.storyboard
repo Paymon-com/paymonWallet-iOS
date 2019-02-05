@@ -23,7 +23,7 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Cz-sy-nOY" customClass="CircularImageView" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="16" y="13" width="50" height="50"/>
-                                        <color key="backgroundColor" white="0.70620263400000005" alpha="0.15397135419999999" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.15397135419999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="6B2-uz-plM"/>
                                             <constraint firstAttribute="width" constant="50" id="kU4-rO-ouQ"/>
@@ -147,7 +147,7 @@
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qlk-W8-vuc" userLabel="Update Profile Photo" customClass="CircularImageView" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="141.5" y="8" width="60" height="60"/>
-                                        <color key="backgroundColor" white="0.70620263400000005" alpha="0.15397135419999999" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.15397135419999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="2Ti-Kc-zRw"/>
                                             <constraint firstAttribute="height" constant="60" id="Ncj-iv-cj4"/>

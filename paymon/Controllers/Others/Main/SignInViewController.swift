@@ -32,6 +32,12 @@ class SignInViewController: PaymonViewController, UITextFieldDelegate {
     }
     
     @IBAction func signInClick(_ sender: Any) {
+        
+        if !Connectivity.isConnectedToInternet {
+            _ = SimpleOkAlertController.init(title: "Login failed".localized, message: "Check your internet connection".localized, vc: self)
+            return
+        }
+        
         if (login.text?.isEmpty)! {
             login.shake()
             return

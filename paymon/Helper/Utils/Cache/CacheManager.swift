@@ -36,7 +36,6 @@ public class CacheManager {
                     CacheManager.isAddedStorage = true
                     UserDataManager.shared.updateOrCreateUser(userObject: User.shared.currentUser)
                     
-                    print("Storage was added")
                     DispatchQueue.main.async {
                         NotificationCenter.default.post(name: .coreStoreWasCreated, object: nil)
                     }
@@ -51,7 +50,6 @@ public class CacheManager {
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .removeObserver, object: nil)
             }
-            
             self.dataStack = nil
             CacheManager.isAddedStorage = false
         }

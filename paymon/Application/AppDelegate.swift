@@ -8,8 +8,8 @@
 
 import UIKit
 import UserNotifications
-//import web3swift
-//import Geth
+import FirebaseCore
+import FirebaseInstanceID
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, NotificationManagerListener, UNUserNotificationCenterDelegate {
@@ -31,10 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NotificationManagerListen
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        FirebaseApp.configure()
+
         SetterStoryboards.shared.isiPad = UIScreen.main.bounds.size.height >= 1024 ? true : false
         SetterStoryboards.shared.setStoryboard()
-        
         
         User.shared.loadConfig()
         NetworkManager.shared.reconnect()
@@ -45,8 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NotificationManagerListen
 
         UNUserNotificationCenter.current().delegate = self
         PushNotificationManager.shared.registrForNotification(application: application)
-        //setup ether
-//        loadEthenWallet()
 
         return true
     }
@@ -92,30 +90,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NotificationManagerListen
         completionHandler([.alert, .badge, .sound])
     }
     
-    
-//    func loadEthenWallet() {
-//        //Choose your namespace and password
-//        guard let _ = UserDefaults.instance.getEthernAddress() else {
-//            let passphrase = "qwerty"
-//            let config = EthAccountConfiguration(namespace: "walletA", password: passphrase)
-//            
-//            //Call launch with configuration to create a keystore and account
-//            //keystoreA: The encrypted private and public key for wallet A
-//            //accountA : An Ethereum account
-//            let (keystore, account): (GethKeyStore?,GethAccount?) = EthAccountCoordinator.default.launch(config)
-//            UserDefaults.instance.setEthernAddress(value: account?.getAddress().getHex())
-//            KeystoreService().keystore = keystore
-//            self.keystore.keystore = keystore
-//            Keychain().passphrase = passphrase
-//            let jsonKey = try? keystore?.exportKey(account, passphrase: passphrase, newPassphrase: passphrase)
-//            let keychain = Keychain()
-//            keychain.jsonKey = jsonKey!
-//            keychain.passphrase = passphrase
-//            return
-//        }
-//        
-//    }
-
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -151,9 +125,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NotificationManagerListen
                 NetworkManager.shared.reconnect()
             }
         }
-//        else if id == NotificationManager.authByTokenFailed {
-//            User.clearConfig()
-//        }
     }
 }
 

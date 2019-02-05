@@ -35,6 +35,8 @@ class CreateNewEthWalletViewController: UIViewController, UITextFieldDelegate {
         newPassword.delegate = self
         repeatPassword.delegate = self
         setLayoutOptions()
+        self.view.addEndEditingTapper()
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {

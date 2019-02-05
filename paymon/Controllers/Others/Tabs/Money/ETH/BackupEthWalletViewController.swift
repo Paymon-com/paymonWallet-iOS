@@ -25,6 +25,7 @@ class BackupEthWalletViewController: UIViewController, UITextFieldDelegate, UIPo
     
     override func viewDidLoad() {
         setLayoutOptions()
+        self.view.addEndEditingTapper()
     }
     
     func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {

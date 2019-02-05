@@ -14,7 +14,7 @@ extension UIImageView {
         
         if !url.isEmpty {
 
-            self.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "NonPhoto"), options: [.refreshCached], completed: nil)
+            self.sd_setImage(with: URL(string: url), placeholderImage: nil, options: [.refreshCached], completed: nil)
 
         }
         

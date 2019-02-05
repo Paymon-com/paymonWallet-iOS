@@ -35,7 +35,7 @@ class RestoreEthViewController: UIViewController, UIDocumentPickerDelegate {
     
     override func viewDidLoad() {
         setLayoutOptions()
-        
+
         pmntWalletWasCreatedByEth = NotificationCenter.default.addObserver(forName: .ethWalletWasCreated, object: nil, queue: nil) {
             notification in
             self.pmntWalletWasRestoredByEth()
