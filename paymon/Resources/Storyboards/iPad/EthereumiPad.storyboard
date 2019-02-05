@@ -333,10 +333,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fv4-Hj-7ne" userLabel="Wallet info view">
                                         <rect key="frame" x="0.0" y="64.5" width="512" height="63.5"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EtherClear" translatesAutoresizingMaskIntoConstraints="NO" id="wlG-52-gur">
-                                                <rect key="frame" x="16" y="16" width="23" height="32"/>
+                                            <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EtherClear" translatesAutoresizingMaskIntoConstraints="NO" id="wlG-52-gur">
+                                                <rect key="frame" x="16" y="16" width="28" height="32"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="23" id="FBw-13-T0W"/>
+                                                    <constraint firstAttribute="width" constant="28" id="FBw-13-T0W"/>
                                                     <constraint firstAttribute="height" constant="32" id="zWk-rP-tX9"/>
                                                 </constraints>
                                             </imageView>
@@ -347,7 +347,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wru-RH-EaI">
-                                                <rect key="frame" x="55" y="12.5" width="101" height="39"/>
+                                                <rect key="frame" x="60" y="12.5" width="101" height="39"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                                 <state key="normal" title="Your wallet">
                                                     <color key="titleColor" red="0.68274689830000002" green="0.78635056950000004" blue="0.95144550120000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -557,21 +557,21 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ARp-DI-Vh5">
                                                 <rect key="frame" x="0.0" y="0.0" width="512" height="84"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EtherClear" translatesAutoresizingMaskIntoConstraints="NO" id="LEw-l6-qZU">
-                                                        <rect key="frame" x="16" y="26" width="23" height="32"/>
+                                                    <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EtherClear" translatesAutoresizingMaskIntoConstraints="NO" id="LEw-l6-qZU">
+                                                        <rect key="frame" x="16" y="26" width="25" height="32"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="23" id="JKc-id-83s"/>
+                                                            <constraint firstAttribute="width" constant="25" id="JKc-id-83s"/>
                                                             <constraint firstAttribute="height" constant="32" id="z88-h7-Wpx"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBN-yY-KBb">
-                                                        <rect key="frame" x="55" y="12" width="41.5" height="21.5"/>
+                                                        <rect key="frame" x="57" y="12" width="41.5" height="21.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhD-d5-gyh">
-                                                        <rect key="frame" x="55" y="45.5" width="100.5" height="26.5"/>
+                                                        <rect key="frame" x="57" y="45.5" width="100.5" height="26.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                                         <color key="textColor" red="0.68274689830000002" green="0.78635056950000004" blue="0.95144550120000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -609,21 +609,21 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bF3-wQ-Xia">
                                                 <rect key="frame" x="0.0" y="84" width="512" height="106.5"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EtherClear" translatesAutoresizingMaskIntoConstraints="NO" id="Plb-Xp-bov">
-                                                        <rect key="frame" x="16" y="37" width="23" height="32"/>
+                                                    <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EtherClear" translatesAutoresizingMaskIntoConstraints="NO" id="Plb-Xp-bov">
+                                                        <rect key="frame" x="16" y="37" width="25" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="1gQ-XT-sC9"/>
-                                                            <constraint firstAttribute="width" constant="23" id="rcj-3L-GLK"/>
+                                                            <constraint firstAttribute="width" constant="25" id="rcj-3L-GLK"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1g-Yk-FhW">
-                                                        <rect key="frame" x="55" y="12" width="19.5" height="21.5"/>
+                                                        <rect key="frame" x="57" y="12" width="19.5" height="21.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="1wt9q3go8qfhof8g1wt9q3go8qfhof8goafasdf43f1wt9q3go8qfhof8goafasdf43foafasdf43f" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgK-Ta-xne">
-                                                        <rect key="frame" x="55" y="41.5" width="441" height="53"/>
+                                                        <rect key="frame" x="57" y="41.5" width="439" height="53"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                                         <color key="textColor" red="0.68274689830000002" green="0.78635056950000004" blue="0.95144550120000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -964,7 +964,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6q-fk-FGZ">
-                                                    <rect key="frame" x="16" y="85" width="704" height="1"/>
+                                                    <rect key="frame" x="16" y="85" width="480" height="1"/>
                                                     <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="XGu-hu-tSa"/>
@@ -979,22 +979,19 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Anton  " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PlH-Kw-Ck1">
-                                                    <rect key="frame" x="73" y="30" width="180" height="26.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="180" id="oXD-fW-pK5"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="73" y="30" width="296.5" height="26.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:47" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgd-6F-Vo4">
-                                                    <rect key="frame" x="675.5" y="11" width="44.5" height="21.5"/>
+                                                    <rect key="frame" x="451.5" y="11" width="44.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+47623.24" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LYR-8b-cH7">
-                                                    <rect key="frame" x="261" y="48" width="459" height="29"/>
+                                                    <rect key="frame" x="377.5" y="48" width="118.5" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
                                                     <color key="textColor" red="0.55634254220000001" green="0.97934550050000002" blue="0.0" alpha="0.60236378209999997" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1033,7 +1030,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transactions list is empty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGs-Vg-84e">
-                                                    <rect key="frame" x="238.5" y="28.5" width="259" height="29"/>
+                                                    <rect key="frame" x="126.5" y="28.5" width="259" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>

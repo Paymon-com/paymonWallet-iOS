@@ -56,7 +56,7 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     }
     
     @IBAction func deleteMessagesClick(_ sender: Any) {
-        if isEdit {
+        if isEdit && !messagesForDelete.isEmpty {
             let alertController = UIAlertController(title: "Remove messages".localized, message: "Are you sure you want to delete these messages?".localized, preferredStyle: .alert)
             
             let confirmAction = UIAlertAction(title: "Remove".localized, style: .default) { _ in
@@ -183,7 +183,7 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     func listMonitor(_ monitor: ListMonitor<ChatMessageData>, didInsertObject object: ChatMessageData, toIndexPath indexPath: IndexPath) {
 
         if object.toId == chatID {
-            self.chatTableView.insertRows(at: [indexPath], with: .none)
+            self.chatTableView.insertRows(at: [indexPath], with: .bottom)
         }
     }
     
@@ -192,7 +192,11 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     }
     
     func listMonitor(_ monitor: ListMonitor<ChatMessageData>, didInsertSection sectionInfo: NSFetchedResultsSectionInfo, toSectionIndex sectionIndex: Int) {
-            self.chatTableView.insertSections(IndexSet(integer: sectionIndex), with: .none)
+            self.chatTableView.insertSections(IndexSet(integer: sectionIndex), with: .bottom)
+    }
+    
+    func listMonitor(_ monitor: ListMonitor<ChatMessageData>, didDeleteSection sectionInfo: NSFetchedResultsSectionInfo, fromSectionIndex sectionIndex: Int) {
+        self.chatTableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
     }
     
     func listMonitor(_ monitor: ListMonitor<ChatMessageData>, didUpdateObject object: ChatMessageData, atIndexPath indexPath: IndexPath) {
@@ -291,15 +295,7 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if messages != nil {
-            messages.removeObserver(self)
-        }
-        
         NotificationCenter.default.removeObserver(isLoadedMore)
-        
-        if let nc = UIApplication.shared.keyWindow?.rootViewController as? MainNavigationController {
-            nc.navigationBar.isHidden = true
-        }
         
     }
     
@@ -318,24 +314,30 @@ class ChatViewController: PaymonViewController, ListSectionObserver {
         if User.shared.currentUser == nil || chatID == 0 {
             return
         }
-        let packet = RPC.PM_getChatMessages()
         
-        packet.chatID = isGroup ? RPC.PM_peerGroup(group_id: chatID) : RPC.PM_peerUser(user_id: chatID)
-        packet.count = count
-        packet.offset = offset
-        
-        NetworkManager.shared.sendPacket(packet) {response, e in
-            if response == nil { return }
-            if let packet = response as? RPC.PM_chatMessages {
-                if (packet.messages.count != 0) {
-                    self.messageCountForUpdate = packet.messages.count
-                    self.reloadChat()
-                    MessageDataManager.shared.addMoreOldMessages(packet.messages)
-                } else {
-                    self.messageCountForUpdate = 1
-                    self.reloadChat()
+        if Connectivity.isConnectedToInternet {
+            let packet = RPC.PM_getChatMessages()
+            
+            packet.chatID = isGroup ? RPC.PM_peerGroup(group_id: chatID) : RPC.PM_peerUser(user_id: chatID)
+            packet.count = count
+            packet.offset = offset
+            
+            NetworkManager.shared.sendPacket(packet) {response, e in
+                if response == nil { return }
+                if let packet = response as? RPC.PM_chatMessages {
+                    if (packet.messages.count != 0) {
+                        self.messageCountForUpdate = packet.messages.count
+                        self.reloadChat()
+                        MessageDataManager.shared.addMoreOldMessages(packet.messages)
+                    } else {
+                        self.messageCountForUpdate = 1
+                        self.reloadChat()
+                    }
                 }
             }
+        } else {
+            self.messageCountForUpdate = 1
+            self.reloadChat()
         }
     }
 }
@@ -482,6 +484,9 @@ extension ChatViewController: UITextViewDelegate {
         textView.constraints.forEach{ (constraint) in
             if constraint.firstAttribute == .height {
                 constraint.constant = estimatedSize.height + 4
+                var offset = textView.contentOffset
+                offset.y = 0
+                textView.setContentOffset(offset, animated: true)
             }
         }
         

@@ -26,6 +26,7 @@ class MessageDataManager {
         messageData.text = messageObject.text
         messageData.itemType = Int16(messageObject.itemType.rawValue)
         messageData.action = messageObject.action != nil ? messageObject.action.type : 0
+        print("saved message")
     }
     
     func saveMessage(messageObject : RPC.Message) {
@@ -102,9 +103,9 @@ class MessageDataManager {
     }
     
     func updateMessages(_ messages : [RPC.Message]) {
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: .isLoadedMore, object: nil)
-        }
+//        DispatchQueue.main.async {
+//            NotificationCenter.default.post(name: .isLoadedMore, object: nil)
+//        }
         for message in messages {
             updateMessage(messageObject: message)
         }
@@ -122,7 +123,6 @@ class MessageDataManager {
                 .where(\.toId == chatId)
                 .tweak { $0.fetchBatchSize = 30 }
                 .orderBy(.descending(\.date))) as ListMonitor<ChatMessageData>? {
-            CacheManager.shared.dataStack.refreshAndMergeAllObjects()
 
             return result
         } else {

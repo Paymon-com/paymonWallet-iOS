@@ -39,8 +39,6 @@ public class MessageManager {
                 GroupDataManager.shared.updateGroups(packet.groups)
                 MessageDataManager.shared.updateMessages(packet.messages)
             }
-            
-            
             self.isChatsLoaded = false
         }
     }

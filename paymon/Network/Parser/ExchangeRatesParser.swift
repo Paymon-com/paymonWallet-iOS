@@ -34,7 +34,7 @@ class ExchangeRateParser{
                 }
                 completionHandler(result)
                 
-            } catch let jsonError{
+            } catch let jsonError {
                 print("Error srializing json:", jsonError)
             }
             

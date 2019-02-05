@@ -33,6 +33,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     
     @objc func refresh() {
         self.navigationItem.title = "Update...".localized
+        self.chatsTable.allowsSelection = false
 
         isUpdated = false
         segment.selectedSegmentIndex = 1
@@ -50,12 +51,16 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.chatsTable.allowsSelection = false
 
         removeObserver = NotificationCenter.default.addObserver(forName: .removeObserver, object: nil, queue: nil) { notification in
             self.allChats = nil
         }
         
         coreStoreWasCreated = NotificationCenter.default.addObserver(forName: .coreStoreWasCreated, object: nil, queue: nil) { notification in
+            print("Storage was added")
+
             self.setChatsTable()
         }
         
@@ -81,8 +86,8 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         messagesSaved = NotificationCenter.default.addObserver(forName: .isLoadedMore, object: nil, queue: nil) { notification in
             print("set enabled table")
             
-            self.chatsTable.allowsSelection = !self.chatsTable.allowsSelection
-            
+            self.chatsTable.allowsSelection = true
+
             if self.chatsTable.allowsSelection {
                 self.endUpdateChats()
             }
@@ -97,7 +102,9 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         print("set chats")
         allChats = ChatsDataManager.shared.getAllChats()
         allChats.addObserver(self)
-        self.chatsTable.reloadData()
+        DispatchQueue.main.async {
+            self.chatsTable.reloadData()
+        }
         
         if User.shared.isAuthenticated {
             isUpdated = false
@@ -118,7 +125,7 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     }
     
     func listMonitor(_ monitor: ListMonitor<ChatsData>, didInsertObject object: ChatsData, toIndexPath indexPath: IndexPath) {
-        self.chatsTable.insertRows(at: [indexPath], with: .none)
+        self.chatsTable.insertRows(at: [indexPath], with: .left)
     }
     
     func listMonitor(_ monitor: ListMonitor<ChatsData>, didDeleteObject object: ChatsData, fromIndexPath indexPath: IndexPath) {
@@ -168,7 +175,6 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
         }
         
         let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchText.lowercased())
-        
         allChats.refetch([OrderBy<ChatsData>(.descending(\.time)), Where<ChatsData>(predicate)])
         
     }
@@ -330,7 +336,9 @@ class ChatsViewController: PaymonViewController, UISearchBarDelegate, ListSectio
     }
     
     func sendRequestLeaveOrClear(packet : Packet, chatId : Int32) {
-        let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
+        DispatchQueue.main.async {
+            let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
         
         NetworkManager.shared.sendPacket(packet) { response, e in
             if (response != nil && response is RPC.PM_boolTrue) {
@@ -379,9 +387,9 @@ extension ChatsViewController: UITableViewDelegate {
         chatViewController.isGroup = chat.isGroup
         chatViewController.chatID = chat.id
         print(chat.id)
-        
+
         self.navigationItem.title = "Chats".localized
-        
+
         DispatchQueue.main.async {
             self.navigationController?.pushViewController(chatViewController, animated: true)
         }

@@ -140,7 +140,9 @@ class EthereumTransferInformationViewController: UIViewController {
         
         self.view.setGradientLayer(frame: self.view.bounds, topColor: UIColor.AppColor.Black.primaryBlackLight.cgColor, bottomColor: UIColor.AppColor.Black.primaryBlack.cgColor)
         
-        self.stackView.setGradientLayer(frame: CGRect(x: 0, y: 0, width: self.stackView.frame.width, height: self.stackView.frame.height), topColor: UIColor.AppColor.Black.walletTableInfoLight.cgColor, bottomColor: UIColor.AppColor.Black.walletTableInfoDark.cgColor)
+        let widthScreen = UIScreen.main.bounds.width
+
+        self.stackView.setGradientLayer(frame: CGRect(x: 0, y: 0, width: widthScreen, height: self.stackView.frame.height), topColor: UIColor.AppColor.Black.walletTableInfoLight.cgColor, bottomColor: UIColor.AppColor.Black.walletTableInfoDark.cgColor)
         
         stackView.layer.cornerRadius = 30
         

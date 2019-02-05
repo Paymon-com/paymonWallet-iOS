@@ -24,9 +24,7 @@ class DeepLinkManager {
     
     func handleRemoteNotification(_ userInfo: [AnyHashable: Any]) {
         deeplinkType = PushNotificationManager.shared.handelPushNotification(userInfo: userInfo)
-        print("handle yeeeees")
         if UIApplication.shared.applicationState == .active {
-            print("app on the background")
             checkDeepLink()
         }
     }

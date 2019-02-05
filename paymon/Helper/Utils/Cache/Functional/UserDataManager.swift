@@ -39,7 +39,6 @@ class UserDataManager {
         userData.btcAddress = userObject.btcAddress 
         userData.ethAddress = userObject.ethAddress
         userData.pmntAddress = userObject.pmntAddress
-
     }
     
     func updateOrCreateUser(userObject : RPC.UserObject) {

@@ -8,6 +8,7 @@
 
 import Foundation
 import UserNotifications
+import FirebaseCore
 
 class PushNotificationManager {
   
@@ -30,7 +31,7 @@ class PushNotificationManager {
         let skip = UNNotificationAction(identifier: PushNotification.Action.skip, title: "Skip".localized, options: [])
         let mute = UNNotificationAction(identifier: PushNotification.Action.mute, title: "Do not disturb for 8 hours".localized, options: [])
         
-        let messages = UNNotificationCategory(identifier: PushNotification.Category.messages, actions: [answer, skip, mute], intentIdentifiers: [], options: [])
+        let messages = UNNotificationCategory(identifier: PushNotification.Category.messages, actions: [answer, skip], intentIdentifiers: [], options: [])
         
         UNUserNotificationCenter.current().setNotificationCategories([messages])
     }

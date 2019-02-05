@@ -56,6 +56,7 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     var publicKey : String!
     var yourWalletBalanceValue : Double!
     var toAddress:String! = ""
+    var isIPhone5 = false
 
     
     @IBAction func infoClick(_ sender: Any) {
@@ -116,6 +117,14 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let modelName = UIDevice.modelName
+        
+        switch modelName {
+        case "iPhone5,1", "iPhone5,2", "iPhone5,3", "iPhone5,4", "iPhone6,1", "iPhone6,2":
+            self.isIPhone5 = true
+        default:
+            self.isIPhone5 = false
+        }
         
         getYourWalletInfo()
         setLayoutOptions()
@@ -336,17 +345,19 @@ class EthereumTransferViewController : UIViewController, UITextFieldDelegate {
 
     @objc func handleKeyboard(notification: NSNotification) {
 
-        if let userInfo = notification.userInfo {
-            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
-
-            sendBottomConstraint.constant = notification.name == UIResponder.keyboardWillShowNotification ? keyboardFrame!.height - 16 : 16
-
-            UIView.animate(withDuration: 0,
-                           delay: 0,
-                           options: UIView.AnimationOptions.curveEaseOut,
-                           animations: {
-                            self.view.layoutIfNeeded()
-            }, completion: nil)
+        if !isIPhone5 {
+            if let userInfo = notification.userInfo {
+                let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+                
+                sendBottomConstraint.constant = notification.name == UIResponder.keyboardWillShowNotification ? keyboardFrame!.height - 16 : 16
+                
+                UIView.animate(withDuration: 0,
+                               delay: 0,
+                               options: UIView.AnimationOptions.curveEaseOut,
+                               animations: {
+                                self.view.layoutIfNeeded()
+                }, completion: nil)
+            }
         }
     }
 }

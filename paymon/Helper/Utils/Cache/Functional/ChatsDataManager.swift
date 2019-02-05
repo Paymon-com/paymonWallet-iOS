@@ -27,11 +27,11 @@ class ChatsDataManager {
         chatsData.lastMessagePhotoUrl = lastMessagePhotoUrl
         chatsData.isGroup = true
         chatsData.creatorId = groupObject.creatorId
+        print("saved group chats")
+
     }
     
     func saveUserChatMessageData(chatsData : ChatsData, userObject : UserData, messageObject : RPC.Message) {
-        print("save user")
-
         chatsData.id = userObject.id
         chatsData.photoUrl = userObject.photoUrl!
         chatsData.title = Utils.formatUserDataName(userObject)
@@ -41,10 +41,11 @@ class ChatsDataManager {
         chatsData.itemType = Int16(messageObject.itemType.rawValue)
         chatsData.lastMessagePhotoUrl = ""
         chatsData.isGroup = false
+        print("save user chats")
+
     }
     
     func saveUserChatMessageData(chatsData : ChatsData, userObject : RPC.UserObject, messageObject : RPC.Message) {
-        print("save user")
 
         chatsData.id = userObject.id
         chatsData.photoUrl = userObject.photoUrl.url
@@ -55,6 +56,7 @@ class ChatsDataManager {
         chatsData.itemType = Int16(messageObject.itemType.rawValue)
         chatsData.lastMessagePhotoUrl = ""
         chatsData.isGroup = false
+        print("save user chats")
     }
     
     func updateGroupChats(groupObject : GroupData, messageObject : RPC.Message, lastMessagePhotoUrl : String) {

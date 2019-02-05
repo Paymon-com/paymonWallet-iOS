@@ -153,6 +153,12 @@ class SignUpViewController: PaymonViewController, UITextFieldDelegate {
     }
     
     @IBAction func signUpClick(_ sender: Any) {
+        
+        if !Connectivity.isConnectedToInternet {
+            _ = SimpleOkAlertController.init(title: "Login failed".localized, message: "Check your internet connection".localized, vc: self)
+            return
+        }
+        
         if (canSignUp) {
             let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
             self.updateButtons(canSignUp: false)

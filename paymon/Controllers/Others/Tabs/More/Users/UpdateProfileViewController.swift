@@ -72,8 +72,12 @@ class UpdateProfileViewController: PaymonViewController, UIImagePickerController
     @IBAction func updateItemClick(_ sender: Any) {
         self.view.endEditing(true)
         
-        updateItem.isEnabled = false
-        NotificationCenter.default.post(name: .updateProfile, object: nil)
+        if Connectivity.isConnectedToInternet {
+            updateItem.isEnabled = false
+            NotificationCenter.default.post(name: .updateProfile, object: nil)
+        } else {
+            _ = SimpleOkAlertController.init(title: "Registration Failed".localized, message: "Check your internet connection".localized, vc: self)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,35 +93,39 @@ class UpdateProfileViewController: PaymonViewController, UIImagePickerController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         
-        DispatchQueue.main.async {
-            let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
-        }
-        
-        UserManager.shared.updateAvatar(info: info) { isUpdated, image, error in
+        if Connectivity.isConnectedToInternet {
             DispatchQueue.main.async {
-                MBProgressHUD.hide(for: self.view, animated: true)
+                let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
             }
-            if isUpdated {
+            
+            UserManager.shared.updateAvatar(info: info) { isUpdated, image, error in
                 DispatchQueue.main.async {
-                    Utils.showSuccesHud(vc: self)
-                    self.avatar.image = image
+                    MBProgressHUD.hide(for: self.view, animated: true)
                 }
-                
-            } else {
-                if error == 0 {
-                    _ = SimpleOkAlertController.init(title: "Upload photo failed".localized, message: "The minimum width of the photo can be 256 points".localized, vc: self)
-                } else if error == 1 {
-                    print("file upload failed")
+                if isUpdated {
                     DispatchQueue.main.async {
-                        _ = SimpleOkAlertController.init(title: "Update failed".localized, message: "An error occurred during the update".localized, vc: self)
+                        Utils.showSuccesHud(vc: self)
+                        self.avatar.image = image
                     }
+                    
                 } else {
-                    _ = SimpleOkAlertController.init(title: "Update failed".localized, message: "An error occurred during the update".localized, vc: self)
-                    PMFileManager.shared.cancelFileUpload(fileID: Int64(User.shared.currentUser.id));
+                    if error == 0 {
+                        _ = SimpleOkAlertController.init(title: "Upload photo failed".localized, message: "The minimum width of the photo can be 256 points".localized, vc: self)
+                    } else if error == 1 {
+                        print("file upload failed")
+                        DispatchQueue.main.async {
+                            _ = SimpleOkAlertController.init(title: "Update failed".localized, message: "An error occurred during the update".localized, vc: self)
+                        }
+                    } else {
+                        _ = SimpleOkAlertController.init(title: "Update failed".localized, message: "An error occurred during the update".localized, vc: self)
+                        PMFileManager.shared.cancelFileUpload(fileID: Int64(User.shared.currentUser.id));
+                    }
                 }
             }
+            
+            needRemoveObservers = true
+        } else {
+            _ = SimpleOkAlertController.init(title: "Update failed".localized, message: "Check your internet connection".localized, vc: self)
         }
-        
-        needRemoveObservers = true
     }
 }
