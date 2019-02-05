@@ -227,15 +227,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B00EFC46219C41EA004ECC89 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B00EFC67219C4453004ECC89 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -289,7 +280,6 @@
 		B0097800214C622C00191B90 /* More.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		B0097803214C654C00191B90 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		B00AFD73216CE09100EC45AF /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
-		B00EFC48219C41EA004ECC89 /* libBRCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBRCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01954D820FFA92000F3DDB0 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		B01954DA20FFA92000F3DDB0 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		B01954DB20FFA92100F3DDB0 /* QRGenerater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGenerater.swift; sourceTree = "<group>"; };
@@ -489,13 +479,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B00EFC45219C41EA004ECC89 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B099C96F20FCF7DB00718608 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -786,7 +769,6 @@
 				B099C97220FCF7DB00718608 /* paymon.app */,
 				B099C98620FCF7DC00718608 /* paymonTests.xctest */,
 				B099C99120FCF7DC00718608 /* paymonUITests.xctest */,
-				B00EFC48219C41EA004ECC89 /* libBRCore.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1325,23 +1307,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B00EFC47219C41EA004ECC89 /* BRCore */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B00EFC4C219C41EA004ECC89 /* Build configuration list for PBXNativeTarget "BRCore" */;
-			buildPhases = (
-				B00EFC44219C41EA004ECC89 /* Sources */,
-				B00EFC45219C41EA004ECC89 /* Frameworks */,
-				B00EFC46219C41EA004ECC89 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = BRCore;
-			productName = BRCore;
-			productReference = B00EFC48219C41EA004ECC89 /* libBRCore.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		B099C97120FCF7DB00718608 /* paymon */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B099C99A20FCF7DC00718608 /* Build configuration list for PBXNativeTarget "paymon" */;
@@ -1410,9 +1375,6 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Maxim Skorynin";
 				TargetAttributes = {
-					B00EFC47219C41EA004ECC89 = {
-						CreatedOnToolsVersion = 10.1;
-					};
 					B099C97120FCF7DB00718608 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 0940;
@@ -1457,7 +1419,6 @@
 				B099C97120FCF7DB00718608 /* paymon */,
 				B099C98520FCF7DC00718608 /* paymonTests */,
 				B099C99020FCF7DC00718608 /* paymonUITests */,
-				B00EFC47219C41EA004ECC89 /* BRCore */,
 			);
 		};
 /* End PBXProject section */
@@ -1626,13 +1587,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B00EFC44219C41EA004ECC89 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B099C96E20FCF7DB00718608 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1870,47 +1824,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		B00EFC4D219C41EA004ECC89 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5YNJ6HYTVJ;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/Modules/breadwallet-core\"",
-					"\"$(SRCROOT)/Modules/breadwallet-core/secp256k1\"",
-				);
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7 armv7s armv7";
-			};
-			name = Debug;
-		};
-		B00EFC4E219C41EA004ECC89 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5YNJ6HYTVJ;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/Modules/breadwallet-core\"",
-					"\"$(SRCROOT)/Modules/breadwallet-core/secp256k1\"",
-				);
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7 armv7s armv7";
-			};
-			name = Release;
-		};
 		B099C99820FCF7DC00718608 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1982,7 +1895,6 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -2052,7 +1964,6 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -2071,14 +1982,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Charts\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CryptoSwift\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/PureLayout\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/web3swift\"",
-					"\"${PODS_ROOT}/Geth/Frameworks\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/OpenSSL-Universal\"",
 				);
 				HEADER_SEARCH_PATHS = (
@@ -2095,7 +2001,6 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"/usr/local/cryptopp-ios/lib",
 					/usr/local/Cellar/cryptopp/7.0.0/lib,
 					"$(PROJECT_DIR)/Pods/OpenSSL-Universal/lib-ios",
 				);
@@ -2109,7 +2014,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -2139,7 +2043,6 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"/usr/local/cryptopp-ios/lib",
 					/usr/local/Cellar/cryptopp/7.0.0/lib,
 					"$(PROJECT_DIR)/Pods/OpenSSL-Universal/lib-ios",
 				);
@@ -2152,7 +2055,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "paymon/Application/paymon-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -2247,15 +2149,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B00EFC4C219C41EA004ECC89 /* Build configuration list for PBXNativeTarget "BRCore" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B00EFC4D219C41EA004ECC89 /* Debug */,
-				B00EFC4E219C41EA004ECC89 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		B099C96D20FCF7DB00718608 /* Build configuration list for PBXProject "paymon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

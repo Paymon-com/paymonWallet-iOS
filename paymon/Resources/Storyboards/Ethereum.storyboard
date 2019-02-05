@@ -796,7 +796,7 @@
                         <outlet property="yourWalletBalance" destination="1V9-Ra-WPR" id="nM4-6I-61Z"/>
                         <outlet property="yourWalletPicture" destination="sLs-MW-8Db" id="luy-Sy-LW1"/>
                         <outlet property="yourWalletPictureWidth" destination="gc1-56-awE" id="7NB-lV-w4u"/>
-                        <segue destination="DB0-k2-yaO" kind="show" id="ci9-Om-11N"/>
+                        <segue destination="DB0-k2-yaO" kind="show" identifier="PaymentSuccessViewController" id="ci9-Om-11N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFK-jC-WVF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -948,7 +948,7 @@
                                 <rect key="frame" x="0.0" y="44" width="343" height="467"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellTransaction" id="Zv4-CD-uVd" userLabel="cellTransaction" customClass="TransactionTableViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellTransaction" id="Zv4-CD-uVd" userLabel="cellTransaction" customClass="TransactionTableViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zv4-CD-uVd" id="tod-5X-ru4">
@@ -956,7 +956,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHj-wa-L7E">
-                                                    <rect key="frame" x="16" y="55" width="279" height="1"/>
+                                                    <rect key="frame" x="16" y="55" width="311" height="1"/>
                                                     <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="G3z-El-nul"/>
@@ -971,7 +971,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Anton  " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvA-dr-JZ1">
-                                                    <rect key="frame" x="55" y="19.5" width="148.5" height="17"/>
+                                                    <rect key="frame" x="55" y="19.5" width="180" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="180" id="uhE-If-hLS"/>
                                                     </constraints>
@@ -980,13 +980,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:47" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWB-0V-Ewj">
-                                                    <rect key="frame" x="264" y="11" width="31" height="15"/>
+                                                    <rect key="frame" x="296" y="11" width="31" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+47623.24" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8G-3L-XFd">
-                                                    <rect key="frame" x="211.5" y="26" width="83.5" height="21"/>
+                                                    <rect key="frame" x="243" y="26" width="84" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <color key="textColor" red="0.55634254220000001" green="0.97934550050000002" blue="0.0" alpha="0.60236378209999997" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1017,7 +1017,7 @@
                                             <outlet property="time" destination="cWB-0V-Ewj" id="63u-UL-yTm"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellEmpty" id="8Kz-I2-vHC" userLabel="cellEmpty" customClass="TransEmptyTableViewCell" customModule="paymon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellEmpty" id="8Kz-I2-vHC" userLabel="cellEmpty" customClass="TransEmptyTableViewCell" customModule="paymon" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="84" width="343" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Kz-I2-vHC" id="FP0-jI-W0k">
@@ -1025,7 +1025,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transactions list is empty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZHl-J7-K92">
-                                                    <rect key="frame" x="58.5" y="17.5" width="194" height="21"/>
+                                                    <rect key="frame" x="74.5" y="17.5" width="194" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>

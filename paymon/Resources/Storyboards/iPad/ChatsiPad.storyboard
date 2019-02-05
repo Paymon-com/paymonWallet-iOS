@@ -500,7 +500,7 @@
                                                     <constraint firstAttribute="height" constant="32" id="pbH-ud-Lm4"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwq-0K-BYg">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwq-0K-BYg">
                                                 <rect key="frame" x="32" y="0.0" width="128" height="32"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                 <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -695,11 +695,6 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="user-group" translatesAutoresizingMaskIntoConstraints="NO" id="dNO-iM-ACj">
-                                                    <rect key="frame" x="141" y="12" width="25" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
-                                                </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrL-AH-R5W">
                                                     <rect key="frame" x="104" y="99" width="664" height="1"/>
                                                     <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -727,11 +722,6 @@
                                                 <constraint firstItem="gvO-UA-zKw" firstAttribute="top" secondItem="Ouz-yx-48A" secondAttribute="bottom" constant="8" id="sY4-16-dGs"/>
                                                 <constraint firstItem="5SP-qF-gZw" firstAttribute="leading" secondItem="Mn2-QP-fOd" secondAttribute="trailing" constant="8" id="wnr-mS-Hg7"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="subviews">
-                                                    <exclude reference="dNO-iM-ACj"/>
-                                                </mask>
-                                            </variation>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="78" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1036,7 +1026,7 @@
                                                     <constraint firstAttribute="height" constant="34" id="fBj-1e-lG9"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r70-sy-pcu">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r70-sy-pcu">
                                                 <rect key="frame" x="34" y="0.0" width="174" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
                                                 <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1335,7 +1325,6 @@
         <image name="NonPhoto" width="512" height="512"/>
         <image name="Plus" width="15" height="15"/>
         <image name="SendGray" width="32" height="32"/>
-        <image name="user-group" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="oOJ-uP-cg8"/>

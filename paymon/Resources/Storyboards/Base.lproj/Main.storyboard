@@ -48,7 +48,7 @@
                                                     <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="25"/>
                                                 </variation>
                                                 <connections>
-                                                    <segue destination="5Qk-PO-K0T" kind="show" id="fLj-us-ALc"/>
+                                                    <segue destination="5Qk-PO-K0T" kind="show" identifier="SignUpViewController" id="fLj-us-ALc"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pgb-b7-MU7">
@@ -67,7 +67,7 @@
                                                     <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="25"/>
                                                 </variation>
                                                 <connections>
-                                                    <segue destination="eOt-XP-KeY" kind="show" id="Lrf-tE-kgV"/>
+                                                    <segue destination="eOt-XP-KeY" kind="show" identifier="SignInViewController" id="Lrf-tE-kgV"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -436,7 +436,7 @@
                         <color key="tintColor" red="0.062745098040000002" green="0.52549019610000003" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="MLy-rK-MiO" kind="show" id="zel-5x-XWo"/>
+                        <segue destination="MLy-rK-MiO" kind="show" identifier="TabsViewController" id="zel-5x-XWo"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oDg-MV-vO0" userLabel="First Responder" sceneMemberID="firstResponder"/>

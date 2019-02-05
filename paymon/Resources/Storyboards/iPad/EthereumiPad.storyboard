@@ -800,7 +800,7 @@
                         <outlet property="yourWalletBalance" destination="fbj-a0-Lfz" id="Tgn-QP-4bc"/>
                         <outlet property="yourWalletPicture" destination="LEw-l6-qZU" id="AVu-Y7-2Ii"/>
                         <outlet property="yourWalletPictureWidth" destination="JKc-id-83s" id="Tbu-5I-htP"/>
-                        <segue destination="GOm-f4-F6t" kind="show" id="To9-WT-2Wr"/>
+                        <segue destination="GOm-f4-F6t" kind="show" identifier="PaymentSuccessViewController" id="To9-WT-2Wr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gU2-Ds-Yxc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -964,14 +964,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6q-fk-FGZ">
-                                                    <rect key="frame" x="16" y="85" width="480" height="1"/>
+                                                    <rect key="frame" x="16" y="84.5" width="480" height="1"/>
                                                     <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="XGu-hu-tSa"/>
                                                     </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wCD-ON-GkB" customClass="CircularImageView" customModule="paymon" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="22" width="42" height="42"/>
+                                                    <rect key="frame" x="8" y="22" width="42" height="42"/>
                                                     <color key="backgroundColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="0.3985877404" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="42" id="NcR-yK-yyq"/>
@@ -979,7 +979,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Anton  " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PlH-Kw-Ck1">
-                                                    <rect key="frame" x="73" y="30" width="296.5" height="26.5"/>
+                                                    <rect key="frame" x="66" y="29.5" width="303.5" height="26.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -991,7 +991,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+47623.24" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LYR-8b-cH7">
-                                                    <rect key="frame" x="377.5" y="48" width="118.5" height="29"/>
+                                                    <rect key="frame" x="377.5" y="47.5" width="118.5" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
                                                     <color key="textColor" red="0.55634254220000001" green="0.97934550050000002" blue="0.0" alpha="0.60236378209999997" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>

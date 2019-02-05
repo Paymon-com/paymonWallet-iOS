@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eer-zw-zyR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,6 @@
         <!--Settings View Controller-->
         <scene sceneID="qZj-NI-Zzv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WKm-jx-46B" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SettingsViewController" title="Settings View Controller" id="eer-zw-zyR" customClass="SettingsViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lle-Oy-otN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -37,6 +36,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Qy9-iq-Gou"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WKm-jx-46B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1354" y="3151"/>
         </scene>
@@ -397,7 +397,7 @@
                     <connections>
                         <outlet property="privacyCell" destination="YDL-Sh-Wj4" id="0Hx-fC-OZb"/>
                         <outlet property="termsCell" destination="WjR-pE-vBk" id="SA6-wJ-FkZ"/>
-                        <segue destination="RFo-gL-FpD" kind="show" id="26R-Wb-TdK"/>
+                        <segue destination="RFo-gL-FpD" kind="show" identifier="OfficialDocsViewController" id="26R-Wb-TdK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KyK-Kb-dOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -407,7 +407,6 @@
         <!--Settings Notification View Controller-->
         <scene sceneID="Bau-By-M4z">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdp-Dh-Rqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Settings Notification View Controller" id="61e-18-5be" customClass="SettingsNotificationViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="25m-vc-tn6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
@@ -431,6 +430,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="eio-Kh-9in"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdp-Dh-Rqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2894" y="1997"/>
         </scene>
@@ -499,71 +499,9 @@
             </objects>
             <point key="canvasLocation" x="2894" y="1390"/>
         </scene>
-        <!--Title-->
-        <scene sceneID="02c-5N-hfQ">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2UM-JA-5OS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="GXR-Qm-fWE" customClass="NotificationSoundViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UXU-ke-eXX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b0u-lZ-MGi">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <connections>
-                                    <segue destination="iyr-KB-xN5" kind="embed" id="3tn-g0-wzm"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="NdE-7c-UuX" firstAttribute="bottom" secondItem="b0u-lZ-MGi" secondAttribute="bottom" id="ZeM-K3-PsM"/>
-                            <constraint firstItem="b0u-lZ-MGi" firstAttribute="top" secondItem="NdE-7c-UuX" secondAttribute="top" id="gqk-5J-n1g"/>
-                            <constraint firstItem="NdE-7c-UuX" firstAttribute="trailing" secondItem="b0u-lZ-MGi" secondAttribute="trailing" id="ha5-nq-Hgh"/>
-                            <constraint firstItem="b0u-lZ-MGi" firstAttribute="leading" secondItem="NdE-7c-UuX" secondAttribute="leading" id="rdH-ED-Rjm"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="NdE-7c-UuX"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Title" id="bCW-fS-lyC"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="3574" y="2006"/>
-        </scene>
-        <!--Notification Sound Table-->
-        <scene sceneID="hyD-1f-OXe">
-            <objects>
-                <tableViewController title="Notification Sound Table" id="iyr-KB-xN5" customClass="NotificationSoundTableViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="0DF-do-ncx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="separatorColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SoundCell" id="K53-0x-dMS">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K53-0x-dMS" id="YZl-Ip-MDp">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="iyr-KB-xN5" id="Ijk-Fl-Qts"/>
-                            <outlet property="delegate" destination="iyr-KB-xN5" id="7TJ-P3-kdj"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oAW-tV-vY8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3574" y="1380"/>
-        </scene>
         <!--Settings Security View Controller-->
         <scene sceneID="i7r-tf-ogl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zye-6S-VNc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="1qO-sg-WLi" customClass="SettingsSecurityViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Ks-yH-BwO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
@@ -586,6 +524,7 @@
                         <viewLayoutGuide key="safeArea" id="Heo-QN-TO9"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zye-6S-VNc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2894" y="3931"/>
         </scene>
@@ -638,7 +577,6 @@
         <!--Title-->
         <scene sceneID="Clk-Gm-b8g">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YHo-w5-BxU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="f7e-4S-mu1" customClass="SettingAccountViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Ae-rs-k9U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
@@ -662,6 +600,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="pGH-Ys-VJF"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YHo-w5-BxU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2894" y="2612"/>
         </scene>
@@ -737,7 +676,6 @@
         <!--Settings Wallet View Controller-->
         <scene sceneID="hba-Pb-BsB">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RmE-qL-Asq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="2O9-8c-ryy" customClass="SettingsWalletViewController" customModule="paymon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xea-70-AYE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
@@ -761,6 +699,7 @@
                         <viewLayoutGuide key="safeArea" id="Nc9-ln-VQC"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RmE-qL-Asq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2894" y="3233"/>
         </scene>
@@ -943,7 +882,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kiG-rm-qRe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2894" y="4448"/>
+            <point key="canvasLocation" x="2894" y="4524"/>
         </scene>
     </scenes>
     <resources>
