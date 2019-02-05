@@ -1,11 +1,9 @@
-
 stages:
   - build
 
 before_script:
     - pod install
     - gem install xcpretty -N
-    - echo "ruby-2.4" > ~/.ruby-version
 
 build_project:
   stage: build
